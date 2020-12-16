@@ -1,0 +1,105 @@
+<ion-content>
+  <div id="content_producto" class="padding">
+    <div class="content_carrusel">
+      <ion-slides pager="true" #slides [options]="sliderOptions" class="content_img_gde">
+        <ion-slide *ngFor="let item of items">
+          <img src="{{item}}" alt="{{item}}" alt="aire" class="img_gde">
+        </ion-slide>
+      </ion-slides>
+      <div class="content_img_ch">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch"  (click)="move1(slides)" >
+            </ion-col>
+            <ion-col>
+              <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch" (click)="move2(slides)">
+            </ion-col>
+            <ion-col>
+              <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch" (click)="move3(slides)">
+            </ion-col>
+            <ion-col>
+              <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch" (click)="move4(slides)">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    <div id="configurador_content">
+      <div class="titulo2">Configurador</div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-radio-group allow-empty-selection="false" name="radio-group" value="radio1">
+              <ion-item class="ion-no-padding" color="white" lines="none">
+                <ion-label class="titulo_radio">1.0 Ton</ion-label>
+                <ion-radio class="radio" color="medium" slot="start" value="radio1"></ion-radio>
+              </ion-item>
+              <ion-item class="ion-no-padding" color="white" lines="none">
+                <ion-label class="titulo_radio">1.5 Ton</ion-label>
+                <ion-radio class="radio" color="medium" slot="start" value="radio2"></ion-radio>
+              </ion-item>
+              <ion-item class="ion-no-padding" color="white" lines="none">
+                <ion-label class="titulo_radio">2.0 Ton</ion-label>
+                <ion-radio class="radio" color="medium" slot="start" value="radio3"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-col>
+          <ion-col>
+            <ion-radio-group allow-empty-selection="false" name="radio-group2" value="rad1">
+              <ion-item class="ion-no-padding" color="white" lines="none">
+                <ion-label class="titulo_radio">solo frio</ion-label>
+                <ion-radio class="radio" color="medium" slot="start" value="rad1"></ion-radio>
+              </ion-item>
+              <ion-item class="ion-no-padding" color="white" lines="none">
+                <ion-label class="titulo_radio">frio calor</ion-label>
+                <ion-radio class="radio" color="medium" slot="start" value="rad2"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div id="descripcion_content">
+      <div class="titulo1">york mini split</div>
+      <p class="parrafo1">
+        <span>yhfe/yhg series</span> <br>
+        <span>compresor on/off 220v</span> <br>
+        <span>r-410a</span> <br>
+        <span>solo frio y frio/calor</span>
+      </p>
+      <div class="parrafo2">
+        <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">york</span> <br>
+        <span class="ion-text-capitalize">Disponibilidad: En Stock </span>
+      </div> 
+      <p class="parrafo3">
+      Características:Operación SilenciosaPantalla LCDFunciónde reinicioIncluye control remotoRefrigerante ecológicoVentilador con tres velocidades -alta, media y baja.Incluye Kit de instalación (Cu-Cu) y cableado de 4 mts de longitud… 
+      </p>
+      <div class="precios">
+         <span class="precio1"> $5,027.00</span>&nbsp;<span class="precio2"><s>$8,999.00</s></span>
+      </div>
+      <section class="full-width">
+        <ion-button expand="full" class="btn_agregar" (click)="onClickCarrito()">Agregar al carrito</ion-button>
+      </section>
+    </div>
+  </div>
+</ion-content>
+<div class="content_menu">
+  <ul>
+    <li>
+      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+    </li>
+    <li>
+      <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+    </li>
+    <li>
+      <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+    </li>
+    <li>
+      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+    </li>
+    <li>
+      <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+    </li>
+  </ul>
+</div>

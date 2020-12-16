@@ -1,0 +1,50 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <form id="login_form" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    <img src="assets/images/logo2.png" alt="logo_login" class="logo2">
+    <ion-item lines="full" lines="none">
+      <ion-input type="email" formControlName="correo" required class="inputs" placeholder="Email"></ion-input>
+    </ion-item>
+    <!-- Error messages -->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.correo.errors?.required">
+      Campo Email requerido.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.correo.errors?.pattern">
+      Formato debe ser correo@dominio.com.
+    </span>
+    <ion-item lines="full" lines="none" >
+      <ion-input type="password" formControlName="password" required class="inputs" placeholder="Password"></ion-input>
+    </ion-item>
+    <!-- Error messages -->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.password.errors?.required">
+      Campo Password requerido.
+    </span>
+    <span class="error ion-padding"  *ngIf="isSubmitted && errorControl.password.errors?.minlength">
+      El Password debe tener minimo 6 caractéres.
+    </span>
+    <!-- <span class="error ion-padding"  *ngIf="isSubmitted && errorControl.password.errors?.pattern">
+      El Password debe contener 6 caracteres con 1 mayuscula una minuscula y in caracter raro no importa el orden.
+    </span> -->
+    <div id="boton_content">
+      <ion-button type="submit" color="color1">
+        <span class="txtBtn1">Login</span>
+      </ion-button>
+      <!-- <a  [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a> -->
+      <!-- <ion-button type="submit" size="small"  >
+        
+      </ion-button> -->
+      <ion-router-link class="link1 ion-float-right mt10">Ayuda</ion-router-link>
+      <div id="content_link">
+        <ion-router-link href="/register" class="link1 ion-float-left">No soy socio.&nbsp;</ion-router-link><ion-router-link href="/register" class="link2 ion-float-left">Necesito registrarme</ion-router-link>
+        <!-- <ion-button type="submit" size="small"  (click)="onClickRegisterß()">
+          <span class="link1">No soy socio. </span>&nbsp;  
+        </ion-button> -->
+      </div>
+    </div>
+    
+  </form>
+</ion-content>

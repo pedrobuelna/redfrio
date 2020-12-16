@@ -1,0 +1,41 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>ubicaciones</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div id="container">
+    <ion-select id="categoria_select"  (ionChange)="goSucursales($event)" [value]="tiendaSelected">
+      <ion-select-option [value]="0">Sucursales</ion-select-option>      
+      <ion-select-option *ngFor="let sucursal of sucursales;let i = index" [value]="sucursal.nombre">{{sucursal.nombre}}</ion-select-option>
+    </ion-select>
+    <div class="content_boton">
+      <ion-button expand="full" class="btn_pagar" (click)="clickOnSucursales()">
+        <ion-label style="position: absolute;left:10px">
+          <img src="../../assets/images/ubicacion_menu.png" alt="ubicacion_menu">
+        </ion-label>
+        <ion-label style="position: absolute;left:40px" >Sucursales cerca de mi</ion-label>
+      </ion-button>
+  </div>
+  </div>
+</ion-content>
+<div class="content_menu">
+  <ul>
+    <li>
+      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+    </li>
+    <li>
+      <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+    </li>
+    <li>
+      <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+    </li>
+    <li>
+      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+    </li>
+    <li>
+      <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,59 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <div id="splash" #splash>
+    <div id="content_letras">
+      Bienvenido! <br>
+      Compre con <br>
+      confianza.
+    </div>
+  </div>
+  <div class="carrito" (click)="onClickCarrito()">
+    <span class="numero">4</span>
+    <img src="../../assets/images/carrito.png" alt="carrito" >
+  </div>
+  <ion-slides pager="true" [options]="sliderOptions">
+    <ion-slide *ngFor="let item of items">
+      <img src="{{item}}" alt="{{item}}" style="width:100%;">
+    </ion-slide>
+  </ion-slides>
+  <ion-slides [options]="sliderOptions2" class="productos_carrusel">
+    <ion-slide *ngFor="let item of items">
+      <div id="content_producto_carrusel" (click)="onClickProducto()">
+        <img src="../../assets/images/producto1@3x.png" alt="producto1@3x.png">
+        <div class="content_producto_textos">
+          <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+            YHFE/YHGE SERIES <br>
+            COMPRESOR ON/OFF 220V R-410A <br>
+            SOLO FRIO Y FRIO/CALOR <br><br>
+             <span class="pricetxt1">$5,027.00 <s>  $8,999.00</s></span>
+          </p>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <div class="content_menu">
+    <ul>
+      <li>
+        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+      </li>
+      <li>
+        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+      </li>
+      <li>
+        <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+      </li>
+    </ul>
+  </div>
+</ion-content>

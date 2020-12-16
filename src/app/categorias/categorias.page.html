@@ -1,0 +1,67 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>categorias</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <div class="content_img_buscar">
+    <img src="../../assets/images/buscar.png" alt="buscar" class="buscar_img">
+  </div>
+  <div id="content_categorias">
+    <div class="carrito" (click)="onClickCarrito()">
+      <span class="numero">4</span>
+      <img src="../../assets/images/carrito.png" alt="carrito" >
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <span class="titulo">Aire Acondicionado</span>
+          <img src="../../assets/images/Aire.jpg" alt="categoria1" class="categorias_img" (click)="onclickCategoria()">
+        </ion-col>
+        <ion-col>
+          <span class="titulo">equipo para comercios</span>
+          <img src="../../assets/images/Comercial.jpg" alt="categoria2" class="categorias_img" (click)="onclickCategoria()">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <span class="titulo">gas regrigerante</span>
+          <img src="../../assets/images/Freon.jpg" alt="categoria1" class="categorias_img" (click)="onclickCategoria()">
+        </ion-col>
+        <ion-col>
+          <span class="titulo">herramientas</span>
+          <img src="../../assets/images/Herramientas.jpg" alt="categoria2" class="categorias_img" (click)="onclickCategoria()">
+        </ion-col>
+      </ion-row>
+      <ion-row class="last">
+        <ion-col>
+          <span class="titulo">outlet</span>
+          <img src="../../assets/images/cat4.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria()">
+        </ion-col>
+        <ion-col>
+          <span class="titulo">todos</span>
+          <img src="../../assets/images/cat4.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria()">
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+  </div>
+  <div class="content_menu">
+    <ul>
+      <li>
+        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+      </li>
+      <li>
+        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+      </li>
+      <li>
+        <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+      </li>
+    </ul>
+  </div>
+</ion-content>

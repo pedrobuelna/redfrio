@@ -1,0 +1,41 @@
+#content_producto{background-color: #ffffff;}
+#configurador_content{box-shadow: 0px 3px 6px #00000029;padding: 0 20px;margin-bottom: 30px;}
+.optionB{height: 30px;}
+.titulo2{text-align: center;border-bottom:1px solid #707070;color:#707070;padding-bottom:5px;margin-top:30px;font-size: 14px;}
+.titulo_radio{border: none; color: #707070;text-transform:uppercase;font-size:12px;margin: 0;}
+.radio{margin:0 10px 0 0}
+ion-item {
+    --min-height: 32px;
+}
+#descripcion_content{
+    color: #707070;
+}
+.content_carrusel{background-color: #ffffff;}
+.content_img_gde{padding: 0 3px 7px 3px;}
+.padding{padding: 30px;}
+.img_gde{width: 100%;}
+ion-grid{
+    ion-card{
+        width:100%;
+        margin-left:0 !important;
+        margin-right:0 !important;
+        ion-card-content{
+            padding: 0 !important; 
+        }
+    }
+}
+.btn_agregar{
+    margin-top: 30px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 16px;
+    --background: var(--ion-rojo-btn);
+    margin-bottom: 100px;
+}
+.titulo1{font-size: 20px;text-transform: uppercase;}
+.parrafo1{font-size: 16px;text-transform: uppercase;}
+.precios{font-size: 24px;}
+.precio2{color: #DD0330;}
+.img_gde{height: 220px;}
+.img_gde,.img_ch{box-shadow: 0px 3px 6px #00000029;}
+ 

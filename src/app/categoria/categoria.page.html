@@ -1,0 +1,135 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>categoria</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="carrito" (click)="onClickCarrito()">
+    <span class="numero">4</span>
+    <img src="../../assets/images/carrito.png" alt="carrito" >
+  </div>
+  <div id="content_filtro">
+    <select name="categoria_select" id="categoria_select">
+      <option value="0" selected>aire acondicionado</option>
+      <option value="1">Equipo para comercios</option>
+      <option value="2">gas refrigerante</option>
+      <option value="3">herramientas</option>
+      <option value="4">outlets</option>
+      <option value="5">todos</option>
+    </select>
+    <br><br>
+    <div class="txt3">Comprar por:</div>
+    <select name="categoria_select2" id="categoria_select2">
+      <option value="1">Más vendido</option>
+    </select>
+  </div>
+  <ion-grid style="padding: 0 25px">
+    <ion-row>
+      <ion-col class="productos_carrusel" (click)="onclickProducto()">
+        <div id="content_producto_carrusel">
+          <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+          <img src="../../assets/images/aireblanco.png" alt="aireblanco.png">
+          <div class="content_producto_textos">
+            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+              YHFE/YHGE SERIES <br>
+              COMPRESOR ON/OFF 220V R-410A <br>
+              SOLO FRIO Y FRIO/CALOR <br><br>
+               <span class="pricetxt1">$5,027.00   <span class="oferta"> <s>$8,999.00</s></span></span>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col class="productos_carrusel">
+        <div id="content_producto_carrusel"  (click)="onclickProducto()">
+          <img src="../../assets/images/outlet.png" alt="outlet" class="marks">
+          <img src="../../assets/images/airegris.png" alt="airegris.png">
+          <div class="content_producto_textos">
+            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+              YHFE/YHGE SERIES <br>
+              COMPRESOR ON/OFF 220V R-410A <br>
+              SOLO FRIO Y FRIO/CALOR <br><br>
+               <span class="pricetxt1">$5,027.00  <span class="oferta"><s> $8,999.00</s></span></span>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="productos_carrusel"  (click)="onclickProducto()">
+        <div id="content_producto_carrusel">
+          <img src="../../assets/images/doble.png" alt="doble" class="marks">
+          <img src="../../assets/images/aireblanco.png" alt="aireblanco.png">
+          <div class="content_producto_textos">
+            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+              YHFE/YHGE SERIES <br>
+              COMPRESOR ON/OFF 220V R-410A <br>
+              SOLO FRIO Y FRIO/CALOR <br><br>
+               <span class="pricetxt1">$5,027.00   <span class="oferta"> <s>$8,999.00</s></span></span>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col class="productos_carrusel">
+        <div id="content_producto_carrusel">
+          <img src="../../assets/images/airegris.png" alt="airegris.png">
+          <div class="content_producto_textos">
+            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+              YHFE/YHGE SERIES <br>
+              COMPRESOR ON/OFF 220V R-410A <br>
+              SOLO FRIO Y FRIO/CALOR <br><br>
+               <span class="pricetxt1">$5,027.00  <span class="oferta"><s> $8,999.00</s></span></span>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="last">
+      <ion-col class="productos_carrusel">
+        <div id="content_producto_carrusel">
+          <img src="../../assets/images/aireblanco.png" alt="aireblanco.png">
+          <div class="content_producto_textos">
+            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+              YHFE/YHGE SERIES <br>
+              COMPRESOR ON/OFF 220V R-410A <br>
+              SOLO FRIO Y FRIO/CALOR <br><br>
+               <span class="pricetxt1">$5,027.00   <span class="oferta"> <s>$8,999.00</s></span></span>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col class="productos_carrusel"  (click)="onclickProducto()">
+        <div id="content_producto_carrusel">
+          <img src="../../assets/images/airegris.png" alt="airegris.png">
+          <div class="content_producto_textos">
+            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+              YHFE/YHGE SERIES <br>
+              COMPRESOR ON/OFF 220V R-410A <br>
+              SOLO FRIO Y FRIO/CALOR <br><br>
+               <span class="pricetxt1">$5,027.00  <span class="oferta"><s> $8,999.00</s></span></span>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+  <div class="content_menu">
+    <ul>
+      <li>
+        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+      </li>
+      <li>
+        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+      </li>
+      <li>
+        <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+      </li>
+    </ul>
+  </div>
+</ion-content>
