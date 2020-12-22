@@ -5,9 +5,9 @@
 </ion-header> -->
 <ion-content>
   <div class="content_sucursales">
-    <ion-select (ionChange)="checkValue($event)" id="categoria_select" value="-" appNoArrow>
+    <ion-select (ionChange)="checkValue($event)" id="categoria_select" [value]="this.sucursalActual.id_sucursal" appNoArrow>
       <ion-select-option value="-">Seleccionar</ion-select-option>
-      <ion-select-option *ngFor="let marker of markers" value="{{marker.nombre}}">{{marker.nombre}}</ion-select-option>
+      <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.id_sucursal}}">{{sucursal.nombre}}</ion-select-option>
     </ion-select>
     
     <div class="content_mapa">
@@ -20,18 +20,18 @@
         <div class="content_direc none">
           <p>
             <img src="../../assets/images/img_flechaarriba.png" alt="direccion" class="direccion_img">
-            <span>{{titulo}}<br> <span class="ml10"></span> <br>
-            <span class="ml10">as</span> </span> 
+            <span>{{this.sucursalActual.nombre}}<br> <span class="ml10"></span> <br>
+            <span class="ml10">{{this.sucursalActual.direccion}}</span> </span> 
           </p>
           <p> 
             <img src="../../assets/images/img_tel.png" alt="img_tel" class="direccion_img">
-            <span>as</span><br>
+            <span>{{this.sucursalActual.telefono_1}}</span><br>
             <img src="../../assets/images/img_tel.png" alt="img_tel" class="direccion_img"> 
-            <span>as</span><br> 
+            <span>{{this.sucursalActual.telefono_2}}</span><br> 
           </p> 
           <p> 
             <img src="../../assets/images/img_mail.png" alt="img_tel" class="direccion_img">
-            <span>as</span><br>
+            <span>{{this.sucursalActual.mail}}</span><br>
           </p>
         </div>
       </div>

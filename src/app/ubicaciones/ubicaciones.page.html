@@ -8,7 +8,7 @@
   <div id="container">
     <ion-select id="categoria_select"  (ionChange)="goSucursales($event)" [value]="tiendaSelected">
       <ion-select-option [value]="0">Sucursales</ion-select-option>      
-      <ion-select-option *ngFor="let sucursal of sucursales;let i = index" [value]="sucursal.nombre">{{sucursal.nombre}}</ion-select-option>
+      <ion-select-option *ngFor="let sucursal of sucursales;let i = index" [value]="sucursal.id_sucursal">{{sucursal.nombre}}</ion-select-option>
     </ion-select>
     <div class="content_boton">
       <ion-button expand="full" class="btn_pagar" (click)="clickOnSucursales()">
