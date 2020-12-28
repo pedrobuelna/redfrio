@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from './../interfaces/task';
 import { Sucursal } from './../interfaces/task';
+import { Login } from './../interfaces/task';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,12 @@ import { Sucursal } from './../interfaces/task';
 export class TaskService {
   //private api = 'https://jsonplaceholder.typicode.com';
   //private api = 'http://webservicearca.000webhostapp.com';
-  private api = 'http://webservice.prueba';
+  private api = 'http://178.128.14.243:3000';
   constructor(
     private http: HttpClient
   ) {
 
   }
-
   getAllTasks() {
     //const path = `${this.api}/todos`;
     const path = `http://178.128.14.243:3000/sucursales`;
@@ -24,12 +24,12 @@ export class TaskService {
   }
   getTask(id: string) {
     //const path = `${this.api}/todos/${id}`;
-    const path = `${this.api}/refacciones/${id}`;
+    const path = `http://webservicearca.000webhostapp.com/refacciones/${id}`;
     return this.http.get<Task>(path);
   }
   createTask(task: Task) {
     // const path = `${this.api}/todos`;
-    const path = `http://178.128.14.243:3000/clientes`;
+    const path = `${this.api}/clientes`;
     return this.http.post(path, task);
   }
   updateTask(task: Task) {
@@ -41,5 +41,11 @@ export class TaskService {
     // const path = `${this.api}/todos/${id}`;
     const path = `${this.api}/refacciones/${id}`
     return this.http.delete(path);
+  }
+  getLogin(mail: any,contrasena:any) {
+    //const path = `${this.api}/todos/${id}`;
+    const path = `${this.api}/clientes?mail=eq.${mail}&password=eq.${contrasena}`;
+    //alert(path)
+    return this.http.get<Task>(path);
   }
 }

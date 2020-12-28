@@ -27,6 +27,8 @@ export class AppComponent {
   password: string;
   status: string;
   uso_cfdi: string;
+  email: string;
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

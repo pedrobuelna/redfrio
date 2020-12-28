@@ -22,4 +22,8 @@ export interface Sucursal {
   coordenadas: string;
   enlaceMaps: string;
 }
+export interface Login {
+  mail: string;
+  contrasena: string;
+}
 
