@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/task';
 import { ActivatedRoute } from '@angular/router';
+import {Md5} from 'ts-md5/dist/md5';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -38,7 +39,7 @@ export class LoginPage implements OnInit {
   getLogin() {
 		
     
-    this.taskService.getLogin(this.ionicForm.value.correo,this.ionicForm.value.password)
+    this.taskService.getLogin(this.ionicForm.value.correo,Md5.hashStr(this.ionicForm.value.password))
     .subscribe((data) => {
       // do happy stuff
       //task.mail = this.ionicForm.value.mail

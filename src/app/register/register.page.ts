@@ -3,6 +3,7 @@ import { Router } from  "@angular/router";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { TaskService } from '../services/task.service';
 import { Task, Sucursal } from '../interfaces/task';
+import {Md5} from 'ts-md5/dist/md5';
 //import { AuthService } from '../auth.service';
 
 @Component({
@@ -114,7 +115,7 @@ export class RegisterPage implements OnInit {
         tipo_empresa: this.ionicForm.value.tipoEmpresa,
         rfc: this.ionicForm.value.rfc,
         persona_fisica: this.ionicForm.value.persona_fisica,
-        password: this.ionicForm.value.password,
+        password: Md5.hashStr(this.ionicForm.value.password),
         status: "0",
         uso_cfdi: this.ionicForm.value.uso_cfdi,
       };
