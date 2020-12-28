@@ -15,7 +15,6 @@ export class LoginPage implements OnInit {
   tasks: Task[] = [];
   mail:any;
   password:any;
-
   constructor(private router: Router,public formBuilder: FormBuilder,private taskService: TaskService,private activatedRoute: ActivatedRoute) { 
     this.ionicForm = this.formBuilder.group({
       correo:  ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
@@ -44,7 +43,6 @@ export class LoginPage implements OnInit {
       // do happy stuff
       //task.mail = this.ionicForm.value.mail
       //task.contrasena = this.ionicForm.value.password
-      
       alert(`Haz sido logueado` + data.password)
      }, (err) => {
        // do alerty stuff
