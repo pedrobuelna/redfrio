@@ -3,8 +3,8 @@ import { Router } from  "@angular/router";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { TaskService } from '../services/task.service';
 import { Task, Sucursal } from '../interfaces/task';
-import {Md5} from 'ts-md5/dist/md5';
 //import { AuthService } from '../auth.service';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-register',
@@ -104,6 +104,7 @@ export class RegisterPage implements OnInit {
     } else {
       alert('Form Completed' + this.ionicForm.value)
       this.router.navigate(['/principal']);
+      this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       const task = {
         nombre: this.ionicForm.value.nombre,
         nombre_2: this.ionicForm.value.nombre2,
@@ -115,7 +116,7 @@ export class RegisterPage implements OnInit {
         tipo_empresa: this.ionicForm.value.tipoEmpresa,
         rfc: this.ionicForm.value.rfc,
         persona_fisica: this.ionicForm.value.persona_fisica,
-        password: Md5.hashStr(this.ionicForm.value.password),
+        password: this.ionicForm.value.password,
         status: "0",
         uso_cfdi: this.ionicForm.value.uso_cfdi,
       };

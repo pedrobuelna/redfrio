@@ -44,7 +44,13 @@ export class LoginPage implements OnInit {
       // do happy stuff
       //task.mail = this.ionicForm.value.mail
       //task.contrasena = this.ionicForm.value.password
-      alert(`Haz sido logueado` + data.password)
+      if(data[0]!=null){
+        console.log("Existe: " + data);
+        this.router.navigate(['/principal']);
+      }else{
+        console.log("No Existe: " + Md5.hashStr("57f842f3-2e23-4d03-b1ef-cb5b7dd8e778"));
+        alert("Usuario y/o contrasena incorrecta");
+      }
      }, (err) => {
        // do alerty stuff
        alert(err)
