@@ -48,4 +48,20 @@ export class TaskService {
     //alert(path)
     return this.http.get<Task>(path);
   }
+  getProductos() {
+    //const path = `${this.api}/todos/${id}`;
+    const path = `${this.api}/productos`;
+    //alert(path)
+    return this.http.get<Task>(path);
+  }
+  getProducto(id:any) {
+    //const path = `${this.api}/todos/${id}`;
+    const path = `${this.api}/productos?uuid_producto=eq.${id}`;
+    //alert(path)
+    return this.http.get<Task>(path);
+  }
+  sendMailUsr(usrMail:string){
+    const path= `http://carteraclientes.com/sistema/enviarCorreoRegistroCliente/${usrMail}`;
+    return this.http.patch<Task>(path,false);
+  }
 }

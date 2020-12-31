@@ -26,4 +26,59 @@ export interface Login {
   mail: string;
   contrasena: string;
 }
-
+export interface productos {
+  uuid_producto: string;
+  producto_id: string;
+  no_parte: string;
+  marca: string;
+  nombre: string;
+  desc_corta: string;
+  desc_larga: string;
+  status: string;
+  visible: string;
+  nuevo: string;
+  promocion: string;
+  destacado: string;
+  um: string;
+  tasa_iva: string;
+  grupo_accesorios_id: string;
+  grupo_relacionados_id: string;
+  nom_img1: string;
+  url_img1: string;
+  nom_img2: string;
+  url_img2: string;
+  nom_img3: string;
+  url_img3: string;
+  nom_img4: string;
+  url_img4: string;
+  nom_img5: string;
+  url_img5: string;
+}
+export interface producto {
+  uuid_producto: string;
+  producto_id: string;
+  no_parte: string;
+  marca: string;
+  nombre: string;
+  desc_corta: string;
+  desc_larga: string;
+  status: string;
+  visible: string;
+  nuevo: string;
+  promocion: string;
+  destacado: string;
+  um: string;
+  tasa_iva: string;
+  grupo_accesorios_id: string;
+  grupo_relacionados_id: string;
+  nom_img1: string;
+  url_img1: string;
+  nom_img2: string;
+  url_img2: string;
+  nom_img3: string;
+  url_img3: string;
+  nom_img4: string;
+  url_img4: string;
+  nom_img5: string;
+  url_img5: string;
+}

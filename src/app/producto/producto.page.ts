@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {TaskService} from '../services/task.service';
 
 @Component({
   selector: 'app-producto',
@@ -22,7 +23,10 @@ export class ProductoPage implements OnInit {
     }
   };
   @ViewChild('slides') slides;
-  constructor(private router: Router) { }
+  
+  producto2: any;
+  constructor(private router: Router,private taskService: TaskService,
+    private route: ActivatedRoute) { }
   move1(slides){
     console.log(slides)
     slides.slideTo(0)
@@ -40,6 +44,14 @@ export class ProductoPage implements OnInit {
     slides.slideTo(3)
   }
   ngOnInit() {
+    let x="";
+    this.route.queryParams.subscribe( queryParams => x = queryParams.id);
+//    console.log("x:" + x)
+    this.taskService.getProducto(x)
+      .subscribe(producto2 => {
+          this.producto2 = producto2;
+          console.log(producto2)
+    });
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

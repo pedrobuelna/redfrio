@@ -24,23 +24,21 @@
       <option value="1">Más vendido</option>
     </select>
   </div>
-  <ion-grid style="padding: 0 25px">
-    <ion-row>
-      <ion-col class="productos_carrusel" (click)="onclickProducto()">
-        <div id="content_producto_carrusel">
-          <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
-          <img src="../../assets/images/aireblanco.png" alt="aireblanco.png">
-          <div class="content_producto_textos">
-            <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
-              YHFE/YHGE SERIES <br>
-              COMPRESOR ON/OFF 220V R-410A <br>
-              SOLO FRIO Y FRIO/CALOR <br><br>
-               <span class="pricetxt1">$5,027.00   <span class="oferta"> <s>$8,999.00</s></span></span>
-            </p>
-          </div>
+  <ion-row>
+    <ion-col *ngFor="let producto of productos2;let i = index" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
+      <div id="content_producto_carrusel">
+        <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+        <img src="../../assets/images/aireblanco.png" alt="aireblanco.png">
+        <div class="content_producto_textos">
+          <p> <span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br> </p>
+          <p> {{producto.desc_corta}}</p>
+          <p><span class="pricetxt1">$5,027.00<span class="oferta"> <s>$8,999.00</s></span></span>
+          </p>
         </div>
-      </ion-col>
-      <ion-col class="productos_carrusel">
+      </div>
+    </ion-col>
+  </ion-row>
+      <!-- <ion-col class="productos_carrusel">
         <div id="content_producto_carrusel"  (click)="onclickProducto()">
           <img src="../../assets/images/outlet.png" alt="outlet" class="marks">
           <img src="../../assets/images/airegris.png" alt="airegris.png">
@@ -53,9 +51,9 @@
             </p>
           </div>
         </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
+      </ion-col> -->
+    
+    <!-- <ion-row>
       <ion-col class="productos_carrusel"  (click)="onclickProducto()">
         <div id="content_producto_carrusel">
           <img src="../../assets/images/doble.png" alt="doble" class="marks">
@@ -111,8 +109,8 @@
           </div>
         </div>
       </ion-col>
-    </ion-row>
-  </ion-grid> 
+    </ion-row> -->
+  
   <div class="content_menu">
     <ul>
       <li>

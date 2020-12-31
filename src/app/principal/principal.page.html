@@ -23,11 +23,11 @@
     </ion-slide>
   </ion-slides>
   <ion-slides [options]="sliderOptions2" class="productos_carrusel">
-    <ion-slide *ngFor="let item of items">
-      <div id="content_producto_carrusel" (click)="onClickProducto()">
+    <ion-slide  *ngFor="let producto of productos2;let i = index">
+      <div id="content_producto_carrusel" (click)="onClickProducto(producto.uuid_producto)">
         <img src="../../assets/images/producto1@3x.png" alt="producto1@3x.png">
         <div class="content_producto_textos">
-          <p> <span class="titletxt1"> YORK MINISPLIT </span><br>
+          <p> <span class="titletxt1"> {{producto.marca}} MINISPLIT </span><br>
             YHFE/YHGE SERIES <br>
             COMPRESOR ON/OFF 220V R-410A <br>
             SOLO FRIO Y FRIO/CALOR <br><br>

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { TaskService } from '../services/task.service';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -34,7 +35,9 @@ export class PrincipalPage implements OnInit {
     centeredSlides: true,
     spaceBetween: 20
   };
-  constructor(private router: Router,private renderer: Renderer2) { }
+  productos2: any;
+  constructor(private router: Router,private renderer: Renderer2,
+    private taskService: TaskService) { }
   addMyClass(){
     //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
     this.renderer.addClass(this.splash.nativeElement, "quitSplash");
@@ -43,6 +46,11 @@ export class PrincipalPage implements OnInit {
     setTimeout(() => {
       this.addMyClass()
      }, 1500);
+     this.taskService.getProductos()
+      .subscribe(productos2 => {
+          this.productos2 = productos2;
+          console.log(productos2)
+      });
   }
   retraso(){
     console.log("Retraso")
@@ -62,8 +70,12 @@ export class PrincipalPage implements OnInit {
   onclickUsuario(){
     this.router.navigate(['/register']);
   }
-  onClickProducto(){
-    this.router.navigate(['/producto']);
+  onClickProducto(id){
+    this.router.navigate(['/producto'], {
+        queryParams: {
+            id: id
+        }
+    });
   }
   onClickCarrito(){
     this.router.navigate(['/carrito']);

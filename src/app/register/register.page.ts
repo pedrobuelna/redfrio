@@ -103,8 +103,9 @@ export class RegisterPage implements OnInit {
       return false;
     } else {
       alert('Form Completed' + this.ionicForm.value)
-      this.router.navigate(['/principal']);
+      
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
+      let usrMail = this.ionicForm.value.mail;
       const task = {
         nombre: this.ionicForm.value.nombre,
         nombre_2: this.ionicForm.value.nombre2,
@@ -121,14 +122,27 @@ export class RegisterPage implements OnInit {
         uso_cfdi: this.ionicForm.value.uso_cfdi,
       };
       this.taskService.createTask(task)
-				.subscribe((newTask) => {
-           // do happy stuff
-           alert("Tus datos han sido guardados correctamente")
-          }, (err) => {
-            // do alerty stuff
+        .subscribe((reply: any) => {
+            this.taskService.sendMailUsr(usrMail)
+                .subscribe((sendMail: any) => {
+                    alert("Tus datos han sido guardados correctamente")
+                }, (err) => {
+                    alert(err);
+                });
+        }, (err) => {
             alert(err)
-          });
-      }
+        });
+        this.router.navigate(['/principal']);
+      // this.taskService.createTask(task)
+			// 	.subscribe((newTask) => {
+      //      // do happy stuff
+      //      alert("Tus datos han sido guardados correctamente")
+      //     }, (err) => {
+      //       // do alerty stuff
+      //       alert(err)
+      //     });
+      
+       }
     
   }
   onclickNotificaciones(){

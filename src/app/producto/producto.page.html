@@ -1,12 +1,12 @@
 <ion-content>
-  <div id="content_producto" class="padding">
+  <div id="content_producto" class="padding" *ngFor="let producto of producto2;let i = index" >
     <div class="content_carrusel">
       <ion-slides pager="true" #slides [options]="sliderOptions" class="content_img_gde">
         <ion-slide *ngFor="let item of items">
           <img src="{{item}}" alt="{{item}}" alt="aire" class="img_gde">
         </ion-slide>
       </ion-slides>
-      <div class="content_img_ch">
+      <div class="content_img_ch" >
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -61,7 +61,7 @@
       </ion-grid>
     </div>
     <div id="descripcion_content">
-      <div class="titulo1">york mini split</div>
+      <div class="titulo1">{{producto.marca}} mini split</div>
       <p class="parrafo1">
         <span>yhfe/yhg series</span> <br>
         <span>compresor on/off 220v</span> <br>
@@ -69,7 +69,7 @@
         <span>solo frio y frio/calor</span>
       </p>
       <div class="parrafo2">
-        <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">york</span> <br>
+        <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
         <span class="ion-text-capitalize">Disponibilidad: En Stock </span>
       </div> 
       <p class="parrafo3">
