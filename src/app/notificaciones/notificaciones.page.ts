@@ -10,6 +10,9 @@ export class NotificacionesPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    $(".abrir").click(function(){
+      alert("Abrir ventana y dar efecto");
+    })
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

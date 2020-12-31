@@ -44,7 +44,7 @@ export class TaskService {
   }
   getLogin(mail: any,contrasena:any) {
     //const path = `${this.api}/todos/${id}`;
-    const path = `${this.api}/clientes?mail=eq.${mail}&password=eq.${contrasena}`;
+    const path = `${this.api}/clientes?mail=eq.${mail}&password=eq.${contrasena}&status=eq.1`;
     //alert(path)
     return this.http.get<Task>(path);
   }
