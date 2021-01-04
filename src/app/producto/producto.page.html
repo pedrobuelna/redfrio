@@ -70,7 +70,7 @@
       </p>
       <div class="parrafo2">
         <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
-        <span class="ion-text-capitalize">Disponibilidad: En Stock </span>
+        <span class="ion-text-capitalize">Disponibilidad: <span *ngIf="producto.status==1">En stock</span><span *ngIf="producto.status==0">No hay disponibilidad</span> </span>
       </div> 
       <p class="parrafo3">
       Características:Operación SilenciosaPantalla LCDFunciónde reinicioIncluye control remotoRefrigerante ecológicoVentilador con tres velocidades -alta, media y baja.Incluye Kit de instalación (Cu-Cu) y cableado de 4 mts de longitud… 
