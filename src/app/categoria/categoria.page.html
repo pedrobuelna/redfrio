@@ -24,11 +24,11 @@
       <option value="1">Más vendido</option>
     </select>
   </div>
-  <ion-row>
+  <ion-row class="content_categorias">
     <ion-col *ngFor="let producto of productos2;let i = index" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel">
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
-        <img src="../../assets/images/aireblanco.png" alt="aireblanco.png">
+        <img src="../../assets/images/logo.png" alt="imgblanca.png">
         <div class="content_producto_textos">
           <p> <span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br> </p>
           <p> {{producto.desc_corta}}</p>
