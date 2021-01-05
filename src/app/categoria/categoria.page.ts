@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {TaskService} from '../services/task.service';
 @Component({
   selector: 'app-categoria',
@@ -7,14 +7,30 @@ import {TaskService} from '../services/task.service';
   styleUrls: ['./categoria.page.scss'],
 })
 export class CategoriaPage implements OnInit {
-  constructor(private router: Router,private taskService: TaskService) { }
+  constructor(private router: Router,private taskService: TaskService,
+              private route: ActivatedRoute) { }
   productos2: any;
   ngOnInit() {
-    this.taskService.getProductos()
+    let x: string;
+    this.route.queryParams.subscribe( queryParams => x = queryParams.id);
+    //alert(x)
+    if(x=="0"){
+      //alert("TODOS")
+      this.taskService.getAllProductos()
+        .subscribe(productos2 => {
+            this.productos2 = productos2;
+            console.log(productos2)
+      });
+    }else{
+      //alert("familia "+ x)
+      this.taskService.getProductos(x)
       .subscribe(productos2 => {
           this.productos2 = productos2;
           console.log(productos2)
       });
+    }
+    
+    
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);
@@ -36,7 +52,7 @@ export class CategoriaPage implements OnInit {
         queryParams: {
             id: id
         }
-    });
+      });
     //this.router.navigate(['/producto']);
   }
   onClickCarrito(){

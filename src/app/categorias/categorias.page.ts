@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-categorias',
@@ -8,10 +9,16 @@ import { Router } from '@angular/router';
 })
 export class CategoriasPage implements OnInit {
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router,private taskService: TaskService) { }
+  familias:any;
   ngOnInit() {
+    this.taskService.getFamilias()
+      .subscribe(familias => {
+          this.familias = familias;
+          console.log(familias)
+      });
   }
+
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);
   }
@@ -21,14 +28,18 @@ export class CategoriasPage implements OnInit {
   onclickMenu(){
     this.router.navigate(['/principal']);
   }
-  onclickCategorias(){
-    this.router.navigate(['/categorias']);
+  onclickAllCategoria(){
+    this.router.navigate(['/categoria']);
   }
   onclickUsuario(){
     this.router.navigate(['/usuario']);
   }
-  onclickCategoria(){
-    this.router.navigate(['/categoria']);
+  onclickCategoria(id){
+    this.router.navigate(['/categoria'], {
+      queryParams: {
+          id: id
+      }
+    });
   }
   onClickCarrito(){
     this.router.navigate(['/carrito']);

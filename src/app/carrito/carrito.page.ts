@@ -11,6 +11,13 @@ export class CarritoPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    let x=0;
+    $(".precio").each(function(i){
+      
+      x=x+parseInt($(this).text())
+      
+    })
+    $(".subtotal_numero").text(x)
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

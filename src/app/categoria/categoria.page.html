@@ -24,6 +24,7 @@
       <option value="1">Más vendido</option>
     </select>
   </div>
+  
   <ion-row class="content_categorias">
     <ion-col *ngFor="let producto of productos2;let i = index" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel">
@@ -36,8 +37,12 @@
           </p>
         </div>
       </div>
-    </ion-col>
+      </ion-col>
+      <div style="color:black" *ngIf="!productos2?.length">
+        No se encuentran productos en esta categoría
+      </div>
   </ion-row>
+  
       <!-- <ion-col class="productos_carrusel">
         <div id="content_producto_carrusel"  (click)="onclickProducto()">
           <img src="../../assets/images/outlet.png" alt="outlet" class="marks">

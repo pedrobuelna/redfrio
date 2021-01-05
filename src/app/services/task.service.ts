@@ -48,9 +48,27 @@ export class TaskService {
     //alert(path)
     return this.http.get<Task>(path);
   }
-  getProductos() {
+  getFamilias() {
+    //const path = `${this.api}/todos/${id}`;
+    const path = `${this.api}/familias`;
+    //alert(path)
+    return this.http.get<Task>(path);
+  }
+  getFamilia(id:any) {
+    //const path = `${this.api}/todos/${id}`;
+    const path = `${this.api}/familias?id_familia=eq.${id}`;
+    //alert(path)
+    return this.http.get<Task>(path);
+  }
+  getAllProductos() {
     //const path = `${this.api}/todos/${id}`;
     const path = `${this.api}/productos`;
+    //alert(path)
+    return this.http.get<Task>(path);
+  }
+  getProductos(id) {
+    //const path = `${this.api}/todos/${id}`;
+    const path = `${this.api}/productos?familia_id=eq.${id}`;
     //alert(path)
     return this.http.get<Task>(path);
   }
