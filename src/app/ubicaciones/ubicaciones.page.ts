@@ -25,7 +25,8 @@ export class UbicacionesPage implements OnInit {
         this.taskService.getAllTasks()
             .subscribe(sucursales => {
                 this.sucursales = sucursales;
-            });
+        });
+        
     }
     goSucursales(event) {
         this.router.navigate(['/sucursales'], {
