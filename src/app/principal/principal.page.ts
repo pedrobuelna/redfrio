@@ -46,7 +46,7 @@ export class PrincipalPage implements OnInit {
     setTimeout(() => {
       this.addMyClass()
      }, 1500);
-     this.taskService.getProductos()
+     this.taskService.getAllProductos()
       .subscribe(productos2 => {
           this.productos2 = productos2;
           console.log(productos2)

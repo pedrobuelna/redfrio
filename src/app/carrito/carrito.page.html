@@ -10,7 +10,7 @@
         <option value="0" selected>su carrito</option>
       </select>
     </div>
-    <div class="subcontent_carrito">
+    <div class="subcontent_carrito" *ngFor="let lista of listas; let i = index">
       <ion-grid>
         <ion-row>
           <ion-col size="5" >
@@ -22,18 +22,18 @@
             <ion-row>
               <ion-col size="8">
                 <p class="parrafo1">
-                  <span class="titulo1">YORK MINISPLIT</span> <br>
-                  YHFE/YHGE SERIES COMPRESOR ON/OFF R-410A SOLO FRIO Y FRIO/CALOR 220V
+                  <span class="titulo1">{{lista.nombre}}</span> <br>
+                  {{lista.descripcion}}
                 </p>
                 <span class="precio none">500</span>
               </ion-col>
-              <span class="remover">Eliminar</span>
+              <span class="remover" (click)="delete(i)">Eliminar</span>
               <ion-col size="4">
-                <div class="precio1">$5,027.00</div>
-                <select name="cantidad" class="cantidad">
+                <div class="precio1">{{lista.precio}}</div>
+                <select name="cantidad" class="cantidad" id="cant1">
                   <option value="1">1</option>
-                  <option value="1">2</option>
-                  <option value="1">3</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </ion-col>
             </ion-row>
@@ -41,7 +41,7 @@
         </ion-row>
       </ion-grid>
     </div>
-    <div class="subcontent_carrito">
+    <!-- <div class="subcontent_carrito">
       <ion-grid>
         <ion-row>
           <ion-col size="5">
@@ -61,10 +61,10 @@
               <span class="remover">Eliminar</span>
               <ion-col size="4">
                 <div class="precio1">$5,027.00</div>
-                <select name="cantidad" class="cantidad">
+                <select name="cantidad" class="cantidad" id="cant2">
                   <option value="1">1</option>
-                  <option value="1">2</option>
-                  <option value="1">3</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </ion-col>
             </ion-row>
@@ -92,10 +92,10 @@
               <span class="remover">Eliminar</span>
               <ion-col size="4">
                 <div class="precio1">$5,027.00</div>
-                <select name="cantidad" class="cantidad">
+                <select name="cantidad" class="cantidad" id="cant3">
                   <option value="1">1</option>
-                  <option value="1">2</option>
-                  <option value="1">3</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </ion-col>
             </ion-row>
@@ -123,10 +123,10 @@
               <span class="remover">Eliminar</span>
               <ion-col size="4">
                 <div class="precio1">$5,027.00</div>
-                <select name="cantidad" class="cantidad">
+                <select name="cantidad" class="cantidad" id="cant4">
                   <option value="1">1</option>
-                  <option value="1">2</option>
-                  <option value="1">3</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </ion-col>
             </ion-row>
@@ -154,10 +154,10 @@
               <span class="remover">Eliminar</span>
               <ion-col size="4">
                 <div class="precio1">$5,027.00</div>
-                <select name="cantidad" class="cantidad">
+                <select name="cantidad" class="cantidad" id="cant5">
                   <option value="1">1</option>
-                  <option value="1">2</option>
-                  <option value="1">3</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </ion-col>
             </ion-row>
@@ -185,17 +185,17 @@
               <span class="remover">Eliminar</span>
               <ion-col size="4">
                 <div class="precio1">$5,027.00</div>
-                <select name="cantidad" class="cantidad">
+                <select name="cantidad" class="cantidad" id="cant6">
                   <option value="1">1</option>
-                  <option value="1">2</option>
-                  <option value="1">3</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
                 </select>
               </ion-col>
             </ion-row>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div>
+    </div> -->
   </div>
   
   <div class="content_subtotal">
@@ -211,7 +211,7 @@
   </div>
   <div class="content_boton">
       <ion-button expand="full" class="btn_pagar" (click)="onClickCheckout()">
-          <ion-label style="position: absolute;left:10px">$1,452</ion-label>
+          <ion-label style="position: absolute;left:10px">$ <span class="total_btnpago"></span></ion-label>
           <ion-label style="position: absolute;right:10px">Forma de pago</ion-label>
       </ion-button>
   </div>
