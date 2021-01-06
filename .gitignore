@@ -20,8 +20,9 @@ npm-debug.log*
 .versions/
 coverage/
 dist/
-
+node_modules/
 tmp/
+
 temp/
 hooks/
 platforms/
@@ -33,3 +34,4 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+node_modules
