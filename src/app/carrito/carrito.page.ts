@@ -32,7 +32,9 @@ export class CarritoPage implements OnInit {
     let x=0;
     $(".precio").each(function(i){
       x=x+(parseInt($(this).text()) * parseInt($(".cantidad").val()))
+      alert(x)
     })
+    
     $(".subtotal_numero").text("$ "+x)
     $(".total_btnpago").text(x)
     $( ".cantidad" ).change(function() {
