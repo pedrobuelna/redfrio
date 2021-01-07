@@ -8,7 +8,7 @@ export declare const routerIDsToChain: (ids: RouteID[], chains: RouteChain[]) =>
 export declare const routerPathToChain: (path: string[], chains: RouteChain[]) => RouteChain | null;
 export declare const computePriority: (chain: RouteChain) => number;
 export declare class RouterSegments {
-    private path;
-    constructor(path: string[]);
-    next(): string;
+  private path;
+  constructor(path: string[]);
+  next(): string;
 }
