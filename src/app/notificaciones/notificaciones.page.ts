@@ -1,18 +1,67 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { MyModalPage } from '../modals/my-modal/my-modal.page';
+import { DatePipe } from '@angular/common';
+import {TaskService} from '../services/task.service';
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.page.html',
   styleUrls: ['./notificaciones.page.scss'],
+  providers: [DatePipe]
 })
 export class NotificacionesPage implements OnInit {
-
-  constructor(private router: Router) { }
-
+  
+  dataReturned: any;
+  constructor(private router: Router,private datePipe: DatePipe,
+    private taskService: TaskService,
+    public modalController: ModalController) { 
+      
+    }
+    currentDate:any  = new Date();
+    listas: any;
+    // lista: Array<any> = [
+    //   {
+    //     titulo: "Oferta de fin de semana",
+    //     fecha:"12 de Nov. 2020",
+    //     descripcion: "6 Meses sin intereses! <br> Detalles de oferta.",
+    //     url_imagen: "../../assets/images/imgnot2.png",
+    //     estatus:0
+    //   },
+    //   {
+    //     titulo: "Oferta de fin de semana 2",
+    //     fecha:"12 de Nov. 2020",
+    //     descripcion: "6 Meses sin intereses! <br> Detalles de oferta.",
+    //     url_imagen: "../../assets/images/imgnot1.png",
+    //     estatus:0
+    //   },
+    //]
+    async openModal(index) {
+      const modal = await this.modalController.create({
+        component: MyModalPage,
+        componentProps: {
+          "titulo": this.listas[index].titulo,
+          "descripcion": this.listas[index].descripcion,
+          "url_imagen": this.listas[index].url_imagen,
+          "fecha": this.listas[index].fecha,
+        }
+      });
+  
+      modal.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null) {
+          this.dataReturned = dataReturned.data;
+          //alert('Modal Sent Data :'+ dataReturned);
+        }
+      });
+  
+      return await modal.present();
+    }
   ngOnInit() {
-    $(".abrir").click(function(){
-      alert("Abrir ventana y dar efecto");
-    })
+    this.taskService.getNotificaciones()
+      .subscribe(listas => {
+          this.listas = listas;
+    });
+    this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

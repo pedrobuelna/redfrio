@@ -11,6 +11,7 @@ export class CategoriasPage implements OnInit {
 
   constructor(private router: Router,private taskService: TaskService) { }
   familias:any;
+ 
   ngOnInit() {
     this.taskService.getFamilias()
       .subscribe(familias => {

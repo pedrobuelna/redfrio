@@ -82,3 +82,13 @@ export interface producto {
   nom_img5: string;
   url_img5: string;
 }
+export interface Notificaciones {
+  uuid: string;
+  uuid_cliente: string;
+  titulo: string;
+  fecha: string;
+  descripcion: string;
+  url_imagen: string;
+  icono: string;
+  status: string;
+}

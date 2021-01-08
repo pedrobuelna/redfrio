@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Task } from './../interfaces/task';
+import { Notificaciones, Task } from './../interfaces/task';
 import { Sucursal } from './../interfaces/task';
 import { Login } from './../interfaces/task';
 
@@ -32,10 +32,9 @@ export class TaskService {
     const path = `${this.api}/clientes`;
     return this.http.post(path, task);
   }
-  updateTask(task: Task) {
-   // const path = `${this.api}/todos/${task.id}`;
-    //const path = `${this.api}/refacciones/${task.id}`;
-    //return this.http.put<Task>(path, task);
+  getNotificaciones() {
+    const path = `${this.api}/notificaciones`;
+    return this.http.get<Notificaciones[]>(path);
   }
   deleteTask(id: string) {
     // const path = `${this.api}/todos/${id}`;

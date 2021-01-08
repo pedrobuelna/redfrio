@@ -1,0 +1,25 @@
+<!-- my-modal.page.html -->
+<!-- <ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>my-modal</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <br><br>
+  <div class="content2_notificaciones noleido2">
+    <div class="subcontent_content2_notificaciones">
+      <img src="{{url_imagen}}" alt="notificacion_negro" style="display: inline-block;">
+      <div style="display: inline-block;margin-left:5px">
+        <span class="txt1">{{titulo}}</span><br>
+        <span class="txt2">Válido hasta: {{fecha}}</span>
+      </div>
+    </div>
+    <div class="content_texto">
+      {{descripcion}}
+    </div>
+    <ion-button (click)="closeModal()" class="color2">Cerrar</ion-button>
+  </div>
+  
+
+</ion-content>
