@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { MyModalPage } from '../modals/my-modal/my-modal.page';
 import { DatePipe } from '@angular/common';
 import {TaskService} from '../services/task.service';
+import { Notificacion } from '../interfaces/task';
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.page.html',
@@ -11,14 +12,16 @@ import {TaskService} from '../services/task.service';
   providers: [DatePipe]
 })
 export class NotificacionesPage implements OnInit {
-  
   dataReturned: any;
+  tasks: Notificacion[] = [];
   constructor(private router: Router,private datePipe: DatePipe,
     private taskService: TaskService,
     public modalController: ModalController) { 
       
     }
     currentDate:any  = new Date();
+    uuid_cliente:any = "8e96af95-4575-47e9-a2aa-b56aba2f035f";
+    uuid_notificacion:any;
     listas: any;
     // lista: Array<any> = [
     //   {
@@ -36,7 +39,9 @@ export class NotificacionesPage implements OnInit {
     //     estatus:0
     //   },
     //]
+    
     async openModal(index) {
+      this.uuid_notificacion = this.listas[index].uuid_notificacion
       const modal = await this.modalController.create({
         component: MyModalPage,
         componentProps: {
@@ -44,17 +49,32 @@ export class NotificacionesPage implements OnInit {
           "descripcion": this.listas[index].descripcion,
           "url_imagen": this.listas[index].url_imagen,
           "fecha": this.listas[index].fecha,
+          "uuid_cliente": this.uuid_cliente,
+          "uuid_notificacion": this.listas[index].uuid_notificacion,
+          "status": this.listas[index].status,
         }
       });
-  
+      const Notificacion = {
+        status: "1"
+      };
+      this.taskService.updateNotificacion(Notificacion,this.uuid_cliente,this.uuid_notificacion)
+      .subscribe(listas => {
+          
+      });
+      
       modal.onDidDismiss().then((dataReturned) => {
         if (dataReturned !== null) {
           this.dataReturned = dataReturned.data;
           //alert('Modal Sent Data :'+ dataReturned);
         }
       });
-  
+      this.taskService.getNotificaciones()
+      .subscribe(listas => {
+          this.listas = listas;
+    });
+    this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
       return await modal.present();
+      
     }
   ngOnInit() {
     this.taskService.getNotificaciones()
@@ -63,7 +83,13 @@ export class NotificacionesPage implements OnInit {
     });
     this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
   }
+  
   onclickNotificaciones(){
+    this.taskService.getNotificaciones()
+      .subscribe(listas => {
+          this.listas = listas;
+    });
+    this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
     this.router.navigate(['/notificaciones']);
   }
   onclickUbicaciones(){

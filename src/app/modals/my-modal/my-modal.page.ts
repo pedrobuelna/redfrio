@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, NavParams } from '@ionic/angular';
 @Component({
   selector: 'app-my-modal',
@@ -11,7 +12,7 @@ export class MyModalPage implements OnInit {
   url_imagen: string;
   fecha: string;
   constructor( private modalController: ModalController,
-    private navParams: NavParams) { }
+    private navParams: NavParams,private router: Router) { }
 
   ngOnInit() {
     console.table(this.navParams);
@@ -21,7 +22,9 @@ export class MyModalPage implements OnInit {
     this.fecha = this.navParams.data.fecha;
   }
   async closeModal() {
+    this.router.navigate(['/notificaciones']);
     const onClosedData: string = "Wrapped Up!";
     await this.modalController.dismiss(onClosedData);
+    
   }
 }

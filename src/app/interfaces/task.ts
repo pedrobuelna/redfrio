@@ -92,3 +92,6 @@ export interface Notificaciones {
   icono: string;
   status: string;
 }
+export interface Notificacion {
+  status: string;
+}
