@@ -59,7 +59,11 @@ export class NotificacionesPage implements OnInit {
       };
       this.taskService.updateNotificacion(Notificacion,this.uuid_cliente,this.uuid_notificacion)
       .subscribe(listas => {
-          
+        this.taskService.getNotificaciones()
+        .subscribe(listas => {
+            this.listas = listas;
+        });
+        this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
       });
       
       modal.onDidDismiss().then((dataReturned) => {
@@ -68,11 +72,7 @@ export class NotificacionesPage implements OnInit {
           //alert('Modal Sent Data :'+ dataReturned);
         }
       });
-      this.taskService.getNotificaciones()
-      .subscribe(listas => {
-          this.listas = listas;
-    });
-    this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+      
       return await modal.present();
       
     }
