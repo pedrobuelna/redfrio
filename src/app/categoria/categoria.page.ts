@@ -10,7 +10,13 @@ export class CategoriaPage implements OnInit {
   constructor(private router: Router,private taskService: TaskService,
               private route: ActivatedRoute) { }
   productos2: any;
+  familias: any;
   ngOnInit() {
+    this.taskService.getFamilias()
+      .subscribe(familias => {
+          this.familias = familias;
+          console.log(familias)
+      });
     let x: string;
     this.route.queryParams.subscribe( queryParams => x = queryParams.id);
     //alert(x)
