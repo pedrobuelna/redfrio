@@ -1,6 +1,128 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["login-login-module"],{
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.page.html":
+/***/ "34Y5":
+/*!*************************************!*\
+  !*** ./src/app/login/login.page.ts ***!
+  \*************************************/
+/*! exports provided: LoginPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPage", function() { return LoginPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_login_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./login.page.html */ "V6Ie");
+/* harmony import */ var _login_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login.page.scss */ "r67e");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _services_task_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/task.service */ "i6c7");
+/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ts-md5/dist/md5 */ "kScs");
+/* harmony import */ var ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+
+
+
+
+
+
+
+
+
+
+let LoginPage = class LoginPage {
+    constructor(router, navCtrl, formBuilder, taskService, alertController, activatedRoute) {
+        this.router = router;
+        this.navCtrl = navCtrl;
+        this.formBuilder = formBuilder;
+        this.taskService = taskService;
+        this.alertController = alertController;
+        this.activatedRoute = activatedRoute;
+        this.isSubmitted = false;
+        this.tasks = [];
+        this.ionicForm = this.formBuilder.group({
+            correo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[a-zA-Z0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(6)]]
+        });
+    }
+    get errorControl() {
+        return this.ionicForm.controls;
+    }
+    submitForm() {
+        this.isSubmitted = true;
+        if (!this.ionicForm.valid) {
+            console.log('Please provide all the required values!');
+            return false;
+        }
+        else {
+            console.log('Form Completed' + this.ionicForm.value);
+            this.getLogin();
+        }
+    }
+    presentAlert() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'class_alert',
+                //header: 'Alert',
+                //subHeader: 'Subtitle',
+                message: 'Usuario y/o contraseña incorrecta',
+                buttons: ['OK']
+            });
+            yield alert.present();
+        });
+    }
+    getLogin() {
+        this.taskService.getLogin(this.ionicForm.value.correo, ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7__["Md5"].hashStr(this.ionicForm.value.password))
+            .subscribe((data) => {
+            // do happy stuff
+            //task.mail = this.ionicForm.value.mail
+            //task.contrasena = this.ionicForm.value.password
+            if (data[0] != null) {
+                console.log("Existe: " + data);
+                this.navCtrl.navigateRoot(['/principal']);
+            }
+            else {
+                console.log("No Existe: " + ts_md5_dist_md5__WEBPACK_IMPORTED_MODULE_7__["Md5"].hashStr("57f842f3-2e23-4d03-b1ef-cb5b7dd8e778"));
+                this.presentAlert();
+            }
+        }, (err) => {
+            // do alerty stuff
+            alert(err);
+        });
+    }
+    ngOnInit() {
+    }
+    validarLogin() {
+        // this.authService.register(form.value).subscribe((res) => {
+        //   this.router.navigateByUrl('home');
+        // });
+        this.navCtrl.navigateRoot(['/principal']);
+    }
+    onClickRegister() {
+        this.router.navigate(['/register']);
+    }
+};
+LoginPage.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _services_task_service__WEBPACK_IMPORTED_MODULE_6__["TaskService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["AlertController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
+];
+LoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-login',
+        template: _raw_loader_login_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_login_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], LoginPage);
+
+
+
+/***/ }),
+
+/***/ "V6Ie":
 /*!*****************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.page.html ***!
   \*****************************************************************************/
@@ -13,44 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app/login/login-routing.module.ts":
-/*!***********************************************!*\
-  !*** ./src/app/login/login-routing.module.ts ***!
-  \***********************************************/
-/*! exports provided: LoginPageRoutingModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageRoutingModule", function() { return LoginPageRoutingModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _login_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login.page */ "./src/app/login/login.page.ts");
-
-
-
-
-const routes = [
-    {
-        path: '',
-        component: _login_page__WEBPACK_IMPORTED_MODULE_3__["LoginPage"]
-    }
-];
-let LoginPageRoutingModule = class LoginPageRoutingModule {
-};
-LoginPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
-    })
-], LoginPageRoutingModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/login/login.module.ts":
+/***/ "X3zk":
 /*!***************************************!*\
   !*** ./src/app/login/login.module.ts ***!
   \***************************************/
@@ -60,13 +145,13 @@ LoginPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _login_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./login-routing.module */ "./src/app/login/login-routing.module.ts");
-/* harmony import */ var _login_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login.page */ "./src/app/login/login.page.ts");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _login_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./login-routing.module */ "euwS");
+/* harmony import */ var _login_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login.page */ "34Y5");
 
 
 
@@ -93,7 +178,44 @@ LoginPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
-/***/ "./src/app/login/login.page.scss":
+/***/ "euwS":
+/*!***********************************************!*\
+  !*** ./src/app/login/login-routing.module.ts ***!
+  \***********************************************/
+/*! exports provided: LoginPageRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageRoutingModule", function() { return LoginPageRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _login_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login.page */ "34Y5");
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _login_page__WEBPACK_IMPORTED_MODULE_3__["LoginPage"]
+    }
+];
+let LoginPageRoutingModule = class LoginPageRoutingModule {
+};
+LoginPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+    })
+], LoginPageRoutingModule);
+
+
+
+/***/ }),
+
+/***/ "r67e":
 /*!***************************************!*\
   !*** ./src/app/login/login.page.scss ***!
   \***************************************/
@@ -102,77 +224,7 @@ LoginPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("#login_form {\n  padding: 0 42px;\n}\n\n.logo2 {\n  margin: 130px auto 55px;\n  display: block;\n}\n\nion-item {\n  border-radius: 6px !important;\n  border: none !important;\n  --background: #EFEFEF !important;\n  border: none !important;\n  height: 47px;\n}\n\nion-item {\n  margin-top: 20px;\n  box-shadow: 0px 3px 6px #00000029;\n}\n\nion-input {\n  height: 47px;\n  --placeholder-color: #707070;\n  --placeholder-opacity: 1;\n  color: #151515;\n  font-size: 17px;\n}\n\n.txtBtn1 {\n  padding: 0 40px !important;\n  font-size: 20px;\n  color: white;\n}\n\n.mt10 {\n  margin-top: 20px;\n  margin-right: 30px;\n}\n\n.error {\n  color: red;\n  display: inline-block;\n}\n\nion-button {\n  background-color: #0F0E9F;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vbG9naW4ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQVksZUFBQTtBQUVaOztBQURBO0VBQU8sdUJBQUE7RUFBd0IsY0FBQTtBQU0vQjs7QUFMQTtFQUFTLDZCQUFBO0VBQThCLHVCQUFBO0VBQXdCLGdDQUFBO0VBQWlDLHVCQUFBO0VBQXdCLFlBQUE7QUFheEg7O0FBWkE7RUFBUyxnQkFBQTtFQUFpQixpQ0FBQTtBQWlCMUI7O0FBaEJBO0VBQVUsWUFBQTtFQUFhLDRCQUFBO0VBQTZCLHdCQUFBO0VBQXlCLGNBQUE7RUFBZSxlQUFBO0FBd0I1Rjs7QUF2QkE7RUFBUywwQkFBQTtFQUEyQixlQUFBO0VBQWdCLFlBQUE7QUE2QnBEOztBQTVCQTtFQUFNLGdCQUFBO0VBQWlCLGtCQUFBO0FBaUN2Qjs7QUFoQ0E7RUFBTyxVQUFBO0VBQVUscUJBQUE7QUFxQ2pCOztBQXBDQTtFQUNJLHlCQUFBO0FBdUNKIiwiZmlsZSI6InNyYy9hcHAvbG9naW4vbG9naW4ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2xvZ2luX2Zvcm17cGFkZGluZzogMCA0MnB4O31cbi5sb2dvMnttYXJnaW46IDEzMHB4IGF1dG8gNTVweDtkaXNwbGF5OiBibG9jazt9XG5pb24taXRlbXtib3JkZXItcmFkaXVzOiA2cHggIWltcG9ydGFudDtib3JkZXI6IG5vbmUgIWltcG9ydGFudDstLWJhY2tncm91bmQ6ICNFRkVGRUYgIWltcG9ydGFudDtib3JkZXI6IG5vbmUgIWltcG9ydGFudDtoZWlnaHQ6IDQ3cHg7fVxuaW9uLWl0ZW17bWFyZ2luLXRvcDogMjBweDtib3gtc2hhZG93OiAwcHggM3B4IDZweCAjMDAwMDAwMjk7fVxuaW9uLWlucHV0e2hlaWdodDogNDdweDstLXBsYWNlaG9sZGVyLWNvbG9yOiAjNzA3MDcwOy0tcGxhY2Vob2xkZXItb3BhY2l0eTogMTtjb2xvcjogIzE1MTUxNTtmb250LXNpemU6IDE3cHg7fVxuLnR4dEJ0bjF7cGFkZGluZzogMCA0MHB4ICFpbXBvcnRhbnQ7Zm9udC1zaXplOiAyMHB4O2NvbG9yOiB3aGl0ZTt9XG4ubXQxMHttYXJnaW4tdG9wOiAyMHB4O21hcmdpbi1yaWdodDogMzBweDt9XG4uZXJyb3J7Y29sb3I6cmVkO2Rpc3BsYXk6IGlubGluZS1ibG9jazt9XG5pb24tYnV0dG9ue1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwRjBFOUY7XG59Il19 */");
-
-/***/ }),
-
-/***/ "./src/app/login/login.page.ts":
-/*!*************************************!*\
-  !*** ./src/app/login/login.page.ts ***!
-  \*************************************/
-/*! exports provided: LoginPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPage", function() { return LoginPage; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-
-
-
-
-let LoginPage = class LoginPage {
-    constructor(router, formBuilder) {
-        this.router = router;
-        this.formBuilder = formBuilder;
-        this.isSubmitted = false;
-        this.ionicForm = this.formBuilder.group({
-            correo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[a-zA-Z0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6)]]
-        });
-    }
-    get errorControl() {
-        return this.ionicForm.controls;
-    }
-    submitForm() {
-        this.isSubmitted = true;
-        if (!this.ionicForm.valid) {
-            console.log('Please provide all the required values!');
-            return false;
-        }
-        else {
-            console.log('Form Completed' + this.ionicForm.value);
-            this.router.navigate(['/principal']);
-        }
-    }
-    ngOnInit() {
-    }
-    validarLogin() {
-        // this.authService.register(form.value).subscribe((res) => {
-        //   this.router.navigateByUrl('home');
-        // });
-        this.router.navigate(['/principal']);
-    }
-    onClickRegister() {
-        this.router.navigate(['/register']);
-    }
-};
-LoginPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] }
-];
-LoginPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-login',
-        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./login.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.page.html")).default,
-        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./login.page.scss */ "./src/app/login/login.page.scss")).default]
-    })
-], LoginPage);
-
-
+/* harmony default export */ __webpack_exports__["default"] = ("#login_form {\n  padding: 0 42px;\n}\n\n.logo2 {\n  margin: 130px auto 55px;\n  display: block;\n}\n\nion-item {\n  border-radius: 6px !important;\n  border: none !important;\n  --background: #EFEFEF !important;\n  border: none !important;\n  height: 47px;\n}\n\nion-item {\n  margin-top: 20px;\n  box-shadow: 0px 3px 6px #00000029;\n}\n\nion-input {\n  height: 47px;\n  --placeholder-color: #707070;\n  --placeholder-opacity: 1;\n  color: #151515;\n  font-size: 17px;\n}\n\n.txtBtn1 {\n  padding: 0 40px !important;\n  font-size: 20px;\n  color: white;\n}\n\n.mt10 {\n  margin-top: 20px;\n  margin-right: 30px;\n}\n\nion-button {\n  background-color: #0F0E9F;\n}\n\n.error {\n  color: red;\n  display: inline-block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xvZ2luLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUFZLGVBQUE7QUFFWjs7QUFEQTtFQUFPLHVCQUFBO0VBQXdCLGNBQUE7QUFNL0I7O0FBTEE7RUFBUyw2QkFBQTtFQUE4Qix1QkFBQTtFQUF3QixnQ0FBQTtFQUFpQyx1QkFBQTtFQUF3QixZQUFBO0FBYXhIOztBQVpBO0VBQVMsZ0JBQUE7RUFBaUIsaUNBQUE7QUFpQjFCOztBQWhCQTtFQUFVLFlBQUE7RUFBYSw0QkFBQTtFQUE2Qix3QkFBQTtFQUF5QixjQUFBO0VBQWUsZUFBQTtBQXdCNUY7O0FBdkJBO0VBQVMsMEJBQUE7RUFBMkIsZUFBQTtFQUFnQixZQUFBO0FBNkJwRDs7QUE1QkE7RUFBTSxnQkFBQTtFQUFpQixrQkFBQTtBQWlDdkI7O0FBaENBO0VBQ0kseUJBQUE7QUFtQ0o7O0FBakNBO0VBQU8sVUFBQTtFQUFVLHFCQUFBO0FBc0NqQiIsImZpbGUiOiJsb2dpbi5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbG9naW5fZm9ybXtwYWRkaW5nOiAwIDQycHg7fVxuLmxvZ28ye21hcmdpbjogMTMwcHggYXV0byA1NXB4O2Rpc3BsYXk6IGJsb2NrO31cbmlvbi1pdGVte2JvcmRlci1yYWRpdXM6IDZweCAhaW1wb3J0YW50O2JvcmRlcjogbm9uZSAhaW1wb3J0YW50Oy0tYmFja2dyb3VuZDogI0VGRUZFRiAhaW1wb3J0YW50O2JvcmRlcjogbm9uZSAhaW1wb3J0YW50O2hlaWdodDogNDdweDt9XG5pb24taXRlbXttYXJnaW4tdG9wOiAyMHB4O2JveC1zaGFkb3c6IDBweCAzcHggNnB4ICMwMDAwMDAyOTt9XG5pb24taW5wdXR7aGVpZ2h0OiA0N3B4Oy0tcGxhY2Vob2xkZXItY29sb3I6ICM3MDcwNzA7LS1wbGFjZWhvbGRlci1vcGFjaXR5OiAxO2NvbG9yOiAjMTUxNTE1O2ZvbnQtc2l6ZTogMTdweDt9XG4udHh0QnRuMXtwYWRkaW5nOiAwIDQwcHggIWltcG9ydGFudDtmb250LXNpemU6IDIwcHg7Y29sb3I6IHdoaXRlO31cbi5tdDEwe21hcmdpbi10b3A6IDIwcHg7bWFyZ2luLXJpZ2h0OiAzMHB4O31cbmlvbi1idXR0b257XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzBGMEU5Rjtcbn1cbi5lcnJvcntjb2xvcjpyZWQ7ZGlzcGxheTogaW5saW5lLWJsb2NrO31cbiJdfQ== */");
 
 /***/ })
 

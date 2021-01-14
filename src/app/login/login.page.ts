@@ -5,7 +5,8 @@ import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/task';
 import { ActivatedRoute } from '@angular/router';
 import {Md5} from 'ts-md5/dist/md5';
-import { AlertController } from '@ionic/angular';
+import { AlertController,NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,7 +18,9 @@ export class LoginPage implements OnInit {
   tasks: Task[] = [];
   mail:any;
   password:any;
-  constructor(private router: Router,public formBuilder: FormBuilder,private taskService: TaskService,
+  constructor(private router: Router,
+    public navCtrl: NavController,
+    public formBuilder: FormBuilder,private taskService: TaskService,
     public alertController: AlertController,
     private activatedRoute: ActivatedRoute) { 
     this.ionicForm = this.formBuilder.group({
@@ -57,7 +60,7 @@ export class LoginPage implements OnInit {
       //task.contrasena = this.ionicForm.value.password
       if(data[0]!=null){
         console.log("Existe: " + data);
-        this.router.navigate(['/principal']);
+        this.navCtrl.navigateRoot(['/principal']);
       }else{
         console.log("No Existe: " + Md5.hashStr("57f842f3-2e23-4d03-b1ef-cb5b7dd8e778"));
         this.presentAlert();
@@ -73,7 +76,7 @@ export class LoginPage implements OnInit {
     // this.authService.register(form.value).subscribe((res) => {
     //   this.router.navigateByUrl('home');
     // });
-    this.router.navigate(['/principal']);
+    this.navCtrl.navigateRoot(['/principal']);
   }
   onClickRegister() {
     this.router.navigate(['/register']);

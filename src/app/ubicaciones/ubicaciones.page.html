@@ -6,7 +6,8 @@
 
 <ion-content>
   <div id="container">
-     <ion-select id="categoria_select" (ionChange)="goSucursales($event)" value="0">
+    
+     <ion-select id="categoria_select" (ionChange)="goSucursales($event)" value="{{tiendaSelected}}">
       <ion-select-option value="0">Sucursales</ion-select-option>      
       <ion-select-option *ngFor="let sucursal of sucursales;let i = index" value="{{sucursal.id_sucursal}}">{{sucursal.nombre}}</ion-select-option>
     </ion-select>

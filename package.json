@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/geolocation": "^5.30.0",
+    "@ionic-native/native-geocoder": "^5.30.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/sqlite": "^5.30.0",
     "@ionic-native/sqlite-porter": "^5.30.0",
@@ -27,6 +29,9 @@
     "@ionic/angular": "^5.0.0",
     "@types/jquery": "^3.5.5",
     "cordova-android": "^8.1.0",
+    "cordova-plugin-add-swift-support": "^2.0.2",
+    "cordova-plugin-geolocation": "^4.1.0",
+    "cordova-plugin-nativegeocoder": "^3.4.1",
     "cordova-sqlite-storage": "^5.1.0",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.5",
@@ -36,12 +41,12 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1100.5",
+    "@angular-devkit/build-angular": "^0.1100.7",
     "@angular/cli": "~10.0.5",
     "@angular/compiler": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
     "@angular/language-service": "~10.0.0",
-    "@ionic/angular-toolkit": "^2.3.0",
+    "@ionic/angular-toolkit": "^3.0.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -76,7 +81,11 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
-      "uk.co.workingedge.cordova.plugin.sqliteporter": {}
+      "uk.co.workingedge.cordova.plugin.sqliteporter": {},
+      "cordova-plugin-geolocation": {
+        "GPS_REQUIRED": "true"
+      },
+      "cordova-plugin-nativegeocoder": {}
     },
     "platforms": [
       "android"

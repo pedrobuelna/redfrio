@@ -11,7 +11,18 @@ export class CategoriaPage implements OnInit {
               private route: ActivatedRoute) { }
   productos2: any;
   familias: any;
+  
+  checkValue(event){
+    console.log(event.detail.value)
+     let id = parseFloat(event.detail.value);
+      this.taskService.getProductos(id)
+      .subscribe(productos2 => {
+          this.productos2 = productos2;
+          console.log(productos2)
+      });
+  }
   ngOnInit() {
+    
     this.taskService.getFamilias()
       .subscribe(familias => {
           this.familias = familias;
@@ -35,9 +46,9 @@ export class CategoriaPage implements OnInit {
           console.log(productos2)
       });
     }
-    
-    
   }
+  
+
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);
   }

@@ -5,8 +5,7 @@
 </ion-header> -->
 <ion-content>
   <div class="content_sucursales">
-    <ion-select (ionChange)="checkValue($event)" id="categoria_select" [value]="this.sucursalActual.id_sucursal" appNoArrow>
-      <ion-select-option value="-">Seleccionar</ion-select-option>
+    <ion-select (ionChange)="checkValue($event)" id="categoria_select" value="{{sucursalActual.id_sucursal}}" appNoArrow>
       <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.id_sucursal}}">{{sucursal.nombre}}</ion-select-option>
     </ion-select>
     

@@ -1,6 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["checkout-checkout-module"],{
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/checkout/checkout.page.html":
+/***/ "/6ko":
 /*!***********************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/checkout/checkout.page.html ***!
   \***********************************************************************************/
@@ -13,44 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app/checkout/checkout-routing.module.ts":
-/*!*****************************************************!*\
-  !*** ./src/app/checkout/checkout-routing.module.ts ***!
-  \*****************************************************/
-/*! exports provided: CheckoutPageRoutingModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckoutPageRoutingModule", function() { return CheckoutPageRoutingModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _checkout_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./checkout.page */ "./src/app/checkout/checkout.page.ts");
-
-
-
-
-const routes = [
-    {
-        path: '',
-        component: _checkout_page__WEBPACK_IMPORTED_MODULE_3__["CheckoutPage"]
-    }
-];
-let CheckoutPageRoutingModule = class CheckoutPageRoutingModule {
-};
-CheckoutPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
-        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
-    })
-], CheckoutPageRoutingModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/checkout/checkout.module.ts":
+/***/ "8y03":
 /*!*********************************************!*\
   !*** ./src/app/checkout/checkout.module.ts ***!
   \*********************************************/
@@ -60,13 +23,13 @@ CheckoutPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorat
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckoutPageModule", function() { return CheckoutPageModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _checkout_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./checkout-routing.module */ "./src/app/checkout/checkout-routing.module.ts");
-/* harmony import */ var _checkout_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./checkout.page */ "./src/app/checkout/checkout.page.ts");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _checkout_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./checkout-routing.module */ "v3IU");
+/* harmony import */ var _checkout_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./checkout.page */ "E2Rb");
 
 
 
@@ -93,20 +56,7 @@ CheckoutPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
-/***/ "./src/app/checkout/checkout.page.scss":
-/*!*********************************************!*\
-  !*** ./src/app/checkout/checkout.page.scss ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".padding30 {\n  padding: 30px;\n}\n\n.titulo_checkout {\n  font-size: 20px;\n  margin-top: 20px;\n  color: black;\n}\n\n.inline-block {\n  display: inline-block;\n  vertical-align: middle;\n}\n\n.txt_registro {\n  margin-left: 20px;\n  text-transform: uppercase;\n  font-size: 12px;\n}\n\nion-item {\n  margin-top: 15px;\n  font-size: 20px;\n}\n\nion-item.item-has-focus > ion-label,\nion-item.item-has-value > ion-label {\n  color: #707070 !important;\n}\n\nion-item > ion-label {\n  color: black !important;\n}\n\n.font-s1 {\n  font-size: 12px;\n  color: #989898;\n}\n\n.black {\n  color: black;\n}\n\n.font-s3 {\n  font-size: 20px;\n  color: #000000;\n}\n\n.btn_pagar {\n  margin-top: 30px;\n  height: 60px;\n  text-transform: inherit;\n  --background: var(--ion-rojo-btn);\n  margin-bottom: 100px;\n}\n\n.content_boton {\n  margin-top: 20px;\n}\n\n.error {\n  color: red;\n}\n\n#forma_envio_content {\n  background-color: #0F0E9F;\n  color: white;\n  padding: 20px;\n  font-size: 12px;\n}\n\n.titulo1_envio {\n  font-size: 20px;\n}\n\n.content_radios {\n  padding: 0;\n}\n\n.right {\n  float: right;\n}\n\n.mt {\n  margin-top: 20px;\n}\n\n.radio {\n  margin: 0.5rem;\n}\n\n.radio input[type=radio] {\n  position: absolute;\n  opacity: 0;\n}\n\n.radio input[type=radio] + .radio-label:before {\n  content: \"\";\n  background: black;\n  border-radius: 100%;\n  display: inline-block;\n  width: 1.4em;\n  height: 1.4em;\n  position: relative;\n  top: -0.2em;\n  margin-right: 1em;\n  vertical-align: top;\n  cursor: pointer;\n  text-align: center;\n  transition: all 250ms ease;\n}\n\n.radio input[type=radio]:checked + .radio-label:before {\n  background-color: white;\n  box-shadow: inset 0 0 0 6px black;\n}\n\n.radio input[type=radio]:focus + .radio-label:before {\n  outline: none;\n  border-color: white;\n}\n\n.radio input[type=radio]:disabled + .radio-label:before {\n  box-shadow: inset 0 0 0 6px black;\n  border-color: black;\n  background: black;\n}\n\n.radio input[type=radio] + .radio-label:empty:before {\n  margin-right: 0;\n}\n\n#splash {\n  height: 100vh;\n  background-color: #ffffff;\n  width: 100%;\n  position: fixed;\n  left: 0;\n  top: 0;\n  z-index: 10;\n  display: none;\n}\n\n#content_letras {\n  font-size: 35px;\n  margin-top: 113px;\n  margin-left: 56px;\n  color: #0F0E9F;\n}\n\n#splash.quitSplash {\n  display: block;\n  top: 100%;\n  opacity: 1;\n  transition-duration: 0.6s;\n  top: 0;\n}\n\n.circulo {\n  width: 150px;\n  height: 150px;\n  border: 2px solid #DD0330;\n  color: #00257C;\n  border-radius: 50%;\n  margin-top: 50px;\n  margin-left: 56px;\n  text-align: center;\n}\n\n.texto_circulo {\n  position: relative;\n  top: calc(50% - 8px);\n  text-align: center;\n  transform: translateY(-50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY2hlY2tvdXQvY2hlY2tvdXQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQVcsYUFBQTtBQUVYOztBQURBO0VBQWlCLGVBQUE7RUFBZ0IsZ0JBQUE7RUFBaUIsWUFBQTtBQU9sRDs7QUFOQTtFQUFjLHFCQUFBO0VBQXNCLHNCQUFBO0FBV3BDOztBQVZBO0VBQWMsaUJBQUE7RUFBa0IseUJBQUE7RUFBMEIsZUFBQTtBQWdCMUQ7O0FBZkE7RUFBUyxnQkFBQTtFQUFpQixlQUFBO0FBb0IxQjs7QUFqQkE7O0VBRUkseUJBQUE7QUFvQko7O0FBbEJBO0VBQ0ksdUJBQUE7QUFxQko7O0FBaEJBO0VBQVMsZUFBQTtFQUFnQixjQUFBO0FBcUJ6Qjs7QUFwQkE7RUFBTyxZQUFBO0FBd0JQOztBQXZCQTtFQUFTLGVBQUE7RUFBZ0IsY0FBQTtBQTRCekI7O0FBM0JBO0VBQVcsZ0JBQUE7RUFBa0IsWUFBQTtFQUFhLHVCQUFBO0VBQXdCLGlDQUFBO0VBQW1DLG9CQUFBO0FBbUNyRzs7QUFsQ0E7RUFBZSxnQkFBQTtBQXNDZjs7QUFyQ0E7RUFBTyxVQUFBO0FBeUNQOztBQXhDQTtFQUFxQix5QkFBQTtFQUEwQixZQUFBO0VBQVksYUFBQTtFQUFjLGVBQUE7QUErQ3pFOztBQTlDQTtFQUFlLGVBQUE7QUFrRGY7O0FBakRBO0VBQWdCLFVBQUE7QUFxRGhCOztBQXBEQTtFQUFPLFlBQUE7QUF3RFA7O0FBdkRBO0VBQUksZ0JBQUE7QUEyREo7O0FBMURHO0VBQ0MsY0FBQTtBQTZESjs7QUE1REk7RUFDRSxrQkFBQTtFQUNBLFVBQUE7QUE4RE47O0FBNURRO0VBQ0UsV0FBQTtFQUNBLGlCQS9CRDtFQWdDQyxtQkFBQTtFQUNBLHFCQUFBO0VBQ0EsWUFBQTtFQUNBLGFBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxpQkFBQTtFQUNBLG1CQUFBO0VBQ0EsZUFBQTtFQUNBLGtCQUFBO0VBQ0EsMEJBQUE7QUE4RFY7O0FBekRVO0VBQ0UsdUJBL0NIO0VBZ0RHLGlDQUFBO0FBMkRaOztBQXJEVTtFQUNFLGFBQUE7RUFDQSxtQkF4REg7QUErR1Q7O0FBakRVO0VBQ0UsaUNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0FBbURaOztBQTdDVTtFQUNFLGVBQUE7QUErQ1o7O0FBekNBO0VBQVEsYUFBQTtFQUFjLHlCQUFBO0VBQTBCLFdBQUE7RUFBWSxlQUFBO0VBQWdCLE9BQUE7RUFBUSxNQUFBO0VBQU8sV0FBQTtFQUFZLGFBQUE7QUFvRHZHOztBQW5EQTtFQUFnQixlQUFBO0VBQWdCLGlCQUFBO0VBQWtCLGlCQUFBO0VBQWtCLGNBQUE7QUEwRHBFOztBQXpEQTtFQUFtQixjQUFBO0VBQWMsU0FBQTtFQUFVLFVBQUE7RUFBVyx5QkFBQTtFQUEwQixNQUFBO0FBaUVoRjs7QUFoRUE7RUFBUyxZQUFBO0VBQWEsYUFBQTtFQUFlLHlCQUFBO0VBQTJCLGNBQUE7RUFBZ0Isa0JBQUE7RUFBb0IsZ0JBQUE7RUFBa0IsaUJBQUE7RUFBa0Isa0JBQUE7QUEyRXhJOztBQTFFQTtFQUFlLGtCQUFBO0VBQW9CLG9CQUFBO0VBQXNCLGtCQUFBO0VBQTBGLDJCQUFBO0FBbUZuSiIsImZpbGUiOiJzcmMvYXBwL2NoZWNrb3V0L2NoZWNrb3V0LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wYWRkaW5nMzB7cGFkZGluZzozMHB4fVxuLnRpdHVsb19jaGVja291dHtmb250LXNpemU6IDIwcHg7bWFyZ2luLXRvcDogMjBweDtjb2xvcjogYmxhY2s7fVxuLmlubGluZS1ibG9ja3tkaXNwbGF5OiBpbmxpbmUtYmxvY2s7dmVydGljYWwtYWxpZ246IG1pZGRsZTt9XG4udHh0X3JlZ2lzdHJve21hcmdpbi1sZWZ0OiAyMHB4O3RleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7Zm9udC1zaXplOiAxMnB4O31cbmlvbi1pdGVte21hcmdpbi10b3A6IDE1cHg7Zm9udC1zaXplOiAyMHB4O31cbiRjb2xvcjE6IGJsYWNrO1xuJGNvbG9yMjogd2hpdGU7XG5pb24taXRlbS5pdGVtLWhhcy1mb2N1cyA+IGlvbi1sYWJlbCxcbmlvbi1pdGVtLml0ZW0taGFzLXZhbHVlID4gaW9uLWxhYmVse1xuICAgIGNvbG9yOiAjNzA3MDcwICFpbXBvcnRhbnQ7XG59XG5pb24taXRlbSA+IGlvbi1sYWJlbHtcbiAgICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcbiAgfVxuLy8gaW9uLWl0ZW0uaXRlbS1oYXMtdmFsdWV7XG4vLyAgICAgLS1oaWdobGlnaHQtYmFja2dyb3VuZDogcmVkO1xuLy8gfVxuLmZvbnQtczF7Zm9udC1zaXplOiAxMnB4O2NvbG9yOiAjOTg5ODk4O31cbi5ibGFja3tjb2xvcjogYmxhY2s7fVxuLmZvbnQtczN7Zm9udC1zaXplOiAyMHB4O2NvbG9yOiAjMDAwMDAwO31cbi5idG5fcGFnYXJ7bWFyZ2luLXRvcDogMzBweDsgaGVpZ2h0OiA2MHB4O3RleHQtdHJhbnNmb3JtOmluaGVyaXQ7IC0tYmFja2dyb3VuZDogdmFyKC0taW9uLXJvam8tYnRuKTsgbWFyZ2luLWJvdHRvbTogMTAwcHg7fVxuLmNvbnRlbnRfYm90b257bWFyZ2luLXRvcDogMjBweDt9XG4uZXJyb3J7Y29sb3I6cmVkO31cbiNmb3JtYV9lbnZpb19jb250ZW50e2JhY2tncm91bmQtY29sb3I6ICMwRjBFOUY7Y29sb3I6d2hpdGU7cGFkZGluZzogMjBweDtmb250LXNpemU6IDEycHg7fVxuLnRpdHVsbzFfZW52aW97Zm9udC1zaXplOiAyMHB4O31cbi5jb250ZW50X3JhZGlvc3twYWRkaW5nOjA7fVxuLnJpZ2h0e2Zsb2F0OiByaWdodDt9XG4ubXR7bWFyZ2luLXRvcDogMjBweDt9XG4gICAucmFkaW8ge1xuICAgIG1hcmdpbjogMC41cmVtO1xuICAgIGlucHV0W3R5cGU9XCJyYWRpb1wiXSB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBvcGFjaXR5OiAwO1xuICAgICAgKyAucmFkaW8tbGFiZWwge1xuICAgICAgICAmOmJlZm9yZSB7XG4gICAgICAgICAgY29udGVudDogJyc7XG4gICAgICAgICAgYmFja2dyb3VuZDogJGNvbG9yMTtcbiAgICAgICAgICBib3JkZXItcmFkaXVzOiAxMDAlO1xuICAgICAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICAgICAgICB3aWR0aDogMS40ZW07XG4gICAgICAgICAgaGVpZ2h0OiAxLjRlbTtcbiAgICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICAgICAgdG9wOiAtMC4yZW07XG4gICAgICAgICAgbWFyZ2luLXJpZ2h0OiAxZW07IFxuICAgICAgICAgIHZlcnRpY2FsLWFsaWduOiB0b3A7XG4gICAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMjUwbXMgZWFzZTtcbiAgICAgICAgfVxuICAgICAgfVxuICAgICAgJjpjaGVja2VkIHtcbiAgICAgICAgKyAucmFkaW8tbGFiZWwge1xuICAgICAgICAgICY6YmVmb3JlIHtcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICRjb2xvcjI7XG4gICAgICAgICAgICBib3gtc2hhZG93OiBpbnNldCAwIDAgMCA2cHggJGNvbG9yMTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICAgICY6Zm9jdXMge1xuICAgICAgICArIC5yYWRpby1sYWJlbCB7XG4gICAgICAgICAgJjpiZWZvcmUge1xuICAgICAgICAgICAgb3V0bGluZTogbm9uZTtcbiAgICAgICAgICAgIGJvcmRlci1jb2xvcjogJGNvbG9yMjtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICAgICY6ZGlzYWJsZWQge1xuICAgICAgICArIC5yYWRpby1sYWJlbCB7XG4gICAgICAgICAgJjpiZWZvcmUge1xuICAgICAgICAgICAgYm94LXNoYWRvdzogaW5zZXQgMCAwIDAgNnB4ICRjb2xvcjE7XG4gICAgICAgICAgICBib3JkZXItY29sb3I6IGRhcmtlbigkY29sb3IxLCAyNSUpO1xuICAgICAgICAgICAgYmFja2dyb3VuZDogZGFya2VuKCRjb2xvcjEsIDI1JSk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG4gICAgICArIC5yYWRpby1sYWJlbCB7XG4gICAgICAgICY6ZW1wdHkge1xuICAgICAgICAgICY6YmVmb3JlIHtcbiAgICAgICAgICAgIG1hcmdpbi1yaWdodDogMDtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbiNzcGxhc2h7aGVpZ2h0OiAxMDB2aDtiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmZmZmO3dpZHRoOiAxMDAlO3Bvc2l0aW9uOiBmaXhlZDtsZWZ0OiAwO3RvcDogMDt6LWluZGV4OiAxMDtkaXNwbGF5Om5vbmUsfVxuI2NvbnRlbnRfbGV0cmFze2ZvbnQtc2l6ZTogMzVweDttYXJnaW4tdG9wOiAxMTNweDttYXJnaW4tbGVmdDogNTZweDtjb2xvcjogIzBGMEU5Rjt9XG4jc3BsYXNoLnF1aXRTcGxhc2h7ZGlzcGxheTpibG9jazt0b3A6IDEwMCU7b3BhY2l0eTogMTt0cmFuc2l0aW9uLWR1cmF0aW9uOiAwLjZzO3RvcDogMDt9XG4uY2lyY3Vsb3t3aWR0aDogMTUwcHg7aGVpZ2h0OiAxNTBweDsgYm9yZGVyOiAycHggc29saWQgI0REMDMzMDsgY29sb3I6ICMwMDI1N0M7IGJvcmRlci1yYWRpdXM6IDUwJTsgbWFyZ2luLXRvcDogNTBweDsgbWFyZ2luLWxlZnQ6IDU2cHg7dGV4dC1hbGlnbjogY2VudGVyO31cbi50ZXh0b19jaXJjdWxve3Bvc2l0aW9uOiByZWxhdGl2ZTsgdG9wOiBjYWxjKDUwJSAtIDhweCk7IHRleHQtYWxpZ246IGNlbnRlcjsgLXdlYmtpdC10cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7IC1tcy10cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTsgfSJdfQ== */");
-
-/***/ }),
-
-/***/ "./src/app/checkout/checkout.page.ts":
+/***/ "E2Rb":
 /*!*******************************************!*\
   !*** ./src/app/checkout/checkout.page.ts ***!
   \*******************************************/
@@ -116,10 +66,14 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckoutPage", function() { return CheckoutPage; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_checkout_page_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./checkout.page.html */ "/6ko");
+/* harmony import */ var _checkout_page_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./checkout.page.scss */ "pA2R");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+
+
 
 
 
@@ -135,29 +89,29 @@ let CheckoutPage = class CheckoutPage {
         // });
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
-            nombre: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(2)]],
-            apellido: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(2)]],
-            calle: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-            numeroExterior: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(10)]],
-            estado: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-            poblacion: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-            celular: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(10)]],
+            nombre: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(2)]],
+            apellido: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(2)]],
+            calle: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]],
+            numeroExterior: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(10)]],
+            estado: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]],
+            poblacion: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]],
+            celular: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(10)]],
             celular2: ['', []],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
-            colonia: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(2)]],
-            cp: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(5), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(5)]],
+            colonia: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(2)]],
+            cp: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(5), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(5)]],
             telefono: ['',],
             //VALIDACION RFC: ^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$
-            rfc: ['BUFP910825DE3', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
-            nombreTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('[A-Z]*')]],
-            personaContacto: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('[A-Z]*')]],
-            numeroTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(16), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(16)]],
-            fechaDiaTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(16), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(16)]],
-            fechaMesTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(2), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(2)]],
-            fechaAnoTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-            cvvTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(3)]],
-            correo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+            rfc: ['BUFP910825DE3', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
+            nombreTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[A-Z]*')]],
+            personaContacto: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[A-Z]*')]],
+            numeroTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(16), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(16)]],
+            fechaDiaTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(16), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(16)]],
+            fechaMesTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(2), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(2)]],
+            fechaAnoTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]],
+            cvvTarjeta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+$'), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(3), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(3)]],
+            correo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         });
     }
     get errorControl() {
@@ -237,20 +191,70 @@ let CheckoutPage = class CheckoutPage {
     }
 };
 CheckoutPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Renderer2"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Renderer2"] }
 ];
 CheckoutPage.propDecorators = {
-    splash: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"], args: ["splash",] }]
+    splash: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ["splash",] }]
 };
 CheckoutPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-checkout',
-        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./checkout.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/checkout/checkout.page.html")).default,
-        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./checkout.page.scss */ "./src/app/checkout/checkout.page.scss")).default]
+        template: _raw_loader_checkout_page_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_checkout_page_scss__WEBPACK_IMPORTED_MODULE_2__["default"]]
     })
 ], CheckoutPage);
+
+
+
+/***/ }),
+
+/***/ "pA2R":
+/*!*********************************************!*\
+  !*** ./src/app/checkout/checkout.page.scss ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".padding30 {\n  padding: 30px;\n}\n\n.titulo_checkout {\n  font-size: 20px;\n  margin-top: 20px;\n  color: black;\n}\n\n.inline-block {\n  display: inline-block;\n  vertical-align: middle;\n}\n\n.txt_registro {\n  margin-left: 20px;\n  text-transform: uppercase;\n  font-size: 12px;\n}\n\nion-item {\n  margin-top: 15px;\n  font-size: 20px;\n}\n\nion-item.item-has-focus > ion-label,\nion-item.item-has-value > ion-label {\n  color: #707070 !important;\n}\n\nion-item > ion-label {\n  color: black !important;\n}\n\n.font-s1 {\n  font-size: 12px;\n  color: #989898;\n}\n\n.black {\n  color: black;\n}\n\n.font-s3 {\n  font-size: 20px;\n  color: #000000;\n}\n\n.btn_pagar {\n  margin-top: 30px;\n  height: 60px;\n  text-transform: inherit;\n  --background: var(--ion-rojo-btn);\n  margin-bottom: 100px;\n}\n\n.content_boton {\n  margin-top: 20px;\n}\n\n.error {\n  color: red;\n}\n\n#forma_envio_content {\n  background-color: #0F0E9F;\n  color: white;\n  padding: 20px;\n  font-size: 12px;\n}\n\n.titulo1_envio {\n  font-size: 20px;\n}\n\n.content_radios {\n  padding: 0;\n}\n\n.right {\n  float: right;\n}\n\n.mt {\n  margin-top: 20px;\n}\n\n.radio {\n  margin: 0.5rem;\n}\n\n.radio input[type=radio] {\n  position: absolute;\n  opacity: 0;\n}\n\n.radio input[type=radio] + .radio-label:before {\n  content: \"\";\n  background: black;\n  border-radius: 100%;\n  display: inline-block;\n  width: 1.4em;\n  height: 1.4em;\n  position: relative;\n  top: -0.2em;\n  margin-right: 1em;\n  vertical-align: top;\n  cursor: pointer;\n  text-align: center;\n  transition: all 250ms ease;\n}\n\n.radio input[type=radio]:checked + .radio-label:before {\n  background-color: white;\n  box-shadow: inset 0 0 0 6px black;\n}\n\n.radio input[type=radio]:focus + .radio-label:before {\n  outline: none;\n  border-color: white;\n}\n\n.radio input[type=radio]:disabled + .radio-label:before {\n  box-shadow: inset 0 0 0 6px black;\n  border-color: black;\n  background: black;\n}\n\n.radio input[type=radio] + .radio-label:empty:before {\n  margin-right: 0;\n}\n\n#splash {\n  height: 100vh;\n  background-color: #ffffff;\n  width: 100%;\n  position: fixed;\n  left: 0;\n  top: 0;\n  z-index: 10;\n  display: none;\n}\n\n#content_letras {\n  font-size: 35px;\n  margin-top: 113px;\n  margin-left: 56px;\n  color: #0F0E9F;\n}\n\n#splash.quitSplash {\n  display: block;\n  top: 100%;\n  opacity: 1;\n  transition-duration: 0.6s;\n  top: 0;\n}\n\n.circulo {\n  width: 150px;\n  height: 150px;\n  border: 2px solid #DD0330;\n  color: #00257C;\n  border-radius: 50%;\n  margin-top: 50px;\n  margin-left: 56px;\n  text-align: center;\n}\n\n.texto_circulo {\n  position: relative;\n  top: calc(50% - 8px);\n  text-align: center;\n  transform: translateY(-50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NoZWNrb3V0LnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUFXLGFBQUE7QUFFWDs7QUFEQTtFQUFpQixlQUFBO0VBQWdCLGdCQUFBO0VBQWlCLFlBQUE7QUFPbEQ7O0FBTkE7RUFBYyxxQkFBQTtFQUFzQixzQkFBQTtBQVdwQzs7QUFWQTtFQUFjLGlCQUFBO0VBQWtCLHlCQUFBO0VBQTBCLGVBQUE7QUFnQjFEOztBQWZBO0VBQVMsZ0JBQUE7RUFBaUIsZUFBQTtBQW9CMUI7O0FBakJBOztFQUVJLHlCQUFBO0FBb0JKOztBQWxCQTtFQUNJLHVCQUFBO0FBcUJKOztBQWhCQTtFQUFTLGVBQUE7RUFBZ0IsY0FBQTtBQXFCekI7O0FBcEJBO0VBQU8sWUFBQTtBQXdCUDs7QUF2QkE7RUFBUyxlQUFBO0VBQWdCLGNBQUE7QUE0QnpCOztBQTNCQTtFQUFXLGdCQUFBO0VBQWtCLFlBQUE7RUFBYSx1QkFBQTtFQUF3QixpQ0FBQTtFQUFtQyxvQkFBQTtBQW1Dckc7O0FBbENBO0VBQWUsZ0JBQUE7QUFzQ2Y7O0FBckNBO0VBQU8sVUFBQTtBQXlDUDs7QUF4Q0E7RUFBcUIseUJBQUE7RUFBMEIsWUFBQTtFQUFZLGFBQUE7RUFBYyxlQUFBO0FBK0N6RTs7QUE5Q0E7RUFBZSxlQUFBO0FBa0RmOztBQWpEQTtFQUFnQixVQUFBO0FBcURoQjs7QUFwREE7RUFBTyxZQUFBO0FBd0RQOztBQXZEQTtFQUFJLGdCQUFBO0FBMkRKOztBQTFERztFQUNDLGNBQUE7QUE2REo7O0FBNURJO0VBQ0Usa0JBQUE7RUFDQSxVQUFBO0FBOEROOztBQTVEUTtFQUNFLFdBQUE7RUFDQSxpQkEvQkQ7RUFnQ0MsbUJBQUE7RUFDQSxxQkFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSxXQUFBO0VBQ0EsaUJBQUE7RUFDQSxtQkFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtFQUNBLDBCQUFBO0FBOERWOztBQXpEVTtFQUNFLHVCQS9DSDtFQWdERyxpQ0FBQTtBQTJEWjs7QUFyRFU7RUFDRSxhQUFBO0VBQ0EsbUJBeERIO0FBK0dUOztBQWpEVTtFQUNFLGlDQUFBO0VBQ0EsbUJBQUE7RUFDQSxpQkFBQTtBQW1EWjs7QUE3Q1U7RUFDRSxlQUFBO0FBK0NaOztBQXpDQTtFQUFRLGFBQUE7RUFBYyx5QkFBQTtFQUEwQixXQUFBO0VBQVksZUFBQTtFQUFnQixPQUFBO0VBQVEsTUFBQTtFQUFPLFdBQUE7RUFBWSxhQUFBO0FBb0R2Rzs7QUFuREE7RUFBZ0IsZUFBQTtFQUFnQixpQkFBQTtFQUFrQixpQkFBQTtFQUFrQixjQUFBO0FBMERwRTs7QUF6REE7RUFBbUIsY0FBQTtFQUFjLFNBQUE7RUFBVSxVQUFBO0VBQVcseUJBQUE7RUFBMEIsTUFBQTtBQWlFaEY7O0FBaEVBO0VBQVMsWUFBQTtFQUFhLGFBQUE7RUFBZSx5QkFBQTtFQUEyQixjQUFBO0VBQWdCLGtCQUFBO0VBQW9CLGdCQUFBO0VBQWtCLGlCQUFBO0VBQWtCLGtCQUFBO0FBMkV4STs7QUExRUE7RUFBZSxrQkFBQTtFQUFvQixvQkFBQTtFQUFzQixrQkFBQTtFQUEwRiwyQkFBQTtBQW1GbkoiLCJmaWxlIjoiY2hlY2tvdXQucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhZGRpbmczMHtwYWRkaW5nOjMwcHh9XG4udGl0dWxvX2NoZWNrb3V0e2ZvbnQtc2l6ZTogMjBweDttYXJnaW4tdG9wOiAyMHB4O2NvbG9yOiBibGFjazt9XG4uaW5saW5lLWJsb2Nre2Rpc3BsYXk6IGlubGluZS1ibG9jazt2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO31cbi50eHRfcmVnaXN0cm97bWFyZ2luLWxlZnQ6IDIwcHg7dGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtmb250LXNpemU6IDEycHg7fVxuaW9uLWl0ZW17bWFyZ2luLXRvcDogMTVweDtmb250LXNpemU6IDIwcHg7fVxuJGNvbG9yMTogYmxhY2s7XG4kY29sb3IyOiB3aGl0ZTtcbmlvbi1pdGVtLml0ZW0taGFzLWZvY3VzID4gaW9uLWxhYmVsLFxuaW9uLWl0ZW0uaXRlbS1oYXMtdmFsdWUgPiBpb24tbGFiZWx7XG4gICAgY29sb3I6ICM3MDcwNzAgIWltcG9ydGFudDtcbn1cbmlvbi1pdGVtID4gaW9uLWxhYmVse1xuICAgIGNvbG9yOiBibGFjayAhaW1wb3J0YW50O1xuICB9XG4vLyBpb24taXRlbS5pdGVtLWhhcy12YWx1ZXtcbi8vICAgICAtLWhpZ2hsaWdodC1iYWNrZ3JvdW5kOiByZWQ7XG4vLyB9XG4uZm9udC1zMXtmb250LXNpemU6IDEycHg7Y29sb3I6ICM5ODk4OTg7fVxuLmJsYWNre2NvbG9yOiBibGFjazt9XG4uZm9udC1zM3tmb250LXNpemU6IDIwcHg7Y29sb3I6ICMwMDAwMDA7fVxuLmJ0bl9wYWdhcnttYXJnaW4tdG9wOiAzMHB4OyBoZWlnaHQ6IDYwcHg7dGV4dC10cmFuc2Zvcm06aW5oZXJpdDsgLS1iYWNrZ3JvdW5kOiB2YXIoLS1pb24tcm9qby1idG4pOyBtYXJnaW4tYm90dG9tOiAxMDBweDt9XG4uY29udGVudF9ib3RvbnttYXJnaW4tdG9wOiAyMHB4O31cbi5lcnJvcntjb2xvcjpyZWQ7fVxuI2Zvcm1hX2VudmlvX2NvbnRlbnR7YmFja2dyb3VuZC1jb2xvcjogIzBGMEU5Rjtjb2xvcjp3aGl0ZTtwYWRkaW5nOiAyMHB4O2ZvbnQtc2l6ZTogMTJweDt9XG4udGl0dWxvMV9lbnZpb3tmb250LXNpemU6IDIwcHg7fVxuLmNvbnRlbnRfcmFkaW9ze3BhZGRpbmc6MDt9XG4ucmlnaHR7ZmxvYXQ6IHJpZ2h0O31cbi5tdHttYXJnaW4tdG9wOiAyMHB4O31cbiAgIC5yYWRpbyB7XG4gICAgbWFyZ2luOiAwLjVyZW07XG4gICAgaW5wdXRbdHlwZT1cInJhZGlvXCJdIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIG9wYWNpdHk6IDA7XG4gICAgICArIC5yYWRpby1sYWJlbCB7XG4gICAgICAgICY6YmVmb3JlIHtcbiAgICAgICAgICBjb250ZW50OiAnJztcbiAgICAgICAgICBiYWNrZ3JvdW5kOiAkY29sb3IxO1xuICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDEwMCU7XG4gICAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgICAgICAgIHdpZHRoOiAxLjRlbTtcbiAgICAgICAgICBoZWlnaHQ6IDEuNGVtO1xuICAgICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgICAgICB0b3A6IC0wLjJlbTtcbiAgICAgICAgICBtYXJnaW4tcmlnaHQ6IDFlbTsgXG4gICAgICAgICAgdmVydGljYWwtYWxpZ246IHRvcDtcbiAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgICAgICAgIHRyYW5zaXRpb246IGFsbCAyNTBtcyBlYXNlO1xuICAgICAgICB9XG4gICAgICB9XG4gICAgICAmOmNoZWNrZWQge1xuICAgICAgICArIC5yYWRpby1sYWJlbCB7XG4gICAgICAgICAgJjpiZWZvcmUge1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogJGNvbG9yMjtcbiAgICAgICAgICAgIGJveC1zaGFkb3c6IGluc2V0IDAgMCAwIDZweCAkY29sb3IxO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuICAgICAgJjpmb2N1cyB7XG4gICAgICAgICsgLnJhZGlvLWxhYmVsIHtcbiAgICAgICAgICAmOmJlZm9yZSB7XG4gICAgICAgICAgICBvdXRsaW5lOiBub25lO1xuICAgICAgICAgICAgYm9yZGVyLWNvbG9yOiAkY29sb3IyO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuICAgICAgJjpkaXNhYmxlZCB7XG4gICAgICAgICsgLnJhZGlvLWxhYmVsIHtcbiAgICAgICAgICAmOmJlZm9yZSB7XG4gICAgICAgICAgICBib3gtc2hhZG93OiBpbnNldCAwIDAgMCA2cHggJGNvbG9yMTtcbiAgICAgICAgICAgIGJvcmRlci1jb2xvcjogZGFya2VuKCRjb2xvcjEsIDI1JSk7XG4gICAgICAgICAgICBiYWNrZ3JvdW5kOiBkYXJrZW4oJGNvbG9yMSwgMjUlKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICAgICsgLnJhZGlvLWxhYmVsIHtcbiAgICAgICAgJjplbXB0eSB7XG4gICAgICAgICAgJjpiZWZvcmUge1xuICAgICAgICAgICAgbWFyZ2luLXJpZ2h0OiAwO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxuI3NwbGFzaHtoZWlnaHQ6IDEwMHZoO2JhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7d2lkdGg6IDEwMCU7cG9zaXRpb246IGZpeGVkO2xlZnQ6IDA7dG9wOiAwO3otaW5kZXg6IDEwO2Rpc3BsYXk6bm9uZSx9XG4jY29udGVudF9sZXRyYXN7Zm9udC1zaXplOiAzNXB4O21hcmdpbi10b3A6IDExM3B4O21hcmdpbi1sZWZ0OiA1NnB4O2NvbG9yOiAjMEYwRTlGO31cbiNzcGxhc2gucXVpdFNwbGFzaHtkaXNwbGF5OmJsb2NrO3RvcDogMTAwJTtvcGFjaXR5OiAxO3RyYW5zaXRpb24tZHVyYXRpb246IDAuNnM7dG9wOiAwO31cbi5jaXJjdWxve3dpZHRoOiAxNTBweDtoZWlnaHQ6IDE1MHB4OyBib3JkZXI6IDJweCBzb2xpZCAjREQwMzMwOyBjb2xvcjogIzAwMjU3QzsgYm9yZGVyLXJhZGl1czogNTAlOyBtYXJnaW4tdG9wOiA1MHB4OyBtYXJnaW4tbGVmdDogNTZweDt0ZXh0LWFsaWduOiBjZW50ZXI7fVxuLnRleHRvX2NpcmN1bG97cG9zaXRpb246IHJlbGF0aXZlOyB0b3A6IGNhbGMoNTAlIC0gOHB4KTsgdGV4dC1hbGlnbjogY2VudGVyOyAtd2Via2l0LXRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTsgLW1zLXRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpOyB9Il19 */");
+
+/***/ }),
+
+/***/ "v3IU":
+/*!*****************************************************!*\
+  !*** ./src/app/checkout/checkout-routing.module.ts ***!
+  \*****************************************************/
+/*! exports provided: CheckoutPageRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckoutPageRoutingModule", function() { return CheckoutPageRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _checkout_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./checkout.page */ "E2Rb");
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _checkout_page__WEBPACK_IMPORTED_MODULE_3__["CheckoutPage"]
+    }
+];
+let CheckoutPageRoutingModule = class CheckoutPageRoutingModule {
+};
+CheckoutPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+    })
+], CheckoutPageRoutingModule);
 
 
 

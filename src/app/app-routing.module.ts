@@ -67,6 +67,10 @@ const routes: Routes = [
     path: 'my-modal',
     loadChildren: () => import('./modals/my-modal/my-modal.module').then( m => m.MyModalPageModule)
   },
+  {
+    path: 'sucursalcerca',
+    loadChildren: () => import('./sucursalcerca/sucursalcerca.module').then( m => m.SucursalcercaPageModule)
+  },
 ];
 
 @NgModule({
