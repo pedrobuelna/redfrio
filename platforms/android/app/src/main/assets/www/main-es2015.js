@@ -147,6 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/sqlite-porter/ngx */ "+Wxr");
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "Bfh1");
 /* harmony import */ var _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/native-geocoder/ngx */ "h+qT");
+/* harmony import */ var _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/paypal/ngx */ "bXRV");
 
 
 
@@ -157,6 +158,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // plugins
+
 
 
 
@@ -175,6 +177,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_9__["SQLite"],
             _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__["SQLitePorter"],
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__["Geolocation"],
+            _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__["PayPal"],
             _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__["NativeGeocoder"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
@@ -229,6 +232,10 @@ let TaskService = class TaskService {
         const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f`;
         return this.http.get(path);
     }
+    getNotificacionesNoLeidas() {
+        const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0`;
+        return this.http.get(path);
+    }
     updateNotificacion(task, uuid_cliente, uuid) {
         // const path = `${this.api}/todos/${id}`;
         const path = `${this.api}/notificaciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`;
@@ -263,9 +270,9 @@ let TaskService = class TaskService {
         //alert(path)
         return this.http.get(path);
     }
-    getProductos(id) {
+    getProductos(id, ordenarpor) {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?familia_id=eq.${id}`;
+        const path = `${this.api}/productos?familia_id=eq.${id}${ordenarpor}`;
         //alert(path)
         return this.http.get(path);
     }
@@ -616,6 +623,10 @@ const routes = [
     {
         path: 'sucursalcerca',
         loadChildren: () => __webpack_require__.e(/*! import() | sucursalcerca-sucursalcerca-module */ "sucursalcerca-sucursalcerca-module").then(__webpack_require__.bind(null, /*! ./sucursalcerca/sucursalcerca.module */ "nkOP")).then(m => m.SucursalcercaPageModule)
+    },
+    {
+        path: 'paypal-mobile',
+        loadChildren: () => __webpack_require__.e(/*! import() | paypal-mobile-paypal-mobile-module */ "paypal-mobile-paypal-mobile-module").then(__webpack_require__.bind(null, /*! ./paypal-mobile/paypal-mobile.module */ "IOmk")).then(m => m.PaypalMobilePageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {

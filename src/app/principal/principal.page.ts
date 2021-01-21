@@ -36,6 +36,8 @@ export class PrincipalPage implements OnInit {
     spaceBetween: 20
   };
   productos2: any;
+  notificaciones:any;
+  cantidadNot:any;
   constructor(private router: Router,private renderer: Renderer2,
     private taskService: TaskService) { }
   addMyClass(){
@@ -50,6 +52,18 @@ export class PrincipalPage implements OnInit {
       .subscribe(productos2 => {
           this.productos2 = productos2;
           console.log(productos2)
+      });
+      this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
+      });
+  }
+  ionViewWillEnter(){
+    this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
       });
   }
   retraso(){

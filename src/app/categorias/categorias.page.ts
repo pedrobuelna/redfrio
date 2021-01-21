@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
-
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.page.html',
   styleUrls: ['./categorias.page.scss'],
 })
 export class CategoriasPage implements OnInit {
-
   constructor(private router: Router,private taskService: TaskService) { }
   familias:any;
- 
   ngOnInit() {
     this.taskService.getFamilias()
       .subscribe(familias => {
@@ -19,7 +16,6 @@ export class CategoriasPage implements OnInit {
           console.log(familias)
       });
   }
-
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);
   }

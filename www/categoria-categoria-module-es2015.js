@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".oferta {\n  color: #DD0330;\n}\n\n.productos_carrusel {\n  margin: 0;\n}\n\n.last {\n  margin-bottom: 130px;\n}\n\n#content_filtro {\n  padding: 0 30px;\n}\n\n#categoria_select {\n  margin-top: 30px;\n}\n\n#categoria_select,\n#categoria_select2 {\n  border: 2px solid #015BEE;\n  width: 100%;\n  text-transform: uppercase;\n  padding: 0 30px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  height: 60px;\n  font-size: 12px;\n  letter-spacing: 2px;\n  color: black;\n}\n\n#categoria_select2 {\n  margin-bottom: 30px;\n}\n\n.txt3 {\n  text-transform: uppercase;\n  margin-bottom: 10px;\n}\n\n.marks {\n  position: absolute;\n  top: 15px;\n  left: 10px;\n}\n\n.content_categorias {\n  padding: 0 30px;\n}\n\nion-select::part(icon) {\n  color: black !important;\n  opacity: 1;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NhdGVnb3JpYS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBUSxjQUFBO0FBRVI7O0FBREE7RUFBb0IsU0FBQTtBQUtwQjs7QUFKQTtFQUFNLG9CQUFBO0FBUU47O0FBUEE7RUFBZ0IsZUFBQTtBQVdoQjs7QUFWQTtFQUFrQixnQkFBQTtBQWNsQjs7QUFiQTs7RUFDbUIseUJBQUE7RUFBMEIsV0FBQTtFQUFhLHlCQUFBO0VBQTJCLGVBQUE7RUFBaUIsd0JBQUE7RUFBMEIscUJBQUE7RUFBdUIsWUFBQTtFQUFhLGVBQUE7RUFBZ0IsbUJBQUE7RUFBb0IsWUFBQTtBQTBCeE07O0FBeEJBO0VBQW1CLG1CQUFBO0FBNEJuQjs7QUEzQkE7RUFBTSx5QkFBQTtFQUEwQixtQkFBQTtBQWdDaEM7O0FBL0JBO0VBQU8sa0JBQUE7RUFBbUIsU0FBQTtFQUFVLFVBQUE7QUFxQ3BDOztBQXBDQTtFQUFvQixlQUFBO0FBd0NwQjs7QUF2Q0E7RUFDQyx1QkFBQTtFQUF3QixVQUFBO0FBMkN6QiIsImZpbGUiOiJjYXRlZ29yaWEucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm9mZXJ0YXtjb2xvcjogI0REMDMzMDt9XG4ucHJvZHVjdG9zX2NhcnJ1c2Vse21hcmdpbjogMDt9XG4ubGFzdHttYXJnaW4tYm90dG9tOiAxMzBweDt9XG4jY29udGVudF9maWx0cm97cGFkZGluZzogMCAzMHB4O31cbiNjYXRlZ29yaWFfc2VsZWN0e21hcmdpbi10b3A6IDMwcHg7fVxuI2NhdGVnb3JpYV9zZWxlY3QsXG4jY2F0ZWdvcmlhX3NlbGVjdDJ7Ym9yZGVyOiAycHggc29saWQgIzAxNUJFRTt3aWR0aDogMTAwJTsgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsgcGFkZGluZzogMCAzMHB4OyAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7IC1tb3otYXBwZWFyYW5jZTogbm9uZTsgaGVpZ2h0OiA2MHB4O2ZvbnQtc2l6ZTogMTJweDtsZXR0ZXItc3BhY2luZzogMnB4O2NvbG9yOiBibGFjazt9XG5cbiNjYXRlZ29yaWFfc2VsZWN0MnttYXJnaW4tYm90dG9tOiAzMHB4O31cbi50eHQze3RleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7bWFyZ2luLWJvdHRvbTogMTBweDt9XG4ubWFya3N7cG9zaXRpb246IGFic29sdXRlO3RvcDogMTVweDtsZWZ0OiAxMHB4O31cbi5jb250ZW50X2NhdGVnb3JpYXN7cGFkZGluZzowIDMwcHg7fVxuaW9uLXNlbGVjdDo6cGFydChpY29uKSB7XG5cdGNvbG9yOiBibGFjayAhaW1wb3J0YW50O29wYWNpdHk6IDE7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".oferta {\n  color: #DD0330;\n  font-size: 11px;\n  margin-left: 5px;\n}\n\n.productos_carrusel {\n  margin: 0;\n}\n\n#content_filtro {\n  width: 100%;\n  padding: 0 30px;\n  position: fixed;\n  z-index: 2;\n  background: white;\n}\n\n#categoria_select {\n  margin-top: 30px;\n}\n\n#categoria_select,\n#categoria_select2 {\n  border: 2px solid #015BEE;\n  width: 100%;\n  text-transform: uppercase;\n  padding: 0 30px;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  height: 60px;\n  font-size: 12px;\n  letter-spacing: 2px;\n  color: black;\n}\n\n#categoria_select2 {\n  margin-bottom: 30px;\n}\n\n.txt3 {\n  text-transform: uppercase;\n  margin-bottom: 10px;\n}\n\n.marks {\n  position: absolute;\n  top: 15px;\n  left: 10px;\n}\n\n.content_categorias {\n  padding: 0 30px;\n  margin: 247px 0 0;\n}\n\n.last {\n  margin-bottom: 130px;\n}\n\nion-select::part(icon) {\n  color: black !important;\n  opacity: 1;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2NhdGVnb3JpYS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBUSxjQUFBO0VBQWUsZUFBQTtFQUFnQixnQkFBQTtBQUl2Qzs7QUFIQTtFQUFvQixTQUFBO0FBT3BCOztBQU5BO0VBQW9CLFdBQUE7RUFBWSxlQUFBO0VBQWlCLGVBQUE7RUFBaUIsVUFBQTtFQUFZLGlCQUFBO0FBYzlFOztBQWJBO0VBQWtCLGdCQUFBO0FBaUJsQjs7QUFoQkE7O0VBQ21CLHlCQUFBO0VBQTBCLFdBQUE7RUFBYSx5QkFBQTtFQUEyQixlQUFBO0VBQWlCLHdCQUFBO0VBQTBCLHFCQUFBO0VBQXVCLFlBQUE7RUFBYSxlQUFBO0VBQWdCLG1CQUFBO0VBQW9CLFlBQUE7QUE2QnhNOztBQTNCQTtFQUFtQixtQkFBQTtBQStCbkI7O0FBOUJBO0VBQU0seUJBQUE7RUFBMEIsbUJBQUE7QUFtQ2hDOztBQWxDQTtFQUFPLGtCQUFBO0VBQW1CLFNBQUE7RUFBVSxVQUFBO0FBd0NwQzs7QUF2Q0E7RUFBb0IsZUFBQTtFQUFlLGlCQUFBO0FBNENuQzs7QUEzQ0E7RUFBTSxvQkFBQTtBQStDTjs7QUE5Q0E7RUFDQyx1QkFBQTtFQUF3QixVQUFBO0FBa0R6QiIsImZpbGUiOiJjYXRlZ29yaWEucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm9mZXJ0YXtjb2xvcjogI0REMDMzMDtmb250LXNpemU6IDExcHg7bWFyZ2luLWxlZnQ6IDVweDt9XG4ucHJvZHVjdG9zX2NhcnJ1c2Vse21hcmdpbjogMDt9XG4jY29udGVudF9maWx0cm97ICAgIHdpZHRoOiAxMDAlO3BhZGRpbmc6IDAgMzBweDsgcG9zaXRpb246IGZpeGVkOyB6LWluZGV4OiAyOyBiYWNrZ3JvdW5kOiB3aGl0ZTt9XG4jY2F0ZWdvcmlhX3NlbGVjdHttYXJnaW4tdG9wOiAzMHB4O31cbiNjYXRlZ29yaWFfc2VsZWN0LFxuI2NhdGVnb3JpYV9zZWxlY3Qye2JvcmRlcjogMnB4IHNvbGlkICMwMTVCRUU7d2lkdGg6IDEwMCU7IHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7IHBhZGRpbmc6IDAgMzBweDsgLXdlYmtpdC1hcHBlYXJhbmNlOiBub25lOyAtbW96LWFwcGVhcmFuY2U6IG5vbmU7IGhlaWdodDogNjBweDtmb250LXNpemU6IDEycHg7bGV0dGVyLXNwYWNpbmc6IDJweDtjb2xvcjogYmxhY2s7fVxuXG4jY2F0ZWdvcmlhX3NlbGVjdDJ7bWFyZ2luLWJvdHRvbTogMzBweDt9XG4udHh0M3t0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO21hcmdpbi1ib3R0b206IDEwcHg7fVxuLm1hcmtze3Bvc2l0aW9uOiBhYnNvbHV0ZTt0b3A6IDE1cHg7bGVmdDogMTBweDt9XG4uY29udGVudF9jYXRlZ29yaWFze3BhZGRpbmc6MCAzMHB4O21hcmdpbjogMjQ3cHggMCAwO31cbi5sYXN0e21hcmdpbi1ib3R0b206IDEzMHB4O31cbmlvbi1zZWxlY3Q6OnBhcnQoaWNvbikge1xuXHRjb2xvcjogYmxhY2sgIWltcG9ydGFudDtvcGFjaXR5OiAxO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -64,7 +64,7 @@ CategoriaPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>categoria</ion-title>\n  </ion-toolbar>\n</ion-header> -->\n\n<ion-content>\n  <div class=\"carrito\" (click)=\"onClickCarrito()\">\n    <span class=\"numero\">4</span>\n    <img src=\"../../assets/images/carrito.png\" alt=\"carrito\" >\n  </div>\n  \n  <div id=\"content_filtro\">\n    <!-- <select name=\"categoria_select\" id=\"categoria_select\">\n      <option value=\"0\" selected>Seleccionar</option>\n      <option *ngFor=\"let familia of familias;let i = index;let last = last;\" value=\"{{i+1}}\">{{familia.nombre_familia}}</option>\n    </select> -->\n    <ion-select name=\"categoria_select\" id=\"categoria_select\" value=\"0\" (ionChange)=\"checkValue($event)\">\n      <ion-select-option value=\"0\" selected>Seleccionar</ion-select-option>\n      <ion-select-option *ngFor=\"let familia of familias;let i = index;let last = last;\" value=\"{{i+1}}\">{{familia.nombre_familia}}</ion-select-option>\n    </ion-select>\n    <br><br>\n    <div class=\"txt3\">Comprar por:</div>\n    <ion-select name=\"categoria_select2\" id=\"categoria_select2\" value=\"0\">\n      <ion-select-option value=\"0\" selected>Seleccionar</ion-select-option>\n      <ion-select-option value=\"1\">Más vendido</ion-select-option>\n    </ion-select>\n  </div>\n  <ion-row class=\"content_categorias\">\n    <ion-col *ngFor=\"let producto of productos2;let i = index\" size=\"6\" class=\"productos_carrusel\" (click)=\"onclickProducto(producto.uuid_producto)\">\n      <div id=\"content_producto_carrusel\">\n        <img src=\"../../assets/images/nuevo.png\" alt=\"nuevo\" class=\"marks\">\n        <img src=\"../../assets/images/logo.png\" alt=\"imgblanca.png\">\n        <div class=\"content_producto_textos\">\n          <p> <span class=\"titletxt1\"> {{producto.marca}} {{producto.nombre}} </span><br> </p>\n          <p> {{producto.desc_corta}}</p>\n          <p><span class=\"pricetxt1\">$5,027.00<span class=\"oferta\"> <s>$8,999.00</s></span></span>\n          </p>\n        </div>\n      </div>\n      </ion-col>\n      <div style=\"color:black\" *ngIf=\"!productos2?.length\">\n        No se encuentran productos en esta categoría\n      </div>\n  </ion-row>\n  \n      <!-- <ion-col class=\"productos_carrusel\">\n        <div id=\"content_producto_carrusel\"  (click)=\"onclickProducto()\">\n          <img src=\"../../assets/images/outlet.png\" alt=\"outlet\" class=\"marks\">\n          <img src=\"../../assets/images/airegris.png\" alt=\"airegris.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00  <span class=\"oferta\"><s> $8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col> -->\n    \n    <!-- <ion-row>\n      <ion-col class=\"productos_carrusel\"  (click)=\"onclickProducto()\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/doble.png\" alt=\"doble\" class=\"marks\">\n          <img src=\"../../assets/images/aireblanco.png\" alt=\"aireblanco.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00   <span class=\"oferta\"> <s>$8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n      <ion-col class=\"productos_carrusel\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/airegris.png\" alt=\"airegris.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00  <span class=\"oferta\"><s> $8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"last\">\n      <ion-col class=\"productos_carrusel\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/aireblanco.png\" alt=\"aireblanco.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00   <span class=\"oferta\"> <s>$8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n      <ion-col class=\"productos_carrusel\"  (click)=\"onclickProducto()\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/airegris.png\" alt=\"airegris.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00  <span class=\"oferta\"><s> $8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row> -->\n  \n  <div class=\"content_menu\">\n    <ul>\n      <li>\n        <img src=\"../../assets/images/alertas_menu.png\" (click)=\"onclickNotificaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/ubicacion_menu.png\" (click)=\"onclickUbicaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/reacsa_menu.png\" (click)=\"onclickMenu()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/listado_menu.png\" (click)=\"onclickCategorias()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/usuario_menu.png\" (click)=\"onclickUsuario()\">\n      </li>\n    </ul>\n  </div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>categoria</ion-title>\n  </ion-toolbar>\n</ion-header> -->\n\n<ion-content>\n  <div class=\"carrito\" (click)=\"onClickCarrito()\">\n    <span class=\"numero\">4</span>\n    <img src=\"../../assets/images/carrito.png\" alt=\"carrito\" >\n  </div>\n  \n  <div id=\"content_filtro\">\n    <!-- <select name=\"categoria_select\" id=\"categoria_select\">\n      <option value=\"0\" selected>Seleccionar</option>\n      <option *ngFor=\"let familia of familias;let i = index;let last = last;\" value=\"{{i+1}}\">{{familia.nombre_familia}}</option>\n    </select> -->\n    <ion-select name=\"categoria_select\" id=\"categoria_select\" value=\"{{valorSelect}}\" (ionChange)=\"checkValue($event)\">\n      <!-- <ion-select-option value=\"0\">Seleccionar</ion-select-option> -->\n      <ion-select-option *ngFor=\"let familia of familias;let i = index;let last = last;\" value=\"{{familia.id_familia}}\">{{familia.nombre_familia}}</ion-select-option>\n    </ion-select>\n    <br><br>\n    <div class=\"txt3\" style=\"color: black;\">Ordenar por:</div>\n    <ion-select name=\"categoria_select2\" id=\"categoria_select2\" value=\"{{valorOrdenar}}\" (ionChange)=\"filtroDestacados($event)\">\n      <ion-select-option value=\"&order=destacado.desc\">Destacados</ion-select-option>\n      <ion-select-option value=\"&order=precio.desc\">Mayor a Menor</ion-select-option>\n      <ion-select-option value=\"&order=precio.asc\">Menor a Mayor</ion-select-option>\n      <ion-select-option value=\"&order=nombre.asc\">A - Z</ion-select-option>\n      <ion-select-option value=\"&order=nombre.desc\">Z - A</ion-select-option>\n    </ion-select>\n  </div>\n  \n  <ion-row class=\"content_categorias\">\n    <ion-col *ngFor=\"let producto of productos2;let i = index;let last = last;\" size=\"6\" class=\"productos_carrusel\" (click)=\"onclickProducto(producto.uuid_producto)\">\n      <div id=\"content_producto_carrusel\" [class.last]=\"last\">\n        <img src=\"../../assets/images/nuevo.png\" alt=\"nuevo\" class=\"marks\">\n        <img src=\"../../assets/images/logo.png\" alt=\"imgblanca.png\">\n        <div class=\"content_producto_textos\">\n          <p> <span class=\"titletxt1\"> {{producto.marca}} {{producto.nombre}} </span><br> </p>\n          <p> {{producto.desc_corta}}</p>\n          <p><span class=\"pricetxt1\">{{producto.precio}}<span class=\"oferta\"> <s *ngIf=\"producto.precio_viejo\">${{producto.precio_viejo}}</s></span></span>\n          </p>\n        </div>\n      </div>\n      </ion-col>\n      <div style=\"color:black\" *ngIf=\"!productos2?.length\">\n        No se encuentran productos en esta categoría\n      </div>\n  </ion-row>\n  \n      <!-- <ion-col class=\"productos_carrusel\">\n        <div id=\"content_producto_carrusel\"  (click)=\"onclickProducto()\">\n          <img src=\"../../assets/images/outlet.png\" alt=\"outlet\" class=\"marks\">\n          <img src=\"../../assets/images/airegris.png\" alt=\"airegris.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00  <span class=\"oferta\"><s> $8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col> -->\n    \n    <!-- <ion-row>\n      <ion-col class=\"productos_carrusel\"  (click)=\"onclickProducto()\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/doble.png\" alt=\"doble\" class=\"marks\">\n          <img src=\"../../assets/images/aireblanco.png\" alt=\"aireblanco.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00   <span class=\"oferta\"> <s>$8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n      <ion-col class=\"productos_carrusel\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/airegris.png\" alt=\"airegris.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00  <span class=\"oferta\"><s> $8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"last\">\n      <ion-col class=\"productos_carrusel\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/aireblanco.png\" alt=\"aireblanco.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00   <span class=\"oferta\"> <s>$8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n      <ion-col class=\"productos_carrusel\"  (click)=\"onclickProducto()\">\n        <div id=\"content_producto_carrusel\">\n          <img src=\"../../assets/images/airegris.png\" alt=\"airegris.png\">\n          <div class=\"content_producto_textos\">\n            <p> <span class=\"titletxt1\"> YORK MINISPLIT </span><br>\n              YHFE/YHGE SERIES <br>\n              COMPRESOR ON/OFF 220V R-410A <br>\n              SOLO FRIO Y FRIO/CALOR <br><br>\n               <span class=\"pricetxt1\">$5,027.00  <span class=\"oferta\"><s> $8,999.00</s></span></span>\n            </p>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row> -->\n  \n  <div class=\"content_menu\">\n    <ul>\n      <li>\n        <img src=\"../../assets/images/alertas_menu.png\" (click)=\"onclickNotificaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/ubicacion_menu.png\" (click)=\"onclickUbicaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/reacsa_menu.png\" (click)=\"onclickMenu()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/listado_menu.png\" (click)=\"onclickCategorias()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/usuario_menu.png\" (click)=\"onclickUsuario()\">\n      </li>\n    </ul>\n  </div>\n</ion-content>\n");
 
 /***/ }),
 
@@ -134,24 +134,37 @@ let CategoriaPage = class CategoriaPage {
         this.route = route;
     }
     checkValue(event) {
-        console.log(event.detail.value);
+        console.log("valor: " + this.valorSelect);
         let id = parseFloat(event.detail.value);
-        this.taskService.getProductos(id)
+        let ordernarpor = $("#categoria_select2").val();
+        this.taskService.getProductos(id, ordernarpor)
+            .subscribe(productos2 => {
+            this.productos2 = productos2;
+            console.log(productos2);
+        });
+    }
+    filtroDestacados(event) {
+        let id = $("#categoria_select").val();
+        let ordernarpor = event.detail.value;
+        console.log("id: " + id);
+        console.log("ordenamiento: " + ordernarpor);
+        this.taskService.getProductos(id, ordernarpor)
             .subscribe(productos2 => {
             this.productos2 = productos2;
             console.log(productos2);
         });
     }
     ngOnInit() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.taskService.getFamilias()
             .subscribe(familias => {
             this.familias = familias;
             console.log(familias);
+            this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
+            this.valorSelect = this.x;
         });
-        let x;
-        this.route.queryParams.subscribe(queryParams => x = queryParams.id);
         //alert(x)
-        if (x == "0") {
+        if (this.x == "0") {
             //alert("TODOS")
             this.taskService.getAllProductos()
                 .subscribe(productos2 => {
@@ -161,29 +174,70 @@ let CategoriaPage = class CategoriaPage {
         }
         else {
             //alert("familia "+ x)
-            this.taskService.getProductos(x)
+            let ordernarpor = $("#categoria_select2").val();
+            this.taskService.getProductos(this.x, ordernarpor)
                 .subscribe(productos2 => {
                 this.productos2 = productos2;
                 console.log(productos2);
             });
         }
     }
+    ionViewWillEnter() {
+        this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
+        this.valorOrdenar = "&order=destacado.desc";
+        this.taskService.getFamilias()
+            .subscribe(familias => {
+            this.familias = familias;
+            console.log(familias);
+            console.log(this.x);
+            setTimeout(() => {
+                alert(this.x + "a" + $("#categoria_select").val());
+                $("#categoria_select").val(parseInt(this.x));
+            }, 500);
+        });
+        //alert("x: "+x)
+        //alert(x)
+        if (this.x == "0") {
+            ////alert("TODOS")
+            this.taskService.getAllProductos()
+                .subscribe(productos2 => {
+                this.productos2 = productos2;
+                console.log(productos2);
+            });
+        }
+        else {
+            ////alert("familia "+ x)
+            let ordernarpor = $("#categoria_select2").val();
+            this.taskService.getProductos(this.x, ordernarpor)
+                .subscribe(productos2 => {
+                this.productos2 = productos2;
+                console.log(productos2);
+                $("#categoria_select").val(parseInt(this.x));
+            });
+        }
+    }
     onclickNotificaciones() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/notificaciones']);
     }
     onclickUbicaciones() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/ubicaciones']);
     }
     onclickMenu() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/principal']);
     }
     onclickCategorias() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/usuario']);
     }
     onclickProducto(id) {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/producto'], {
             queryParams: {
                 id: id
@@ -192,6 +246,7 @@ let CategoriaPage = class CategoriaPage {
         //this.router.navigate(['/producto']);
     }
     onClickCarrito() {
+        this.valorOrdenar = "&order=destacado.desc";
         this.router.navigate(['/carrito']);
     }
 };
@@ -200,6 +255,9 @@ CategoriaPage.ctorParameters = () => [
     { type: _services_task_service__WEBPACK_IMPORTED_MODULE_5__["TaskService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
 ];
+CategoriaPage.propDecorators = {
+    mylblRef: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['mylbl',] }]
+};
 CategoriaPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-categoria',

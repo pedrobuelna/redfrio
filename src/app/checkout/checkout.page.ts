@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
@@ -15,8 +15,11 @@ export class CheckoutPage implements OnInit {
   mostrarDireccion1: boolean;
   mostrarFactura: boolean;
   calle2Required: boolean;
+  paymentAmount: string = '3.33';
+  currency: string = 'MXN';
+  currencyIcon: string = '₹';
   @ViewChild("splash") splash: ElementRef;
-  constructor(private  router:  Router,public formBuilder: FormBuilder,private renderer: Renderer2) {
+  constructor(private payPal: PayPal,private  router:  Router,public formBuilder: FormBuilder,private renderer: Renderer2) {
     // this.ionicForm = new FormGroup({
     //   nombre: new FormControl()
     // });
@@ -40,7 +43,7 @@ export class CheckoutPage implements OnInit {
       nombreTarjeta: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
       personaContacto: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
       numeroTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(16),Validators.maxLength(16)]],
-      fechaDiaTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(16),Validators.maxLength(16)]],
+      fechaDiaTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(2),Validators.maxLength(2)]],
       fechaMesTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(2),Validators.maxLength(2)]],
       fechaAnoTarjeta: ['', [Validators.required]],
       cvvTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'),Validators.minLength(3),Validators.maxLength(3)]],
@@ -83,6 +86,40 @@ export class CheckoutPage implements OnInit {
   ngOnInit() {
     
   }
+  payWithPaypal() {
+    this.payPal.init({
+      PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
+      PayPalEnvironmentSandbox: 'Af9_zR1K8wQc5MOod3Sr0knKhKUAQK48aGq6_n4SPLrQ-lnZxoyt-ySGV24UnRrW4NkDVAeBPtXYsKQm'
+    }).then(() => {
+      // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
+      this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        // Only needed if you get an "Internal Service Error" after PayPal login!
+        //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+      })).then(() => {
+        let payment = new PayPalPayment(this.paymentAmount, this.currency, 'Description', 'sale');
+        this.payPal.renderSinglePaymentUI(payment).then((res) => {
+          console.log("JALA");
+          console.log(res);
+          setTimeout(() => {
+            this.addMyClass()
+           }, 1500);
+           setTimeout(() => {
+            this.router.navigate(['/principal']);
+           }, 200000);
+          // Successfully paid
+        }, () => {
+          console.log("Error or render dialog closed without being successful")
+          // Error or render dialog closed without being successful
+        });
+      }, () => {
+        console.log("Error in configuration")
+        // Error in configuration
+      });
+    }, () => {
+      console.log("Error in initialization, maybe PayPal isn't supported or something else")
+      // Error in initialization, maybe PayPal isn't supported or something else
+    });
+  }
   submitForm() {
     this.isSubmitted = true;
     //alert("ENVIAR valor RFC: "+this.ionicForm.value.rfc)
@@ -91,13 +128,7 @@ export class CheckoutPage implements OnInit {
       return false;
     } else {
       console.log('Form Completed' + this.ionicForm.value)
-      setTimeout(() => {
-        this.addMyClass()
-       }, 1500);
-       setTimeout(() => {
-        this.router.navigate(['/principal']);
-       }, 200000);
-      
+      this.payWithPaypal();
     }
   }
   onclickNotificaciones(){

@@ -315,7 +315,13 @@
 
       var _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @ionic-native/native-geocoder/ngx */
-      "h+qT"); // plugins
+      "h+qT");
+      /* harmony import */
+
+
+      var _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! @ionic-native/paypal/ngx */
+      "bXRV"); // plugins
 
 
       var AppModule = function AppModule() {
@@ -326,7 +332,7 @@
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"]],
-        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_9__["SQLite"], _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__["SQLitePorter"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__["Geolocation"], _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__["NativeGeocoder"], {
+        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_9__["SQLite"], _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__["SQLitePorter"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__["Geolocation"], _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__["PayPal"], _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__["NativeGeocoder"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
           useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
         }],
@@ -412,6 +418,12 @@
             return this.http.get(path);
           }
         }, {
+          key: "getNotificacionesNoLeidas",
+          value: function getNotificacionesNoLeidas() {
+            var path = "".concat(this.api, "/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0");
+            return this.http.get(path);
+          }
+        }, {
           key: "updateNotificacion",
           value: function updateNotificacion(task, uuid_cliente, uuid) {
             // const path = `${this.api}/todos/${id}`;
@@ -459,9 +471,9 @@
           }
         }, {
           key: "getProductos",
-          value: function getProductos(id) {
+          value: function getProductos(id, ordenarpor) {
             //const path = `${this.api}/todos/${id}`;
-            var path = "".concat(this.api, "/productos?familia_id=eq.").concat(id); //alert(path)
+            var path = "".concat(this.api, "/productos?familia_id=eq.").concat(id).concat(ordenarpor); //alert(path)
 
             return this.http.get(path);
           }
@@ -793,6 +805,17 @@
           /*! ./sucursalcerca/sucursalcerca.module */
           "nkOP")).then(function (m) {
             return m.SucursalcercaPageModule;
+          });
+        }
+      }, {
+        path: 'paypal-mobile',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() | paypal-mobile-paypal-mobile-module */
+          "paypal-mobile-paypal-mobile-module").then(__webpack_require__.bind(null,
+          /*! ./paypal-mobile/paypal-mobile.module */
+          "IOmk")).then(function (m) {
+            return m.PaypalMobilePageModule;
           });
         }
       }];

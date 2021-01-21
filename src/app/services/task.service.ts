@@ -36,6 +36,10 @@ export class TaskService {
     const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f`;
     return this.http.get<Notificaciones[]>(path);
   }
+  getNotificacionesNoLeidas() {
+    const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0`;
+    return this.http.get<Notificaciones[]>(path);
+  }
   updateNotificacion(task: Notificacion,uuid_cliente:any,uuid:any) {
     // const path = `${this.api}/todos/${id}`;
     const path = `${this.api}/notificaciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`
@@ -70,9 +74,9 @@ export class TaskService {
     //alert(path)
     return this.http.get<Task>(path);
   }
-  getProductos(id) {
+  getProductos(id,ordenarpor) {
     //const path = `${this.api}/todos/${id}`;
-    const path = `${this.api}/productos?familia_id=eq.${id}`;
+    const path = `${this.api}/productos?familia_id=eq.${id}${ordenarpor}`;
     //alert(path)
     return this.http.get<Task>(path);
   }

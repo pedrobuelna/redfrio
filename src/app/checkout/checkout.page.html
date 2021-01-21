@@ -161,7 +161,7 @@
         </ion-item>
         <ion-item color="light">
           <ion-label position="floating">Correo *</ion-label>
-          <ion-input formControlName="correo"></ion-input>
+          <ion-input formControlName="correo" type="email"></ion-input>
         </ion-item>
         <!-- Error messages -->
         <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.correo.errors?.required || errorControl.correo.errors?.pattern">
@@ -333,33 +333,27 @@
           <ion-input formControlName="numeroTarjeta"></ion-input>
         </ion-item>
         <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.required">
-          Campo Nombre de tarjeta es requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.pattern">
-          El Nombre de tarjeta debe tener solo numeros.
-        </span>
         <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.minlength">
-          El Nombre de tarjeta debe tener minimo 3 caractéres.
+          El Numero de tarjeta debe tener minimo 16 caractéres.
         </span>
         <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.maxlength">
-          El Nombre de tarjeta debe tener maximo 3 caractéres.
+          El Numero de tarjeta debe tener maximo 16 caractéres.
         </span> 
         <ion-item color="light">
           <ion-label position="floating">Fecha de Expiracion (DD)*</ion-label>
           <ion-select formControlName="fechaDiaTarjeta">
-            <ion-select-option value="brown">01</ion-select-option>
-            <ion-select-option value="blonde">02</ion-select-option>
-            <ion-select-option value="black">03</ion-select-option>
-            <ion-select-option value="red">04</ion-select-option>
-            <ion-select-option value="red">05</ion-select-option>
-            <ion-select-option value="red">06</ion-select-option>
-            <ion-select-option value="red">07</ion-select-option>
-            <ion-select-option value="red">08</ion-select-option>
-            <ion-select-option value="red">09</ion-select-option>
-            <ion-select-option value="red">10</ion-select-option>
-            <ion-select-option value="red">11</ion-select-option>
-            <ion-select-option value="red">12</ion-select-option>
+            <ion-select-option value="01">01</ion-select-option>
+            <ion-select-option value="02">02</ion-select-option>
+            <ion-select-option value="03">03</ion-select-option>
+            <ion-select-option value="04">04</ion-select-option>
+            <ion-select-option value="05">05</ion-select-option>
+            <ion-select-option value="06">06</ion-select-option>
+            <ion-select-option value="07">07</ion-select-option>
+            <ion-select-option value="08">08</ion-select-option>
+            <ion-select-option value="09">09</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
+            <ion-select-option value="11">11</ion-select-option>
+            <ion-select-option value="12">12</ion-select-option>
           </ion-select>
         </ion-item>
         <!-- Error messages -->
@@ -369,18 +363,18 @@
         <ion-item color="light" >
           <ion-label position="floating">Fecha de Expiracion (MM)*</ion-label>
           <ion-select formControlName="fechaMesTarjeta">
-            <ion-select-option value="brown">01</ion-select-option>
-            <ion-select-option value="blonde">02</ion-select-option>
-            <ion-select-option value="black">03</ion-select-option>
-            <ion-select-option value="red">04</ion-select-option>
-            <ion-select-option value="red">05</ion-select-option>
-            <ion-select-option value="red">06</ion-select-option>
-            <ion-select-option value="red">07</ion-select-option>
-            <ion-select-option value="red">08</ion-select-option>
-            <ion-select-option value="red">09</ion-select-option>
-            <ion-select-option value="red">10</ion-select-option>
-            <ion-select-option value="red">11</ion-select-option>
-            <ion-select-option value="red">12</ion-select-option>
+            <ion-select-option value="01">01</ion-select-option>
+            <ion-select-option value="02">02</ion-select-option>
+            <ion-select-option value="03">03</ion-select-option>
+            <ion-select-option value="04">04</ion-select-option>
+            <ion-select-option value="05">05</ion-select-option>
+            <ion-select-option value="06">06</ion-select-option>
+            <ion-select-option value="07">07</ion-select-option>
+            <ion-select-option value="08">08</ion-select-option>
+            <ion-select-option value="09">09</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
+            <ion-select-option value="11">11</ion-select-option>
+            <ion-select-option value="12">12</ion-select-option>
           </ion-select>
         </ion-item>
         <!-- Error messages -->

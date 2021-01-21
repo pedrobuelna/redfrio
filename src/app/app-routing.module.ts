@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'sucursalcerca',
     loadChildren: () => import('./sucursalcerca/sucursalcerca.module').then( m => m.SucursalcercaPageModule)
   },
+  {
+    path: 'paypal-mobile',
+    loadChildren: () => import('./paypal-mobile/paypal-mobile.module').then( m => m.PaypalMobilePageModule)
+  },
 ];
 
 @NgModule({

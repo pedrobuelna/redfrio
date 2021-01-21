@@ -14,6 +14,8 @@ import { Notificacion } from '../interfaces/task';
 export class NotificacionesPage implements OnInit {
   dataReturned: any;
   tasks: Notificacion[] = [];
+  notificaciones:any;
+  cantidadNot:any;
   constructor(private router: Router,private datePipe: DatePipe,
     private taskService: TaskService,
     public modalController: ModalController) { 
@@ -77,18 +79,34 @@ export class NotificacionesPage implements OnInit {
       
     }
   ngOnInit() {
+    this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
+      });
     this.taskService.getNotificaciones()
       .subscribe(listas => {
           this.listas = listas;
     });
     this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
   }
-  
+  ionViewWillEnter(){
+    this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
+      });
+  }
   onclickNotificaciones(){
     this.taskService.getNotificaciones()
       .subscribe(listas => {
           this.listas = listas;
     });
+    this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
+      });
     this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
     this.router.navigate(['/notificaciones']);
   }
