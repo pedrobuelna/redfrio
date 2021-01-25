@@ -135,7 +135,7 @@ let CategoriaPage = class CategoriaPage {
     }
     checkValue(event) {
         console.log("valor: " + this.valorSelect);
-        let id = parseFloat(event.detail.value);
+        let id = parseInt(event.detail.value);
         let ordernarpor = $("#categoria_select2").val();
         this.taskService.getProductos(id, ordernarpor)
             .subscribe(productos2 => {
@@ -169,7 +169,6 @@ let CategoriaPage = class CategoriaPage {
             this.taskService.getAllProductos()
                 .subscribe(productos2 => {
                 this.productos2 = productos2;
-                console.log(productos2);
             });
         }
         else {
@@ -178,7 +177,6 @@ let CategoriaPage = class CategoriaPage {
             this.taskService.getProductos(this.x, ordernarpor)
                 .subscribe(productos2 => {
                 this.productos2 = productos2;
-                console.log(productos2);
             });
         }
     }
@@ -188,10 +186,7 @@ let CategoriaPage = class CategoriaPage {
         this.taskService.getFamilias()
             .subscribe(familias => {
             this.familias = familias;
-            console.log(familias);
-            console.log(this.x);
             setTimeout(() => {
-                alert(this.x + "a" + $("#categoria_select").val());
                 $("#categoria_select").val(parseInt(this.x));
             }, 500);
         });
@@ -202,7 +197,6 @@ let CategoriaPage = class CategoriaPage {
             this.taskService.getAllProductos()
                 .subscribe(productos2 => {
                 this.productos2 = productos2;
-                console.log(productos2);
             });
         }
         else {
@@ -211,7 +205,6 @@ let CategoriaPage = class CategoriaPage {
             this.taskService.getProductos(this.x, ordernarpor)
                 .subscribe(productos2 => {
                 this.productos2 = productos2;
-                console.log(productos2);
                 $("#categoria_select").val(parseInt(this.x));
             });
         }

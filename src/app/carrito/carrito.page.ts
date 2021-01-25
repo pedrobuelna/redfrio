@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class CarritoPage implements OnInit {
 
   constructor(private router: Router) { }
+  subtotal:any;
   listas: Array<any>=[
     {
       nombre: "YORK MINISPLIT",
@@ -42,14 +43,26 @@ export class CarritoPage implements OnInit {
     
   }
   ngOnInit() {
-    
+    setTimeout(() => {
+      let valselect;
+      let x=0;
+      $(".subcontent_carrito").each(function(i){
+        valselect = parseInt($(this).find(".cantidad").val())
+        console.log("valor de select " + i +" "+ valselect)
+        console.log("valor de cantidad "  + i +" "+ parseInt($(this).find(".precio").text()))
+        console.log("Calculo total de cada 1 "  + i +" "+ parseInt(valselect) * parseInt($(this).find(".precio").text()))
+        x=x+(parseInt(valselect) * parseInt($(this).find(".precio").text()))
+      })
+      $(".subtotal_numero").text("$ "+x)
+      $(".total_btnpago").text(x)
+      this.subtotal = x
+    }, 200); 
   }
   ionViewWillEnter(){
     let x=0;
     $(".precio1").each(function(i){
       x=x+(parseInt($(this).text()) * parseInt($(".cantidad").val()))
     })
-    
     $(".subtotal_numero").text("$ "+x)
     $(".total_btnpago").text(x)
     $(".cantidad").change(function() {
@@ -64,6 +77,7 @@ export class CarritoPage implements OnInit {
       })
       $(".subtotal_numero").text("$ "+x)
       $(".total_btnpago").text(x)
+      this.subtotal = x
     });
     
   }
@@ -89,7 +103,11 @@ export class CarritoPage implements OnInit {
     this.router.navigate(['/carrito']);
   }
   onClickCheckout(){
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/checkout'], {
+        queryParams: {
+          subtotal: this.subtotal
+        }
+    });  
   }
   
 }

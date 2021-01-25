@@ -69,6 +69,20 @@ let CarritoPage = class CarritoPage {
         }
     }
     ngOnInit() {
+        setTimeout(() => {
+            let valselect;
+            let x = 0;
+            $(".subcontent_carrito").each(function (i) {
+                valselect = parseInt($(this).find(".cantidad").val());
+                console.log("valor de select " + i + " " + valselect);
+                console.log("valor de cantidad " + i + " " + parseInt($(this).find(".precio").text()));
+                console.log("Calculo total de cada 1 " + i + " " + parseInt(valselect) * parseInt($(this).find(".precio").text()));
+                x = x + (parseInt(valselect) * parseInt($(this).find(".precio").text()));
+            });
+            $(".subtotal_numero").text("$ " + x);
+            $(".total_btnpago").text(x);
+            this.subtotal = x;
+        }, 200);
     }
     ionViewWillEnter() {
         let x = 0;
@@ -89,6 +103,7 @@ let CarritoPage = class CarritoPage {
             });
             $(".subtotal_numero").text("$ " + x);
             $(".total_btnpago").text(x);
+            this.subtotal = x;
         });
     }
     onclickNotificaciones() {
@@ -113,7 +128,11 @@ let CarritoPage = class CarritoPage {
         this.router.navigate(['/carrito']);
     }
     onClickCheckout() {
-        this.router.navigate(['/checkout']);
+        this.router.navigate(['/checkout'], {
+            queryParams: {
+                subtotal: this.subtotal
+            }
+        });
     }
 };
 CarritoPage.ctorParameters = () => [

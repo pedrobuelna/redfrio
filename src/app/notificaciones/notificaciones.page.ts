@@ -44,6 +44,7 @@ export class NotificacionesPage implements OnInit {
     
     async openModal(index) {
       this.uuid_notificacion = this.listas[index].uuid_notificacion
+      
       const modal = await this.modalController.create({
         component: MyModalPage,
         componentProps: {
@@ -55,6 +56,7 @@ export class NotificacionesPage implements OnInit {
           "uuid_notificacion": this.listas[index].uuid_notificacion,
           "status": this.listas[index].status,
         }
+        
       });
       const Notificacion = {
         status: "1"
@@ -65,6 +67,12 @@ export class NotificacionesPage implements OnInit {
         .subscribe(listas => {
             this.listas = listas;
         });
+        this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
+
+      });
         this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
       });
       
@@ -83,6 +91,7 @@ export class NotificacionesPage implements OnInit {
       .subscribe(notificaciones => {
           this.notificaciones = notificaciones;
           this.cantidadNot = this.notificaciones.length
+          
       });
     this.taskService.getNotificaciones()
       .subscribe(listas => {

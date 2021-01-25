@@ -30,8 +30,6 @@ export class SucursalesPage implements OnInit {
     longitude: any = 0; //longitude
     @ViewChild("splash") splash: ElementRef;
     map = null;
-
-
     sucursalActual: informacionSucursal;
     sucursales: any;
     marcadorActual: MarcadoMap;
@@ -68,6 +66,7 @@ export class SucursalesPage implements OnInit {
                         },
                         title: sucursal.nombre
                     }
+                    //$("#categoria_select").val(this.sucursalActual.id_sucursal)
                     setTimeout(() => {
                        this.sucursalActual={
                         id_sucursal:this.sucursalActual.id_sucursal,
@@ -76,13 +75,12 @@ export class SucursalesPage implements OnInit {
                         telefono_2:sucursal.telefono_2,
                         mail:sucursal.mail,
                         direccion:sucursal.direccion
-                    }
+                        }
                     console.log("0")
                     this.loadMap(marcador);
                     console.log("1") 
+                    
                     }, 200);
-                    
-                    
                 }
             });
         });

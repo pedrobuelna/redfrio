@@ -116,7 +116,24 @@
           }
         }, {
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            var _this = this;
+
+            setTimeout(function () {
+              var valselect;
+              var x = 0;
+              $(".subcontent_carrito").each(function (i) {
+                valselect = parseInt($(this).find(".cantidad").val());
+                console.log("valor de select " + i + " " + valselect);
+                console.log("valor de cantidad " + i + " " + parseInt($(this).find(".precio").text()));
+                console.log("Calculo total de cada 1 " + i + " " + parseInt(valselect) * parseInt($(this).find(".precio").text()));
+                x = x + parseInt(valselect) * parseInt($(this).find(".precio").text());
+              });
+              $(".subtotal_numero").text("$ " + x);
+              $(".total_btnpago").text(x);
+              _this.subtotal = x;
+            }, 200);
+          }
         }, {
           key: "ionViewWillEnter",
           value: function ionViewWillEnter() {
@@ -138,6 +155,7 @@
               });
               $(".subtotal_numero").text("$ " + x);
               $(".total_btnpago").text(x);
+              this.subtotal = x;
             });
           }
         }, {
@@ -178,7 +196,11 @@
         }, {
           key: "onClickCheckout",
           value: function onClickCheckout() {
-            this.router.navigate(['/checkout']);
+            this.router.navigate(['/checkout'], {
+              queryParams: {
+                subtotal: this.subtotal
+              }
+            });
           }
         }]);
 

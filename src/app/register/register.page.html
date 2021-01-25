@@ -10,9 +10,9 @@
     </div>
     <br>
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
-      <ion-item class="closed">
+      <ion-item class="closed" color="dark">
         <ion-label position="floating">Nombres *</ion-label>
-        <ion-input formControlName="nombre" type="text" required></ion-input>
+        <ion-input  formControlName="nombre" type="text" required></ion-input>
       </ion-item>
       <div class="espacios">
         <!-- Error messages -->
@@ -20,16 +20,16 @@
           El Nombre es requerido, mayúsculas, minimo 5 y maximo 40 caractéres.
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label position="floating">Nombre(s) faltante </ion-label>
-        <ion-input formControlName="nombre_2"></ion-input>
+        <ion-input color="light" formControlName="nombre_2"></ion-input>
       </ion-item>
       <div class="espacios">
         <span class="error ion-padding" *ngIf="isSubmitted && errorControl.nombre_2.errors?.maxlength">
           Campo Nombre 2 maximo 40 caractéres.
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label position="floating">Teléfono</ion-label>
         <ion-input formControlName="telefono" type="tel"></ion-input>
       </ion-item>
@@ -39,9 +39,9 @@
           El Teléfono debe ser numérico y tener 10 caractéres.
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label position="floating">Celular *</ion-label>
-        <ion-input formControlName="celular" type="tel"></ion-input>
+        <ion-input  formControlName="celular" type="tel"></ion-input>
       </ion-item>
        <!-- Error messages -->
        <div class="espacios">
@@ -49,7 +49,7 @@
           El Celular debe ser numérico y tener 10 caractéres.
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label position="floating">Email *</ion-label>
         <ion-input formControlName="mail" type="email"></ion-input>
       </ion-item>
@@ -59,7 +59,7 @@
           Campo email requerido y con formato correo@dominio.dominio
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label position="floating">Persona Contacto *</ion-label>
         <ion-input formControlName="persona_contacto"></ion-input>
       </ion-item>
@@ -68,7 +68,7 @@
           Campo Persona Contacto requerido solo letras mayusculas y máximo 40 caractéres.
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-label position="floating">Password *</ion-label>
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
@@ -78,7 +78,7 @@
           Campo Password requerido y minimo 8 caractéres
         </span>
       </div>
-      <ion-item>
+      <ion-item color="dark">
         <ion-checkbox mode="md" formControlName="myBoolean" (ionChange)="muestraDireccion2()"></ion-checkbox>
         <label style="color:black;margin-left: 10px;">Requiere Factura</label>
       </ion-item>
@@ -94,7 +94,7 @@
             Campo RFC Obligatorio y debe llevar la clabe correcta y en mayusculas.
           </span>
         </div>
-        <ion-item  >
+        <ion-item color="dark">
           <ion-label position="floating">Uso de CFDI</ion-label>
           <ion-select formControlName="uso_cfdi" value="">
             <ion-select-option value="">Selecciona CFDI</ion-select-option>

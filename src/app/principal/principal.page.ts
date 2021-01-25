@@ -2,16 +2,18 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { IonSlides } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
+
+
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
 export class PrincipalPage implements OnInit {
-  public items = ["../../assets/images/tarjetas-reacsa@3x2.jpeg",
-    "../../assets/images/tarjetas-reacsa@3x.jpeg",
-    "../../assets/images/../../assets/images/tarjetas-reacsa@3x2.jpeg",
-    "../../assets/images/tarjetas-reacsa@3x.jpeg"
+  public items = ["https://cdn.reacsa.mx/banners/banner2.jpeg",
+    "https://cdn.reacsa.mx/banners/banner1.jpeg",
+    "https://cdn.reacsa.mx/banners/banner2.jpeg",
+    "https://cdn.reacsa.mx/banners/banner1.jpeg"
   ];
   @ViewChild("splash") splash: ElementRef;
   public sliderOptions = {
@@ -44,6 +46,7 @@ export class PrincipalPage implements OnInit {
     //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
     this.renderer.addClass(this.splash.nativeElement, "quitSplash");
   }
+  
   ngOnInit() {
     setTimeout(() => {
       this.addMyClass()
@@ -58,13 +61,9 @@ export class PrincipalPage implements OnInit {
           this.notificaciones = notificaciones;
           this.cantidadNot = this.notificaciones.length
       });
+
   }
   ionViewWillEnter(){
-    this.taskService.getNotificacionesNoLeidas()
-      .subscribe(notificaciones => {
-          this.notificaciones = notificaciones;
-          this.cantidadNot = this.notificaciones.length
-      });
   }
   retraso(){
     console.log("Retraso")

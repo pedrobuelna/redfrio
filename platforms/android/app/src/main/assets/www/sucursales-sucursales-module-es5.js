@@ -234,7 +234,8 @@
                       lng: parseInt(coordenadas[1])
                     },
                     title: sucursal.nombre
-                  };
+                  }; //$("#categoria_select").val(this.sucursalActual.id_sucursal)
+
                   setTimeout(function () {
                     _this2.sucursalActual = {
                       id_sucursal: _this2.sucursalActual.id_sucursal,

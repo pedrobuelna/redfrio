@@ -131,6 +131,7 @@ let SucursalesPage = class SucursalesPage {
                         },
                         title: sucursal.nombre
                     };
+                    //$("#categoria_select").val(this.sucursalActual.id_sucursal)
                     setTimeout(() => {
                         this.sucursalActual = {
                             id_sucursal: this.sucursalActual.id_sucursal,

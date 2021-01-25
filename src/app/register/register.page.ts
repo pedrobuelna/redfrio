@@ -102,8 +102,7 @@ export class RegisterPage implements OnInit {
       console.log('Please provide all the required values!')
       return false;
     } else {
-      alert('Form Completed' + this.ionicForm.value)
-      
+      //alert('Form Completed' + this.ionicForm.value)
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
       const task = {
@@ -123,14 +122,15 @@ export class RegisterPage implements OnInit {
       };
       this.taskService.createTask(task)
         .subscribe((reply: any) => {
+            alert("Tus datos han sido guardados correctamente")
             this.taskService.sendMailUsr(usrMail)
                 .subscribe((sendMail: any) => {
-                    alert("Tus datos han sido guardados correctamente")
+                    console.log("Tus datos han sido guardados correctamente")
                 }, (err) => {
-                    alert(err);
+                    console.log(err);
                 });
         }, (err) => {
-            alert(err)
+            console.log(err)
         });
         this.router.navigate(['/principal']);
       // this.taskService.createTask(task)

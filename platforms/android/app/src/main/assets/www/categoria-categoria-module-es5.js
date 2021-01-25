@@ -250,7 +250,7 @@
             var _this = this;
 
             console.log("valor: " + this.valorSelect);
-            var id = parseFloat(event.detail.value);
+            var id = parseInt(event.detail.value);
             var ordernarpor = $("#categoria_select2").val();
             this.taskService.getProductos(id, ordernarpor).subscribe(function (productos2) {
               _this.productos2 = productos2;
@@ -292,14 +292,12 @@
               //alert("TODOS")
               this.taskService.getAllProductos().subscribe(function (productos2) {
                 _this3.productos2 = productos2;
-                console.log(productos2);
               });
             } else {
               //alert("familia "+ x)
               var ordernarpor = $("#categoria_select2").val();
               this.taskService.getProductos(this.x, ordernarpor).subscribe(function (productos2) {
                 _this3.productos2 = productos2;
-                console.log(productos2);
               });
             }
           }
@@ -314,10 +312,7 @@
             this.valorOrdenar = "&order=destacado.desc";
             this.taskService.getFamilias().subscribe(function (familias) {
               _this4.familias = familias;
-              console.log(familias);
-              console.log(_this4.x);
               setTimeout(function () {
-                alert(_this4.x + "a" + $("#categoria_select").val());
                 $("#categoria_select").val(parseInt(_this4.x));
               }, 500);
             }); //alert("x: "+x)
@@ -327,14 +322,12 @@
               ////alert("TODOS")
               this.taskService.getAllProductos().subscribe(function (productos2) {
                 _this4.productos2 = productos2;
-                console.log(productos2);
               });
             } else {
               ////alert("familia "+ x)
               var ordernarpor = $("#categoria_select2").val();
               this.taskService.getProductos(this.x, ordernarpor).subscribe(function (productos2) {
                 _this4.productos2 = productos2;
-                console.log(productos2);
                 $("#categoria_select").val(parseInt(_this4.x));
               });
             }
