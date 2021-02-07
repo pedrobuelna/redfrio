@@ -15,10 +15,13 @@
         <span class="txt2">Válido hasta: {{fecha}}</span>
       </div>
     </div>
-    <div class="content_texto">
-      {{descripcion}}
+    <div class="content_texto" [innerHTML]="descripcion" >
+      
     </div>
-    <ion-button (click)="closeModal()" class="color2">Cerrar</ion-button>
+    <div class="content_boton">
+      <ion-button (click)="closeModal()" class="color2">Cerrar</ion-button>  
+    </div>
+    
   </div>
   
 

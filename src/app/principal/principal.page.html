@@ -18,8 +18,8 @@
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
   <ion-slides pager="true" [options]="sliderOptions">
-    <ion-slide *ngFor="let item of items">
-      <img src="{{item}}" alt="{{item}}" style="width:100%;">
+    <ion-slide *ngFor="let item of banners">
+      <img src="{{item.ruta}}" alt="{{item.ruta}}" style="width:100%;">
     </ion-slide>
   </ion-slides>
   <ion-slides [options]="sliderOptions2" class="productos_carrusel">

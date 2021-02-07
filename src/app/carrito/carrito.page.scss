@@ -3,10 +3,10 @@
 .content_img img{height: 143px;box-shadow: 0px 3px 6px #00000029;}
 .content_select{padding: 15px;}
 #categoria_select{border: 2px solid #015BEE;width: 100%; text-transform: uppercase; padding: 0 30px; -webkit-appearance: none; -moz-appearance: none; height: 60px;background: url(../../assets/images/flecha_abajo.png);background-position: right 20px center;background-repeat: no-repeat;background-size: 10px;font-size: 12px;letter-spacing: 2px;color: black;}
-.parrafo1{font-size: 13px;text-transform: uppercase;color: #707070;margin: 30px 0 0 ;}
+.parrafo1{font-size: 13px;text-transform: uppercase;color: #707070;margin: 30px 0 0 ;max-height: 96px;overflow: hidden;}
 .titulo1{color: #151515;}
 .precio1{font-size: 12px;margin-bottom: 20px;margin: 30px 0 30px;}
-.cantidad{-webkit-appearance: none;border:none;border-bottom: 2px solid #00257C;width: 100%;padding-left: 10px;background: url(../../assets/images/flecha_abajo.png);background-repeat: no-repeat;background-size: 10px;background-position: right 10px center;font-size: 12px;padding-bottom: 5px;color: black;}
+.cantidad{-webkit-appearance: none;border:none;width: 100%;padding-left: 10px;background: url(../../assets/images/flecha_abajo.png);background-repeat: no-repeat;background-size: 10px;background-position: right 10px center;font-size: 12px;padding-bottom: 5px;color: black;}
 .remover{border-bottom: 1px solid #95989A;padding-bottom: 3px;font-size: 12px;color: #95989A;position: absolute;bottom: 5px;margin-left: 5px;}
 .total{font-size: 18px;color: black;margin-bottom: 10px;}
 .content_subtotal{padding: 0 50px;margin-top: 40px;}
@@ -26,4 +26,4 @@
 button .button-inner{
     justify-content: space-between !important;
 }
-  
+.none{display: none;}

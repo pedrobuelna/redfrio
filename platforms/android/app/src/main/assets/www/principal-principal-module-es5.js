@@ -145,24 +145,41 @@
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @ionic/angular */
+      "TEn/");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/router */
       "tyNb");
       /* harmony import */
 
 
-      var _services_task_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _services_task_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ../services/task.service */
       "i6c7");
+      /* harmony import */
+
+
+      var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @ionic-native/network/ngx */
+      "kwrG");
 
       var PrincipalPage = /*#__PURE__*/function () {
-        function PrincipalPage(router, renderer, taskService) {
+        function PrincipalPage(router, renderer, taskService, network, platform, navCtrl) {
+          var _this = this;
+
           _classCallCheck(this, PrincipalPage);
 
           this.router = router;
           this.renderer = renderer;
           this.taskService = taskService;
-          this.items = ["../../assets/images/tarjetas-reacsa@3x2.jpeg", "../../assets/images/tarjetas-reacsa@3x.jpeg", "../../assets/images/../../assets/images/tarjetas-reacsa@3x2.jpeg", "../../assets/images/tarjetas-reacsa@3x.jpeg"];
+          this.network = network;
+          this.platform = platform;
+          this.navCtrl = navCtrl;
+          this.items = ["https://cdn.reacsa.mx/banners/banner2.jpeg", "https://cdn.reacsa.mx/banners/banner1.jpeg", "https://cdn.reacsa.mx/banners/banner2.jpeg", "https://cdn.reacsa.mx/banners/banner1.jpeg"];
           this.sliderOptions = {
             initialSlide: 0,
             speed: 350,
@@ -182,6 +199,23 @@
             centeredSlides: true,
             spaceBetween: 20
           };
+          this.platform.ready().then(function () {
+            var disconnectSubscription = _this.network.onDisconnect().subscribe(function () {
+              console.log('network was disconnected :-(');
+              alert("Desconectado a Inernet");
+
+              _this.router.navigate(['/sinconexion']);
+            }); //disconnectSubscription.unsubscribe();
+
+
+            var connectSubscription = _this.network.onConnect().subscribe(function () {
+              console.log('network was connected :-)');
+              alert("Conectado a Inernet");
+
+              _this.navCtrl.pop();
+            }); //connectSubscription.unsubscribe();
+
+          });
         }
 
         _createClass(PrincipalPage, [{
@@ -193,28 +227,43 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this = this;
+            var _this2 = this;
 
             setTimeout(function () {
-              _this.addMyClass();
+              _this2.addMyClass();
             }, 1500);
+            this.taskService.getAllBanners().subscribe(function (banners) {
+              _this2.banners = banners;
+              console.log(banners);
+            });
             this.taskService.getAllProductos().subscribe(function (productos2) {
-              _this.productos2 = productos2;
+              _this2.productos2 = productos2;
               console.log(productos2);
             });
             this.taskService.getNotificacionesNoLeidas().subscribe(function (notificaciones) {
-              _this.notificaciones = notificaciones;
-              _this.cantidadNot = _this.notificaciones.length;
+              _this2.notificaciones = notificaciones;
+              _this2.cantidadNot = _this2.notificaciones.length;
             });
           }
         }, {
           key: "ionViewWillEnter",
           value: function ionViewWillEnter() {
-            var _this2 = this;
+            var _this3 = this;
 
+            // this.network.onDisconnect().subscribe(() => {
+            //   console.log('network was disconnected :-(');
+            //   alert("FirstPage onDisconnect oninit");
+            //   // this.navCtrl.navigateRoot(['/principal']);
+            //   this.navCtrl.navigateRoot(['/sinconexion']);
+            //  });
+            //  this.network.onConnect().subscribe(() => {
+            //   console.log('network was connected :-)');
+            //   alert("FirstPage onConnect oninit");
+            //   this.navCtrl.navigateBack;
+            //  });
             this.taskService.getNotificacionesNoLeidas().subscribe(function (notificaciones) {
-              _this2.notificaciones = notificaciones;
-              _this2.cantidadNot = _this2.notificaciones.length;
+              _this3.notificaciones = notificaciones;
+              _this3.cantidadNot = _this3.notificaciones.length;
             });
           }
         }, {
@@ -245,7 +294,7 @@
         }, {
           key: "onclickUsuario",
           value: function onclickUsuario() {
-            this.router.navigate(['/register']);
+            this.router.navigate(['/editarperfil']);
           }
         }, {
           key: "onClickProducto",
@@ -268,11 +317,17 @@
 
       PrincipalPage.ctorParameters = function () {
         return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
         }, {
           type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Renderer2"]
         }, {
-          type: _services_task_service__WEBPACK_IMPORTED_MODULE_5__["TaskService"]
+          type: _services_task_service__WEBPACK_IMPORTED_MODULE_6__["TaskService"]
+        }, {
+          type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"]
         }];
       };
 
@@ -366,7 +421,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Home\n    </ion-title>\n  </ion-toolbar>\n</ion-header> -->\n<ion-content>\n  <div id=\"splash\" #splash>\n    <div id=\"content_letras\">\n      Bienvenido! <br>\n      Compre con <br>\n      confianza.\n    </div>\n  </div>\n  <div class=\"carrito\" (click)=\"onClickCarrito()\">\n    <span class=\"numero\">4</span>\n    <img src=\"../../assets/images/carrito.png\" alt=\"carrito\" >\n  </div>\n  <ion-slides pager=\"true\" [options]=\"sliderOptions\">\n    <ion-slide *ngFor=\"let item of items\">\n      <img src=\"{{item}}\" alt=\"{{item}}\" style=\"width:100%;\">\n    </ion-slide>\n  </ion-slides>\n  <ion-slides [options]=\"sliderOptions2\" class=\"productos_carrusel\">\n    <ion-slide  *ngFor=\"let producto of productos2;let i = index\">\n      <div id=\"content_producto_carrusel\" (click)=\"onClickProducto(producto.uuid_producto)\">\n        <img src=\"../../assets/images/producto1@3x.png\" alt=\"producto1@3x.png\">\n        <div class=\"content_producto_textos\">\n          <p> <span class=\"titletxt1\"> {{producto.marca}} MINISPLIT </span><br>\n            YHFE/YHGE SERIES <br>\n            COMPRESOR ON/OFF 220V R-410A <br>\n            SOLO FRIO Y FRIO/CALOR <br><br>\n             <span class=\"pricetxt1\">$5,027.00 <s>  $8,999.00</s></span>\n          </p>\n        </div>\n      </div>\n    </ion-slide>\n  </ion-slides>\n  <div class=\"content_menu\">\n    <ul>\n      <li>\n        <img src=\"../../assets/images/alertas_menu.png\" (click)=\"onclickNotificaciones()\">\n          <span class=\"cantidad\" *ngIf=\"cantidadNot!=0\">{{cantidadNot}}</span>\n      </li>\n      <li>\n        <img src=\"../../assets/images/ubicacion_menu.png\" (click)=\"onclickUbicaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/reacsa_menu.png\" (click)=\"onclickMenu()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/listado_menu.png\" (click)=\"onclickCategorias()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/usuario_menu.png\" (click)=\"onclickUsuario()\">\n      </li>\n    </ul>\n  </div>\n</ion-content>";
+      __webpack_exports__["default"] = "<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Home\n    </ion-title>\n  </ion-toolbar>\n</ion-header> -->\n<ion-content>\n  <div id=\"splash\" #splash>\n    <div id=\"content_letras\">\n      Bienvenido! <br>\n      Compre con <br>\n      confianza.\n    </div>\n  </div>\n  <div class=\"carrito\" (click)=\"onClickCarrito()\">\n    <span class=\"numero\">4</span>\n    <img src=\"../../assets/images/carrito.png\" alt=\"carrito\" >\n  </div>\n  <ion-slides pager=\"true\" [options]=\"sliderOptions\">\n    <ion-slide *ngFor=\"let item of banners\">\n      <img src=\"{{item.ruta}}\" alt=\"{{item.ruta}}\" style=\"width:100%;\">\n    </ion-slide>\n  </ion-slides>\n  <ion-slides [options]=\"sliderOptions2\" class=\"productos_carrusel\">\n    <ion-slide  *ngFor=\"let producto of productos2;let i = index\">\n      <div id=\"content_producto_carrusel\" (click)=\"onClickProducto(producto.uuid_producto)\">\n        <img src=\"../../assets/images/producto1@3x.png\" alt=\"producto1@3x.png\">\n        <div class=\"content_producto_textos\">\n          <p> <span class=\"titletxt1\"> {{producto.marca}} MINISPLIT </span><br>\n            YHFE/YHGE SERIES <br>\n            COMPRESOR ON/OFF 220V R-410A <br>\n            SOLO FRIO Y FRIO/CALOR <br><br>\n             <span class=\"pricetxt1\">$5,027.00 <s>  $8,999.00</s></span>\n          </p>\n        </div>\n      </div>\n    </ion-slide>\n  </ion-slides>\n  <div class=\"content_menu\">\n    <ul>\n      <li>\n        <img src=\"../../assets/images/alertas_menu.png\" (click)=\"onclickNotificaciones()\">\n          <span class=\"cantidad\" *ngIf=\"cantidadNot!=0\">{{cantidadNot}}</span>\n      </li>\n      <li>\n        <img src=\"../../assets/images/ubicacion_menu.png\" (click)=\"onclickUbicaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/reacsa_menu.png\" (click)=\"onclickMenu()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/listado_menu.png\" (click)=\"onclickCategorias()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/usuario_menu.png\" (click)=\"onclickUsuario()\">\n      </li>\n    </ul>\n  </div>\n</ion-content>";
       /***/
     }
   }]);

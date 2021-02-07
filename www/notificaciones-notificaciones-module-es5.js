@@ -42,7 +42,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>notificaciones</ion-title>\n  </ion-toolbar>\n</ion-header> -->\n\n<ion-content id=\"content_notificacion\">\n  <!-- <p *ngIf=\"dataReturned\">{{dataReturned}}</p> -->\n  <div id=\"content1_notificaciones\" style=\"color: black;\">\n      <img src=\"../../assets/images/notificacion_negro.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txtTitulo\">Notificaciones</span><br>\n        <span class=\"txtFecha\">{{currentDate}}</span>\n      </div>\n  </div>\n  <!-- <div class=\"content2_notificaciones\"  *ngFor=\"let list of lista;let i = index\" (click)=\"openModal(i)\">\n    <div class=\"subcontent_content2_notificaciones\"  class=\"abrir\">\n      <img src=\"{{list.titulo}}\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Bienvenido a la APP</span><br>\n        <span class=\"txt2\">20 de Nov. 2020</span>\n      </div>\n    </div>\n    <div class=\"content_texto\">\n      Bienvenido a la APP\n    </div>\n  </div> -->\n  <div class=\"content2_notificaciones noleido2\" *ngFor=\"let list of listas;let i = index\" (click)=\"openModal(i)\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"{{list.url_imagen}}\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">{{list.titulo}}</span><br>\n        <span class=\"txt2\">Válido hasta: {{list.fecha}}</span>\n      </div>\n      <img *ngIf=\"list.status==1\" src=\"../../assets/images/noleido.png\" alt=\"noleido\">\n      \n    </div>\n    <div class=\"content_texto\">\n      {{list.descripcion}}\n    </div>\n  </div>\n  <!-- <div class=\"content2_notificaciones\" (click)=\"openModal()\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"../../assets/images/imgnot2.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Oferta de fin de semana</span><br>\n        <span class=\"txt2\">Válido hasta: 12 de Nov. 2020</span>\n      </div>\n      <img src=\"../../assets/images/ojo.png\" alt=\"ojo\">\n    </div>\n    <div class=\"content_texto\">\n      6 Meses sin intereses! <br>\n      Detalles de oferta.\n    </div>\n  </div>\n  <div class=\"content2_notificaciones visto2\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"../../assets/images/imgnot1.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Mini Splits a 50%</span><br>\n        <span class=\"txt2\">Válido hasta: 05 de Dic. 2020</span>\n      </div>\n      <img src=\"../../assets/images/visto.png\" alt=\"visto\">\n    </div>\n    <div class=\"content_texto\">\n      Mini Splits a mitad de precio normal. <br>\n      Detalles de oferta.\n    </div>\n  </div>\n  <div class=\"content2_notificaciones last noleido2\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"../../assets/images/imgnot1.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Ahorra 20% en todos los <br> compresores en existencia</span>\n      </div>\n      <img src=\"../../assets/images/noleido.png\" alt=\"noleido\">\n    </div>\n    <div class=\"content_texto\">\n      Mini Splits a mitad de precio normal. <br>\n      Detalles de oferta\n    </div>\n  </div> -->\n  <div class=\"content_menu\">\n    <ul>\n      <li>\n        <img src=\"../../assets/images/alertas_menu.png\" (click)=\"onclickNotificaciones()\">\n        <span class=\"cantidad\" *ngIf=\"cantidadNot!=0\">{{cantidadNot}}</span>\n      </li>\n      <li>\n        <img src=\"../../assets/images/ubicacion_menu.png\" (click)=\"onclickUbicaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/reacsa_menu.png\" (click)=\"onclickMenu()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/listado_menu.png\" (click)=\"onclickCategorias()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/usuario_menu.png\" (click)=\"onclickUsuario()\">\n      </li>\n    </ul>\n  </div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>notificaciones</ion-title>\n  </ion-toolbar>\n</ion-header> -->\n\n<ion-content id=\"content_notificacion\">\n  <!-- <p *ngIf=\"dataReturned\">{{dataReturned}}</p> -->\n  <div id=\"content1_notificaciones\" style=\"color: black;\">\n      <img src=\"../../assets/images/notificacion_negro.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txtTitulo\">Notificaciones</span><br>\n        <span class=\"txtFecha\">{{currentDate}}</span>\n      </div>\n  </div>\n  <div class=\"content2_notificaciones noleido2\" *ngFor=\"let list of listas;let i = index\" (click)=\"openModal(i)\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"{{list.url_imagen}}\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">{{list.titulo}}</span><br>\n        <span class=\"txt2\">Válido hasta: {{list.fecha}}</span>\n      </div>\n      <img *ngIf=\"list.status==1\" src=\"../../assets/images/noleido.png\" alt=\"noleido\">\n    </div>\n    <div class=\"content_texto\"[innerHTML]=\"text\">\n      {{list.descripcion}}\n    </div>\n  </div>\n  <!-- <div class=\"content2_notificaciones\" (click)=\"openModal()\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"../../assets/images/imgnot2.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Oferta de fin de semana</span><br>\n        <span class=\"txt2\">Válido hasta: 12 de Nov. 2020</span>\n      </div>\n      <img src=\"../../assets/images/ojo.png\" alt=\"ojo\">\n    </div>\n    <div class=\"content_texto\">\n      6 Meses sin intereses! <br>\n      Detalles de oferta.\n    </div>\n  </div>\n  <div class=\"content2_notificaciones visto2\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"../../assets/images/imgnot1.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Mini Splits a 50%</span><br>\n        <span class=\"txt2\">Válido hasta: 05 de Dic. 2020</span>\n      </div>\n      <img src=\"../../assets/images/visto.png\" alt=\"visto\">\n    </div>\n    <div class=\"content_texto\">\n      Mini Splits a mitad de precio normal. <br>\n      Detalles de oferta.\n    </div>\n  </div>\n  <div class=\"content2_notificaciones last noleido2\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"../../assets/images/imgnot1.png\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">Ahorra 20% en todos los <br> compresores en existencia</span>\n      </div>\n      <img src=\"../../assets/images/noleido.png\" alt=\"noleido\">\n    </div>\n    <div class=\"content_texto\">\n      Mini Splits a mitad de precio normal. <br>\n      Detalles de oferta\n    </div>\n  </div> -->\n  <div class=\"content_menu\">\n    <ul>\n      <li>\n        <img src=\"../../assets/images/alertas_menu.png\" (click)=\"onclickNotificaciones()\">\n        <span class=\"cantidad\" *ngIf=\"cantidadNot!=0\">{{cantidadNot}}</span>\n      </li>\n      <li>\n        <img src=\"../../assets/images/ubicacion_menu.png\" (click)=\"onclickUbicaciones()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/reacsa_menu.png\" (click)=\"onclickMenu()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/listado_menu.png\" (click)=\"onclickCategorias()\">\n      </li>\n      <li>\n        <img src=\"../../assets/images/usuario_menu.png\" (click)=\"onclickUsuario()\">\n      </li>\n    </ul>\n  </div>\n</ion-content>\n";
       /***/
     },
 
@@ -250,7 +250,13 @@
                           _this.cantidadNot = _this.notificaciones.length;
                         });
 
-                        _this.currentDate = _this.datePipe.transform(_this.currentDate, 'dd MMMM yyyy');
+                        var fecha = new Date();
+                        var options = {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        };
+                        _this.currentDate = fecha.toLocaleDateString("es-ES", options);
                       });
                       modal.onDidDismiss().then(function (dataReturned) {
                         if (dataReturned !== null) {
@@ -283,7 +289,14 @@
             this.taskService.getNotificaciones().subscribe(function (listas) {
               _this2.listas = listas;
             });
-            this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+            var fecha = new Date();
+            var options = {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            };
+            console.log(fecha.toLocaleDateString("es-ES", options));
+            this.currentDate = fecha.toLocaleDateString("es-ES", options);
           }
         }, {
           key: "ionViewWillEnter",
@@ -307,7 +320,14 @@
               _this4.notificaciones = notificaciones;
               _this4.cantidadNot = _this4.notificaciones.length;
             });
-            this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+            var fecha = new Date();
+            var options = {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            };
+            console.log(fecha.toLocaleDateString("es-ES", options));
+            this.currentDate = fecha.toLocaleDateString("es-ES", options);
             this.router.navigate(['/notificaciones']);
           }
         }, {

@@ -148,6 +148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "Bfh1");
 /* harmony import */ var _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/native-geocoder/ngx */ "h+qT");
 /* harmony import */ var _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/paypal/ngx */ "bXRV");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/network/ngx */ "kwrG");
 
 
 
@@ -158,6 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // plugins
+
 
 
 
@@ -178,6 +180,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__["SQLitePorter"],
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__["Geolocation"],
             _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__["PayPal"],
+            _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_15__["Network"],
             _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__["NativeGeocoder"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
@@ -236,6 +239,19 @@ let TaskService = class TaskService {
         const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0`;
         return this.http.get(path);
     }
+    getDirecciones() {
+        const path = `${this.api}/direcciones?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101`;
+        return this.http.get(path);
+    }
+    getPerfiles() {
+        const path = `${this.api}/clientes?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101`;
+        return this.http.get(path);
+    }
+    updateDirecciones(task, uuid_cliente, uuid) {
+        // const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`;
+        return this.http.patch(path, task);
+    }
     updateNotificacion(task, uuid_cliente, uuid) {
         // const path = `${this.api}/todos/${id}`;
         const path = `${this.api}/notificaciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`;
@@ -276,6 +292,12 @@ let TaskService = class TaskService {
         //alert(path)
         return this.http.get(path);
     }
+    getAllBanners() {
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/banners?status=eq.1`;
+        //alert(path)
+        return this.http.get(path);
+    }
     getProducto(id) {
         //const path = `${this.api}/todos/${id}`;
         const path = `${this.api}/productos?uuid_producto=eq.${id}`;
@@ -285,6 +307,18 @@ let TaskService = class TaskService {
     sendMailUsr(usrMail) {
         const path = `http://carteraclientes.com/sistema/enviarCorreoRegistroCliente/${usrMail}`;
         return this.http.patch(path, false);
+    }
+    getCfdi() {
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/uso_cfdi`;
+        //alert(path)
+        return this.http.get(path);
+    }
+    getEstados() {
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/estados`;
+        //alert(path)
+        return this.http.get(path);
     }
 };
 TaskService.ctorParameters = () => [
@@ -566,7 +600,7 @@ const routes = [
     },
     {
         path: 'login',
-        loadChildren: () => Promise.all(/*! import() | login-login-module */[__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "X3zk")).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() | login-login-module */[__webpack_require__.e("default~editarperfil-editarperfil-module~login-login-module~register-register-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "X3zk")).then(m => m.LoginPageModule)
     },
     {
         path: 'auth',
@@ -574,7 +608,7 @@ const routes = [
     },
     {
         path: 'register',
-        loadChildren: () => Promise.all(/*! import() | register-register-module */[__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null, /*! ./register/register.module */ "x5bZ")).then(m => m.RegisterPageModule)
+        loadChildren: () => Promise.all(/*! import() | register-register-module */[__webpack_require__.e("default~editarperfil-editarperfil-module~login-login-module~register-register-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null, /*! ./register/register.module */ "x5bZ")).then(m => m.RegisterPageModule)
     },
     {
         path: 'forgot-password',
@@ -628,13 +662,21 @@ const routes = [
         path: 'paypal-mobile',
         loadChildren: () => __webpack_require__.e(/*! import() | paypal-mobile-paypal-mobile-module */ "paypal-mobile-paypal-mobile-module").then(__webpack_require__.bind(null, /*! ./paypal-mobile/paypal-mobile.module */ "IOmk")).then(m => m.PaypalMobilePageModule)
     },
+    {
+        path: 'sinconexion',
+        loadChildren: () => __webpack_require__.e(/*! import() | sinconexion-sinconexion-module */ "sinconexion-sinconexion-module").then(__webpack_require__.bind(null, /*! ./sinconexion/sinconexion.module */ "FENq")).then(m => m.SinconexionPageModule)
+    },
+    {
+        path: 'editarperfil',
+        loadChildren: () => Promise.all(/*! import() | editarperfil-editarperfil-module */[__webpack_require__.e("default~editarperfil-editarperfil-module~login-login-module~register-register-module"), __webpack_require__.e("editarperfil-editarperfil-module")]).then(__webpack_require__.bind(null, /*! ./editarperfil/editarperfil.module */ "Beyy")).then(m => m.EditarperfilPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
 AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"] })
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, { preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"], relativeLinkResolution: 'legacy' })
         ],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
     })

@@ -73,7 +73,10 @@ export class NotificacionesPage implements OnInit {
           this.cantidadNot = this.notificaciones.length
 
       });
-        this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+        var fecha = new Date();
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        this.currentDate = fecha.toLocaleDateString("es-ES", options)
+
       });
       
       modal.onDidDismiss().then((dataReturned) => {
@@ -97,7 +100,12 @@ export class NotificacionesPage implements OnInit {
       .subscribe(listas => {
           this.listas = listas;
     });
-    this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+    var fecha = new Date();
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        console.log(
+          fecha.toLocaleDateString("es-ES", options)
+        );
+        this.currentDate = fecha.toLocaleDateString("es-ES", options)
   }
   ionViewWillEnter(){
     this.taskService.getNotificacionesNoLeidas()
@@ -116,7 +124,12 @@ export class NotificacionesPage implements OnInit {
           this.notificaciones = notificaciones;
           this.cantidadNot = this.notificaciones.length
       });
-    this.currentDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+      var fecha = new Date();
+      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+      console.log(
+        fecha.toLocaleDateString("es-ES", options)
+      );
+      this.currentDate = fecha.toLocaleDateString("es-ES", options)
     this.router.navigate(['/notificaciones']);
   }
   onclickUbicaciones(){

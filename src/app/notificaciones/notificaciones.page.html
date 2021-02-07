@@ -13,18 +13,6 @@
         <span class="txtFecha">{{currentDate}}</span>
       </div>
   </div>
-  <!-- <div class="content2_notificaciones"  *ngFor="let list of lista;let i = index" (click)="openModal(i)">
-    <div class="subcontent_content2_notificaciones"  class="abrir">
-      <img src="{{list.titulo}}" alt="notificacion_negro" style="display: inline-block;">
-      <div style="display: inline-block;margin-left:5px">
-        <span class="txt1">Bienvenido a la APP</span><br>
-        <span class="txt2">20 de Nov. 2020</span>
-      </div>
-    </div>
-    <div class="content_texto">
-      Bienvenido a la APP
-    </div>
-  </div> -->
   <div class="content2_notificaciones noleido2" *ngFor="let list of listas;let i = index" (click)="openModal(i)">
     <div class="subcontent_content2_notificaciones">
       <img src="{{list.url_imagen}}" alt="notificacion_negro" style="display: inline-block;">
@@ -33,9 +21,8 @@
         <span class="txt2">Válido hasta: {{list.fecha}}</span>
       </div>
       <img *ngIf="list.status==1" src="../../assets/images/noleido.png" alt="noleido">
-      
     </div>
-    <div class="content_texto">
+    <div class="content_texto"[innerHTML]="text">
       {{list.descripcion}}
     </div>
   </div>

@@ -16,7 +16,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { PayPal } from '@ionic-native/paypal/ngx';
-
+import { Network } from '@ionic-native/network/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,6 +28,7 @@ import { PayPal } from '@ionic-native/paypal/ngx';
     SQLitePorter,
     Geolocation,
     PayPal,
+    Network,
     NativeGeocoder,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

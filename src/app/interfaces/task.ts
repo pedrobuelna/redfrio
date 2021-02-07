@@ -95,3 +95,22 @@ export interface Notificaciones {
 export interface Notificacion {
   status: string;
 }
+export interface Perfiles {
+  uuid_cliente: string;
+  id_cliente_sap: string;
+  nombre: string;
+  nombre_2: string;
+  telefono: string;
+  celular: string;
+  mail: string;
+  persona_contacto: string;
+  sucursal: string;
+  tipo_empresa: string;
+  lista_precio_id: string,
+  facturacion: string,
+  rfc: string,
+  persona_fisica: string,
+  uso_cfdi: string,
+  password: string,
+  status: string
+}

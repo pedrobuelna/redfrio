@@ -1,9 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, Platform,NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
-
-
+import { Network } from '@ionic-native/network/ngx';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -40,17 +39,39 @@ export class PrincipalPage implements OnInit {
   productos2: any;
   notificaciones:any;
   cantidadNot:any;
+  banners:any;
   constructor(private router: Router,private renderer: Renderer2,
-    private taskService: TaskService) { }
+    private taskService: TaskService,private network: Network,
+    private platform: Platform,public navCtrl: NavController) { 
+      this.platform.ready().then(() => {
+        let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+         console.log('network was disconnected :-(');
+         alert("Desconectado a Inernet");
+         this.router.navigate(['/sinconexion']);
+        });
+        //disconnectSubscription.unsubscribe();
+        let connectSubscription = this.network.onConnect().subscribe(() => {
+          console.log('network was connected :-)');
+          alert("Conectado a Inernet");
+          this.navCtrl.pop();
+         });
+         //connectSubscription.unsubscribe();
+       });
+    }
   addMyClass(){
     //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
     this.renderer.addClass(this.splash.nativeElement, "quitSplash");
   }
-  
   ngOnInit() {
+      
     setTimeout(() => {
       this.addMyClass()
      }, 1500);
+     this.taskService.getAllBanners()
+      .subscribe(banners => {
+          this.banners = banners;
+          console.log(banners)
+      });
      this.taskService.getAllProductos()
       .subscribe(productos2 => {
           this.productos2 = productos2;
@@ -61,9 +82,25 @@ export class PrincipalPage implements OnInit {
           this.notificaciones = notificaciones;
           this.cantidadNot = this.notificaciones.length
       });
-
   }
   ionViewWillEnter(){
+    // this.network.onDisconnect().subscribe(() => {
+    //   console.log('network was disconnected :-(');
+    //   alert("FirstPage onDisconnect oninit");
+    //   // this.navCtrl.navigateRoot(['/principal']);
+    //   this.navCtrl.navigateRoot(['/sinconexion']);
+      
+    //  });
+    //  this.network.onConnect().subscribe(() => {
+    //   console.log('network was connected :-)');
+    //   alert("FirstPage onConnect oninit");
+    //   this.navCtrl.navigateBack;
+    //  });
+    this.taskService.getNotificacionesNoLeidas()
+      .subscribe(notificaciones => {
+          this.notificaciones = notificaciones;
+          this.cantidadNot = this.notificaciones.length
+      });
   }
   retraso(){
     console.log("Retraso")
@@ -81,7 +118,7 @@ export class PrincipalPage implements OnInit {
     this.router.navigate(['/categorias']);
   }
   onclickUsuario(){
-    this.router.navigate(['/register']);
+    this.router.navigate(['/editarperfil']);
   }
   onClickProducto(id){
     this.router.navigate(['/producto'], {

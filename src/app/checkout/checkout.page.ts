@@ -206,7 +206,6 @@ export class CheckoutPage implements OnInit {
         //alert("paypal"+this.paymentAmount)
         let payment = new PayPalPayment(this.paymentAmount, this.currency, 'Descripcion', 'Venta en REACSA');
         this.payPal.renderSinglePaymentUI(payment).then((res) => {
-          console.log("JALA");
           console.log(res);
           setTimeout(() => {
             this.addMyClass()

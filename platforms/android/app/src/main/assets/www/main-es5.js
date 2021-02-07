@@ -321,7 +321,13 @@
 
       var _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @ionic-native/paypal/ngx */
-      "bXRV"); // plugins
+      "bXRV");
+      /* harmony import */
+
+
+      var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! @ionic-native/network/ngx */
+      "kwrG"); // plugins
 
 
       var AppModule = function AppModule() {
@@ -332,7 +338,7 @@
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"]],
-        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_9__["SQLite"], _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__["SQLitePorter"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__["Geolocation"], _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__["PayPal"], _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__["NativeGeocoder"], {
+        providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_sqlite_ngx__WEBPACK_IMPORTED_MODULE_9__["SQLite"], _ionic_native_sqlite_porter_ngx__WEBPACK_IMPORTED_MODULE_11__["SQLitePorter"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_12__["Geolocation"], _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_14__["PayPal"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_15__["Network"], _ionic_native_native_geocoder_ngx__WEBPACK_IMPORTED_MODULE_13__["NativeGeocoder"], {
           provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
           useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
         }],
@@ -424,6 +430,25 @@
             return this.http.get(path);
           }
         }, {
+          key: "getDirecciones",
+          value: function getDirecciones() {
+            var path = "".concat(this.api, "/direcciones?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101");
+            return this.http.get(path);
+          }
+        }, {
+          key: "getPerfiles",
+          value: function getPerfiles() {
+            var path = "".concat(this.api, "/clientes?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101");
+            return this.http.get(path);
+          }
+        }, {
+          key: "updateDirecciones",
+          value: function updateDirecciones(task, uuid_cliente, uuid) {
+            // const path = `${this.api}/todos/${id}`;
+            var path = "".concat(this.api, "/direcciones?uuid_cliente=eq.").concat(uuid_cliente, "&uuid_notificacion=eq.").concat(uuid);
+            return this.http.patch(path, task);
+          }
+        }, {
           key: "updateNotificacion",
           value: function updateNotificacion(task, uuid_cliente, uuid) {
             // const path = `${this.api}/todos/${id}`;
@@ -478,6 +503,14 @@
             return this.http.get(path);
           }
         }, {
+          key: "getAllBanners",
+          value: function getAllBanners() {
+            //const path = `${this.api}/todos/${id}`;
+            var path = "".concat(this.api, "/banners?status=eq.1"); //alert(path)
+
+            return this.http.get(path);
+          }
+        }, {
           key: "getProducto",
           value: function getProducto(id) {
             //const path = `${this.api}/todos/${id}`;
@@ -490,6 +523,22 @@
           value: function sendMailUsr(usrMail) {
             var path = "http://carteraclientes.com/sistema/enviarCorreoRegistroCliente/".concat(usrMail);
             return this.http.patch(path, false);
+          }
+        }, {
+          key: "getCfdi",
+          value: function getCfdi() {
+            //const path = `${this.api}/todos/${id}`;
+            var path = "".concat(this.api, "/uso_cfdi"); //alert(path)
+
+            return this.http.get(path);
+          }
+        }, {
+          key: "getEstados",
+          value: function getEstados() {
+            //const path = `${this.api}/todos/${id}`;
+            var path = "".concat(this.api, "/estados"); //alert(path)
+
+            return this.http.get(path);
           }
         }]);
 
@@ -647,7 +696,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | login-login-module */
-          [__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~editarperfil-editarperfil-module~login-login-module~register-register-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null,
           /*! ./login/login.module */
           "X3zk")).then(function (m) {
             return m.LoginPageModule;
@@ -669,7 +718,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | register-register-module */
-          [__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~editarperfil-editarperfil-module~login-login-module~register-register-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null,
           /*! ./register/register.module */
           "x5bZ")).then(function (m) {
             return m.RegisterPageModule;
@@ -818,6 +867,28 @@
             return m.PaypalMobilePageModule;
           });
         }
+      }, {
+        path: 'sinconexion',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() | sinconexion-sinconexion-module */
+          "sinconexion-sinconexion-module").then(__webpack_require__.bind(null,
+          /*! ./sinconexion/sinconexion.module */
+          "FENq")).then(function (m) {
+            return m.SinconexionPageModule;
+          });
+        }
+      }, {
+        path: 'editarperfil',
+        loadChildren: function loadChildren() {
+          return Promise.all(
+          /*! import() | editarperfil-editarperfil-module */
+          [__webpack_require__.e("default~editarperfil-editarperfil-module~login-login-module~register-register-module"), __webpack_require__.e("editarperfil-editarperfil-module")]).then(__webpack_require__.bind(null,
+          /*! ./editarperfil/editarperfil.module */
+          "Beyy")).then(function (m) {
+            return m.EditarperfilPageModule;
+          });
+        }
       }];
 
       var AppRoutingModule = function AppRoutingModule() {
@@ -826,7 +897,8 @@
 
       AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, {
-          preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"]
+          preloadingStrategy: _angular_router__WEBPACK_IMPORTED_MODULE_2__["PreloadAllModules"],
+          relativeLinkResolution: 'legacy'
         })],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
       })], AppRoutingModule);

@@ -279,7 +279,6 @@ let CheckoutPage = class CheckoutPage {
                 //alert("paypal"+this.paymentAmount)
                 let payment = new _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_6__["PayPalPayment"](this.paymentAmount, this.currency, 'Descripcion', 'Venta en REACSA');
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
-                    console.log("JALA");
                     console.log(res);
                     setTimeout(() => {
                         this.addMyClass();

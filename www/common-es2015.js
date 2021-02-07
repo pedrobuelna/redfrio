@@ -206,7 +206,7 @@ MyModalPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".content2_notificaciones {\n  color: black;\n}\n\n.color2 {\n  --background: #00257C !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL215LW1vZGFsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUF5QixZQUFBO0FBRXpCOztBQURBO0VBQVMsZ0NBQUE7QUFLVCIsImZpbGUiOiJteS1tb2RhbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGVudDJfbm90aWZpY2FjaW9uZXN7Y29sb3I6IGJsYWNrO31cbi5jb2xvcjIgey0tYmFja2dyb3VuZDogIzAwMjU3QyAhaW1wb3J0YW50O30iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".content2_notificaciones {\n  color: black;\n}\n\n.content_boton {\n  text-align: center;\n  margin-top: 100px;\n}\n\n.color2 {\n  --background: #00257C !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL215LW1vZGFsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUF5QixZQUFBO0FBRXpCOztBQURBO0VBQWUsa0JBQUE7RUFBbUIsaUJBQUE7QUFNbEM7O0FBTEE7RUFBUyxnQ0FBQTtBQVNUIiwiZmlsZSI6Im15LW1vZGFsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250ZW50Ml9ub3RpZmljYWNpb25lc3tjb2xvcjogYmxhY2s7fVxuLmNvbnRlbnRfYm90b257dGV4dC1hbGlnbjogY2VudGVyO21hcmdpbi10b3A6IDEwMHB4O31cbi5jb2xvcjIgey0tYmFja2dyb3VuZDogIzAwMjU3QyAhaW1wb3J0YW50O31cbiJdfQ== */");
 
 /***/ }),
 
@@ -268,7 +268,7 @@ const detachComponent = (delegate, element) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- my-modal.page.html -->\n<!-- <ion-header>\n  <ion-toolbar color=\"danger\">\n    <ion-title>my-modal</ion-title>\n  </ion-toolbar>\n</ion-header> -->\n\n<ion-content>\n  <br><br>\n  <div class=\"content2_notificaciones noleido2\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"{{url_imagen}}\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">{{titulo}}</span><br>\n        <span class=\"txt2\">Válido hasta: {{fecha}}</span>\n      </div>\n    </div>\n    <div class=\"content_texto\">\n      {{descripcion}}\n    </div>\n    <ion-button (click)=\"closeModal()\" class=\"color2\">Cerrar</ion-button>\n  </div>\n  \n\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- my-modal.page.html -->\n<!-- <ion-header>\n  <ion-toolbar color=\"danger\">\n    <ion-title>my-modal</ion-title>\n  </ion-toolbar>\n</ion-header> -->\n\n<ion-content>\n  <br><br>\n  <div class=\"content2_notificaciones noleido2\">\n    <div class=\"subcontent_content2_notificaciones\">\n      <img src=\"{{url_imagen}}\" alt=\"notificacion_negro\" style=\"display: inline-block;\">\n      <div style=\"display: inline-block;margin-left:5px\">\n        <span class=\"txt1\">{{titulo}}</span><br>\n        <span class=\"txt2\">Válido hasta: {{fecha}}</span>\n      </div>\n    </div>\n    <div class=\"content_texto\" [innerHTML]=\"descripcion\" >\n      \n    </div>\n    <div class=\"content_boton\">\n      <ion-button (click)=\"closeModal()\" class=\"color2\">Cerrar</ion-button>  \n    </div>\n    \n  </div>\n  \n\n</ion-content>");
 
 /***/ }),
 

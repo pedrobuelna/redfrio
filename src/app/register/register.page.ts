@@ -31,7 +31,8 @@ export class RegisterPage implements OnInit {
   password: string;
   status: string;
   uso_cfdi: string;
-	flag=0;
+  flag=0;
+  cfdis:any;
   constructor(
     private  router:  Router,
     public formBuilder: FormBuilder,
@@ -65,6 +66,11 @@ export class RegisterPage implements OnInit {
     // }else{
     //   this.mostrarDireccion1 = false;
     // }
+    this.taskService.getCfdi()
+    .subscribe(cfdis => {
+       console.log("cfdis: ",cfdis);
+       this.cfdis = cfdis;
+    });
   }
   getTask() {
     this.taskService.getAllTasks()

@@ -371,7 +371,6 @@
                 var payment = new _ionic_native_paypal_ngx__WEBPACK_IMPORTED_MODULE_6__["PayPalPayment"](_this2.paymentAmount, _this2.currency, 'Descripcion', 'Venta en REACSA');
 
                 _this2.payPal.renderSinglePaymentUI(payment).then(function (res) {
-                  console.log("JALA");
                   console.log(res);
                   setTimeout(function () {
                     _this2.addMyClass();
