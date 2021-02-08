@@ -108,6 +108,7 @@ export interface carrito_activo{
     uuid_carrito: string;
     uuid_cliente:string;
     cantidad:number;
+}
 
 export interface Notificaciones {
   uuid: string;
