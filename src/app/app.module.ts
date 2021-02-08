@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , enableProdMode} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -14,7 +14,10 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { PayPal } from '@ionic-native/paypal/ngx';
+import { Network } from '@ionic-native/network/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,8 +28,13 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
     SQLite,
     SQLitePorter,
     NativeStorage,
+    Geolocation,
+    PayPal,
+    Network,
+    NativeGeocoder,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+enableProdMode();

@@ -20,13 +20,21 @@ export class UbicacionesPage implements OnInit {
     tiendaSelected = 0;
     constructor(private router: Router, private route: ActivatedRoute,
         private taskService: TaskService) {}
-
     ngOnInit() {
         this.taskService.getAllTasks()
             .subscribe(sucursales => {
                 this.sucursales = sucursales;
         });
-        
+        $("#categoria_select").val("0")
+    }
+    ionViewWillEnter(){
+        //this.tiendaSelected=0;
+        // alert(this.tiendaSelected)
+        // this.taskService.getAllTasks()
+        //     .subscribe(sucursales => {
+        //         this.sucursales = sucursales;
+        // });
+
     }
     goSucursales(event) {
         this.router.navigate(['/sucursales'], {
@@ -34,6 +42,7 @@ export class UbicacionesPage implements OnInit {
                 sucursal: event.detail.value
             }
         });
+        event.detail.value = 0;
     }
     onclickNotificaciones() {
         this.router.navigate(['/notificaciones']);
@@ -57,6 +66,6 @@ export class UbicacionesPage implements OnInit {
         this.router.navigate(['/carrito']);
     }
     clickOnSucursales() {
-        this.router.navigate(['/sucursales']);
+        this.router.navigate(['/sucursalcerca']);
     }
 }

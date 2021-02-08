@@ -5,26 +5,28 @@
 </ion-header> -->
 
 <ion-content id="content_notificacion">
-  <div id="content1_notificaciones">
+  <!-- <p *ngIf="dataReturned">{{dataReturned}}</p> -->
+  <div id="content1_notificaciones" style="color: black;">
       <img src="../../assets/images/notificacion_negro.png" alt="notificacion_negro" style="display: inline-block;">
       <div style="display: inline-block;margin-left:5px">
         <span class="txtTitulo">Notificaciones</span><br>
-        <span class="txtFecha">12 de Nov. 2020</span>
+        <span class="txtFecha">{{currentDate}}</span>
       </div>
   </div>
-  <div class="content2_notificaciones visto1">
-    <div class="subcontent_content2_notificaciones"  class="abrir">
-      <img src="../../assets/images/imgnot1.png" alt="notificacion_negro" style="display: inline-block;">
+  <div class="content2_notificaciones noleido2" *ngFor="let list of listas;let i = index" (click)="openModal(i)">
+    <div class="subcontent_content2_notificaciones">
+      <img src="{{list.url_imagen}}" alt="notificacion_negro" style="display: inline-block;">
       <div style="display: inline-block;margin-left:5px">
-        <span class="txt1">Bienvenido a la APP</span><br>
-        <span class="txt2">20 de Nov. 2020</span>
+        <span class="txt1">{{list.titulo}}</span><br>
+        <span class="txt2">Válido hasta: {{list.fecha}}</span>
       </div>
+      <img *ngIf="list.status==1" src="../../assets/images/noleido.png" alt="noleido">
     </div>
-    <div class="content_texto">
-      Bienvenido a la APP
+    <div class="content_texto"[innerHTML]="text">
+      {{list.descripcion}}
     </div>
   </div>
-  <div class="content2_notificaciones">
+  <!-- <div class="content2_notificaciones" (click)="openModal()">
     <div class="subcontent_content2_notificaciones">
       <img src="../../assets/images/imgnot2.png" alt="notificacion_negro" style="display: inline-block;">
       <div style="display: inline-block;margin-left:5px">
@@ -64,11 +66,12 @@
       Mini Splits a mitad de precio normal. <br>
       Detalles de oferta
     </div>
-  </div>
+  </div> -->
   <div class="content_menu">
     <ul>
       <li>
         <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+        <span class="cantidad" *ngIf="cantidadNot!=0">{{cantidadNot}}</span>
       </li>
       <li>
         <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">

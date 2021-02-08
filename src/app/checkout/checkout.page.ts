@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
+import { errorMonitor } from 'events';
 
 @Component({
   selector: 'app-checkout',
@@ -15,8 +17,17 @@ export class CheckoutPage implements OnInit {
   mostrarDireccion1: boolean;
   mostrarFactura: boolean;
   calle2Required: boolean;
+  paymentAmount: string = '3.33';
+  paymentAmountEnvio: string;
+  currency: string = 'USD';
+  currencyIcon: string = '₹';
+  tax:any = 10;
+  envio:any = 0;
+  subtotal:any;
+  total:any;
+  totalEnvio:any;
   @ViewChild("splash") splash: ElementRef;
-  constructor(private  router:  Router,public formBuilder: FormBuilder,private renderer: Renderer2) {
+  constructor(private route: ActivatedRoute,private payPal: PayPal,private  router:  Router,public formBuilder: FormBuilder,private renderer: Renderer2) {
     // this.ionicForm = new FormGroup({
     //   nombre: new FormControl()
     // });
@@ -40,7 +51,7 @@ export class CheckoutPage implements OnInit {
       nombreTarjeta: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
       personaContacto: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
       numeroTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(16),Validators.maxLength(16)]],
-      fechaDiaTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(16),Validators.maxLength(16)]],
+      fechaDiaTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(2),Validators.maxLength(2)]],
       fechaMesTarjeta: ['', [Validators.required,Validators.pattern('^[0-9]+$'),Validators.minLength(2),Validators.maxLength(2)]],
       fechaAnoTarjeta: ['', [Validators.required]],
       cvvTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'),Validators.minLength(3),Validators.maxLength(3)]],
@@ -80,10 +91,178 @@ export class CheckoutPage implements OnInit {
     //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
     this.renderer.addClass(this.splash.nativeElement, "quitSplash");
   }
+  ionViewDidEnter(){
+    var total1 =  parseFloat(this.tax) + parseFloat(this.subtotal)
+    this.total =  parseFloat(this.tax) + parseFloat(this.subtotal)
+    this.totalEnvio =  parseFloat(this.tax) + parseFloat(this.subtotal) + parseFloat(this.envio)
+    this.paymentAmount = this.total.toString()
+    this.paymentAmountEnvio = this.totalEnvio.toString()
+    var tax = parseFloat(this.tax)
+    $("input[name='radio1']") // select the radio by its id
+    .change(function(){ // bind a function to the change event
+        if( $(this).is(":checked") ){
+          if($(this).val()=="gratis"){
+            $(".envio").text(0)
+            $(".total").text(total1)
+          }else{
+            $(".envio").text(20)
+            $(".total").text(total1+20)
+            var tot =total1+20
+            this.paymentAmount = tot.toString()
+            //alert(this.paymentAmount)
+          }
+        }
+    });  
+  }
   ngOnInit() {
+    this.route.queryParams.subscribe( queryParams => this.subtotal = queryParams.subtotal)
+    this.total = parseFloat(this.tax) + parseFloat(this.subtotal) + parseFloat(this.envio) 
+    this.paymentAmount = this.total.toString()
+    //Radios de forma de envio
+    $("input[name='radio1']") // select the radio by its id
+      .change(function(){ // bind a function to the change event
+        if($(this).is(":checked") ){
+          var val = $(this).val(); // retrieve the value
+          if($(this).val()=="cobro"){
+            if($("input[name=radio][value='credito']").is(":checked")){
+              //alert("Forma de envio cobro y Form a de pago credito")
+              $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
+              $(".envionormal").removeClass("hide")
+            }else if($("input[name=radio][value='paypal']").is(":checked")){
+              //alert("Forma de envio cobro y Form a de pago paypal")
+              $(".paypalnormal,.sinenvio,.envionormal").addClass("hide")
+              $(".enviopaypal").removeClass("hide")
+            }
+          }else{
+            if($("input[name=radio][value='credito']").is(":checked")){
+              //alert("Forma de envio sin cobro y Form a de pago credito")
+              $(".enviopaypal,.paypalnormal,.envionormal").addClass("hide")
+              $(".sinenvio").removeClass("hide")
+            }else if($("input[name=radio][value='paypal']").is(":checked")){
+              //alert("Forma de envio sin cobro y Form a de pago Paypal")
+              $(".enviopaypal,.sinenvio,.envionormal").addClass("hide")
+              $(".paypalnormal").removeClass("hide")
+            }
+          }
+        }
+    });
+    //Forma de pago
+    $("input[name='radio']") // select the radio by its id
+    .change(function(){ // bind a function to the change event
+        if( $(this).is(":checked") ){ // check if the radio is checked
+            var val = $(this).val(); // retrieve the value
+            if($(this).val()=="paypal"){
+              $(".btntarjeta").addClass("hide")
+              $(".btnpaypal").removeClass("hide")
+              $(".datosTarjeta").addClass("hide")
+              $("#nombreTarjeta").val("PAYPAL")
+              $("#numeroTarjeta").val("0000000000000000")
+              $("#fechaDiaTarjeta").val("01")
+              $("#fechaMesTarjeta").val("01")
+              $("#fechaAnoTarjeta").val("20")
+              $("#cvvTarjeta").val("000")
+              if($("input[name=radio1][value='gratis']").is(":checked")){
+                //alert("Radio Gratis envio DHL esta en checked y paypal")
+                $(".enviopaypal").addClass("hide")
+              }else if($("input[name=radio1][value='cobro']").is(":checked")){
+                //alert("Radio Cobro envio DHL esta en checked y con paypal")
+                $(".paypalnormal").addClass("hide")
+              }
+            }else{
+              $(".btntarjeta").removeClass("hide")
+              $(".btnpaypal").addClass("hide")
+              $(".datosTarjeta").removeClass("hide")
+              $("#nombreTarjeta").val("")
+              $("#numeroTarjeta").val("")
+              $("#fechaDiaTarjeta").val("")
+              $("#fechaMesTarjeta").val("")
+              $("#fechaAnoTarjeta").val("")
+              $("#cvvTarjeta").val("")
+              if($("input[name=radio1][value='gratis']").is(":checked")){
+                //alert("Radio Gratis envio DHL esta en checked y paypal")
+                $(".enviopaypal,.envionormal").addClass("hide")
+              }else if($("input[name=radio1][value='cobro']").is(":checked")){
+                //alert("Forma de envio cobro y Forma de credito")
+                $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
+                $(".envionormal").removeClass("hide")
+              }
+            }
+        }
+    });
     
   }
-  submitForm() {
+  payWithPaypal() {
+    this.payPal.init({
+      PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
+      PayPalEnvironmentSandbox: 'AX2IlIks14mOg_Yke97jPoGtXGawMNUhbo0-XYSJV21G2Rv97tti6CnKxq3mhME_IjdKiFrFSNPlEAVM'
+    }).then(() => {
+      // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
+      this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        // Only needed if you get an "Internal Service Error" after PayPal login!
+        //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+      })).then(() => {
+        let total2 = parseFloat(this.tax) + parseFloat(this.subtotal)
+        this.paymentAmount = total2.toString();
+        //alert("paypal"+this.paymentAmount)
+        let payment = new PayPalPayment(this.paymentAmount, this.currency, 'Descripcion', 'Venta en REACSA');
+        this.payPal.renderSinglePaymentUI(payment).then((res) => {
+          console.log(res);
+          setTimeout(() => {
+            this.addMyClass()
+           }, 1500);
+           setTimeout(() => {
+            this.router.navigate(['/principal']);
+           }, 200000);
+          // Successfully paid
+        }, () => {
+          console.log("Error or render dialog closed without being successful")
+          // Error or render dialog closed without being successful
+        });
+      }, () => {
+        console.log("Error in configuration")
+        // Error in configuration
+      });
+    }, () => {
+      console.log("Error in initialization, maybe PayPal isn't supported or something else")
+      // Error in initialization, maybe PayPal isn't supported or something else
+    });
+  }
+  payWithPaypalEnvio() {
+    this.payPal.init({
+      PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
+      PayPalEnvironmentSandbox: 'AX2IlIks14mOg_Yke97jPoGtXGawMNUhbo0-XYSJV21G2Rv97tti6CnKxq3mhME_IjdKiFrFSNPlEAVM'
+    }).then(() => {
+      // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
+      this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        // Only needed if you get an "Internal Service Error" after PayPal login!
+        //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
+      })).then(() => {
+        let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + 20;
+        this.paymentAmountEnvio = total2.toString();
+        //alert("paypal"+this.paymentAmountEnvio)
+        let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Descripcion', 'Venta en REACSA');
+        this.payPal.renderSinglePaymentUI(payment).then((res) => {
+          setTimeout(() => {
+            this.addMyClass()
+           }, 1500);
+           setTimeout(() => {
+            this.router.navigate(['/principal']);
+           }, 200000);
+          // Successfully paid
+        }, () => {
+          console.log("Error or render dialog closed without being successful")
+          // Error or render dialog closed without being successful
+        });
+      }, () => {
+        console.log("Error in configuration")
+        // Error in configuration
+      });
+    }, () => {
+      console.log("Error in initialization, maybe PayPal isn't supported or something else")
+      // Error in initialization, maybe PayPal isn't supported or something else
+    });
+  }
+  submitForm(tipo) {
     this.isSubmitted = true;
     //alert("ENVIAR valor RFC: "+this.ionicForm.value.rfc)
     if (!this.ionicForm.valid) {
@@ -91,13 +270,15 @@ export class CheckoutPage implements OnInit {
       return false;
     } else {
       console.log('Form Completed' + this.ionicForm.value)
-      setTimeout(() => {
-        this.addMyClass()
-       }, 1500);
-       setTimeout(() => {
-        this.router.navigate(['/principal']);
-       }, 200000);
-      
+      if(tipo==1){
+        this.payWithPaypal();
+      }else if(tipo==2){
+        alert("Credito")
+      }else if(tipo==3){
+        this.payWithPaypalEnvio();
+      }else if(tipo==4){
+        alert("Credito envio")
+      }
     }
   }
   onclickNotificaciones(){

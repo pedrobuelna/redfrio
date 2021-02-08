@@ -28,6 +28,7 @@ export class CarritoPage implements OnInit {
         private taskService: TaskService,
         private nativeStorage: NativeStorage
     ) {}
+    subtotal:any;
     listas: Array < any >= [{
             nombre: "YORK MINISPLIT",
             descripcion: "YHFE/YHGE SERIES COMPRESOR ON/OFF R-410A SOLO FRIO Y FRIO/CALOR 220V ",
@@ -143,29 +144,33 @@ export class CarritoPage implements OnInit {
         console.info("will did enter")
         this.calcularTotales()
     }
-    onclickNotificaciones() {
+   onclickNotificaciones(){
         this.router.navigate(['/notificaciones']);
     }
-    onclickUbicaciones() {
+    onclickUbicaciones(){
         this.router.navigate(['/ubicaciones']);
     }
-    onclickMenu() {
+    onclickMenu(){
         this.router.navigate(['/principal']);
     }
-    onclickCategorias() {
+    onclickCategorias(){
         this.router.navigate(['/categorias']);
     }
-    onclickUsuario() {
+    onclickUsuario(){
         this.router.navigate(['/register']);
     }
-    onclickProducto() {
+    onclickProducto(){
         this.router.navigate(['/producto']);
     }
-    onClickCarrito() {
+    onClickCarrito(){
         this.router.navigate(['/carrito']);
     }
-    onClickCheckout() {
-        this.router.navigate(['/checkout']);
-    }
+    onClickCheckout(){
+    this.router.navigate(['/checkout'], {
+        queryParams: {
+          subtotal: this.subtotal
+        }
+    });  
+  }
 
 }

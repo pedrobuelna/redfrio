@@ -5,19 +5,17 @@ import {
     HttpClient
 } from '@angular/common/http';
 import {
+    Notificaciones,
+    Notificacion,
+    Perfiles,
+    Sucursal,
+    Login,
     Task,
     productoCarrito,
     agregarProductoCarrito,
     carrito_activo_detalles,
     carrito_activo
 } from './../interfaces/task';
-import {
-    Sucursal
-} from './../interfaces/task';
-import {
-    Login
-} from './../interfaces/task';
-
 
 @Injectable({
     providedIn: 'root'
@@ -37,6 +35,7 @@ export class TaskService {
         const path = `http://178.128.14.243:3000/sucursales`;
         return this.http.get < Sucursal[] > (path);
     }
+    
     getTask(id: string) {
         //const path = `${this.api}/todos/${id}`;
         const path = `http://webservicearca.000webhostapp.com/refacciones/${id}`;
@@ -81,11 +80,17 @@ export class TaskService {
         //alert(path)
         return this.http.get < Task > (path);
     }
-    getProductos(id) {
+    // getProductos(id) {
+    //     //const path = `${this.api}/todos/${id}`;
+    //     const path = `${this.api}/productos?familia_id=eq.${id}`;
+    //     //alert(path)
+    //     return this.http.get < Task > (path);
+    // }
+    getProductos(id,ordenarpor) {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?familia_id=eq.${id}`;
+        const path = `${this.api}/productos?familia_id=eq.${id}${ordenarpor}`;
         //alert(path)
-        return this.http.get < Task > (path);
+        return this.http.get<Task>(path);
     }
     getProducto(id: any) {
         //const path = `${this.api}/todos/${id}`;
@@ -122,6 +127,48 @@ export class TaskService {
         const path = `${this.api}/carrito_detalles?uuid_carrito=eq.${uuid_carrito}&&uuid_producto=eq.${uuid_producto}`;
         return this.http.delete(path);
     }
-
-    
+    getNotificaciones() {
+        const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f`;
+        return this.http.get<Notificaciones[]>(path);
+    }
+    getNotificacionesNoLeidas() {
+        const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0`;
+        return this.http.get<Notificaciones[]>(path);
+    }
+    getDirecciones() {
+        const path = `${this.api}/direcciones?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101`;
+        return this.http.get<Notificaciones[]>(path);
+    }
+    getPerfiles(){
+        const path = `${this.api}/clientes?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101`;
+        return this.http.get<Perfiles[]>(path);
+    }
+    updateDirecciones(task: Notificacion,uuid_cliente:any,uuid:any) {
+        // const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`
+        return this.http.patch<Task>(path,task);
+    }
+    updateNotificacion(task: Notificacion,uuid_cliente:any,uuid:any) {
+        // const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/notificaciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`
+        return this.http.patch<Task>(path,task);
+    }
+    getAllBanners(){
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/banners?status=eq.1`;
+        //alert(path)
+        return this.http.get<Task>(path);
+    }
+    getCfdi() {
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/uso_cfdi`;
+        //alert(path)
+        return this.http.get<Task>(path);
+    }
+    getEstados() {
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/estados`;
+        //alert(path)
+        return this.http.get<Task>(path);
+    }
 }

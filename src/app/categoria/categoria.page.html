@@ -9,31 +9,36 @@
     <span class="numero">4</span>
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
+  
   <div id="content_filtro">
-    <select name="categoria_select" id="categoria_select">
-      <option value="0" selected>aire acondicionado</option>
-      <option value="1">Equipo para comercios</option>
-      <option value="2">gas refrigerante</option>
-      <option value="3">herramientas</option>
-      <option value="4">outlets</option>
-      <option value="5">todos</option>
-    </select>
+    <!-- <select name="categoria_select" id="categoria_select">
+      <option value="0" selected>Seleccionar</option>
+      <option *ngFor="let familia of familias;let i = index;let last = last;" value="{{i+1}}">{{familia.nombre_familia}}</option>
+    </select> -->
+    <ion-select name="categoria_select" id="categoria_select" value="{{valorSelect}}" (ionChange)="checkValue($event)">
+      <!-- <ion-select-option value="0">Seleccionar</ion-select-option> -->
+      <ion-select-option *ngFor="let familia of familias;let i = index;let last = last;" value="{{familia.id_familia}}">{{familia.nombre_familia}}</ion-select-option>
+    </ion-select>
     <br><br>
-    <div class="txt3">Comprar por:</div>
-    <select name="categoria_select2" id="categoria_select2">
-      <option value="1">Más vendido</option>
-    </select>
+    <div class="txt3" style="color: black;">Ordenar por:</div>
+    <ion-select name="categoria_select2" id="categoria_select2" value="{{valorOrdenar}}" (ionChange)="filtroDestacados($event)">
+      <ion-select-option value="&order=destacado.desc">Destacados</ion-select-option>
+      <ion-select-option value="&order=precio.desc">Mayor a Menor</ion-select-option>
+      <ion-select-option value="&order=precio.asc">Menor a Mayor</ion-select-option>
+      <ion-select-option value="&order=nombre.asc">A - Z</ion-select-option>
+      <ion-select-option value="&order=nombre.desc">Z - A</ion-select-option>
+    </ion-select>
   </div>
   
   <ion-row class="content_categorias">
-    <ion-col *ngFor="let producto of productos2;let i = index" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
-      <div id="content_producto_carrusel">
+    <ion-col *ngFor="let producto of productos2;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
+      <div id="content_producto_carrusel" [class.last]="last">
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
         <img src="../../assets/images/logo.png" alt="imgblanca.png">
         <div class="content_producto_textos">
           <p> <span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br> </p>
           <p> {{producto.desc_corta}}</p>
-          <p><span class="pricetxt1">$5,027.00<span class="oferta"> <s>$8,999.00</s></span></span>
+          <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span>
           </p>
         </div>
       </div>

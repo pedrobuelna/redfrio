@@ -82,6 +82,7 @@ export interface producto {
   nom_img5: string;
   url_img5: string;
 }
+
 export interface productoCarrito{
     uuid_producto: string;
     cantidad:number;
@@ -107,4 +108,36 @@ export interface carrito_activo{
     uuid_carrito: string;
     uuid_cliente:string;
     cantidad:number;
+
+export interface Notificaciones {
+  uuid: string;
+  uuid_cliente: string;
+  titulo: string;
+  fecha: string;
+  descripcion: string;
+  url_imagen: string;
+  icono: string;
+  status: string;
+}
+export interface Notificacion {
+  status: string;
+}
+export interface Perfiles {
+  uuid_cliente: string;
+  id_cliente_sap: string;
+  nombre: string;
+  nombre_2: string;
+  telefono: string;
+  celular: string;
+  mail: string;
+  persona_contacto: string;
+  sucursal: string;
+  tipo_empresa: string;
+  lista_precio_id: string,
+  facturacion: string,
+  rfc: string,
+  persona_fisica: string,
+  uso_cfdi: string,
+  password: string,
+  status: string
 }

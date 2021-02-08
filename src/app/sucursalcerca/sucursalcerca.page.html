@@ -1,0 +1,60 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>sucursalcerca</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="content_sucursales">
+    <ion-select (ionChange)="checkValue($event)" id="categoria_select" value="{{sucursalActual.id_sucursal}}" appNoArrow>
+      <ion-select-option value="-">Seleccionar</ion-select-option>
+      <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.id_sucursal}}">{{sucursal.nombre}}</ion-select-option>
+    </ion-select>
+    
+    <div class="content_mapa">
+      <div class="map" #map id="map">
+        <!-- <img src="../../assets/images/img_mapa.png" alt="mapa" class="mapa_img"> -->
+      </div>
+      <!-- Codigo para mostrar html que viene desde el componente -->
+      <!-- <div class="direccion"  *ngFor="let marker of markers" [innerHTML]="marker.direccion"></div> -->
+      <div class="direccion">
+        <div class="content_direc none">
+          <p>
+            <img src="../../assets/images/img_flechaarriba.png" alt="direccion" class="direccion_img">
+            <span>{{this.sucursalActual.nombre}}<br> <span class="ml10"></span> <br>
+            <span class="ml10">{{this.sucursalActual.direccion}}</span> </span> 
+          </p>
+          <p> 
+            <img src="../../assets/images/img_tel.png" alt="img_tel" class="direccion_img">
+            <span>{{this.sucursalActual.telefono_1}}</span><br>
+            <img src="../../assets/images/img_tel.png" alt="img_tel" class="direccion_img"> 
+            <span>{{this.sucursalActual.telefono_2}}</span><br> 
+          </p> 
+          <p> 
+            <img src="../../assets/images/img_mail.png" alt="img_tel" class="direccion_img">
+            <span>{{this.sucursalActual.mail}}</span><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<div class="content_menu">
+  <ul>
+    <li>
+      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+    </li>
+    <li>
+      <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+    </li>
+    <li>
+      <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+    </li>
+    <li>
+      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+    </li>
+    <li>
+      <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+    </li>
+  </ul>
+</div>

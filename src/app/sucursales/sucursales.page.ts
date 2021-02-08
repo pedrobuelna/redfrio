@@ -1,20 +1,9 @@
-import {
-    Component,
-    ElementRef,
-    OnInit,
-    Renderer2,
-    ViewChild
-} from '@angular/core';
-import {
-    Router,
-    ActivatedRoute
-} from '@angular/router';
-import {
-    TaskService
-} from '../services/task.service';
-import {
-    $
-} from 'protractor';
+import {Component,ElementRef,OnInit,Renderer2,ViewChild} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+import { TaskService } from '../services/task.service';
+import { $ } from 'protractor';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { LoadingController } from '@ionic/angular';
 declare var google;
 interface MarcadoMap {
     position: {
@@ -31,30 +20,26 @@ interface informacionSucursal{
     mail:string;
     direccion:string;
 }
-
 @Component({
     selector: 'app-sucursales',
     templateUrl: './sucursales.page.html',
     styleUrls: ['./sucursales.page.scss'],
 })
-
-
-
-
 export class SucursalesPage implements OnInit {
-
+    latitude: any = 0; //latitude
+    longitude: any = 0; //longitude
     @ViewChild("splash") splash: ElementRef;
     map = null;
-
-
     sucursalActual: informacionSucursal;
     sucursales: any;
     marcadorActual: MarcadoMap;
     cantmarkers: any;
     titulo: string;
+    tiendaSelected: any;
 
-    constructor(private router: Router, private route: ActivatedRoute, private renderer: Renderer2,
-        private taskService: TaskService) {
+    constructor(private router: Router,private geolocation: Geolocation, 
+        private route: ActivatedRoute, private renderer: Renderer2,
+        private taskService: TaskService,public loadingController: LoadingController) {
         this.route.queryParams.subscribe(params => {
             this.sucursalActual = {
                 id_sucursal:params.sucursal,
@@ -67,18 +52,44 @@ export class SucursalesPage implements OnInit {
         });
     }
     ngOnInit() {
+        this.tiendaSelected=0;
         this.taskService.getAllTasks()
-            .subscribe(sucursales => {
-                this.sucursales = sucursales;
-                this.loadViewInfo();
+        .subscribe(sucursales => {
+            this.sucursales = sucursales;
+            this.sucursales.forEach(sucursal => {
+                if (sucursal.id_sucursal == this.sucursalActual.id_sucursal) {
+                    let coordenadas = sucursal.coordenadas.split(", ");
+                    let marcador: MarcadoMap = {
+                        position: {
+                            lat: parseInt(coordenadas[0]),
+                            lng: parseInt(coordenadas[1])
+                        },
+                        title: sucursal.nombre
+                    }
+                    //$("#categoria_select").val(this.sucursalActual.id_sucursal)
+                    setTimeout(() => {
+                       this.sucursalActual={
+                        id_sucursal:this.sucursalActual.id_sucursal,
+                        nombre:sucursal.nombre,
+                        telefono_1:sucursal.telefono_1,
+                        telefono_2:sucursal.telefono_2,
+                        mail:sucursal.mail,
+                        direccion:sucursal.direccion
+                        }
+                    console.log("0")
+                    this.loadMap(marcador);
+                    console.log("1") 
+                    
+                    }, 200);
+                }
             });
+        });
     }
-    loadViewInfo() {
-        this.actualizarMarcador()
-    }
+    
     checkValue(event) {
         this.sucursalActual.id_sucursal=event.detail.value;
         this.actualizarMarcador();
+        event.detail.value=0;
     }
     actualizarMarcador(){
         this.sucursales.forEach(sucursal => {
@@ -91,7 +102,8 @@ export class SucursalesPage implements OnInit {
                     },
                     title: sucursal.nombre
                 }
-                this.sucursalActual={
+                setTimeout(() => {
+                    this.sucursalActual={
                     id_sucursal:this.sucursalActual.id_sucursal,
                     nombre:sucursal.nombre,
                     telefono_1:sucursal.telefono_1,
@@ -99,7 +111,11 @@ export class SucursalesPage implements OnInit {
                     mail:sucursal.mail,
                     direccion:sucursal.direccion
                 }
+                console.log("0")
                 this.loadMap(marcador);
+                console.log("1")
+                }, 100);
+                
             }
         });
     }
@@ -117,6 +133,7 @@ export class SucursalesPage implements OnInit {
         });
 
         google.maps.event.addListenerOnce(this.map, 'idle', () => {
+            console.log("a")
             this.renderMarkers();
             mapEle.classList.add('show-map');
         });
@@ -200,6 +217,7 @@ export class SucursalesPage implements OnInit {
         this.router.navigate(['/carrito']);
     }
     clickOnSucursales() {
+        this.tiendaSelected=0
         this.router.navigate(['/sucursales']);
     }
 }

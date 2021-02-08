@@ -24,12 +24,11 @@ import {
     Md5
 } from 'ts-md5/dist/md5';
 import {
-    AlertController
-} from '@ionic/angular';
-import {
     DbService
 } from '../services/db.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { AlertController,NavController } from '@ionic/angular';
+
 
 @Component({
     selector: 'app-login',
@@ -42,8 +41,10 @@ export class LoginPage implements OnInit {
     tasks: Task[] = [];
     mail: any;
     password: any;
+
     constructor(
         private router: Router, 
+        public navCtrl: NavController,
         public formBuilder: FormBuilder, 
         private taskService: TaskService,
         public alertController: AlertController,

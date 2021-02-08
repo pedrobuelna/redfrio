@@ -63,11 +63,31 @@ const routes: Routes = [
     path: 'checkout',
     loadChildren: () => import('./checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
+  {
+    path: 'my-modal',
+    loadChildren: () => import('./modals/my-modal/my-modal.module').then( m => m.MyModalPageModule)
+  },
+  {
+    path: 'sucursalcerca',
+    loadChildren: () => import('./sucursalcerca/sucursalcerca.module').then( m => m.SucursalcercaPageModule)
+  },
+  {
+    path: 'paypal-mobile',
+    loadChildren: () => import('./paypal-mobile/paypal-mobile.module').then( m => m.PaypalMobilePageModule)
+  },
+  {
+    path: 'sinconexion',
+    loadChildren: () => import('./sinconexion/sinconexion.module').then( m => m.SinconexionPageModule)
+  },
+  {
+    path: 'editarperfil',
+    loadChildren: () => import('./editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule)
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })
