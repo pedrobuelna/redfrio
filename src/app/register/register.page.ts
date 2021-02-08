@@ -5,6 +5,9 @@ import { TaskService } from '../services/task.service';
 import { Task, Sucursal } from '../interfaces/task';
 //import { AuthService } from '../auth.service';
 import {Md5} from 'ts-md5/dist/md5';
+import {
+    DbService
+} from '../services/db.service';
 
 @Component({
   selector: 'app-register',

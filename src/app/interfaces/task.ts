@@ -82,3 +82,29 @@ export interface producto {
   nom_img5: string;
   url_img5: string;
 }
+export interface productoCarrito{
+    uuid_producto: string;
+    cantidad:number;
+}
+export interface agregarProductoCarrito{
+    uuid_carrito: string;
+    uuid_producto: string;
+    cantidad:number;
+}
+export interface carrito_activo_detalles{
+    uuid_cliente: string;
+    uuid_carrito: string;
+    modificacion: string;
+    creacion: string;
+    uuid_producto: string;
+    cantidad: number;
+    precio: number;
+}
+export interface uuid_usuario{
+    uuid_cliente:string;
+}
+export interface carrito_activo{
+    uuid_carrito: string;
+    uuid_cliente:string;
+    cantidad:number;
+}

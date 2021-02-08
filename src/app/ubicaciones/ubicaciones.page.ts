@@ -48,7 +48,7 @@ export class UbicacionesPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/usuario']);
+        this.router.navigate(['/register']);
     }
     onclickProducto() {
         this.router.navigate(['/producto']);

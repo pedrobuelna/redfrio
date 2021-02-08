@@ -32,7 +32,7 @@ export class CategoriasPage implements OnInit {
     this.router.navigate(['/categoria']);
   }
   onclickUsuario(){
-    this.router.navigate(['/usuario']);
+    this.router.navigate(['/register']);
   }
   onclickCategoria(id){
     this.router.navigate(['/categoria'], {

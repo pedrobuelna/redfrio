@@ -27,6 +27,6 @@ export class NotificacionesPage implements OnInit {
     this.router.navigate(['/categorias']);
   }
   onclickUsuario(){
-    this.router.navigate(['/usuario']);
+    this.router.navigate(['/register']);
   }
 }

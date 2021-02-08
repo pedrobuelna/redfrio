@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="carrito" (click)="onClickCarrito()">
-    <span class="numero">4</span>
+    <span class="numero">{{cantidadActualCarrito}}</span>
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
   <ion-slides pager="true" [options]="sliderOptions">
@@ -28,10 +28,8 @@
         <img src="../../assets/images/producto1@3x.png" alt="producto1@3x.png">
         <div class="content_producto_textos">
           <p> <span class="titletxt1"> {{producto.marca}} MINISPLIT </span><br>
-            YHFE/YHGE SERIES <br>
-            COMPRESOR ON/OFF 220V R-410A <br>
-            SOLO FRIO Y FRIO/CALOR <br><br>
-             <span class="pricetxt1">$5,027.00 <s>  $8,999.00</s></span>
+            {{producto.desc_corta}}
+             <span class="pricetxt1"> {{producto.precio}} <s>  {{producto.precio_viejo}}</s></span>
           </p>
         </div>
       </div>
