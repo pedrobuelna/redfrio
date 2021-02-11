@@ -29,22 +29,14 @@ export class CategoriaPage implements OnInit {
     valorOrdenar: any;
     cantidadActualCarrito: number;
     x: string;
+    idCategoria:number;
+    ordernarPor:any;
     checkValue(event) {
         console.log("valor: " + this.valorSelect)
         let id = parseInt(event.detail.value);
         let ordernarpor = $("#categoria_select2").val();
-        this.taskService.getProductos(id, ordernarpor)
-            .subscribe(productos2 => {
-                this.productos2 = productos2;
-                console.log(productos2)
-                for (let i = 0; i < this.productos2.length; i++) {
-                    console.log("index : " + i);
-                    console.log(this.productos2[i]);
-                    this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                        this.productos2[i].url_img1 = "../../assets/images/no-image.png"
-                    });
-                }
-            });
+        this.idCategoria=id;
+        this.ordernarPor=ordernarpor;
     }
     filtroDestacados(event) {
         let id = $("#categoria_select").val();
@@ -85,6 +77,18 @@ export class CategoriaPage implements OnInit {
         }
     }
     ionViewWillEnter() {
+        this.taskService.getProductos(this.idCategoria, this.ordernarPor)
+            .subscribe(productos2 => {
+                this.productos2 = productos2;
+                console.log(productos2)
+                for (let i = 0; i < this.productos2.length; i++) {
+                    console.log("index : " + i);
+                    console.log(this.productos2[i]);
+                    this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                        this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                    });
+                }
+            });
         this.nativeStorage.getItem('carrito')
             .then(
                 data => {
