@@ -59,6 +59,7 @@ export class PrincipalPage implements OnInit {
         slidesPerView: 2,
         loop: true,
         centeredSlides: true,
+        autoplay:true,
         spaceBetween: 20
     };
 
@@ -202,7 +203,7 @@ export class PrincipalPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/editarperfil']);
+        this.router.navigate(['/editarperfil']); 
     }
     onClickProducto(id) {
         this.router.navigate(['/producto'], {

@@ -208,7 +208,7 @@ export class EditarperfilPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/register']);
+        // this.router.navigate(['/register']);
     }
     onclickProducto() {
         this.router.navigate(['/producto']);

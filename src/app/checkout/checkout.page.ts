@@ -354,7 +354,7 @@ export class CheckoutPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/usuario']);
+        this.router.navigate(['/editarperfil']);
     }
     onclickProducto() {
         this.router.navigate(['/producto']);
