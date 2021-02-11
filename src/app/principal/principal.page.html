@@ -17,12 +17,12 @@
     <span class="numero">{{cantidadActualCarrito}}</span>
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
-  <ion-slides pager="true" [options]="sliderOptions">
+  <ion-slides pager="true" [options]="sliderOptions" autoplay="true" loop="true">
     <ion-slide *ngFor="let item of banners">
       <img src="{{item.ruta}}" alt="{{item.ruta}}" style="width:100%;">
     </ion-slide>
   </ion-slides>
-  <ion-slides [options]="sliderOptions2" class="productos_carrusel">
+  <ion-slides [options]="sliderOptions2" class="productos_carrusel" autoplay="true" loop="true">
     <ion-slide  *ngFor="let producto of productos2;let i = index">
       <div id="content_producto_carrusel" (click)="onClickProducto(producto.uuid_producto)">
         <img src="{{producto.url_img1}}" alt="producto1@3x.png">
