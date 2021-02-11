@@ -21,7 +21,7 @@
                 <ion-label position="floating">Direcciones</ion-label>
                 <ion-select>
                     <ion-select-option *ngFor="let direccion of direcciones" value="{{direccion.uuid_direccion}}">
-                        {{ direccion.colonia }}</ion-select-option>
+                        {{ direccion.sub_name }}</ion-select-option>
                 </ion-select>
             </ion-item>
             <ion-button expand="full" class="btn_guardar" type="button" (click)="agregarDireccion()">

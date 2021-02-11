@@ -141,8 +141,8 @@ export class CheckoutPage implements OnInit {
                 console.log(app);
                 console.log("uuid_cliente: "+app.uuid_cliente);
                 this.taskService.getDireccionCliente(app.uuid_cliente)
-                .subscribe(sucursales => {
-                    this.sucursales = sucursales;
+                .subscribe(direcciones => {
+                    this.direcciones = direcciones;
                 });
             },
             error => console.error("NO HAY UUID_CLIENTE")

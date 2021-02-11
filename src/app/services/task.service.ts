@@ -202,11 +202,12 @@ export class TaskService {
         const path = `${this.api}/sucursales?status=eq.N`;
         return this.http.get < Task > (path);
     }
+    
+    //Direcciones
     getDireccionCliente(uuid_cliente){
         const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get < any > (path);
     }
-    //Direcciones
     postDirecciones(dataDireccion){
         const path = `${this.api}/direcciones`;
         return this.http.post(path, dataDireccion);

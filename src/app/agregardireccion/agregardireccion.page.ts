@@ -64,21 +64,27 @@ export class AgregardireccionPage implements OnInit {
                     console.log("==APP DATA==");
                     console.log(app);
                     console.log("uuid_cliente: "+app.uuid_cliente);
-                    let direccion = {
-                        sub_name: this.ionicForm.value.alias,
-                        calle: this.ionicForm.value.calle,
-                        numero_exterior: this.ionicForm.value.numero,
-                        numero_interior: this.ionicForm.value.numerointerior,
-                        colonia: this.ionicForm.value.colonia,
-                        cp: this.ionicForm.value.cp,
-                        estado: this.ionicForm.value.estado,
-                        poblacion: this.ionicForm.value.ciudad,
-                        telefono: this.ionicForm.value.telefono,
-                        mail: this.ionicForm.value.correo,
-                        uuid_cliente: app.uuid_cliente
-                    };
-                    this.taskService.postDirecciones(direccion).subscribe(()=>{
-                        this.navCtrl.navigateRoot(['/editarperfil']);
+                    this.taskService.getDireccionCliente(app.uuid_cliente).subscribe((d)=>{
+                        let direccion = {
+                            sub_name: this.ionicForm.value.alias,
+                            calle: this.ionicForm.value.calle,
+                            numero_exterior: this.ionicForm.value.numero,
+                            numero_interior: this.ionicForm.value.numerointerior,
+                            colonia: this.ionicForm.value.colonia,
+                            cp: this.ionicForm.value.cp,
+                            estado: this.ionicForm.value.estado,
+                            poblacion: this.ionicForm.value.ciudad,
+                            telefono: this.ionicForm.value.telefono,
+                            mail: this.ionicForm.value.correo,
+                            uuid_cliente: app.uuid_cliente,
+                            fiscal:false
+                        };
+                        if(d.length==0){
+                            direccion.fiscal=true;
+                        }
+                        this.taskService.postDirecciones(direccion).subscribe(()=>{
+                            this.navCtrl.navigateRoot(['/editarperfil']);
+                        });
                     });
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
