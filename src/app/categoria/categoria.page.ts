@@ -131,7 +131,13 @@ export class CategoriaPage implements OnInit {
             this.taskService.getAllProductos()
                 .subscribe(productos2 => {
                     this.productos2 = productos2;
-
+                    for (let i = 0; i < this.productos2.length; i++) {
+                        console.log("index : " + i);
+                        console.log(this.productos2[i]);
+                        this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                            this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                        });
+                    }
                 });
         } else {
             ////alert("familia "+ x)
@@ -139,7 +145,13 @@ export class CategoriaPage implements OnInit {
             this.taskService.getProductos(this.x, ordernarpor)
                 .subscribe(productos2 => {
                     this.productos2 = productos2;
-
+                    for (let i = 0; i < this.productos2.length; i++) {
+                        console.log("index : " + i);
+                        console.log(this.productos2[i]);
+                        this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                            this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                        });
+                    }
                     $("#categoria_select").val(parseInt(this.x));
                 });
         }
