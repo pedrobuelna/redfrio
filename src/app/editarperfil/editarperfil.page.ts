@@ -25,6 +25,7 @@ import {
 import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -61,6 +62,7 @@ export class EditarperfilPage implements OnInit {
         private router: Router,
         public formBuilder: FormBuilder,
         private taskService: TaskService,
+        public navCtrl: NavController,
         private nativeStorage: NativeStorage) {
         // this.ionicForm = new FormGroup({
         //   nombre: new FormControl()

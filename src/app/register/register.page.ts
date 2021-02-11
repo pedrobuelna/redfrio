@@ -9,6 +9,7 @@ import { ConfirmedValidator } from '../confirmed.validator';
 import {
     DbService
 } from '../services/db.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -40,6 +41,7 @@ export class RegisterPage implements OnInit {
   constructor(
     private  router:  Router,
     public formBuilder: FormBuilder,
+    public navCtrl: NavController,
     private taskService: TaskService,) {
     // this.ionicForm = new FormGroup({
     //   nombre: new FormControl()
@@ -106,6 +108,7 @@ export class RegisterPage implements OnInit {
       this.calle2Required = false;
     }
   }
+  emailcorreo:any;
   submitForm() {
     this.isSubmitted = true;
     console.log(this.ionicForm.valid)
@@ -117,6 +120,7 @@ export class RegisterPage implements OnInit {
       //alert('Form Completed' + this.ionicForm.value)
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
+      this.emailcorreo = this.ionicForm.value.mail;
       const task = {
         nombre: this.ionicForm.value.nombre,
         nombre_2: this.ionicForm.value.nombre2,
@@ -134,8 +138,10 @@ export class RegisterPage implements OnInit {
       };
       this.taskService.createTask(task)
         .subscribe((reply: any) => {
-            alert("Tus datos han sido guardados correctamente")
+            //alert("Tus datos han sido guardados correctamente")
             //this.taskService.sendMailUsr(usrMail)
+            console.log(usrMail)
+            console.log(this.emailcorreo)
             this.taskService.sendMailActivacionUsuario(usrMail)
                 .subscribe((sendMail: any) => {
                     console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
@@ -145,7 +151,7 @@ export class RegisterPage implements OnInit {
         }, (err) => {
             console.log(err)
         });
-        this.router.navigate(['/principal']);
+        this.navCtrl.navigateRoot(['/login']);
       // this.taskService.createTask(task)
 			// 	.subscribe((newTask) => {
       //      // do happy stuff

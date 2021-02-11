@@ -7,6 +7,7 @@
    </base-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain>localhost</domain>
-        <domain>178.128.14.243:3000</domain>
+        <domain>app.reacsa.mx</domain>
+        <domain>app.reacsa.mx:3000</domain>
     </domain-config>
 </network-security-config>
