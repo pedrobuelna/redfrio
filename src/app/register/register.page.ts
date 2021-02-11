@@ -136,22 +136,35 @@ export class RegisterPage implements OnInit {
         status: "0",
         uso_cfdi: this.ionicForm.value.uso_cfdi,
       };
-      this.taskService.createTask(task)
-        .subscribe((reply: any) => {
-            //alert("Tus datos han sido guardados correctamente")
-            //this.taskService.sendMailUsr(usrMail)
-            console.log(usrMail)
-            console.log(this.emailcorreo)
-            this.taskService.sendMailActivacionUsuario(usrMail)
-                .subscribe((sendMail: any) => {
-                    console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
+      this.taskService.validarCorreo(usrMail).subscribe((cliente)=>{
+        console.log("Found");
+        console.log(cliente);
+        if(cliente.length>0){
+            alert("El correo ya se encuentra registrado.")
+        }else{
+              this.taskService.createTask(task)
+                .subscribe((reply: any) => {
+                    //alert("Tus datos han sido guardados correctamente")
+                    //this.taskService.sendMailUsr(usrMail)
+                    console.log(usrMail)
+                    console.log(this.emailcorreo)
+                    this.taskService.sendMailActivacionUsuario(usrMail)
+                        .subscribe((sendMail: any) => {
+                            console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
+                        }, (err) => {
+                            console.log(err);
+                        });
                 }, (err) => {
-                    console.log(err);
+                    console.log(err)
                 });
-        }, (err) => {
-            console.log(err)
-        });
-        this.navCtrl.navigateRoot(['/login']);
+                this.navCtrl.navigateRoot(['/login']);
+        }
+      },er=>{});
+
+    
+
+
+
       // this.taskService.createTask(task)
 			// 	.subscribe((newTask) => {
       //      // do happy stuff

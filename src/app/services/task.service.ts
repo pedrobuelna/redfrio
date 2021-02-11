@@ -42,6 +42,10 @@ export class TaskService {
         const path = `http://webservicearca.000webhostapp.com/refacciones/${id}`;
         return this.http.get < Task > (path);
     }
+    validarCorreo(email: string) {
+        const path = `${this.api}/clientes?mail=eq.${email}`;
+        return this.http.get < any > (path);
+    }
     createTask(task: Task) {
         // const path = `${this.api}/todos`;
         const path = `${this.api}/clientes`;
