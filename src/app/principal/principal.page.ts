@@ -59,6 +59,7 @@ export class PrincipalPage implements OnInit {
         slidesPerView: 2,
         loop: true,
         centeredSlides: true,
+        autoplay:true,
         spaceBetween: 20
     };
 

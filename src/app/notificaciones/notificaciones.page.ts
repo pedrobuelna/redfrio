@@ -142,6 +142,6 @@ export class NotificacionesPage implements OnInit {
     this.router.navigate(['/categorias']);
   }
   onclickUsuario(){
-    this.router.navigate(['/register']);
+    this.router.navigate(['/editarperfil']);
   }
 }
