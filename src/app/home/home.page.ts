@@ -8,7 +8,7 @@ import {
     TaskService
 } from '../services/task.service';
 import {
-    AlertController
+    AlertController, NavController
 } from '@ionic/angular';
 import { Task, uuid_usuario, carrito_activo } from '../interfaces/task';
 import {
@@ -46,7 +46,8 @@ export class HomePage {
         private nativeStorage: NativeStorage,
         public platform: Platform,
         private network: Network,
-        private ionLoader: LoaderService
+        private ionLoader: LoaderService,
+        public navCtrl: NavController
     ) {
         this.platform.ready().then(() => {
             this.nativeStorage.getItem('app')
@@ -111,7 +112,8 @@ export class HomePage {
             () => {
                 console.log('Actualizado APPDATA ==>');
                 console.log(carrito);
-                this.router.navigate(['/principal']);
+                this.navCtrl.navigateRoot(['/principal']);
+                
             },
             error => console.error('Error storing item', error)
         );

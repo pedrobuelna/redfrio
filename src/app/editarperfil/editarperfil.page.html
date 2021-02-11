@@ -27,12 +27,12 @@
           </span>
         </div>
         <ion-item >
-          <ion-label position="floating">Nombre(s) faltante </ion-label>
+          <ion-label position="floating">Apellidos</ion-label>
           <ion-input formControlName="nombre_2"></ion-input>
         </ion-item>
         <div class="espacios">
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.nombre_2.errors?.maxlength">
-            Campo Nombre 2 maximo 40 caractéres.
+            Campo Apellidos 2 maximo 40 caractéres.
           </span>
         </div>
         <ion-item >
@@ -89,7 +89,7 @@
           <label style="color:black;margin-left: 10px;">Requiere Factura</label>
         </ion-item>
         <div class="direccion2" *ngIf=mostrarDireccion1>
-          <div style="color:black;margin-top: 15px;margin:15px 0;">Datos de facturaciòn</div>
+          <div style="color:black;margin-top: 15px;margin:15px 0;">Datos de facturación</div>
           <ion-item >
             <ion-label position="floating">RFC *</ion-label>
             <ion-input formControlName="rfc"></ion-input>
@@ -116,132 +116,35 @@
         </div>
       </div>
       <div *ngFor="let direccion of direcciones;let i = index;let last = last;" >
-        <div style="color:black;margin-top: 15px;margin:15px 0;">DIRECCIÓN</div>
+        <div style="color:black;margin-top: 15px;margin:15px 0;">DIRECCIÓN PRINCIPAL/FACTURACIÓN</div>
       <ion-item >
         <ion-label position="floating">Calle</ion-label>
         <ion-input value="{{direccion.calle}}"></ion-input>
       </ion-item>
-      <ion-item >
-        <ion-label position="floating">Colonia</ion-label>
-        <ion-input value="{{direccion.colonia}}"></ion-input>
-      </ion-item>
-      <ion-item >
+      <ion-item>
         <ion-label position="floating">Numero</ion-label>
         <ion-input value="{{direccion.numero_exterior}}"></ion-input>
       </ion-item>
-      <ion-item >
+      <ion-item>
+        <ion-label position="floating">Colonia</ion-label>
+        <ion-input value="{{direccion.colonia}}"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label position="floating">C.P.</ion-label>
         <ion-input value="{{direccion.cp}}"></ion-input>
       </ion-item>
-      <ion-item >
+      <ion-item>
         <ion-label position="floating">Estado</ion-label>
         <ion-select value="{{direccion.estado}}">
           <ion-select-option value="0">Selecciona Estado</ion-select-option>
           <ion-select-option value="{{estado.estado}}" *ngFor="let estado of estados;let i = index;let last = last;">{{estado.descripcion}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item >
+      <ion-item>
         <ion-label position="floating">Ciudad</ion-label>
-        <ion-select value="{{direccion.poblacion}}">
-          <ion-select-option value="0">Selecciona Ciudad</ion-select-option>
-          <ion-select-option value="mazatlán">Mazatlan</ion-select-option>
-        </ion-select>
+        <ion-input value="{{direccion.poblacion}}"></ion-input>
       </ion-item>
       </div>
-      
-      <!-- <div style="color:black;margin-top: 15px;margin:15px 0;">DIRECCIÓN 2</div>
-      <ion-item >
-        <ion-label position="floating">Calle</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Colonia</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Numero</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">C.P.</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Estado</ion-label>
-        <ion-select value="1">
-          <ion-select-option value="0">Selecciona Estado</ion-select-option>
-          <ion-select-option value="1">Sinaloa</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Ciudad</ion-label>
-        <ion-select value="1">
-          <ion-select-option value="0">Selecciona Ciudad</ion-select-option>
-          <ion-select-option value="1">Mazatlan</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div style="color:black;margin-top: 15px;margin:15px 0;">DIRECCIÓN 3</div>
-      <ion-item >
-        <ion-label position="floating">Calle</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Colonia</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Numero</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">C.P.</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Estado</ion-label>
-        <ion-select value="1">
-          <ion-select-option value="0">Selecciona Estado</ion-select-option>
-          <ion-select-option value="1">Sinaloa</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Ciudad</ion-label>
-        <ion-select value="1">
-          <ion-select-option value="0">Selecciona Ciudad</ion-select-option>
-          <ion-select-option value="1">Mazatlan</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div style="color:black;margin-top: 15px;margin:15px 0;">DIRECCIÓN 4</div>
-      <ion-item >
-        <ion-label position="floating">Calle</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Colonia</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Numero</ion-label>
-        <ion-input ></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">C.P.</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Estado</ion-label>
-        <ion-select value="1">
-          <ion-select-option value="0">Selecciona Estado</ion-select-option>
-          <ion-select-option value="1">Sinaloa</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item >
-        <ion-label position="floating">Ciudad</ion-label>
-        <ion-select value="1">
-          <ion-select-option value="0">Selecciona Ciudad</ion-select-option>
-          <ion-select-option value="1">Mazatlan</ion-select-option>
-        </ion-select>
-      </ion-item> -->
        <div class="content_boton">
         <ion-button expand="full" class="btn_guardar" type="submit">
             <ion-label>GUARDAR</ion-label>
