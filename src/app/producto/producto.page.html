@@ -2,14 +2,20 @@
   <div id="content_producto" class="padding" *ngFor="let producto of producto2;let i = index" >
     <div class="content_carrusel">
       <ion-slides pager="true" #slides [options]="sliderOptions" class="content_img_gde">
-        <ion-slide *ngFor="let item of items">
+        <!-- <ion-slide *ngFor="let item of items">
           <img src="{{item}}" alt="{{item}}" alt="aire" class="img_gde">
+        </ion-slide> -->
+        <ion-slide *ngFor="let item of imgProducto">
+          <img src="{{item}}"  class="img_gde">
         </ion-slide>
       </ion-slides>
       <div class="content_img_ch" >
         <ion-grid>
           <ion-row>
-            <ion-col>
+            <!-- <ion-col *ngFor="let img of imgProducto;let i = index">
+                <img src="{{img}}" class="img_ch"  (click)="moveSlide(slides,(i-1))" >
+            </ion-col> -->
+            <!-- <ion-col>
               <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch"  (click)="move1(slides)" >
             </ion-col>
             <ion-col>
@@ -20,7 +26,7 @@
             </ion-col>
             <ion-col>
               <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch" (click)="move4(slides)">
-            </ion-col>
+            </ion-col> -->
           </ion-row>
         </ion-grid>
       </div>

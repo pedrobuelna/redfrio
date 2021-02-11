@@ -51,7 +51,6 @@ export class CarritoPage implements OnInit {
                 this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carritoActivo => {
                     this.taskService.getCarritoActivoDetalles(carritoActivo[0].uuid_carrito).subscribe(dataCarrito=>{
                         this.carritoProductos=dataCarrito;
-                        this.calcularTotales();
 
                         let cantidadCarrito=((carritoActivo[0].cantidad)?carritoActivo[0].cantidad:0);
                         this.nativeStorage.setItem('carrito', {cantidad: cantidadCarrito,uuid_carrito:carritoActivo[0].uuid_carrito})
@@ -61,6 +60,7 @@ export class CarritoPage implements OnInit {
                                 if(dataCarrito.length<1){
                                     this.router.navigate(['/principal']);
                                 }
+                                this.calcularTotales();
                             },
                             error => console.error('Error storing item', error)
                         );
@@ -116,7 +116,10 @@ export class CarritoPage implements OnInit {
             total = total + (parseFloat($(this).text().replace('$','')) * parseInt($("#cantidad_"+uuid_producto).val()))
             //total = total + (parseFloat($(this).text().replace('$','')) * parseInt($(".cantidad").val()))
         })
-
+        this.nativeStorage.setItem('totalCompra',total).then(
+            ()=>console.log("Se guardo el total de la compra"),
+            error=>console.log("Error al guardar el total de la compra")
+        );
         $(".subtotal_numero").text("$ " + total);
         $(".total_btnpago").text(total);
     }

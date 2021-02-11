@@ -5,335 +5,84 @@
 </ion-header> -->
 
 <ion-content>
-  <div id="splash" #splash >
-    <div id="content_letras">
-      Gracias! <br>
-      Su orden ya <br>
-      se procesa.
+    <div id="splash" #splash>
+        <div id="content_letras">
+            Gracias! <br>
+            Su orden ya <br>
+            se procesa.
+        </div>
+        <div class="circulo" (click)="onclickMenu()">
+            <span class="texto_circulo">Regresa a Reacsa</span>
+        </div>
     </div>
-    <div class="circulo" (click)="onclickMenu()">
-      <span class="texto_circulo">Regresa a Reacsa</span>
-    </div>
-  </div>
-  <div class="content_checkout">
-    <form [formGroup]="ionicForm"  novalidate>
-      <div class="formulario padding30">
-        <div class="titulo_checkout">Checkout</div>
-        <br>
-        <ion-item color="light" class="closed">
-          <ion-label position="floating">Nombres *</ion-label>
-          <ion-input formControlName="nombre" type="text" required ></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.nombre.errors?.required">
-          Campo nombre requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.nombre.errors?.minlength">
-          El nombre debe tener minimo 2 caractéres.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Apellido(s) *</ion-label>
-          <ion-input formControlName="apellido"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.apellido.errors?.required">
-          Campo Apellido requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.apellido.errors?.minlength">
-          El Apellido debe tener minimo 2 caractéres.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Calle *</ion-label>
-          <ion-input formControlName="calle"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.calle.errors?.required">
-          Campo Calle requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.calle.errors?.minlength">
-          El campo Calle debe tener minimo 2 caractéres.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Numero Exterior *</ion-label>
-          <ion-input formControlName="numeroExterior"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.numeroExterior.errors?.required">
-          Campo Numero Exterior requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroExterior.errors?.maxlength">
-          El campo Numero Exterior debe tener maximo 10 caractéres.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroExterior.errors?.pattern">
-          El Celular debe tener solo numeros.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Numero Interior</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-        <ion-item color="light" >
-          <ion-label position="floating">Colonia *</ion-label>
-          <ion-input formControlName="colonia"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.colonia.errors?.required">
-          Campo Colonia requerido.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Código Postal</ion-label>
-          <ion-input formControlName="cp"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cp.errors?.pattern">
-          El codigo postal debe tener solo numeros.
-        </span>
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.cp.errors?.required">
-          Campo codigo postal requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cp.errors?.minlength">
-          El codigo postal debe tener minimo 5 caractéres.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cp.errors?.maxlength">
-          El codigo postal debe tener maximo 5 caractéres.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Población *</ion-label>
-          <ion-select formControlName="poblacion">
-            <ion-select-option value="brown">Mazatlan</ion-select-option>
-            <ion-select-option value="blonde">Culiacan</ion-select-option>
-            <ion-select-option value="black">Navolato</ion-select-option>
-            <ion-select-option value="red">Escuinapa</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.poblacion.errors?.required">
-          Campo Población requerido.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Télefono</ion-label>
-          <ion-input formControlName="telefono"></ion-input>
-        </ion-item>
-        <ion-item color="light" >
-          <ion-label position="floating">Ceular</ion-label>
-          <ion-input formControlName="celular"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.celular.errors?.required">
-          Campo Celular postal requerido.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.celular.errors?.minlength">
-          El Celular debe tener minimo 10 caractéres.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.celular.errors?.maxlength">
-          El Celular debe tener maximo 10 caractéres.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.celular.errors?.pattern">
-          El Celular debe tener solo numeros.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Estado *</ion-label>
-          <ion-select formControlName="estado">
-            <ion-select-option value="">Selecciona Estado</ion-select-option>
-            <ion-select-option value="brown">Sinaloa</ion-select-option>
-            <ion-select-option value="blonde">Sonora</ion-select-option>
-            <ion-select-option value="black">Coahuila</ion-select-option>
-            <ion-select-option value="red">Nuevo Leon</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.estado.errors?.required">
-          Campo Estado requerido.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Télefono </ion-label>
-          <ion-input formControlName="telefono"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.telefono.errors?.minlength">
-          El Telefono debe tener minimo 10 caractéres.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.telefono.errors?.pattern">
-          El Telefono debe tener solo numeros.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Celuar *</ion-label>
-          <ion-input formControlName="celular2"></ion-input>
-        </ion-item>
-        <ion-item color="light">
-          <ion-label position="floating">Correo *</ion-label>
-          <ion-input formControlName="correo" type="email"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.correo.errors?.required || errorControl.correo.errors?.pattern">
-          El campo correo debe ser obligatorio y con el formato correo@cominio.com
-        </span>
-        <ion-item color="light">
-          <ion-label position="floating">Persona de contacto</ion-label>
-          <ion-input formControlName="personaContacto"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.personaContacto.errors?.required || errorControl.personaContacto.errors?.pattern">
-          El campo contacto debe ser obligatorio con mayusculas y sin acentos
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Sucursal *</ion-label>
-          <ion-select>
-            <ion-select-option value="">Selecciona Estado</ion-select-option>
-            <ion-select-option value="brown">Sinaloa</ion-select-option>
-            <ion-select-option value="blonde">Sonora</ion-select-option>
-            <ion-select-option value="black">Coahuila</ion-select-option>
-            <ion-select-option value="red">Nuevo Leon</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item color="light" >
-          <ion-label position="floating">Tipo de Empresa *</ion-label>
-          <ion-select formControlName="estado">
-            <ion-select-option value="">Selecciona Estado</ion-select-option>
-            <ion-select-option value="brown">Sinaloa</ion-select-option>
-            <ion-select-option value="blonde">Sonora</ion-select-option>
-            <ion-select-option value="black">Coahuila</ion-select-option>
-            <ion-select-option value="red">Nuevo Leon</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-item color="light">
-          <ion-label position="floating">Lista Precio ID</ion-label>
-          <ion-input ></ion-input>
-        </ion-item>
-        <br>
-        <div class="titulo_checkout">Direccion de Entrega</div>
-        <br>
-        <ion-item color="light" >
-          <ion-checkbox mode="md" color="light" formControlName="myBoolean" (ionChange)="muestraDireccion2()"></ion-checkbox>
-          <label style="color:black;margin-left: 10px;">Agregar otra dirección</label>
-        </ion-item>
-        <br><br>
-        <div class="direccion2" *ngIf=mostrarDireccion1>
-          <label style="color:black;">DIRECCIÓN 2 </label>
-          <br><br>
-          <ion-item color="light">
-            <ion-label position="floating">Calle2</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item color="light">
-            <ion-label position="floating">Numero Exterior</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item color="light">
-            <ion-label position="floating">Numero Interior</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item color="light">
-            <ion-label position="floating">Colonia</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item color="light">
-            <ion-label position="floating">CP</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item color="light" >
-            <ion-label position="floating">Población</ion-label>
-            <ion-select>
-              <ion-select-option value="brown">Mazatlan</ion-select-option>
-              <ion-select-option value="blonde">Culiacan</ion-select-option>
-              <ion-select-option value="black">Navolato</ion-select-option>
-              <ion-select-option value="red">Escuinapa</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item color="light" >
-            <ion-label position="floating">Estado</ion-label>
-            <ion-select formControlName="estado">
-              <ion-select-option value="">Selecciona Estado</ion-select-option>
-              <ion-select-option value="brown">Sinaloa</ion-select-option>
-              <ion-select-option value="blonde">Sonora</ion-select-option>
-              <ion-select-option value="black">Coahuila</ion-select-option>
-              <ion-select-option value="red">Nuevo Leon</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </div>
-        <ion-item color="light" >
-          <ion-checkbox mode="md" color="light" formControlName="myBoolean2" (ionChange)="muestraFactura()"></ion-checkbox>
-          <label style="color:black;margin-left: 10px;">Solicitar Factura</label>
-        </ion-item>
-        <div class="direccion2" *ngIf=mostrarFactura>
-          <ion-item color="light">
-            <ion-label position="floating">RFC *</ion-label>
-            <ion-input formControlName="rfc"></ion-input>
-          </ion-item>
-          <!-- Error messages -->
-          <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.rfc.errors?.required || errorControl.rfc.errors?.pattern">
-            Campo RFC Obligatorio y debe llevar la clabe correcta.
-          </span>
-          <ion-item color="light">
-            <ion-label position="floating">Colonia</ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-          <ion-item color="light" >
-            <ion-checkbox mode="md" color="light"></ion-checkbox>
-            <label style="color:black;margin-left: 10px;">Soy persona fisica</label>
-          </ion-item>
-          <ion-item color="light">
-            <ion-label position="floating">Uso de CFDI</ion-label>
-            <ion-select value="G03">
-              <ion-select-option value="G03">G03</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </div>
-      </div>
-      
-      <div id="forma_envio_content">
-        <div class="forma_envio_subcontent">
-          <div class="titulo1_envio">Forma de envio</div>
-          <br>
-          <div class="content_radios1">
-            <div class="radio">
-              <input id="radio-12" name="radio1" type="radio" checked value="gratis">
-              <label for="radio-12" class="radio-label">DHL Standard (5 - 19 dias)</label>
-              <span class="right">$0</span>
+    <div class="content_checkout">
+        <form [formGroup]="ionicForm" novalidate>
+            <ion-item>
+                <ion-label position="floating">Direcciones</ion-label>
+                <ion-select>
+                    <ion-select-option *ngFor="let direccion of direcciones" value="{{direccion.uuid_direccion}}">
+                        {{ direccion.colonia }}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-button expand="full" class="btn_guardar" type="button" (click)="agregarDireccion()">
+                <ion-label>Agregar dirección</ion-label>
+            </ion-button>
+            <div id="forma_envio_content">
+                <div class="forma_envio_subcontent">
+                    <div class="titulo1_envio">Forma de envio</div>
+                    <br>
+                    <div class="content_radios1">
+                        <div class="radio">
+                            <input id="radio-12" name="radio1" type="radio" checked value="gratis">
+                            <label for="radio-12" class="radio-label">DHL Standard (5 - 19 dias)</label>
+                            <span class="right">$0</span>
+                        </div>
+                        <br>
+                        <div class="radio">
+                            <input id="radio-22" name="radio1" type="radio" value="cobro">
+                            <label for="radio-22" class="radio-label">DHL Express (2 - 5 dias)</label>
+                            <span class="right">$20</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="forma_pago_subcontent radios">
+                    <div class="titulo1_envio mt">Forma de pago</div>
+                    <br><br>
+                    <div class="radio" style="width: 50%;display: inline-block;margin: 0;text-align: center;">
+                        <input id="radio-1" name="radio" type="radio" checked value="credito">
+                        <label for="radio-1" class="radio-label">Credito/Debito</label>
+                    </div>
+                    <div class="radio" style="width: 50%;display: inline-block;margin: 0;text-align: center;">
+                        <input id="radio-2" name="radio" type="radio" value="paypal">
+                        <label for="radio-2" class="radio-label">Paypal</label>
+                    </div>
+                </div>
             </div>
-            <br>
-            <div class="radio">
-              <input id="radio-22" name="radio1" type="radio" value="cobro">
-              <label  for="radio-22" class="radio-label">DHL Express (2 - 5 dias)</label>
-              <span class="right">$20</span>
-            </div>
-        </div>
-        </div>
-        <div class="forma_pago_subcontent radios">
-          <div class="titulo1_envio mt">Forma de pago</div>
-          <br><br>
-          <div class="radio" style="width: 50%;display: inline-block;margin: 0;text-align: center;">
-            <input id="radio-1" name="radio" type="radio" checked value="credito">
-            <label for="radio-1" class="radio-label">Credito/Debito</label>
-          </div>
-          <div class="radio" style="width: 50%;display: inline-block;margin: 0;text-align: center;">
-            <input id="radio-2" name="radio" type="radio" value="paypal">
-            <label for="radio-2" class="radio-label">Paypal</label>
-          </div>
-        </div>
-      </div>
-      <div class="formulario padding30">
-        <div class="datosTarjeta">
-        <ion-item color="light" class="closed">
-          <ion-label position="floating">Nombre en tarjeta *</ion-label>
-          <ion-input type="text" id="nombreTarjeta" formControlName="nombreTarjeta"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.nombreTarjeta.errors?.pattern && errorControl.nombreTarjeta.errors?.required">
-          El Nombre de tarjeta es obligatorio, debe tener letras en mayusculas.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Numero de tarjeta *</ion-label>
-          <ion-input formControlName="numeroTarjeta" id="numeroTarjeta"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.minlength">
-          El Numero de tarjeta debe tener minimo 16 caractéres.
-        </span>
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.maxlength">
+            <div class="formulario padding30">
+                <div class="datosTarjeta">
+                    <ion-item class="closed">
+                        <ion-label position="floating">Nombre en tarjeta *</ion-label>
+                        <ion-input type="text" id="nombreTarjeta" formControlName="nombreTarjeta"></ion-input>
+                    </ion-item>
+                    <!-- Error messages -->
+                    <span class="error ion-padding" color="danger"
+                        *ngIf="isSubmitted && errorControl.nombreTarjeta.errors?.pattern && errorControl.nombreTarjeta.errors?.required">
+                        El Nombre de tarjeta es obligatorio, debe tener letras en mayusculas.
+                    </span>
+                    <ion-item>
+                        <ion-label position="floating">Numero de tarjeta *</ion-label>
+                        <ion-input formControlName="numeroTarjeta" id="numeroTarjeta"></ion-input>
+                    </ion-item>
+                    <!-- Error messages -->
+                    <span class="error ion-padding" color="danger"
+                        *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.minlength">
+                        El Numero de tarjeta debe tener minimo 16 caractéres.
+                    </span>
+                    <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.maxlength">
           El Numero de tarjeta debe tener maximo 16 caractéres.
-        </span> 
-        <ion-item color="light">
-          <ion-label position="floating">Fecha de Expiracion (DD)*</ion-label>
+        </span>  -->
+                    <ion-item>
+                        <!-- <ion-label position="floating">Fecha de Expiracion (DD)*</ion-label>
           <ion-select formControlName="fechaDiaTarjeta" id="fechaDiaTarjeta">
             <ion-select-option value="01">01</ion-select-option>
             <ion-select-option value="02">02</ion-select-option>
@@ -347,159 +96,167 @@
             <ion-select-option value="10">10</ion-select-option>
             <ion-select-option value="11">11</ion-select-option>
             <ion-select-option value="12">12</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.fechaDiaTarjeta.errors?.required">
+          </ion-select> -->
+                    </ion-item>
+                    <!-- Error messages -->
+                    <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.fechaDiaTarjeta.errors?.required">
           Campo Fecha de Expiracion DD de tarjeta es requerido.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Fecha de Expiracion (MM)*</ion-label>
-          <ion-select formControlName="fechaMesTarjeta" id="fechaMesTarjeta">
-            <ion-select-option value="01">01</ion-select-option>
-            <ion-select-option value="02">02</ion-select-option>
-            <ion-select-option value="03">03</ion-select-option>
-            <ion-select-option value="04">04</ion-select-option>
-            <ion-select-option value="05">05</ion-select-option>
-            <ion-select-option value="06">06</ion-select-option>
-            <ion-select-option value="07">07</ion-select-option>
-            <ion-select-option value="08">08</ion-select-option>
-            <ion-select-option value="09">09</ion-select-option>
-            <ion-select-option value="10">10</ion-select-option>
-            <ion-select-option value="11">11</ion-select-option>
-            <ion-select-option value="12">12</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <!-- Error messages -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.fechaMesTarjeta.errors?.required">
-          Campo Fecha de Expiracion MM de tarjeta es requerido.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Año *</ion-label>
-          <ion-select formControlName="fechaAnoTarjeta" id="fechaAnoTarjeta">
-            <ion-select-option value="20">2020</ion-select-option>
-            <ion-select-option value="21">2021</ion-select-option>
-            <ion-select-option value="22">2022</ion-select-option>
-            <ion-select-option value="23">2023</ion-select-option>
-            <ion-select-option value="24">2024</ion-select-option>
-            <ion-select-option value="25">2025</ion-select-option>
-            <ion-select-option value="26">2026</ion-select-option>
-            <ion-select-option value="27">2027</ion-select-option>
-            <ion-select-option value="28">2028</ion-select-option>
-          </ion-select>
-        </ion-item>
-         <!-- Error messages -->
-         <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.fechaAnoTarjeta.errors?.required">
-          Campo Año de tarjeta es requerido.
-        </span>
-        <ion-item color="light" >
-          <ion-label position="floating">Codigo de seguridad (CVV) *</ion-label>
-          <ion-input formControlName="cvvTarjeta" id="cvvTarjeta"></ion-input>
-        </ion-item>
-        <!-- Error messages -->
-        <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.pattern">
+        </span> -->
+                    <ion-item>
+                        <ion-label position="floating">Fecha de Expiracion (MM)*</ion-label>
+                        <ion-select formControlName="fechaMesTarjeta" id="fechaMesTarjeta">
+                            <ion-select-option value="01">01</ion-select-option>
+                            <ion-select-option value="02">02</ion-select-option>
+                            <ion-select-option value="03">03</ion-select-option>
+                            <ion-select-option value="04">04</ion-select-option>
+                            <ion-select-option value="05">05</ion-select-option>
+                            <ion-select-option value="06">06</ion-select-option>
+                            <ion-select-option value="07">07</ion-select-option>
+                            <ion-select-option value="08">08</ion-select-option>
+                            <ion-select-option value="09">09</ion-select-option>
+                            <ion-select-option value="10">10</ion-select-option>
+                            <ion-select-option value="11">11</ion-select-option>
+                            <ion-select-option value="12">12</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <!-- Error messages -->
+                    <span class="error ion-padding" color="danger"
+                        *ngIf="isSubmitted && errorControl.fechaMesTarjeta.errors?.required">
+                        Campo Fecha de Expiracion MM de tarjeta es requerido.
+                    </span>
+                    <ion-item>
+                        <ion-label position="floating">Año *</ion-label>
+                        <ion-select formControlName="fechaAnoTarjeta" id="fechaAnoTarjeta">
+                            <ion-select-option value="20">2020</ion-select-option>
+                            <ion-select-option value="21">2021</ion-select-option>
+                            <ion-select-option value="22">2022</ion-select-option>
+                            <ion-select-option value="23">2023</ion-select-option>
+                            <ion-select-option value="24">2024</ion-select-option>
+                            <ion-select-option value="25">2025</ion-select-option>
+                            <ion-select-option value="26">2026</ion-select-option>
+                            <ion-select-option value="27">2027</ion-select-option>
+                            <ion-select-option value="28">2028</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <!-- Error messages -->
+                    <span class="error ion-padding" color="danger"
+                        *ngIf="isSubmitted && errorControl.fechaAnoTarjeta.errors?.required">
+                        Campo Año de tarjeta es requerido.
+                    </span>
+                    <ion-item>
+                        <ion-label position="floating">Codigo de seguridad (CVV) *</ion-label>
+                        <ion-input formControlName="cvvTarjeta" id="cvvTarjeta"></ion-input>
+                    </ion-item>
+                    <!-- Error messages -->
+                    <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.pattern">
           El CVV debe tener solo numeros.
         </span> -->
-        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.required || errorControl.cvvTarjeta.errors?.pattern || errorControl.cvvTarjeta.errors?.minlength || errorControl.cvvTarjeta.errors?.maxlength">
-          Campo CVV requerido y tener solo 3 numeros.
-        </span>
-        <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.minlength">
+                    <span class="error ion-padding" color="danger"
+                        *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.required || errorControl.cvvTarjeta.errors?.pattern || errorControl.cvvTarjeta.errors?.minlength || errorControl.cvvTarjeta.errors?.maxlength">
+                        Campo CVV requerido y tener solo 3 numeros.
+                    </span>
+                    <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.minlength">
           El CVV debe tener minimo 3 caractéres.
         </span> -->
-        <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.maxlength">
+                    <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.maxlength">
           El CVV debe tener maximo 3 caractéres.
         </span> -->
-      </div>
-        <br><br>
-        <div class="titulo_checkout">Order Summary</div>
-        <br><br>
-        <ion-grid>
-          <ion-row class="font-s1">
-            <ion-col>
-              <div class="ion-text-left">
-                Subtotal
-              </div>
-            </ion-col>
-            <ion-col>
-              <div class="ion-text-right black">
-                $<span class="subtotal">{{subtotal}}</span>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row class="font-s1">
-            <ion-col>
-              <div>
-                Shipping UPS 2-Day Deliver
-              </div>
-            </ion-col>
-            <ion-col>
-              <div class="ion-text-right black">
-                $<span class="envio">{{envio}}</span>
-              </div>
-            </ion-col>
-          </ion-row>
-          <br>
-          <ion-row class="font-s1">
-            <ion-col>
-              <div>
-                Tax
-              </div>
-            </ion-col>
-            <ion-col>
-              <div class="ion-text-right black">
-                ${{tax}}
-              </div>
-            </ion-col>
-          </ion-row>
-          <br>
-          <ion-row class="font-s2">
-            <ion-col>
-              <div>
-                Total
-              </div>
-            </ion-col>
-            <ion-col>
-              <div class="ion-text-right">
-                $<span class="total">{{total}}</span>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-      <ion-button expand="full" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal hide">Paga con PayPal</ion-button>
-      <ion-button expand="full" color="success" (click)="submitForm(3)" class="btnpaypal enviopaypal hide">Paga con PayPal envio</ion-button>
-      <div class="content_boton btntarjeta sinenvio">
-        <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(2)">
-          <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span></ion-label>
-          <ion-label style="position: absolute;right:10px">Comprar</ion-label>
-        </ion-button>
-      </div>
-      <div class="content_boton btntarjeta envionormal hide">
-        <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(4)">
-          <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span></ion-label>
-          <ion-label style="position: absolute;right:10px">Comprar envio</ion-label>
-        </ion-button>
-      </div>
-    </form>
-  </div>
+                </div>
+                <br><br>
+                <div class="titulo_checkout">Order Summary</div>
+                <br><br>
+                <ion-grid>
+                    <ion-row class="font-s1">
+                        <ion-col>
+                            <div class="ion-text-left">
+                                Subtotal
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="ion-text-right black">
+                                $<span class="subtotal">{{subtotal}}</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="font-s1">
+                        <ion-col>
+                            <div>
+                                Shipping UPS 2-Day Deliver
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="ion-text-right black">
+                                $<span class="envio">{{envio}}</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <br>
+                    <ion-row class="font-s1">
+                        <ion-col>
+                            <div>
+                                Tax
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="ion-text-right black">
+                                ${{tax}}
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <br>
+                    <ion-row class="font-s2">
+                        <ion-col>
+                            <div>
+                                Total
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="ion-text-right">
+                                $<span class="total">{{total}}</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <ion-button expand="full" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal hide">
+                Paga
+                con PayPal</ion-button>
+            <ion-button expand="full" color="success" (click)="submitForm(3)" class="btnpaypal enviopaypal hide">
+                Paga
+                con PayPal envio</ion-button>
+            <div class="content_boton btntarjeta sinenvio">
+                <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(2)">
+                    <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span>
+                    </ion-label>
+                    <ion-label style="position: absolute;right:10px">Comprar</ion-label>
+                </ion-button>
+            </div>
+            <div class="content_boton btntarjeta envionormal hide">
+                <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(4)">
+                    <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span>
+                    </ion-label>
+                    <ion-label style="position: absolute;right:10px">Comprar envio</ion-label>
+                </ion-button>
+            </div>
+        </form>
+    </div>
 </ion-content>
 <div class="content_menu">
-  <ul>
-    <li>
-      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
-    </li>
-    <li>
-      <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
-    </li>
-    <li>
-      <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
-    </li>
-    <li>
-      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
-    </li>
-    <li>
-      <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
-    </li>
-  </ul>
+    <ul>
+        <li>
+            <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+        </li>
+        <li>
+            <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+        </li>
+        <li>
+            <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+        </li>
+        <li>
+            <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+        </li>
+        <li>
+            <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+        </li>
+    </ul>
 </div>
-

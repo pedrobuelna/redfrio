@@ -49,11 +49,11 @@ export class RegisterPage implements OnInit {
       telefono:['', [Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]],
       celular:['',  [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]],
       mail:['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      persona_contacto: ['', [Validators.required,Validators.pattern('[A-Z ]*'),Validators.maxLength(40)]],
+      persona_contacto: ['', [Validators.required,Validators.pattern('[a-zA-Z]*'),Validators.maxLength(40)]],
       sucursal: ['1',],
       tipo_empresa: ['1',],
-      rfc: ['BUFP910825DE3',  [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
-      uso_cfdi: ['', [Validators.required]],
+      rfc: ['XAXX010101000',  [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
+      uso_cfdi: ['G03', [Validators.required]],
       password:['', [Validators.required,Validators.minLength(8)]],
       myBoolean: ['false',[]],
       
@@ -95,8 +95,8 @@ export class RegisterPage implements OnInit {
       this.ionicForm["controls"]["uso_cfdi"].reset();
     }else{
       //alert("valor3: "+this.ionicForm.value.calle2)
-      this.ionicForm.get('rfc').setValue("BUFP910825DE3");
-      this.ionicForm.get('uso_cfdi').setValue("---");
+      this.ionicForm.get('rfc').setValue("XAXX010101000");
+      this.ionicForm.get('uso_cfdi').setValue("G03");
       // this.ionicForm.value.rfc="XXXX000000XX3";
       // this.ionicForm.value.uso_cfdi="XXX";
       this.mostrarDireccion1 = false;
@@ -132,9 +132,10 @@ export class RegisterPage implements OnInit {
       this.taskService.createTask(task)
         .subscribe((reply: any) => {
             alert("Tus datos han sido guardados correctamente")
-            this.taskService.sendMailUsr(usrMail)
+            //this.taskService.sendMailUsr(usrMail)
+            this.taskService.sendMailActivacionUsuario(usrMail)
                 .subscribe((sendMail: any) => {
-                    console.log("Tus datos han sido guardados correctamente")
+                    console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
                 }, (err) => {
                     console.log(err);
                 });
@@ -161,7 +162,7 @@ export class RegisterPage implements OnInit {
     this.router.navigate(['/ubicaciones']);
   }
   onclickMenu(){
-    this.router.navigate(['/principal']);
+    this.router.navigate(['/home']);
   }
   onclickCategorias(){
     this.router.navigate(['/categorias']);

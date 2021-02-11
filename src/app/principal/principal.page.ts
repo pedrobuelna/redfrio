@@ -23,6 +23,7 @@ import {
     Network
 } from '@ionic-native/network/ngx';
 
+
 @Component({
     selector: 'app-principal',
     templateUrl: './principal.page.html',
@@ -66,6 +67,7 @@ export class PrincipalPage implements OnInit {
     banners: any;
     cantidadActualCarrito: number;
     AppData: any[] = [];
+    subscription:any;
 
     constructor(
         private router: Router,
@@ -76,27 +78,42 @@ export class PrincipalPage implements OnInit {
         public navCtrl: NavController,
         private nativeStorage: NativeStorage
     ) {
-        this.platform.ready().then(() => {
-            let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-                console.log('network was disconnected :-(');
-                alert("Desconectado a Inernet");
-                this.router.navigate(['/sinconexion']);
-            });
-            //disconnectSubscription.unsubscribe();
-            let connectSubscription = this.network.onConnect().subscribe(() => {
-                console.log('network was connected :-)');
-                alert("Conectado a Inernet");
-                this.navCtrl.pop();
-            });
-            //connectSubscription.unsubscribe();
-        });
+        // this.platform.ready().then(() => {
+        //     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+        //         console.log('network was disconnected :-(');
+        //         this.ionLoader.showLoader();
+        //         //alert("Desconectado a Inernet");
+        //         //this.router.navigate(['/sinconexion']);
+        //     });
+        //     //disconnectSubscription.unsubscribe();
+        //     let connectSubscription = this.network.onConnect().subscribe(() => {
+        //         console.log('network was connected :-)');
+        //         this.ionLoader.hideLoader();
+        //         // alert("Conectado a Inernet");
+        //         //     this.nativeStorage.getItem('app')
+        //         //     .then(
+        //         //         app => {
+        //         //             //this.router.navigate(['/principal']);
+        //         //         },
+        //         //         error => {
+        //         //             this.router.navigate(['/home']);
+        //         //         }
+        //         //     );
+                
+        //         //this.navCtrl.pop();
+        //     });
+        //     //connectSubscription.unsubscribe();
+        // });
     }
     addMyClass() {
         //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
-
+        // this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+        //     // do on back button click
+        //     alert("NO!!");
+        // });
         setTimeout(() => {
             this.addMyClass()
         }, 1500);
@@ -105,7 +122,7 @@ export class PrincipalPage implements OnInit {
                 this.banners = banners;
                 console.log(banners)
             });
-        this.taskService.getAllProductos()
+        this.taskService.getProductosDestadados()
             .subscribe(productos2 => {
                 this.productos2 = productos2;
                 console.log(productos2)
@@ -116,7 +133,16 @@ export class PrincipalPage implements OnInit {
                 this.cantidadNot = this.notificaciones.length
             });
     }
-    ionViewWillEnter() {
+    //ionViewWillEnter() {
+    ionViewWillLeave() {
+        // this.subscription.unsubscribe();
+    }
+    ionViewDidEnter(){
+        // this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+        //     // do on back button click
+        //     alert("NO!!");
+        // });
+        
         // this.network.onDisconnect().subscribe(() => {
         //   console.log('network was disconnected :-(');
         //   alert("FirstPage onDisconnect oninit");
@@ -136,13 +162,21 @@ export class PrincipalPage implements OnInit {
             });
 
         this.nativeStorage.getItem('carrito')
-            .then(
-                data => {
-                    console.log("WILL ENTER -->Se actualizo cantidad carrito ===>" + data.cantidad);
-                    this.cantidadActualCarrito = data.cantidad;
-                },
-                error => console.error(error)
-            );
+        .then(
+            data => {
+                console.log("WILL ENTER -->Se actualizo cantidad carrito ===>" + data.cantidad);
+                this.cantidadActualCarrito = data.cantidad;
+                if(data.cantidad==0){
+                    $(".carrito").hide();
+                }else{
+                    $(".carrito").show();
+                }
+            },
+            error => {
+                $(".carrito").hide();
+                console.error(error);
+            }
+        );
     }
     retraso() {
         console.log("Retraso")
@@ -172,4 +206,5 @@ export class PrincipalPage implements OnInit {
     onClickCarrito() {
         this.router.navigate(['/carrito']);
     }
+    
 }

@@ -28,11 +28,11 @@ export class ProductoPage implements OnInit {
     AppData: any[] = [];
     CarritoActivoData: any[]=[];
 
-    public items = ["../../assets/images/aireblanco.png",
-        "../../assets/images/aireblanco.png",
-        "../../assets/images/aireblanco.png",
-        "../../assets/images/aireblanco.png"
-    ];
+    // public items = ["../../assets/images/aireblanco.png",
+    //     "../../assets/images/aireblanco.png",
+    //     "../../assets/images/aireblanco.png",
+    //     "../../assets/images/aireblanco.png"
+    // ];
 
     public sliderOptions = {
         initialSlide: 0,
@@ -45,6 +45,7 @@ export class ProductoPage implements OnInit {
     @ViewChild('slides') slides;
 
     producto2: any;
+    imgProducto:Array<string> = [];
     constructor(
         private router: Router,
         private taskService: TaskService,
@@ -52,22 +53,22 @@ export class ProductoPage implements OnInit {
         private db : DbService,
         private nativeStorage: NativeStorage
     ) {}
-    move1(slides) {
+    moveSlide(slides,index) {
         console.log(slides)
-        slides.slideTo(0)
+        slides.slideTo(index)
     }
-    move2(slides) {
-        console.log(slides)
-        slides.slideTo(1)
-    }
-    move3(slides) {
-        console.log(slides)
-        slides.slideTo(2)
-    }
-    move4(slides) {
-        console.log(slides)
-        slides.slideTo(3)
-    }
+    // move2(slides) {
+    //     console.log(slides)
+    //     slides.slideTo(1)
+    // }
+    // move3(slides) {
+    //     console.log(slides)
+    //     slides.slideTo(2)
+    // }
+    // move4(slides) {
+    //     console.log(slides)
+    //     slides.slideTo(3)
+    // }
     ngOnInit() {
         let x = "";
         this.route.queryParams.subscribe(queryParams => x = queryParams.id);
@@ -77,6 +78,34 @@ export class ProductoPage implements OnInit {
             .subscribe(producto2 => {
                 this.producto2 = producto2;
                 console.log(producto2)
+                if(producto2.status_img==false){
+                    console.log("No image");
+                    this.imgProducto.push("https://cdn.reacsa.mx/img/no-image.png");
+                }else{
+                    producto2=producto2[0];
+                    console.log("Buscando imagen");
+                    if(producto2.url_img1!==null){
+                        console.log(producto2.url_img1);
+                        this.imgProducto['0']=producto2.url_img1;
+                    }
+                    if(producto2.url_img2!==null){
+                        console.log(producto2.url_img2);
+                        this.imgProducto['1']=producto2.url_img2;
+                    }
+                    if(producto2.url_img3!==null){
+                        console.log(producto2.url_img3);
+                        this.imgProducto['2']=producto2.url_img3;
+                    }
+                    if(producto2.url_img4!==null){
+                        console.log(producto2.url_img4);
+                        this.imgProducto['3']=producto2.url_img4;
+                    }
+                    if(producto2.url_img5!==null){
+                        console.log(producto2.url_img5);
+                        this.imgProducto['4']=producto2.url_img5;
+                    }
+                }
+                console.log(this.imgProducto);
             });
     }
     onclickNotificaciones() {

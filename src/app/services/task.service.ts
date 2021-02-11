@@ -24,7 +24,8 @@ import {
 export class TaskService {
     //private api = 'https://jsonplaceholder.typicode.com';
     //private api = 'http://webservicearca.000webhostapp.com';
-    private api = 'http://178.128.14.243:3000';
+    //private api = 'http://178.128.14.243:3000';
+    private api = 'http://app.reacsa.mx:3000';
     constructor(
         private http: HttpClient
     ) {
@@ -74,9 +75,15 @@ export class TaskService {
         //alert(path)
         return this.http.get < Task > (path);
     }
+    getProductosDestadados() {
+        //const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/productos_destacados`;
+        //alert(path)
+        return this.http.get < Task > (path);
+    }
     getAllProductos() {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos`;
+        const path = `${this.api}/productos?status=eq.1`;
         //alert(path)
         return this.http.get < Task > (path);
     }
@@ -88,21 +95,29 @@ export class TaskService {
     // }
     getProductos(id,ordenarpor) {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?familia_id=eq.${id}${ordenarpor}`;
+        const path = `${this.api}/productos?status=eq.1&&familia_id=eq.${id}${ordenarpor}`;
         //alert(path)
         return this.http.get<Task>(path);
     }
     getProducto(id: any) {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?uuid_producto=eq.${id}`;
+        const path = `${this.api}/productos?status=eq.1&&uuid_producto=eq.${id}`;
         //alert(path)
-        return this.http.get < Task > (path);
+        return this.http.get < any > (path);
     }
     sendMailUsr(usrMail: string) {
         const path = `http://carteraclientes.com/sistema/enviarCorreoRegistroCliente/${usrMail}`;
         return this.http.patch < Task > (path, false);
     }
+    updInfoPerfil(uuid_cliente, dataPerfil: any) {
+        const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.patch(path, dataPerfil);
+    }
     //Carrito
+    updCarritoInfo(uuid_carrito: string, dataStatus: any) {
+        const path = `${this.api}/carrito?uuid_carrito=eq.${uuid_carrito}`;
+        return this.http.patch(path, dataStatus);
+    }
     getCarritoActivo(uuid_usuario: string) {
         const path = `${this.api}/carrito_activo?uuid_cliente=eq.${uuid_usuario}`;
         return this.http.get < carrito_activo[] > (path);
@@ -139,10 +154,6 @@ export class TaskService {
         const path = `${this.api}/direcciones?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101`;
         return this.http.get<Notificaciones[]>(path);
     }
-    getPerfiles(){
-        const path = `${this.api}/clientes?uuid_cliente=eq.613d8579-4cab-4b50-a7a6-b9317a07c101`;
-        return this.http.get<Perfiles[]>(path);
-    }
     updateDirecciones(task: Notificacion,uuid_cliente:any,uuid:any) {
         // const path = `${this.api}/todos/${id}`;
         const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`
@@ -170,5 +181,25 @@ export class TaskService {
         const path = `${this.api}/estados`;
         //alert(path)
         return this.http.get<Task>(path);
+    }
+    getPerfiles(uuid_cliente:string){
+        const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get<Perfiles[]>(path);
+    }
+    getPerfilCliente(uuid_cliente:string){
+        const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get<Task[]>(path);
+    }
+    sendMailActivacionUsuario(email:string){
+        const path = `http://app.reacsa.mx/restapi/enviarCorreoRegistroCliente/${email}`;
+        return this.http.get < Task > (path);
+    }
+    getSucursales(){
+        const path = `${this.api}/sucursales?status=eq.N`;
+        return this.http.get < Task > (path);
+    }
+    getDireccionCliente(uuid_cliente){
+        const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get < any > (path);
     }
 }

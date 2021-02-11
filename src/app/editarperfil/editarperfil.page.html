@@ -11,12 +11,12 @@
     <br>
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
       <div *ngFor="let perfil of perfiles;let i = index;let last = last;">
-        <ion-item class="closed" >
+        <ion-item color="light" class="closed" >
           <ion-label position="floating">Cliente No.</ion-label>
-          <ion-input  type="text" disabled value="34219"></ion-input>
+          <ion-input  type="text" disabled formControlName="id_cliente_sap"></ion-input>
         </ion-item>
         <br>
-        <ion-item class="closed" >
+        <ion-item color="light" class="closed">
           <ion-label position="floating">Nombres *</ion-label>
           <ion-input formControlName="nombre" type="text" required></ion-input>
         </ion-item>
@@ -243,8 +243,11 @@
         </ion-select>
       </ion-item> -->
        <div class="content_boton">
-        <ion-button expand="full" class="btn_pagar" type="submit">
+        <ion-button expand="full" class="btn_guardar" type="submit">
             <ion-label>GUARDAR</ion-label>
+        </ion-button>
+        <ion-button expand="full" class="btn_logOUt" (click)="logOut()">
+            <ion-label>CERRAR SESIÓN</ion-label>
         </ion-button>
       </div>
     </form>

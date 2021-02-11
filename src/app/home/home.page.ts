@@ -16,6 +16,10 @@ import {
 } from '../services/db.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Platform } from '@ionic/angular';
+import {
+    Network
+} from '@ionic-native/network/ngx';
+import { LoaderService } from '../services/loader.service';
 
 
 @Component({
@@ -40,7 +44,9 @@ export class HomePage {
         private taskService: TaskService,
         private db: DbService,
         private nativeStorage: NativeStorage,
-        public platform: Platform
+        public platform: Platform,
+        private network: Network,
+        private ionLoader: LoaderService
     ) {
         this.platform.ready().then(() => {
             this.nativeStorage.getItem('app')
@@ -53,6 +59,29 @@ export class HomePage {
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
+            let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+                console.log('network was disconnected :-(');
+                this.ionLoader.showLoader();
+                //alert("Desconectado a Inernet");
+                //this.router.navigate(['/sinconexion']);
+            });
+            //disconnectSubscription.unsubscribe();
+            let connectSubscription = this.network.onConnect().subscribe(() => {
+                console.log('network was connected :-)');
+                this.ionLoader.hideLoader();
+                // alert("Conectado a Inernet");
+                //     this.nativeStorage.getItem('app')
+                //     .then(
+                //         app => {
+                //             //this.router.navigate(['/principal']);
+                //         },
+                //         error => {
+                //             this.router.navigate(['/home']);
+                //         }
+                //     );
+                
+                //this.navCtrl.pop();
+            });
         });
     }
     iraLogin() {
