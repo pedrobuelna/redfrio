@@ -10,16 +10,28 @@
   <div id="content_categorias">
     <div class="carrito" (click)="onClickCarrito()">
       <span class="numero">{{cantidadActualCarrito}}</span>
-      <img src="../../assets/images/carrito.png" alt="carrito" >
+      <!-- <img src="../../assets/images/carrito.png" alt="carrito" > -->
     </div>
     <ion-row>
       <ion-col *ngFor="let familia of familias;let i = index;let last = last;" size="6">
         <span class="titulo">{{familia.nombre_familia}}</span>
-        <img src="../../assets/images/Aire.jpg" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==0" src="../../assets/images/EQUIPOSDEREFRIGERACION.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==1" src="../../assets/images/AIREACONDICIONADO.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==2" src="../../assets/images/EQUIPOPARACOMERCIOS.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==3" src="../../assets/images/COMPRESORES.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==4" src="../../assets/images/MOTORES.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==5" src="../../assets/images/GASREFRIGERANTE.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==6" src="../../assets/images/QUIMICOSYACEITES.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==7" src="../../assets/images/CONTROLES.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==8" src="../../assets/images/REFACCIONES.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==9" src="../../assets/images/HERRAMIENTAS.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==10" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==11" src="../../assets/images/SUMINISTROS.png" alt="categoria2" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==12" src="../../assets/images/REFRIGERACIONCOMERCIAL.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
       </ion-col>
       <ion-col size="6" style="margin-bottom: 120px;">
         <span class="titulo">TODOS</span>
-        <img src="../../assets/images/Aire.jpg" alt="categoria1" class="categorias_img" (click)="onclickCategoria('0')">
+        <img src="../../assets/images/AIREACONDICIONADO.png" alt="categoria1" class="categorias_img" (click)="onclickCategoria('0')">
       </ion-col>
     </ion-row>
   </div>
