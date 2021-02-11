@@ -6,7 +6,7 @@
 
 <ion-content>
   <div class="carrito" (click)="onClickCarrito()">
-    <span class="numero">4</span>
+    <span class="numero">{{cantidadActualCarrito}}</span>
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
   
@@ -34,7 +34,7 @@
     <ion-col *ngFor="let producto of productos2;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel" [class.last]="last">
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
-        <img src="../../assets/images/logo.png" alt="imgblanca.png">
+        <img src="{{prodcuto.url_img1}}" alt="imgblanca.png">
         <div class="content_producto_textos">
           <p> <span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br> </p>
           <p> {{producto.desc_corta}}</p>

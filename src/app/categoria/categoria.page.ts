@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {TaskService} from '../services/task.service';
+import {
+    NativeStorage
+} from '@ionic-native/native-storage/ngx';
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.page.html',
@@ -8,12 +11,13 @@ import {TaskService} from '../services/task.service';
 })
 export class CategoriaPage implements OnInit {
   constructor(private router: Router,private taskService: TaskService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,private nativeStorage: NativeStorage) { }
   @ViewChild('mylbl') mylblRef: ElementRef;
   productos2: any;
   familias: any;
   valorSelect:any;
   valorOrdenar:any;
+  cantidadActualCarrito: number;
   x: string;
   checkValue(event){
     console.log("valor: "+this.valorSelect)
@@ -23,6 +27,7 @@ export class CategoriaPage implements OnInit {
       .subscribe(productos2 => {
           this.productos2 = productos2;
           console.log(productos2)
+          this.taskService.validarImg(this.productos2[i].url_img1).then(()=>{},e=>{this.productos2[i].url_img1="../../assets/images/no-image.png"});
       });
   }
   filtroDestacados(event){
@@ -64,7 +69,22 @@ export class CategoriaPage implements OnInit {
     }
   }
   ionViewWillEnter(){
-    
+    this.nativeStorage.getItem('carrito')
+        .then(
+            data => {
+                console.log("WILL ENTER -->Se actualizo cantidad carrito ===>" + data.cantidad);
+                this.cantidadActualCarrito = data.cantidad;
+                if(data.cantidad==0){
+                    $(".carrito").hide();
+                }else{
+                    $(".carrito").show();
+                }
+            },
+            error => {
+                $(".carrito").hide();
+                console.error(error);
+            }
+        );
     this.route.queryParams.subscribe( queryParams => this.x = queryParams.id);
     this.valorOrdenar="&order=destacado.desc";
     this.taskService.getFamilias()
