@@ -41,7 +41,7 @@ export class PrincipalPage implements OnInit {
         initialSlide: 0,
         speed: 350,
         loop: true,
-        autoplay:3000,
+        autoplay: true,
         pagination: {
             el: ".swiper-pagination",
             type: "bullets",
