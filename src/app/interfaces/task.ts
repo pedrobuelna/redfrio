@@ -100,6 +100,7 @@ export interface carrito_activo_detalles{
     uuid_producto: string;
     cantidad: number;
     precio: number;
+    url_img1:string;
 }
 export interface uuid_usuario{
     uuid_cliente:string;

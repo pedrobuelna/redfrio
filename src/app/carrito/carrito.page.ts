@@ -135,6 +135,9 @@ export class CarritoPage implements OnInit {
                     console.log("getCarritoActivoDetalles");
                     console.log(dataCarrito);
                     this.carritoProductos=dataCarrito;
+                    for(let i=0;i<this.carritoProductos.length;i++){
+                        this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
+                    }
                     this.calcularTotales();
                 });
             },

@@ -206,7 +206,15 @@ export class TaskService {
         const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get < any > (path);
     }
-
+    //Direcciones
+    postDirecciones(dataDireccion){
+        const path = `${this.api}/direcciones`;
+        return this.http.post(path, dataDireccion);
+    }
+    patchDirecciones(uuid_direccion:string,patchData:any){
+        const path = `${this.api}/direcciones?uuid_direccion=eq.${uuid_direccion}`
+        return this.http.patch<Task>(path,patchData);
+    }
 
 
 

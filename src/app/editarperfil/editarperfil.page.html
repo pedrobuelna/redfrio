@@ -116,7 +116,7 @@
       </ion-button>
       <ion-item>
         <ion-label position="floating">Direcciones</ion-label>
-        <ion-select value="{{direccion.uuid_direccion[0]}}">
+        <ion-select>
           <ion-select-option value="{{direccion.uuid_direccion}}" *ngFor="let direccion of direcciones;let i = index;let last = last;">{{direccion.sub_name}}</ion-select-option>
         </ion-select>
       </ion-item>

@@ -38,7 +38,7 @@
     </ion-item>
     <div class="espacios">
       <!-- Error messages -->
-      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.numerointerior.errors?.required || errorControl.numerointerior.errors?.pattern || errorControl.numerointerior.errors?.maxlength || errorControl.numerointerior.errors?.minlength)">
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.numerointerior.errors?.pattern || errorControl.numerointerior.errors?.maxlength || errorControl.numerointerior.errors?.minlength)">
         Numero Interior es requerido.
       </span>
     </div>
@@ -71,7 +71,7 @@
     </ion-item>
     <div class="espacios">
       <!-- Error messages -->
-      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.cp.errors?.required)">
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.estado.errors?.required)">
         El Estado es requerido.
       </span>
     </div>

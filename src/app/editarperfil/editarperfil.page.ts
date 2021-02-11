@@ -98,17 +98,18 @@ export class EditarperfilPage implements OnInit {
                 this.estados = estados;
                 console.log("estados: ", estados);
             });
-        this.taskService.getDirecciones()
-            .subscribe(direcciones => {
-                this.direcciones = direcciones;
-                console.log("direcciones: ", direcciones);
-            });
+        
         this.nativeStorage.getItem('app')
             .then(
                 app => {
                     console.log("==APP DATA==");
                     console.log(app);
                     console.log("uuid_cliente: " + app.uuid_cliente);
+                    this.taskService.getDireccionCliente(app.uuid_cliente)
+                    .subscribe(direcciones => {
+                        this.direcciones = direcciones;
+                        console.log("direcciones: ", direcciones);
+                    });
                     this.taskService.getPerfiles(app.uuid_cliente)
                         .subscribe(perfiles => {
                             console.log(perfiles);
@@ -124,7 +125,7 @@ export class EditarperfilPage implements OnInit {
                                 persona_contacto: [perfiles[0].persona_contacto, ],
                                 sucursal: [perfiles[0].sucursal, ],
                                 tipo_empresa: [perfiles[0].tipo_empresa, ],
-                                rfc: [perfiles[0].rfc.toUpperCase, ],
+                                rfc: [perfiles[0].rfc, ],
                                 uso_cfdi: [perfiles[0].uso_cfdi, ],
                                 password: ['', ],
                                 myBoolean: ['true', []],
@@ -184,6 +185,7 @@ export class EditarperfilPage implements OnInit {
                     console.log("==APP DATA==");
                     console.log(app);
                     console.log("uuid_cliente: "+app.uuid_cliente);
+                    perfil.rfc=perfil.rfc.toUpperCase();
                     this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
                         alert("Tus datos se han actualizado correctamente.");
                         this.router.navigate(['/principal']);
