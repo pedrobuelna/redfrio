@@ -123,14 +123,14 @@ export class RegisterPage implements OnInit {
       this.emailcorreo = this.ionicForm.value.mail;
       const task = {
         nombre: this.ionicForm.value.nombre,
-        nombre_2: this.ionicForm.value.nombre2,
+        nombre_2: this.ionicForm.value.nombre_2,
         telefono: this.ionicForm.value.telefono,
         celular: this.ionicForm.value.celular,
         mail: this.ionicForm.value.mail,
         persona_contacto: this.ionicForm.value.personaContacto,
         sucursal: this.ionicForm.value.sucursal,
         tipo_empresa: this.ionicForm.value.tipoEmpresa,
-        rfc: this.ionicForm.value.rfc,
+        rfc: this.ionicForm.value.rfc.toUpperCase,
         persona_fisica: this.ionicForm.value.persona_fisica,
         password: this.ionicForm.value.password,
         status: "0",

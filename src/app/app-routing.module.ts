@@ -91,6 +91,10 @@ const routes: Routes = [
     path: 'pagonoexitoso',
     loadChildren: () => import('./pagonoexitoso/pagonoexitoso.module').then( m => m.PagonoexitosoPageModule)
   },
+  {
+    path: 'agregardireccion',
+    loadChildren: () => import('./agregardireccion/agregardireccion.module').then( m => m.AgregardireccionPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,8 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header> -->
 <ion-content>
   <div class="registro">
     <div class="content_img_txt">
@@ -115,37 +110,17 @@
           </div>
         </div>
       </div>
-      <div *ngFor="let direccion of direcciones;let i = index;let last = last;" >
-        <div style="color:black;margin-top: 15px;margin:15px 0;">DIRECCIÓN PRINCIPAL/FACTURACIÓN</div>
-      <ion-item >
-        <ion-label position="floating">Calle</ion-label>
-        <ion-input value="{{direccion.calle}}"></ion-input>
-      </ion-item>
+      <br>
+      <ion-button expand="full" color="warning" (click)="agregarDirecciones()">
+        <ion-label>Agregar Direcciones</ion-label>
+      </ion-button>
       <ion-item>
-        <ion-label position="floating">Numero</ion-label>
-        <ion-input value="{{direccion.numero_exterior}}"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Colonia</ion-label>
-        <ion-input value="{{direccion.colonia}}"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">C.P.</ion-label>
-        <ion-input value="{{direccion.cp}}"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Estado</ion-label>
-        <ion-select value="{{direccion.estado}}">
-          <ion-select-option value="0">Selecciona Estado</ion-select-option>
-          <ion-select-option value="{{estado.estado}}" *ngFor="let estado of estados;let i = index;let last = last;">{{estado.descripcion}}</ion-select-option>
+        <ion-label position="floating">Direcciones</ion-label>
+        <ion-select value="{{direccion.uuid_direccion[0]}}">
+          <ion-select-option value="{{direccion.uuid_direccion}}" *ngFor="let direccion of direcciones;let i = index;let last = last;">{{direccion.sub_name}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Ciudad</ion-label>
-        <ion-input value="{{direccion.poblacion}}"></ion-input>
-      </ion-item>
-      </div>
-       <div class="content_boton">
+      <div class="content_boton">
         <ion-button expand="full" class="btn_guardar" type="submit">
             <ion-label>GUARDAR</ion-label>
         </ion-button>
@@ -154,7 +129,6 @@
         </ion-button>
       </div>
     </form>
-   
   </div>
   <div class="content_menu">
     <ul>

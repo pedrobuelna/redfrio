@@ -124,7 +124,7 @@ export class EditarperfilPage implements OnInit {
                                 persona_contacto: [perfiles[0].persona_contacto, ],
                                 sucursal: [perfiles[0].sucursal, ],
                                 tipo_empresa: [perfiles[0].tipo_empresa, ],
-                                rfc: [perfiles[0].rfc, ],
+                                rfc: [perfiles[0].rfc.toUpperCase, ],
                                 uso_cfdi: [perfiles[0].uso_cfdi, ],
                                 password: ['', ],
                                 myBoolean: ['true', []],
@@ -213,6 +213,9 @@ export class EditarperfilPage implements OnInit {
     }
     onClickCarrito() {
         this.router.navigate(['/carrito']);
+    }
+    agregarDirecciones(){
+        this.router.navigate(['/agregardireccion']);
     }
     logOut(){
         this.nativeStorage.clear()
