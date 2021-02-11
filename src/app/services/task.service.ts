@@ -202,4 +202,30 @@ export class TaskService {
         const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get < any > (path);
     }
+
+
+
+
+    //validaciones imagenes
+    validarImg(url) {
+        return new Promise(function(resolve, reject) {
+        var timeout = 1000;//5000;
+        var timer, img = new Image();
+        img.onerror = img.onabort = function() {
+            clearTimeout(timer);
+            reject("error");
+        };
+        img.onload = function() {
+            clearTimeout(timer);
+            resolve("success");
+        };
+        timer = setTimeout(function() {
+            // reset .src to invalid URL so it stops previous
+            // loading, but doens't trigger new load
+            img.src = "//!!!!/noexist.jpg";
+            reject("timeout");
+        }, timeout); 
+        img.src = url;
+        });
+    }
 }

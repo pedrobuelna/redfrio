@@ -78,33 +78,78 @@ export class ProductoPage implements OnInit {
             .subscribe(producto2 => {
                 this.producto2 = producto2;
                 console.log(producto2)
-                if(producto2.status_img==false){
-                    console.log("No image");
-                    this.imgProducto.push("https://cdn.reacsa.mx/img/no-image.png");
-                }else{
-                    producto2=producto2[0];
-                    console.log("Buscando imagen");
-                    if(producto2.url_img1!==null){
-                        console.log(producto2.url_img1);
-                        this.imgProducto['0']=producto2.url_img1;
-                    }
-                    if(producto2.url_img2!==null){
-                        console.log(producto2.url_img2);
-                        this.imgProducto['1']=producto2.url_img2;
-                    }
-                    if(producto2.url_img3!==null){
-                        console.log(producto2.url_img3);
-                        this.imgProducto['2']=producto2.url_img3;
-                    }
-                    if(producto2.url_img4!==null){
-                        console.log(producto2.url_img4);
-                        this.imgProducto['3']=producto2.url_img4;
-                    }
-                    if(producto2.url_img5!==null){
-                        console.log(producto2.url_img5);
-                        this.imgProducto['4']=producto2.url_img5;
-                    }
-                }
+                this.taskService.validarImg(producto2[0].url_img1).then(()=>{
+                    console.log("Img1 "+producto2[0].url_img1);
+                    console.log("ok");
+                    this.imgProducto.push(producto2[0].url_img1);
+                },e=>{
+                    console.log("Img1 "+producto2[0].url_img1);
+                    console.log("ER");
+                    this.imgProducto.push("../../assets/images/no-image.png");
+                });
+                this.taskService.validarImg(producto2[0].url_img2).then(()=>{
+                    console.log("Img2 "+producto2[0].url_img2);
+                    console.log("ok");
+                    this.imgProducto.push(producto2[0].url_img2);
+                },e=>{
+                    console.log("Img2 "+producto2[0].url_img2);
+                    console.log("ERR");
+                });
+                this.taskService.validarImg(producto2[0].url_img3).then(()=>{
+                    console.log("Img3 "+producto2[0].url_img3);
+                    console.log("ok");
+                    this.imgProducto.push(producto2[0].url_img3);
+                },e=>{
+                    console.log("Img3 "+producto2[0].url_img3);
+                    console.log("ERR");
+                });
+                this.taskService.validarImg(producto2[0].url_img4).then(()=>{
+                    console.log("Img4 "+producto2[0].url_img4);
+                    console.log("ok");
+                    this.imgProducto.push(producto2[0].url_img4);
+                },e=>{
+                     console.log("Img4 "+producto2[0].url_img4);
+                     console.log("ERR");
+                     
+                });
+                this.taskService.validarImg(producto2[0].url_img5).then(()=>{
+                    console.log("Img5 "+producto2[0].url_img5);
+                    console.log("ok");
+                    this.imgProducto.push(producto2[0].url_img5);
+                },e=>{
+                    console.log("Img5 "+producto2[0].url_img5);
+                    console.log("ER");
+                });
+                // if(producto2.status_img==false){
+                //     console.log("No image");
+                //     this.imgProducto.push("https://cdn.reacsa.mx/img/no-image.png");
+                // }else{
+                //     producto2=producto2[0];
+                //     console.log("Buscando imagen");
+                //     this.taskService.validarImg(producto2[0].url_img[0]1).(()=>{
+
+                //     });
+                // producto2this[0]..url_img1!==null){
+                //         console.log(producto2.);[0]
+                //         this.this.imgProducto['0']=producto2.url_img1;
+                //     }
+                //     if(producto2.this.url_img2!==null){
+                //         console.log(producto2.url_img2);
+                //         this.imgProducto['1']=producto2.url_img2;
+                //     }
+                //     if(producto2.url_img3!==null){
+                //         console.log(producto2.url_img3);
+                //         this.imgProducto['2']=producto2.url_img3;
+                //     }
+                //     if(producto2.url_img4!==null){
+                //         console.log(producto2.url_img4);
+                //         this.imgProducto['3']=producto2.url_img4;
+                //     }
+                //     if(producto2.url_img5!==null){
+                //         console.log(producto2.url_img5);
+                //         this.imgProducto['4']=producto2.url_img5;
+                //     }
+                // }
                 console.log(this.imgProducto);
             });
     }
