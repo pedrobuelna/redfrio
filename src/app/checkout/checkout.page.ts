@@ -29,6 +29,7 @@ import {
 import {
     TaskService
 } from '../services/task.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
     selector: 'app-checkout',
@@ -56,7 +57,7 @@ export class CheckoutPage implements OnInit {
     sucursales: any;
     direcciones:any;
     @ViewChild("splash") splash: ElementRef;
-    constructor(private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
+    constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         // this.ionicForm = new FormGroup({
         //   nombre: new FormControl()
         // });
@@ -307,14 +308,14 @@ export class CheckoutPage implements OnInit {
                             () => {
                                 console.log('Actualizado APPDATA ==>');
                                 console.log(carrito);
-                                this.router.navigate(['/principal']);
+                                this.navCtrl.navigateRoot(['/pagoexitoso'])
                             },
                             error => console.error('Error storing item', error)
                         );
                     });
                 },
                 error => {
-                    this.router.navigate(['/principal']);
+                    this.navCtrl.navigateRoot(['/pagonoexitoso'])
                 }
             );
     }
@@ -322,18 +323,18 @@ export class CheckoutPage implements OnInit {
         this.isSubmitted = true;
         //alert("ENVIAR valor RFC: "+this.ionicForm.value.rfc)
         if (!this.ionicForm.valid) {
-            console.log('Please provide all the required values!')
+            console.log('Valores cacios!')
             return false;
         } else {
-            console.log('Form Completed' + this.ionicForm.value)
+            console.log('Formulario completado' + this.ionicForm.value)
             if (tipo == 1) {
                 this.payWithPaypal(false); //Sin envio
             } else if (tipo == 2) {
-                alert("Credito")
+                this.payWithCard(false);
             } else if (tipo == 3) {
                 this.payWithPaypal(true); //Con envio
             } else if (tipo == 4) {
-                alert("Credito envio")
+                this.payWithCard(true);
             }
         }
     }

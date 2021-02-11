@@ -83,6 +83,14 @@ const routes: Routes = [
     path: 'editarperfil',
     loadChildren: () => import('./editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule)
   },
+  {
+    path: 'pagoexitoso',
+    loadChildren: () => import('./pagoexitoso/pagoexitoso.module').then( m => m.PagoexitosoPageModule)
+  },
+  {
+    path: 'pagonoexitoso',
+    loadChildren: () => import('./pagonoexitoso/pagonoexitoso.module').then( m => m.PagonoexitosoPageModule)
+  },
 ];
 
 @NgModule({
