@@ -202,7 +202,7 @@ export class PrincipalPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/editarperfil']);
+        this.router.navigate(['/editarperfil']); 
     }
     onClickProducto(id) {
         this.router.navigate(['/producto'], {
