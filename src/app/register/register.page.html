@@ -17,11 +17,11 @@
       <div class="espacios">
         <!-- Error messages -->
         <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.nombre.errors?.required || errorControl.nombre.errors?.maxlength || errorControl.nombre.errors?.minlength || errorControl.nombre.errors?.pattern)">
-          El Nombre es requerido, mayúsculas, minimo 5 y maximo 40 caractéres.
+          El Nombre es requerido, minimo 5 y maximo 40 caractéres.
         </span>
       </div>
       <ion-item >
-        <ion-label position="floating">Nombre(s) faltante </ion-label>
+        <ion-label position="floating">Apellidos</ion-label>
         <ion-input formControlName="nombre_2"></ion-input>
       </ion-item>
       <div class="espacios">
@@ -64,21 +64,32 @@
         <ion-input formControlName="persona_contacto"></ion-input>
       </ion-item>
       <div class="espacios">
-        <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.persona_contacto.errors?.required || errorControl.persona_contacto.errors?.maxlength || errorControl.persona_contacto.errors?.pattern)">
-          Campo Persona Contacto requerido solo letras mayusculas y máximo 40 caractéres.
+        <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.persona_contacto.errors?.required || errorControl.persona_contacto.errors?.minlength || errorControl.persona_contacto.errors?.maxlength)">
+          Campo Persona Contacto requerido, minimo 5 caractéres y máximo 40.
         </span>
       </div>
-      <ion-item >
+      <ion-item>
         <ion-label position="floating">Password *</ion-label>
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
-      <!-- Error messages -->
       <div class="espacios">
         <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.password.errors?.required || errorControl.password.errors?.minlength)">
           Campo Password requerido y minimo 8 caractéres
         </span>
       </div>
-      <ion-item >
+      <ion-item>
+        <ion-label position="floating">Confirmar passowrd *</ion-label>
+        <ion-input formControlName="confirmarcontrasena" type="password"></ion-input>
+      </ion-item>
+      <div class="espacios">
+        <span class="error" *ngIf="isSubmitted && errorControl.confirmarcontrasena.errors?.required">
+          * Campo confirmar contraseña requerido.
+        </span>
+        <div class="error" *ngIf="isSubmitted && errorControl.confirmarcontrasena.errors?.confirmedValidator">
+          No coinciden las contraseñas.
+        </div>
+      </div>
+      <ion-item>
         <ion-checkbox mode="md" formControlName="myBoolean" (ionChange)="muestraDireccion2()"></ion-checkbox>
         <label style="color:black;margin-left: 10px;">Requiere Factura</label>
       </ion-item>

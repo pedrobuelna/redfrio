@@ -33,7 +33,6 @@ import {
     styleUrls: ['./editarperfil.page.scss'],
 })
 export class EditarperfilPage implements OnInit {
-
     ionicForm: FormGroup;
     isSubmitted = false;
     myBoolean: boolean;
@@ -75,7 +74,7 @@ export class EditarperfilPage implements OnInit {
             persona_contacto: ['', [Validators.required, Validators.pattern('[A-Z ]*'), Validators.maxLength(40)]],
             sucursal: ['1', ],
             tipo_empresa: ['1', ],
-            rfc: ['BUFP910825DE3', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
+            rfc: ['', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
             uso_cfdi: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(8)]],
             myBoolean: ['false', []],
@@ -133,11 +132,6 @@ export class EditarperfilPage implements OnInit {
             );
 
     }
-    // register(form) {
-    //   this.authService.register(form.value).subscribe((res) => {
-    //     this.router.navigateByUrl('home');
-    //   });
-    //}
     muestraDireccion2() {
         if (this.ionicForm.value.myBoolean == true) {
             this.mostrarDireccion1 = true;
@@ -147,9 +141,9 @@ export class EditarperfilPage implements OnInit {
             this.ionicForm["controls"]["uso_cfdi"].reset();
         } else {
             //alert("valor3: "+this.ionicForm.value.calle2)
-            this.ionicForm.get('rfc').setValue("BUFP910825DE3");
-            this.ionicForm.get('uso_cfdi').setValue("---");
-            // this.ionicForm.value.rfc="XXXX000000XX3";
+            this.ionicForm.get('rfc').setValue("XAXX010101000");
+            this.ionicForm.get('uso_cfdi').setValue("G03");
+            // this.ionicForm.value.rfc="XAXX010101000";
             // this.ionicForm.value.uso_cfdi="XXX";
             this.mostrarDireccion1 = false;
             this.calle2Required = false;
@@ -168,7 +162,7 @@ export class EditarperfilPage implements OnInit {
             let usrMail = this.ionicForm.value.mail;
             let perfil = {
                 nombre: this.ionicForm.value.nombre,
-                nombre_2: this.ionicForm.value.nombre2,
+                nombre_2: this.ionicForm.value.nombre_2,
                 telefono: this.ionicForm.value.telefono,
                 celular: this.ionicForm.value.celular,
                 mail: this.ionicForm.value.mail,
@@ -180,6 +174,7 @@ export class EditarperfilPage implements OnInit {
                 password: this.ionicForm.value.password,
                 status: "0",
                 uso_cfdi: this.ionicForm.value.uso_cfdi,
+                facturacion:true
             };
             this.nativeStorage.getItem('app')
             .then(
@@ -194,30 +189,7 @@ export class EditarperfilPage implements OnInit {
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
-            // this.taskService.createTask(task)
-            //   .subscribe((reply: any) => {
-            //       alert("Tus datos han sido guardados correctamente")
-            //       this.taskService.sendMailUsr(usrMail)
-            //           .subscribe((sendMail: any) => {
-            //               console.log("Tus datos han sido guardados correctamente")
-            //           }, (err) => {
-            //               console.log(err);
-            //           });
-            //   }, (err) => {
-            //       console.log(err)
-            //   });
-            //   this.router.navigate(['/principal']);
-            // this.taskService.createTask(task)
-            // 	.subscribe((newTask) => {
-            //      // do happy stuff
-            //      alert("Tus datos han sido guardados correctamente")
-            //     }, (err) => {
-            //       // do alerty stuff
-            //       alert(err)
-            //     });
-
         }
-
     }
     onclickNotificaciones() {
         this.router.navigate(['/notificaciones']);

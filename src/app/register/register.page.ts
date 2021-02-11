@@ -5,6 +5,7 @@ import { TaskService } from '../services/task.service';
 import { Task, Sucursal } from '../interfaces/task';
 //import { AuthService } from '../auth.service';
 import {Md5} from 'ts-md5/dist/md5';
+import { ConfirmedValidator } from '../confirmed.validator';
 import {
     DbService
 } from '../services/db.service';
@@ -44,20 +45,22 @@ export class RegisterPage implements OnInit {
     //   nombre: new FormControl()
     // });
     this.ionicForm = this.formBuilder.group({
-      nombre: ['', [Validators.required,Validators.pattern('[A-Z ]*'),Validators.minLength(5),Validators.maxLength(40)]],
+      nombre: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(40)]],
       nombre_2: ['', [Validators.maxLength(40)]],
       telefono:['', [Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]],
       celular:['',  [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]],
       mail:['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      persona_contacto: ['', [Validators.required,Validators.pattern('[a-zA-Z]*'),Validators.maxLength(40)]],
+      persona_contacto: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(40)]],
       sucursal: ['1',],
       tipo_empresa: ['1',],
       rfc: ['XAXX010101000',  [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
       uso_cfdi: ['G03', [Validators.required]],
       password:['', [Validators.required,Validators.minLength(8)]],
+      confirmarcontrasena: ['', [Validators.required]],
       myBoolean: ['false',[]],
-      
-   })
+    }, { 
+      validator: ConfirmedValidator('password', 'confirmarcontrasena')
+    })
   }
   get errorControl() {
     return this.ionicForm.controls;
