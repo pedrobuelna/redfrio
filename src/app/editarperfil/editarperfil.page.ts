@@ -78,7 +78,7 @@ export class EditarperfilPage implements OnInit {
             tipo_empresa: ['1', ],
             rfc: ['', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
             uso_cfdi: ['', [Validators.required]],
-            password: ['', [Validators.required, Validators.minLength(8)]],
+            password: ['', [Validators.minLength(8)]],
             myBoolean: ['false', []],
 
         })
@@ -127,7 +127,7 @@ export class EditarperfilPage implements OnInit {
                                 tipo_empresa: [perfiles[0].tipo_empresa, ],
                                 rfc: [perfiles[0].rfc, ],
                                 uso_cfdi: [perfiles[0].uso_cfdi, ],
-                                password: ['', ],
+                                password: [perfiles[0].password, ],
                                 myBoolean: ['true', []],
                             })
                         });
@@ -169,13 +169,13 @@ export class EditarperfilPage implements OnInit {
                 telefono: this.ionicForm.value.telefono,
                 celular: this.ionicForm.value.celular,
                 mail: this.ionicForm.value.mail,
-                persona_contacto: this.ionicForm.value.personaContacto,
+                persona_contacto: this.ionicForm.value.persona_contacto,
                 sucursal: this.ionicForm.value.sucursal,
                 tipo_empresa: this.ionicForm.value.tipoEmpresa,
                 rfc: this.ionicForm.value.rfc,
                 persona_fisica: this.ionicForm.value.persona_fisica,
                 password: this.ionicForm.value.password,
-                status: "0",
+                status: "1",
                 uso_cfdi: this.ionicForm.value.uso_cfdi,
                 facturacion:true
             };

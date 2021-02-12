@@ -58,7 +58,7 @@ export class CategoriasPage implements OnInit {
     this.router.navigate(['/categoria']);
   }
   onclickUsuario(){
-    this.router.navigate(['/register']);
+    this.router.navigate(['/editarperfil']);
   }
   onclickCategoria(id){
     this.router.navigate(['/categoria'], {
