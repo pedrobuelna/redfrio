@@ -127,7 +127,7 @@ export class EditarperfilPage implements OnInit {
                                 tipo_empresa: [perfiles[0].tipo_empresa, ],
                                 rfc: [perfiles[0].rfc, ],
                                 uso_cfdi: [perfiles[0].uso_cfdi, ],
-                                password: [perfiles[0].password, ],
+                                password: ["", ],
                                 myBoolean: ['true', []],
                             })
                         });
@@ -161,7 +161,6 @@ export class EditarperfilPage implements OnInit {
             return false;
         } else {
             //alert('Form Completed' + this.ionicForm.value)
-            this.ionicForm.value.password = Md5.hashStr(this.ionicForm.value.password)
             let usrMail = this.ionicForm.value.mail;
             let perfil = {
                 nombre: this.ionicForm.value.nombre,
@@ -174,11 +173,15 @@ export class EditarperfilPage implements OnInit {
                 tipo_empresa: this.ionicForm.value.tipoEmpresa,
                 rfc: this.ionicForm.value.rfc,
                 persona_fisica: this.ionicForm.value.persona_fisica,
-                password: this.ionicForm.value.password,
                 status: "1",
                 uso_cfdi: this.ionicForm.value.uso_cfdi,
                 facturacion:true
             };
+            if(this.ionicForm.value.password!=""){
+                perfil['password']=Md5.hashStr(this.ionicForm.value.password)
+            }
+            console.log("<== Patch data :) ==>");
+            console.log(perfil);
             this.nativeStorage.getItem('app')
             .then(
                 app => {
