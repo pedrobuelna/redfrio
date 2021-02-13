@@ -19,11 +19,15 @@
         <form [formGroup]="ionicForm" novalidate>
             <ion-item>
                 <ion-label position="floating">Direcciones</ion-label>
-                <ion-select>
+                <ion-select formControlName="direccion">
                     <ion-select-option *ngFor="let direccion of direcciones" value="{{direccion.uuid_direccion}}">
                         {{ direccion.sub_name }}</ion-select-option>
                 </ion-select>
             </ion-item>
+            <span class="error ion-padding" color="danger"
+                *ngIf="isSubmitted && errorControl.direccion.errors?.required">
+                Es necesario seleccionar una dirección
+            </span>
             <ion-button expand="full" class="btn_guardar" type="button" (click)="agregarDireccion()">
                 <ion-label>Agregar dirección</ion-label>
             </ion-button>

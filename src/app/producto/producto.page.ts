@@ -70,6 +70,9 @@ export class ProductoPage implements OnInit {
     //     slides.slideTo(3)
     // }
     ngOnInit() {
+        
+    }
+    ionViewWillEnter(){
         let x = "";
         this.route.queryParams.subscribe(queryParams => x = queryParams.id);
         //    console.log("x:" + x)
@@ -77,7 +80,8 @@ export class ProductoPage implements OnInit {
         this.taskService.getProducto(x)
             .subscribe(producto2 => {
                 this.producto2 = producto2;
-                console.log(producto2)
+                console.log(producto2);
+                this.imgProducto=[];
                 this.taskService.validarImg(producto2[0].url_img1).then(()=>{
                     console.log("Img1 "+producto2[0].url_img1);
                     console.log("ok");
@@ -120,36 +124,6 @@ export class ProductoPage implements OnInit {
                     console.log("Img5 "+producto2[0].url_img5);
                     console.log("ER");
                 });
-                // if(producto2.status_img==false){
-                //     console.log("No image");
-                //     this.imgProducto.push("https://cdn.reacsa.mx/img/no-image.png");
-                // }else{
-                //     producto2=producto2[0];
-                //     console.log("Buscando imagen");
-                //     this.taskService.validarImg(producto2[0].url_img[0]1).(()=>{
-
-                //     });
-                // producto2this[0]..url_img1!==null){
-                //         console.log(producto2.);[0]
-                //         this.this.imgProducto['0']=producto2.url_img1;
-                //     }
-                //     if(producto2.this.url_img2!==null){
-                //         console.log(producto2.url_img2);
-                //         this.imgProducto['1']=producto2.url_img2;
-                //     }
-                //     if(producto2.url_img3!==null){
-                //         console.log(producto2.url_img3);
-                //         this.imgProducto['2']=producto2.url_img3;
-                //     }
-                //     if(producto2.url_img4!==null){
-                //         console.log(producto2.url_img4);
-                //         this.imgProducto['3']=producto2.url_img4;
-                //     }
-                //     if(producto2.url_img5!==null){
-                //         console.log(producto2.url_img5);
-                //         this.imgProducto['4']=producto2.url_img5;
-                //     }
-                // }
                 console.log(this.imgProducto);
             });
     }
@@ -169,6 +143,7 @@ export class ProductoPage implements OnInit {
         this.router.navigate(['/usuario']);
     }
     setCarritoData(carrito:any){
+        
         this.nativeStorage.setItem('carrito', {uuid_carrito:carrito.uuid_carrito,cantidad: carrito.cantidad }).then(
             () => {
                 console.log('Actualizado APPDATA');
@@ -217,6 +192,8 @@ export class ProductoPage implements OnInit {
                 this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito).subscribe(detallesCarrito=>{
                     let cantidad=0; 
                     let productoEncontrado=false;
+                    console.log("Detalles carrito:");
+                    console.log(detallesCarrito);
                     detallesCarrito.forEach(detalle => {
                         if(detalle.uuid_producto==this.idProducto){
                             cantidad=detalle.cantidad;

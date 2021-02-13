@@ -67,12 +67,13 @@
       </ion-grid>
     </div>
     <div id="descripcion_content">
-      <div class="titulo1">{{producto.marca}} mini split</div>
+      <div class="titulo1">{{producto.marca}} {{producto.nombre_familia}}</div>
       <p class="parrafo1">
         {{producto.desc_corta}}
       </p>
       <div class="parrafo2">
         <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
+        <span class="ion-text-capitalize">No. parte: </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
         <span class="ion-text-capitalize">Disponibilidad: <span *ngIf="producto.status==1">En stock</span><span *ngIf="producto.status==0">No hay disponibilidad</span> </span>
       </div> 
       <p class="parrafo3">

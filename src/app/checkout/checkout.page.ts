@@ -48,7 +48,7 @@ export class CheckoutPage implements OnInit {
     paymentAmount: string = '3.33';
     paymentAmountEnvio: string;
     currency: string = 'USD';
-    currencyIcon: string = '₹';
+    currencyIcon: string = '$';
     tax: any = 10;
     envio: any = 0;
     subtotal: any;
@@ -60,6 +60,7 @@ export class CheckoutPage implements OnInit {
     fechaMesTarjeta:any;
     fechaAnoTarjeta:any;
     cvvTarjeta:any;
+    totalCompra:number;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         // this.ionicForm = new FormGroup({
@@ -68,6 +69,7 @@ export class CheckoutPage implements OnInit {
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
+            direccion: [[Validators.required]],
             // nombre: ['', [Validators.required, Validators.minLength(2)]],
             // apellido: ['', [Validators.required, Validators.minLength(2)]],
             // calle: ['', [Validators.required]],
@@ -216,7 +218,7 @@ export class CheckoutPage implements OnInit {
                 if ($(this).is(":checked")) { // check if the radio is checked
                     var val = $(this).val(); // retrieve the value
                     if ($(this).val() == "paypal") {
-                        alert("JALA 1")
+                        
                         $(".btntarjeta").addClass("hide")
                         $(".btnpaypal").removeClass("hide")
                         $(".datosTarjeta").addClass("hide")
@@ -227,14 +229,14 @@ export class CheckoutPage implements OnInit {
                         $("#fechaAnoTarjeta").val("20")
                         $("#cvvTarjeta").val("000")
                         if ($("input[name=radio1][value='gratis']").is(":checked")) {
-                            alert("Radio Gratis envio DHL esta en checked y paypal jala 1")
+                           //alert("Radio Gratis envio DHL esta en checked y paypal jala 1")
                             $(".enviopaypal").addClass("hide")
                         } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
-                            alert("Radio Cobro envio DHL esta en checked y con paypal jala 1")
+                            //alert("Radio Cobro envio DHL esta en checked y con paypal jala 1")
                             $(".paypalnormal").addClass("hide")
                         }
                     } else {
-                        alert("JALA 2")
+                        //alert("JALA 2")
                         $(".btntarjeta").removeClass("hide")
                         $(".btnpaypal").addClass("hide")
                         $(".datosTarjeta").removeClass("hide")
@@ -245,10 +247,10 @@ export class CheckoutPage implements OnInit {
                         $("#fechaAnoTarjeta").val("")
                         $("#cvvTarjeta").val("")
                         if ($("input[name=radio1][value='gratis']").is(":checked")) {
-                            alert("Radio Gratis envio DHL esta en checked y paypal")
+                            //alert("Radio Gratis envio DHL esta en checked y paypal")
                             $(".enviopaypal,.envionormal").addClass("hide")
                         } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
-                            alert("Forma de envio cobro y Forma de credito")
+                            //alert("Forma de envio cobro y Forma de credito")
                             $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
                             $(".envionormal").removeClass("hide")
                         }
@@ -269,8 +271,10 @@ export class CheckoutPage implements OnInit {
             })).then(() => {
                 let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
                 this.paymentAmountEnvio = total2.toString();
+                this.totalCompra=total2;
                 //alert("paypal"+this.paymentAmountEnvio)
                 let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Description', 'sale');
+
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
 
                     setTimeout(() => {
@@ -292,6 +296,8 @@ export class CheckoutPage implements OnInit {
         });
     }
     payWithCard(envio: boolean) {
+        let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
+        this.totalCompra=total2;
         alert("Gracias por su pago " + ((envio == true) ? "con envio" : " sin envio"));
         this.pagoAutorizado(2, "Debito")
     }
@@ -305,7 +311,11 @@ export class CheckoutPage implements OnInit {
                     console.log(carrito);
                     console.log("uuid_carrito: " + carrito.uuid_carrito);
                     this.taskService.updCarritoInfo(carrito.uuid_carrito, {
-                        status: 2
+                        status: 2,
+                        id_tipo_pago:tipo,
+                        total:this.totalCompra,
+                        uuid_direccion:this.ionicForm.value.direccion,
+                        info_pago:JSON.stringify(data)
                     }).subscribe(() => {
                         this.nativeStorage.setItem('carrito', {
                             uuid_carrito: carrito.uuid_carrito,
@@ -327,6 +337,7 @@ export class CheckoutPage implements OnInit {
     }
     submitForm(tipo) {
         this.isSubmitted = true;
+        console.log(this.ionicForm.value.direccion);
         //alert("ENVIAR valor RFC: "+this.ionicForm.value.rfc)
         if (!this.ionicForm.valid) {
             console.log('Valores cacios!')

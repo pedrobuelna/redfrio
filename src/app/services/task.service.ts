@@ -87,7 +87,7 @@ export class TaskService {
     }
     getAllProductos() {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?status=eq.1`;
+        const path = `${this.api}/productos_info`;
         //alert(path)
         return this.http.get < Task > (path);
     }
@@ -99,13 +99,13 @@ export class TaskService {
     // }
     getProductos(id,ordenarpor) {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?status=eq.1&&familia_id=eq.${id}${ordenarpor}`;
+        const path = `${this.api}/productos_info?familia_id=eq.${id}${ordenarpor}`;
         //alert(path)
         return this.http.get<Task>(path);
     }
     getProducto(id: any) {
         //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos?status=eq.1&&uuid_producto=eq.${id}`;
+        const path = `${this.api}/productos_info?uuid_producto=eq.${id}`;
         //alert(path)
         return this.http.get < any > (path);
     }
