@@ -66,7 +66,7 @@
                     </ion-item>
                     <!-- Error messages -->
                     <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && errorControl.nombreTarjeta.errors?.pattern && errorControl.nombreTarjeta.errors?.required">
+                        *ngIf="isSubmitted && (errorControl.nombreTarjeta.errors?.pattern || errorControl.nombreTarjeta.errors?.required)">
                         El Nombre de tarjeta es obligatorio, debe tener letras en mayusculas.
                     </span>
                     <ion-item>
@@ -75,13 +75,13 @@
                     </ion-item>
                     <!-- Error messages -->
                     <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.minlength">
-                        El Numero de tarjeta debe tener minimo 16 caractéres.
+                        *ngIf="isSubmitted && (errorControl.numeroTarjeta.errors?.required || errorControl.numeroTarjeta.errors?.pattern || errorControl.numeroTarjeta.errors?.minlength || errorControl.numeroTarjeta.errors?.maxlength)">
+                        El Numero de tarjeta debe tener 16 caractéres.
                     </span>
                     <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.numeroTarjeta.errors?.maxlength">
           El Numero de tarjeta debe tener maximo 16 caractéres.
         </span>  -->
-                    <ion-item>
+                    <!-- <ion-item> -->
                         <!-- <ion-label position="floating">Fecha de Expiracion (DD)*</ion-label>
           <ion-select formControlName="fechaDiaTarjeta" id="fechaDiaTarjeta">
             <ion-select-option value="01">01</ion-select-option>
@@ -97,7 +97,7 @@
             <ion-select-option value="11">11</ion-select-option>
             <ion-select-option value="12">12</ion-select-option>
           </ion-select> -->
-                    </ion-item>
+                    <!-- </ion-item> -->
                     <!-- Error messages -->
                     <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.fechaDiaTarjeta.errors?.required">
           Campo Fecha de Expiracion DD de tarjeta es requerido.
@@ -121,7 +121,7 @@
                     </ion-item>
                     <!-- Error messages -->
                     <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && errorControl.fechaMesTarjeta.errors?.required">
+                        *ngIf="isSubmitted && (errorControl.fechaMesTarjeta.errors?.required)">
                         Campo Fecha de Expiracion MM de tarjeta es requerido.
                     </span>
                     <ion-item>
@@ -140,7 +140,7 @@
                     </ion-item>
                     <!-- Error messages -->
                     <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && errorControl.fechaAnoTarjeta.errors?.required">
+                        *ngIf="isSubmitted && (errorControl.fechaAnoTarjeta.errors?.required)">
                         Campo Año de tarjeta es requerido.
                     </span>
                     <ion-item>
@@ -152,7 +152,7 @@
           El CVV debe tener solo numeros.
         </span> -->
                     <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.required || errorControl.cvvTarjeta.errors?.pattern || errorControl.cvvTarjeta.errors?.minlength || errorControl.cvvTarjeta.errors?.maxlength">
+                        *ngIf="isSubmitted && (errorControl.cvvTarjeta.errors?.required || errorControl.cvvTarjeta.errors?.pattern || errorControl.cvvTarjeta.errors?.minlength || errorControl.cvvTarjeta.errors?.maxlength)">
                         Campo CVV requerido y tener solo 3 numeros.
                     </span>
                     <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.minlength">

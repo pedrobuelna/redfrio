@@ -56,6 +56,10 @@ export class CheckoutPage implements OnInit {
     totalEnvio: any;
     sucursales: any;
     direcciones:any;
+    numeroTarjeta:any;
+    fechaMesTarjeta:any;
+    fechaAnoTarjeta:any;
+    cvvTarjeta:any;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         // this.ionicForm = new FormGroup({
@@ -64,29 +68,29 @@ export class CheckoutPage implements OnInit {
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
-            nombre: ['', [Validators.required, Validators.minLength(2)]],
-            apellido: ['', [Validators.required, Validators.minLength(2)]],
-            calle: ['', [Validators.required]],
-            numeroExterior: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10)]],
-            estado: ['', [Validators.required]],
-            poblacion: ['', [Validators.required]],
-            celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]],
-            celular2: ['', []],
+            // nombre: ['', [Validators.required, Validators.minLength(2)]],
+            // apellido: ['', [Validators.required, Validators.minLength(2)]],
+            // calle: ['', [Validators.required]],
+            // numeroExterior: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10)]],
+            // estado: ['', [Validators.required]],
+            // poblacion: ['', [Validators.required]],
+            // celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]],
+            //celular2: ['', []],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
-            colonia: ['', [Validators.required, Validators.minLength(2)]],
-            cp: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(5), Validators.maxLength(5)]],
-            telefono: ['', ],
+            // colonia: ['', [Validators.required, Validators.minLength(2)]],
+            // cp: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(5), Validators.maxLength(5)]],
+            //telefono: ['', ],
             //VALIDACION RFC: ^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$
-            rfc: ['BUFP910825DE3', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
+            //rfc: ['BUFP910825DE3', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
             nombreTarjeta: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
-            personaContacto: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
+            //personaContacto: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
             numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(16), Validators.maxLength(16)]],
-            fechaDiaTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(2), Validators.maxLength(2)]],
-            fechaMesTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(2), Validators.maxLength(2)]],
+            //fechaDiaTarjeta: ['', [Validators.required]],
+            fechaMesTarjeta: ['', [Validators.required]],
             fechaAnoTarjeta: ['', [Validators.required]],
             cvvTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(3), Validators.maxLength(3)]],
-            correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+            //correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         })
     }
     get errorControl() {
@@ -212,23 +216,25 @@ export class CheckoutPage implements OnInit {
                 if ($(this).is(":checked")) { // check if the radio is checked
                     var val = $(this).val(); // retrieve the value
                     if ($(this).val() == "paypal") {
+                        alert("JALA 1")
                         $(".btntarjeta").addClass("hide")
                         $(".btnpaypal").removeClass("hide")
                         $(".datosTarjeta").addClass("hide")
                         $("#nombreTarjeta").val("PAYPAL")
-                        $("#numeroTarjeta").val("0000000000000000")
-                        $("#fechaDiaTarjeta").val("01")
-                        $("#fechaMesTarjeta").val("01")
+                        $("#numeroTarjeta").val("1234567890123456")
+                        $("#fechaDiaTarjeta").val("10")
+                        $("#fechaMesTarjeta").val("10")
                         $("#fechaAnoTarjeta").val("20")
                         $("#cvvTarjeta").val("000")
                         if ($("input[name=radio1][value='gratis']").is(":checked")) {
-                            //alert("Radio Gratis envio DHL esta en checked y paypal")
+                            alert("Radio Gratis envio DHL esta en checked y paypal jala 1")
                             $(".enviopaypal").addClass("hide")
                         } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
-                            //alert("Radio Cobro envio DHL esta en checked y con paypal")
+                            alert("Radio Cobro envio DHL esta en checked y con paypal jala 1")
                             $(".paypalnormal").addClass("hide")
                         }
                     } else {
+                        alert("JALA 2")
                         $(".btntarjeta").removeClass("hide")
                         $(".btnpaypal").addClass("hide")
                         $(".datosTarjeta").removeClass("hide")
@@ -239,10 +245,10 @@ export class CheckoutPage implements OnInit {
                         $("#fechaAnoTarjeta").val("")
                         $("#cvvTarjeta").val("")
                         if ($("input[name=radio1][value='gratis']").is(":checked")) {
-                            //alert("Radio Gratis envio DHL esta en checked y paypal")
+                            alert("Radio Gratis envio DHL esta en checked y paypal")
                             $(".enviopaypal,.envionormal").addClass("hide")
                         } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
-                            //alert("Forma de envio cobro y Forma de credito")
+                            alert("Forma de envio cobro y Forma de credito")
                             $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
                             $(".envionormal").removeClass("hide")
                         }
@@ -254,7 +260,7 @@ export class CheckoutPage implements OnInit {
     payWithPaypal(envio: boolean) {
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-            PayPalEnvironmentSandbox: 'AX2IlIks14mOg_Yke97jPoGtXGawMNUhbo0-XYSJV21G2Rv97tti6CnKxq3mhME_IjdKiFrFSNPlEAVM'
+            PayPalEnvironmentSandbox: 'AYxxBdHjJbPGRcgMLaycY-jXkZLYvJPcWpsji7BexCSdZHdf6bOW8pDOpqpohmp7K7WhKT5_k4PUil5V'
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
             this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
@@ -264,7 +270,7 @@ export class CheckoutPage implements OnInit {
                 let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
                 this.paymentAmountEnvio = total2.toString();
                 //alert("paypal"+this.paymentAmountEnvio)
-                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Descripcion', 'Venta en REACSA');
+                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Description', 'sale');
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
 
                     setTimeout(() => {
@@ -330,11 +336,27 @@ export class CheckoutPage implements OnInit {
             if (tipo == 1) {
                 this.payWithPaypal(false); //Sin envio
             } else if (tipo == 2) {
-                this.payWithCard(false);
+                console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+                console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+                console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+                console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+                if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+                    this.payWithCard(false);
+                }else{
+                    this.navCtrl.navigateRoot(['/pagonoexitoso'])
+                }
             } else if (tipo == 3) {
                 this.payWithPaypal(true); //Con envio
             } else if (tipo == 4) {
-                this.payWithCard(true);
+                console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+                console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+                console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+                console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+                if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+                    this.payWithCard(true);
+                }else{
+                    this.navCtrl.navigateRoot(['/pagonoexitoso'])
+                }
             }
         }
     }

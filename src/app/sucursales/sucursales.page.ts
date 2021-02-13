@@ -59,10 +59,16 @@ export class SucursalesPage implements OnInit {
             this.sucursales.forEach(sucursal => {
                 if (sucursal.id_sucursal == this.sucursalActual.id_sucursal) {
                     let coordenadas = sucursal.coordenadas.split(", ");
+
+                    console.log("Parse Int:" + parseInt(coordenadas[0]))
+                    console.log("Parse Int:" + parseInt(coordenadas[0]))
+                    console.log("Parse Float:" + parseFloat(coordenadas[0]))
+                    console.log("Parse Float:" + parseFloat(coordenadas[0]))
+
                     let marcador: MarcadoMap = {
                         position: {
-                            lat: parseInt(coordenadas[0]),
-                            lng: parseInt(coordenadas[1])
+                            lat: parseFloat(coordenadas[0]),
+                            lng: parseFloat(coordenadas[1])
                         },
                         title: sucursal.nombre
                     }
@@ -75,7 +81,7 @@ export class SucursalesPage implements OnInit {
                         telefono_2:sucursal.telefono_2,
                         mail:sucursal.mail,
                         direccion:sucursal.direccion
-                        }
+                    }
                     console.log("0")
                     this.loadMap(marcador);
                     console.log("1") 
@@ -95,10 +101,14 @@ export class SucursalesPage implements OnInit {
         this.sucursales.forEach(sucursal => {
             if (sucursal.id_sucursal == this.sucursalActual.id_sucursal) {
                 let coordenadas = sucursal.coordenadas.split(", ");
+                console.log("Parse Int:" + parseInt(coordenadas[0]))
+                console.log("Parse Int:" + parseInt(coordenadas[0]))
+                console.log("Parse Float:" + parseFloat(coordenadas[0]))
+                console.log("Parse Float:" + parseFloat(coordenadas[0]))
                 let marcador: MarcadoMap = {
                     position: {
-                        lat: parseInt(coordenadas[0]),
-                        lng: parseInt(coordenadas[1])
+                        lat: parseFloat(coordenadas[0]),
+                        lng: parseFloat(coordenadas[1])
                     },
                     title: sucursal.nombre
                 }
@@ -208,7 +218,7 @@ export class SucursalesPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/usuario']);
+        this.router.navigate(['/editarperfil']);
     }
     onclickProducto() {
         this.router.navigate(['/producto']);

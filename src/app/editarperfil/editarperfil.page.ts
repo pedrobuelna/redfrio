@@ -94,10 +94,10 @@ export class EditarperfilPage implements OnInit {
                 console.log("cfdis: ", cfdis);
             });
         this.taskService.getEstados()
-            .subscribe(estados => {
-                this.estados = estados;
-                console.log("estados: ", estados);
-            });
+        .subscribe(estados => {
+            this.estados = estados;
+            console.log("estados: ", estados);
+        });
         
         this.nativeStorage.getItem('app')
             .then(
