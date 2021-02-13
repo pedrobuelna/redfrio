@@ -69,7 +69,7 @@ export class CheckoutPage implements OnInit {
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
-            direccion: [[Validators.required]],
+            direccion: ['',[Validators.required]],
             // nombre: ['', [Validators.required, Validators.minLength(2)]],
             // apellido: ['', [Validators.required, Validators.minLength(2)]],
             // calle: ['', [Validators.required]],
@@ -262,7 +262,7 @@ export class CheckoutPage implements OnInit {
     payWithPaypal(envio: boolean) {
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-            PayPalEnvironmentSandbox: 'AYxxBdHjJbPGRcgMLaycY-jXkZLYvJPcWpsji7BexCSdZHdf6bOW8pDOpqpohmp7K7WhKT5_k4PUil5V'
+            PayPalEnvironmentSandbox: 'ATEWbAHvqQBlwXM_EZblYB7UQ5sjVn75jooKEl9zzI2gIRIKS5U3Zv-_PW5qfL8WVitE00SRuqlybv1t'
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
             this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({

@@ -19,7 +19,8 @@
         <form [formGroup]="ionicForm" novalidate>
             <ion-item>
                 <ion-label position="floating">Direcciones</ion-label>
-                <ion-select formControlName="direccion">
+                <ion-select formControlName="direccion" value="">
+                    <ion-select-option value="">Seleccione una dirección</ion-select-option>
                     <ion-select-option *ngFor="let direccion of direcciones" value="{{direccion.uuid_direccion}}">
                         {{ direccion.sub_name }}</ion-select-option>
                 </ion-select>

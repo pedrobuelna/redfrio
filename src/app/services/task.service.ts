@@ -222,7 +222,7 @@ export class TaskService {
     //validaciones imagenes
     validarImg(url) {
         return new Promise(function(resolve, reject) {
-        var timeout = 1000;//5000;
+        var timeout = 1500;//5000;
         var timer, img = new Image();
         img.onerror = img.onabort = function() {
             clearTimeout(timer);

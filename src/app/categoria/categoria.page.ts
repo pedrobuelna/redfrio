@@ -33,7 +33,7 @@ export class CategoriaPage implements OnInit {
         console.log("valor: " + this.valorSelect)
         let id = parseInt(event.detail.value);
         let ordernarpor = $("#categoria_select2").val();
-        this.taskService.getProductos(id,ordernarpor)
+        this.taskService.getProductos(id, ordernarpor)
             .subscribe(productos2 => {
                 this.productos2 = productos2;
                 console.log(productos2)
@@ -64,17 +64,19 @@ export class CategoriaPage implements OnInit {
                 }
             });
     }
-    ngOnInit() {
+    loadVista() {
+        this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
+        this.valorSelect = this.x;
+        console.log("Valor queryParams");
+        console.log(this.valorSelect);
         this.valorOrdenar = "&order=destacado.desc"
         this.taskService.getFamilias()
             .subscribe(familias => {
                 this.familias = familias;
                 console.log(familias)
-                this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
-                this.valorSelect = this.x;
             });
         //alert(x)
-        if (this.x == "0") {
+        if (this.x == '0') {
             //alert("TODOS")
             this.taskService.getAllProductos()
                 .subscribe(productos2 => {
@@ -104,8 +106,11 @@ export class CategoriaPage implements OnInit {
                 });
         }
     }
+    ngOnInit() {
+        this.loadVista();
+    }
     ionViewWillEnter() {
-        
+        this.loadVista();
         this.nativeStorage.getItem('carrito')
             .then(
                 data => {
@@ -122,69 +127,63 @@ export class CategoriaPage implements OnInit {
                     console.error(error);
                 }
             );
-        this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
-        this.valorOrdenar = "&order=destacado.desc";
-        this.taskService.getFamilias()
-            .subscribe(familias => {
-                this.familias = familias;
-                setTimeout(() => {
-                    $("#categoria_select").val(parseInt(this.x));
-                }, 500);
-            });
-        //alert("x: "+x)
-        //alert(x)
-        if (this.x == "0") {
-            ////alert("TODOS")
-            this.taskService.getAllProductos()
-                .subscribe(productos2 => {
-                    this.productos2 = productos2;
-                    for (let i = 0; i < this.productos2.length; i++) {
-                        console.log("index : " + i);
-                        console.log(this.productos2[i]);
-                        this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                            this.productos2[i].url_img1 = "../../assets/images/no-image.png"
-                        });
-                    }
-                });
-        } else {
-            ////alert("familia "+ x)
-            let ordernarpor = $("#categoria_select2").val();
-            this.taskService.getProductos(this.x, ordernarpor)
-                .subscribe(productos2 => {
-                    this.productos2 = productos2;
-                    for (let i = 0; i < this.productos2.length; i++) {
-                        console.log("index : " + i);
-                        console.log(this.productos2[i]);
-                        this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                            this.productos2[i].url_img1 = "../../assets/images/no-image.png"
-                        });
-                    }
-                    $("#categoria_select").val(parseInt(this.x));
-                });
-        }
+        // this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
+        // this.valorOrdenar = "&order=destacado.desc";
+        // this.taskService.getFamilias()
+        //     .subscribe(familias => {
+        //         this.familias = familias;
+        //         setTimeout(() => {
+        //             $("#categoria_select").val(parseInt(this.x));
+        //         }, 500);
+        //     });
+        // //alert("x: "+x)
+        // //alert(x)
+        // if (this.x == "0") {
+        //     ////alert("TODOS")
+        //     this.taskService.getAllProductos()
+        //         .subscribe(productos2 => {
+        //             this.productos2 = productos2;
+        //             for (let i = 0; i < this.productos2.length; i++) {
+        //                 console.log("index : " + i);
+        //                 console.log(this.productos2[i]);
+        //                 this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+        //                     this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+        //                 });
+        //             }
+        //         });
+        // } else {
+        //     ////alert("familia "+ x)
+        //     let ordernarpor = $("#categoria_select2").val();
+        //     this.taskService.getProductos(this.x, ordernarpor)
+        //         .subscribe(productos2 => {
+        //             this.productos2 = productos2;
+        //             for (let i = 0; i < this.productos2.length; i++) {
+        //                 console.log("index : " + i);
+        //                 console.log(this.productos2[i]);
+        //                 this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+        //                     this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+        //                 });
+        //             }
+        //             $("#categoria_select").val(parseInt(this.x));
+        //         });
+        // }
     }
     onclickNotificaciones() {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/notificaciones']);
     }
     onclickUbicaciones() {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/ubicaciones']);
     }
     onclickMenu() {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/principal']);
     }
     onclickCategorias() {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/usuario']);
     }
     onclickProducto(id) {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/producto'], {
             queryParams: {
                 id: id
@@ -193,7 +192,6 @@ export class CategoriaPage implements OnInit {
         //this.router.navigate(['/producto']);
     }
     onClickCarrito() {
-        this.valorOrdenar = "&order=destacado.desc"
         this.router.navigate(['/carrito']);
     }
 }

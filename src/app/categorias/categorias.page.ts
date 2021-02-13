@@ -42,7 +42,7 @@ export class CategoriasPage implements OnInit {
     this.taskService.getFamilias()
     .subscribe(familias => {
         this.familias = familias;
-        console.log(familias)
+        console.log(familias);
     });
   }
   onclickNotificaciones(){
@@ -61,6 +61,8 @@ export class CategoriasPage implements OnInit {
     this.router.navigate(['/editarperfil']);
   }
   onclickCategoria(id){
+      console.log("Familia==>");
+      console.log(id);
     this.router.navigate(['/categoria'], {
       queryParams: {
           id: id
