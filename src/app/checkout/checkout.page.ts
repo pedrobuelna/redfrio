@@ -273,7 +273,7 @@ export class CheckoutPage implements OnInit {
                 this.paymentAmountEnvio = total2.toString();
                 this.totalCompra=total2;
                 //alert("paypal"+this.paymentAmountEnvio)
-                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Description', 'sale');
+                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en reacsa', 'sale');
 
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
 
