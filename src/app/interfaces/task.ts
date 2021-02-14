@@ -118,7 +118,6 @@ export interface Notificaciones {
   fecha: string;
   descripcion: string;
   url_imagen: string;
-  icono: string;
   status: string;
 }
 export interface Notificacion {

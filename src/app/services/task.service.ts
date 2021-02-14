@@ -146,12 +146,16 @@ export class TaskService {
         const path = `${this.api}/carrito_detalles?uuid_carrito=eq.${uuid_carrito}&&uuid_producto=eq.${uuid_producto}`;
         return this.http.delete(path);
     }
-    getNotificaciones() {
-        const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f`;
-        return this.http.get<Notificaciones[]>(path);
-    }
-    getNotificacionesNoLeidas() {
-        const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0`;
+    // getNotificaciones() {
+    //     const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f`;
+    //     return this.http.get<Notificaciones[]>(path);
+    // }
+    // getNotificacionesNoLeidas() {
+    //     const path = `${this.api}/notificaciones?uuid_cliente=eq.8e96af95-4575-47e9-a2aa-b56aba2f035f&status=eq.0`;
+    //     return this.http.get<Notificaciones[]>(path);
+    // }
+    getNotificaciones(uuid_cliente:string) {
+        const path = `${this.api}/status=eq.1&&uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get<Notificaciones[]>(path);
     }
     getDirecciones() {

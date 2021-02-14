@@ -5,6 +5,9 @@ import { MyModalPage } from '../modals/my-modal/my-modal.page';
 import { DatePipe } from '@angular/common';
 import {TaskService} from '../services/task.service';
 import { Notificacion } from '../interfaces/task';
+import {
+    NativeStorage
+} from '@ionic-native/native-storage/ngx';
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.page.html',
@@ -16,9 +19,12 @@ export class NotificacionesPage implements OnInit {
   tasks: Notificacion[] = [];
   notificaciones:any;
   cantidadNot:any;
-  constructor(private router: Router,private datePipe: DatePipe,
+  constructor(
+    private router: Router,
+    private datePipe: DatePipe,
     private taskService: TaskService,
-    public modalController: ModalController) { 
+    public modalController: ModalController,
+    private nativeStorage: NativeStorage) { 
       
     }
     currentDate:any  = new Date();
@@ -90,29 +96,39 @@ export class NotificacionesPage implements OnInit {
       
     }
   ngOnInit() {
-    this.taskService.getNotificacionesNoLeidas()
-      .subscribe(notificaciones => {
-          this.notificaciones = notificaciones;
-          this.cantidadNot = this.notificaciones.length
+    // this.taskService.getNotificacionesNoLeidas()
+    //   .subscribe(notificaciones => {
+    //       this.notificaciones = notificaciones;
+    //       this.cantidadNot = this.notificaciones.length
           
-      });
-    this.taskService.getNotificaciones()
-      .subscribe(listas => {
-          this.listas = listas;
-    });
-    var fecha = new Date();
-        var options = { year: 'numeric', month: 'long', day: 'numeric' };
-        console.log(
-          fecha.toLocaleDateString("es-ES", options)
-        );
-        this.currentDate = fecha.toLocaleDateString("es-ES", options)
+    //   });
+    this.nativeStorage.getItem('app')
+    .then(
+        app => {
+            console.log("==APP DATA==");
+            console.log(app);
+            console.log("uuid_cliente: "+app.uuid_cliente);
+            this.taskService.getNotificaciones(app.uuid_cliente)
+            .subscribe(listas => {
+                this.listas = listas;
+            });
+        },
+        error => console.error("NO HAY UUID_CLIENTE")
+    );
+    
+    // var fecha = new Date();
+    //     var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    //     console.log(
+    //       fecha.toLocaleDateString("es-ES", options)
+    //     );
+    //     this.currentDate = fecha.toLocaleDateString("es-ES", options)
   }
   ionViewWillEnter(){
-    this.taskService.getNotificacionesNoLeidas()
-      .subscribe(notificaciones => {
-          this.notificaciones = notificaciones;
-          this.cantidadNot = this.notificaciones.length
-      });
+    // this.taskService.getNotificacionesNoLeidas()
+    //   .subscribe(notificaciones => {
+    //       this.notificaciones = notificaciones;
+    //       this.cantidadNot = this.notificaciones.length
+    //   });
   }
   onclickNotificaciones(){
     this.taskService.getNotificaciones()
