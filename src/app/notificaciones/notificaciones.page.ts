@@ -111,6 +111,7 @@ export class NotificacionesPage implements OnInit {
             this.taskService.getNotificaciones(app.uuid_cliente)
             .subscribe(listas => {
                 this.listas = listas;
+                //ok pedro
             });
         },
         error => console.error("NO HAY UUID_CLIENTE")
