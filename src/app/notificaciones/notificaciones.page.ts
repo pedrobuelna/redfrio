@@ -164,15 +164,21 @@ export class NotificacionesPage implements OnInit {
         //   });
     }
     onclickNotificaciones() {
-        this.taskService.getNotificaciones()
-            .subscribe(listas => {
-                this.listas = listas;
-            });
-        this.taskService.getNotificacionesNoLeidas()
-            .subscribe(notificaciones => {
-                this.notificaciones = notificaciones;
-                this.cantidadNot = this.notificaciones.length
-            });
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: "+app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                .subscribe(listas => {
+                    this.listas = listas;
+                    this.cantidadNot = this.listas.length
+                    //ok pedro
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         var fecha = new Date();
         var options = {
             year: 'numeric',
