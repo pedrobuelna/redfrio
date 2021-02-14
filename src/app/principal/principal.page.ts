@@ -135,11 +135,22 @@ export class PrincipalPage implements OnInit {
                     this.taskService.validarImg(this.productos2[i].url_img1).then(()=>{},e=>{this.productos2[i].url_img1="../../assets/images/no-image.png"});
                 }
             });
-        this.taskService.getNotificacionesNoLeidas()
-            .subscribe(notificaciones => {
-                this.notificaciones = notificaciones;
-                this.cantidadNot = this.notificaciones.length
-            });
+    }
+    ionViewWillEnter() {
+        this.nativeStorage.getItem('app')
+            .then(
+                app => {
+                    console.log("==APP DATA==");
+                    console.log(app);
+                    console.log("uuid_cliente: " + app.uuid_cliente);
+                    this.taskService.getNotificaciones(app.uuid_cliente)
+                        .subscribe(notificaciones => {
+                            this.notificaciones = notificaciones;
+                            this.cantidadNot = this.notificaciones.length
+                        });
+                },
+                error => console.error("NO HAY UUID_CLIENTE")
+            );
     }
     //ionViewWillEnter() {
     ionViewWillLeave() {
