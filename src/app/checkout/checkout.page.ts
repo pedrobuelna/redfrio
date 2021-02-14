@@ -262,7 +262,7 @@ export class CheckoutPage implements OnInit {
     payWithPaypal(envio: boolean) {
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-            PayPalEnvironmentSandbox: 'ATEWbAHvqQBlwXM_EZblYB7UQ5sjVn75jooKEl9zzI2gIRIKS5U3Zv-_PW5qfL8WVitE00SRuqlybv1t'
+            PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
             this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
