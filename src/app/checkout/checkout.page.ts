@@ -328,7 +328,7 @@ export class CheckoutPage implements OnInit {
                                         console.log("Nuevo carrito activo.");
                                         console.log(carrito_activo_nuevo);
                                         this.nativeStorage.setItem('carrito', {
-                                            uuid_carrito: carrito_activo_nuevo.uuid_carrito,
+                                            uuid_carrito: carrito_activo_nuevo[0].uuid_carrito,
                                             cantidad: 0
                                         }).then(
                                             () => {
