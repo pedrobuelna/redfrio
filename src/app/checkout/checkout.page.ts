@@ -317,16 +317,31 @@ export class CheckoutPage implements OnInit {
                         uuid_direccion:this.ionicForm.value.direccion,
                         info_pago:JSON.stringify(data)
                     }).subscribe(() => {
-                        this.nativeStorage.setItem('carrito', {
-                            uuid_carrito: carrito.uuid_carrito,
-                            cantidad: 0
-                        }).then(
-                            () => {
-                                console.log('Actualizado APPDATA ==>');
-                                console.log(carrito);
-                                this.navCtrl.navigateRoot(['/pagoexitoso'])
+                        this.nativeStorage.getItem('app')
+                        .then(
+                            app => {
+                                console.log("==APP DATA==");
+                                console.log(app);
+                                console.log("uuid_cliente: "+app.uuid_cliente);
+                                this.taskService.setCarritoActivo({uuid_cliente:app.uuid_cliente}).subscribe(() => {
+                                    this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carrito_activo_nuevo => {
+                                        console.log("Nuevo carrito activo.");
+                                        console.log(carrito_activo_nuevo);
+                                        this.nativeStorage.setItem('carrito', {
+                                            uuid_carrito: carrito_activo_nuevo.uuid_carrito,
+                                            cantidad: 0
+                                        }).then(
+                                            () => {
+                                                console.log('Actualizado APPDATA ==>');
+                                                console.log(carrito);
+                                                this.navCtrl.navigateRoot(['/pagoexitoso'])
+                                            },
+                                            error => console.error('Error storing item', error)
+                                        );
+                                    });
+                                });
                             },
-                            error => console.error('Error storing item', error)
+                            error => console.error("NO HAY UUID_CLIENTE")
                         );
                     });
                 },
