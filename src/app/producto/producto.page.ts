@@ -215,6 +215,8 @@ export class ProductoPage implements OnInit {
                             uuid_producto:this.idProducto,
                             cantidad:1
                         }
+                        console.log("Insertando producto al carrito...");
+                        console.log(dataSetProducto);
                         this.taskService.setProductoToCarrito(dataSetProducto).subscribe(()=>{
                             this.getUuidCliente()
                         });
