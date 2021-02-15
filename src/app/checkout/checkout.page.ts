@@ -61,6 +61,9 @@ export class CheckoutPage implements OnInit {
     fechaAnoTarjeta:any;
     cvvTarjeta:any;
     totalCompra:number;
+    uuid_notificacion: any;
+    listas: any;
+    cantidadNot: any;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         // this.ionicForm = new FormGroup({
@@ -133,7 +136,21 @@ export class CheckoutPage implements OnInit {
         //this.total = parseFloat(this.tax) + parseFloat(this.subtotal) + parseFloat(this.envio) 
         //this.paymentAmount = this.total.toString()
         //Radios de forma de envio
-
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(listas => {
+                        this.listas = listas;
+                        this.cantidadNot = this.listas.length
+                        //ok pedro
+                    });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         this.taskService.getSucursales()
             .subscribe(sucursales => {
                 this.sucursales = sucursales;

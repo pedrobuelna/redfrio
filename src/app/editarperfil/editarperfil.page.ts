@@ -58,6 +58,9 @@ export class EditarperfilPage implements OnInit {
     perfiles: any;
     cfdis: any;
     estados: any;
+    uuid_notificacion: any;
+    listas: any;
+    cantidadNot: any;
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
@@ -86,7 +89,23 @@ export class EditarperfilPage implements OnInit {
     get errorControl() {
         return this.ionicForm.controls;
     }
-    ngOnInit() {}
+    ngOnInit() {
+        this.nativeStorage.getItem('app')
+            .then(
+                app => {
+                    console.log("==APP DATA==");
+                    console.log(app);
+                    console.log("uuid_cliente: " + app.uuid_cliente);
+                    this.taskService.getNotificaciones(app.uuid_cliente)
+                        .subscribe(listas => {
+                            this.listas = listas;
+                            this.cantidadNot = this.listas.length
+                            //ok pedro
+                        });
+                },
+                error => console.error("NO HAY UUID_CLIENTE")
+            );
+    }
     ionViewDidEnter() {
         this.taskService.getCfdi()
             .subscribe(cfdis => {

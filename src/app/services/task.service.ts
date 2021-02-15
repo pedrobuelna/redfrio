@@ -155,7 +155,7 @@ export class TaskService {
     //     return this.http.get<Notificaciones[]>(path);
     // }
     getNotificaciones(uuid_cliente:string) {
-        const path = `${this.api}/status=eq.1&&uuid_cliente=eq.${uuid_cliente}`;
+        const path = `${this.api}/notificaciones?status=eq.1&&uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get<Notificaciones[]>(path);
     }
     getDirecciones() {

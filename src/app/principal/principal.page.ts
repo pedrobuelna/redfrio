@@ -144,6 +144,7 @@ export class PrincipalPage implements OnInit {
                     console.log(app);
                     console.log("uuid_cliente: " + app.uuid_cliente);
                     this.taskService.getNotificaciones(app.uuid_cliente)
+                    
                         .subscribe(notificaciones => {
                             this.notificaciones = notificaciones;
                             this.cantidadNot = this.notificaciones.length
@@ -174,11 +175,11 @@ export class PrincipalPage implements OnInit {
         //   alert("FirstPage onConnect oninit");
         //   this.navCtrl.navigateBack;
         //  });
-        this.taskService.getNotificacionesNoLeidas()
-            .subscribe(notificaciones => {
-                this.notificaciones = notificaciones;
-                this.cantidadNot = this.notificaciones.length
-            });
+        // this.taskService.getNotificacionesNoLeidas()
+        //     .subscribe(notificaciones => {
+        //         this.notificaciones = notificaciones;
+        //         this.cantidadNot = this.notificaciones.length
+        //     });
 
         this.nativeStorage.getItem('carrito')
         .then(

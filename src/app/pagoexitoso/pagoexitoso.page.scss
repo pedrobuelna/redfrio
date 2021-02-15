@@ -1,0 +1,7 @@
+#splash{height: 100vh;background-color: #ffffff;width: 100%;position: fixed;left: 0;top: 0;z-index: 10;}
+#content_letras{font-size: 35px;margin-top: 113px;margin-left: 56px;color: #0F0E9F;}
+#splash.quitSplash{display:block;top: 100%;opacity: 1;transition-duration: 0.6s;top: 0;}
+.circulo{width: 150px;height: 150px; border: 2px solid #DD0330; color: #00257C; border-radius: 50%; margin-top: 50px; margin-left: 56px;text-align: center;}
+.texto_circulo{position: relative; top: calc(50% - 8px); text-align: center; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); }
+.hide{display: none;}
+.btnpaypal{margin-bottom: 100px;}
