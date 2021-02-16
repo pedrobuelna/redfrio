@@ -33,7 +33,7 @@ export class NotificacionesPage implements OnInit {
     dataReturned: any;
     tasks: Notificacion[] = [];
     notificaciones: any;
-    cantidadNot: any;
+    cantidadNot: any = 0;
     constructor(
         private router: Router,
         private datePipe: DatePipe,
@@ -43,9 +43,11 @@ export class NotificacionesPage implements OnInit {
 
     }
     currentDate: any = new Date();
-    uuid_cliente: any = "8e96af95-4575-47e9-a2aa-b56aba2f035f";
+    uuid_cliente: any ;
     uuid_notificacion: any;
     listas: any;
+    cantidadOn:any;
+    listas2:any;
     // lista: Array<any> = [
     //   {
     //     titulo: "Oferta de fin de semana",
@@ -62,43 +64,45 @@ export class NotificacionesPage implements OnInit {
     //     estatus:0
     //   },
     //]
-
-    async openModal(index) {
-        this.uuid_notificacion = this.listas[index].uuid_notificacion
-
+    async openModal(index,idNotificacion,uuidcliente) {
         const modal = await this.modalController.create({
             component: MyModalPage,
             componentProps: {
-                "titulo": this.listas[index].titulo,
-                "descripcion": this.listas[index].descripcion,
-                "url_imagen": this.listas[index].url_imagen,
-                "fecha": this.listas[index].fecha,
+                "titulo": this.listas2[index].titulo,
+                "descripcion": this.listas2[index].descripcion,
+                "url_imagen": this.listas2[index].url_imagen,
+                "fecha": this.listas2[index].fecha,
                 "uuid_cliente": this.uuid_cliente,
-                "uuid_notificacion": this.listas[index].uuid_notificacion,
-                "status": this.listas[index].status,
+                "uuid_notificacion": this.listas2[index].uuid_notificacion,
+                "status": this.listas2[index].status,
             }
-
         });
         const Notificacion = {
             status: "1"
         };
-        this.taskService.updateNotificacion(Notificacion, this.uuid_cliente, this.uuid_notificacion)
+        this.taskService.updateNotificacion(Notificacion, uuidcliente, idNotificacion)
             .subscribe(listas => {
+                
                 this.nativeStorage.getItem('app')
-                    .then(
-                        app => {
-                            console.log("==APP DATA==");
-                            console.log(app);
-                            console.log("uuid_cliente: " + app.uuid_cliente);
-                            this.taskService.getNotificaciones(app.uuid_cliente)
-                                .subscribe(listas => {
-                                    this.listas = listas;
-                                    this.cantidadNot = this.listas.length
-                                    //ok pedro
-                                });
-                        },
-                        error => console.error("NO HAY UUID_CLIENTE")
-                    );
+                .then(
+                    app => {
+                        console.log("==APP DATA==");
+                        console.log(app);
+                        console.log("uuid_cliente: " + app.uuid_cliente);
+                        this.taskService.getNotificaciones(app.uuid_cliente)
+                            .subscribe(listas => {
+                                this.listas = listas;
+                                this.cantidadOn = this.listas.length
+                                //ok pedro
+                            });
+                        this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                        .subscribe(notificaciones => {
+                            this.notificaciones = notificaciones;
+                            this.cantidadNot = this.notificaciones.length
+                        });
+                    },
+                    error => console.error("NO HAY UUID_CLIENTE")
+                );
                 var fecha = new Date();
                 var options = {
                     year: 'numeric',
@@ -120,12 +124,6 @@ export class NotificacionesPage implements OnInit {
 
     }
     ngOnInit() {
-        // this.taskService.getNotificacionesNoLeidas()
-        //   .subscribe(notificaciones => {
-        //       this.notificaciones = notificaciones;
-        //       this.cantidadNot = this.notificaciones.length
-
-        //   });
         var fecha = new Date();
         var options = {
             year: 'numeric',
@@ -142,43 +140,72 @@ export class NotificacionesPage implements OnInit {
                     this.taskService.getNotificaciones(app.uuid_cliente)
                         .subscribe(listas => {
                             this.listas = listas;
-                            this.cantidadNot = this.listas.length
+                            this.cantidadOn = this.listas.length
                             //ok pedro
                         });
+                    this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.notificaciones = notificaciones;
+                        this.cantidadNot = this.notificaciones.length
+                    });
+                    this.taskService.getNotificacionesModal(app.uuid_cliente)
+                    .subscribe(listas => {
+                        //this.listas = listas;
+                        this.listas2 = listas;
+                        //this.cantidadOn = this.listas.length
+                    });
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
-
-        // var fecha = new Date();
-        //     var options = { year: 'numeric', month: 'long', day: 'numeric' };
-        //     console.log(
-        //       fecha.toLocaleDateString("es-ES", options)
-        //     );
-        //     this.currentDate = fecha.toLocaleDateString("es-ES", options)
     }
     ionViewWillEnter() {
-        // this.taskService.getNotificacionesNoLeidas()
-        //   .subscribe(notificaciones => {
-        //       this.notificaciones = notificaciones;
-        //       this.cantidadNot = this.notificaciones.length
-        //   });
-    }
-    onclickNotificaciones() {
         this.nativeStorage.getItem('app')
         .then(
             app => {
                 console.log("==APP DATA==");
                 console.log(app);
-                console.log("uuid_cliente: "+app.uuid_cliente);
+                console.log("uuid_cliente: " + app.uuid_cliente);
                 this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+                this.taskService.getNotificacionesModal(app.uuid_cliente)
                 .subscribe(listas => {
-                    this.listas = listas;
-                    this.cantidadNot = this.listas.length
-                    //ok pedro
+                    //this.listas = listas;
+                    this.listas2 = listas;
+                    //this.cantidadOn = this.listas.length
                 });
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
+    }
+    onclickNotificaciones() {
+        this.nativeStorage.getItem('app')
+            .then(
+                app => {
+                    console.log("==APP DATA==");
+                    console.log(app);
+                    console.log("uuid_cliente: " + app.uuid_cliente);
+                    this.taskService.getNotificaciones(app.uuid_cliente)
+                        .subscribe(listas => {
+                            this.listas = listas;
+                            this.cantidadOn = this.listas.length
+                            //ok pedro
+                        });
+                    this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.notificaciones = notificaciones;
+                        this.cantidadNot = this.notificaciones.length
+                    });
+                },
+                error => console.error("NO HAY UUID_CLIENTE")
+            );
         var fecha = new Date();
         var options = {
             year: 'numeric',

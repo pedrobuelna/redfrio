@@ -76,7 +76,7 @@
                     </span>
                     <ion-item>
                         <ion-label position="floating">Numero de tarjeta *</ion-label>
-                        <ion-input formControlName="numeroTarjeta" id="numeroTarjeta"></ion-input>
+                        <ion-input formControlName="numeroTarjeta" id="numeroTarjeta" type="number"></ion-input>
                     </ion-item>
                     <!-- Error messages -->
                     <span class="error ion-padding" color="danger"
@@ -150,7 +150,7 @@
                     </span>
                     <ion-item>
                         <ion-label position="floating">Codigo de seguridad (CVV) *</ion-label>
-                        <ion-input formControlName="cvvTarjeta" id="cvvTarjeta"></ion-input>
+                        <ion-input formControlName="cvvTarjeta" id="cvvTarjeta" type="number"></ion-input>
                     </ion-item>
                     <!-- Error messages -->
                     <!-- <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.cvvTarjeta.errors?.pattern">

@@ -72,7 +72,7 @@ export class SucursalcercaPage implements OnInit {
   async presentLoading() {
     this.loading = await this.loadingController.create({
       cssClass: 'clase-loading',
-      message: 'Buscando posisionamiento...',
+      message: 'Buscando Posicionamiento...',
     });
     await this.loading.present();
   }

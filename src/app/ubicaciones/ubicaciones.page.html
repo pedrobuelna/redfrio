@@ -29,6 +29,7 @@
   <ul>
     <li>
       <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+      <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
     </li>
     <li>
       <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">

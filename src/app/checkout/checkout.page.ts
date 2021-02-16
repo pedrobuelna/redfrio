@@ -235,7 +235,6 @@ export class CheckoutPage implements OnInit {
                 if ($(this).is(":checked")) { // check if the radio is checked
                     var val = $(this).val(); // retrieve the value
                     if ($(this).val() == "paypal") {
-                        
                         $(".btntarjeta").addClass("hide")
                         $(".btnpaypal").removeClass("hide")
                         $(".datosTarjeta").addClass("hide")
@@ -316,7 +315,8 @@ export class CheckoutPage implements OnInit {
         let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
         this.totalCompra=total2;
         alert("Gracias por su pago " + ((envio == true) ? "con envio" : " sin envio"));
-        this.pagoAutorizado(2, "Debito")
+        let id_transaccion = Math.floor(Math.random() * 10000000) + 1000000;;
+        this.pagoAutorizado(2, id_transaccion)
     }
     pagoAutorizado(tipo: number, data: any) {
         //1 paypal,2 tarjeta
@@ -332,7 +332,7 @@ export class CheckoutPage implements OnInit {
                         id_tipo_pago:tipo,
                         total:this.totalCompra,
                         uuid_direccion:this.ionicForm.value.direccion,
-                        info_pago:JSON.stringify(data)
+                        info_pago:data
                     }).subscribe(() => {
                         this.nativeStorage.getItem('app')
                         .then(

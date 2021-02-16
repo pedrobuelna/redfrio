@@ -61,15 +61,13 @@ export class EditarperfilPage implements OnInit {
     uuid_notificacion: any;
     listas: any;
     cantidadNot: any;
+    notificaciones: any;
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
         private taskService: TaskService,
         public navCtrl: NavController,
         private nativeStorage: NativeStorage) {
-        // this.ionicForm = new FormGroup({
-        //   nombre: new FormControl()
-        // });
         this.ionicForm = this.formBuilder.group({
             nombre: ['', [Validators.required, Validators.pattern('[A-Z ]*'), Validators.minLength(5), Validators.maxLength(40)]],
             nombre_2: ['', [Validators.maxLength(40)]],
@@ -100,13 +98,71 @@ export class EditarperfilPage implements OnInit {
                         .subscribe(listas => {
                             this.listas = listas;
                             this.cantidadNot = this.listas.length
-                            //ok pedro
                         });
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
+              
     }
+    ionViewWillEnter(){
+        this.nativeStorage.getItem('app')
+        .then(
+          app => {
+              console.log("==APP DATA==");
+              console.log(app);
+              console.log("uuid_cliente: " + app.uuid_cliente);
+              this.taskService.getNotificaciones(app.uuid_cliente)
+                  .subscribe(notificaciones => {
+                      this.listas = notificaciones;
+                      //this.cantidadNot = this.notificaciones.length
+                  });
+              this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+              .subscribe(notificaciones => {
+                  this.notificaciones = notificaciones;
+                  this.cantidadNot = this.notificaciones.length
+              });
+          },
+          error => console.error("NO HAY UUID_CLIENTE")
+        );
+      }
     ionViewDidEnter() {
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         this.taskService.getCfdi()
             .subscribe(cfdis => {
                 this.cfdis = cfdis;

@@ -18,9 +18,50 @@ export class CategoriasPage implements OnInit {
 
   familias:any;
   cantidadActualCarrito:any;
-
+  notificaciones: any;
+  cantidadNot: any = 0;
+  listas: any;
   ngOnInit() {
-    
+    this.nativeStorage.getItem('app')
+    .then(
+        app => {
+            console.log("==APP DATA==");
+            console.log(app);
+            console.log("uuid_cliente: " + app.uuid_cliente);
+            this.taskService.getNotificaciones(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.listas = notificaciones;
+                    //this.cantidadNot = this.notificaciones.length
+                });
+            this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+            .subscribe(notificaciones => {
+                this.notificaciones = notificaciones;
+                this.cantidadNot = this.notificaciones.length
+            });
+        },
+        error => console.error("NO HAY UUID_CLIENTE")
+    );
+  }
+  ionViewWillEnter(){
+    this.nativeStorage.getItem('app')
+    .then(
+      app => {
+          console.log("==APP DATA==");
+          console.log(app);
+          console.log("uuid_cliente: " + app.uuid_cliente);
+          this.taskService.getNotificaciones(app.uuid_cliente)
+              .subscribe(notificaciones => {
+                  this.listas = notificaciones;
+                  //this.cantidadNot = this.notificaciones.length
+              });
+          this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+          .subscribe(notificaciones => {
+              this.notificaciones = notificaciones;
+              this.cantidadNot = this.notificaciones.length
+          });
+      },
+      error => console.error("NO HAY UUID_CLIENTE")
+    );
   }
   ionViewDidEnter(){
     this.nativeStorage.getItem('carrito')

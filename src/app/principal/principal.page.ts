@@ -64,12 +64,13 @@ export class PrincipalPage implements OnInit {
 
     productos2: any;
     notificaciones: any;
-    cantidadNot: any;
+    cantidadNot: any = 0;
     banners: any;
     cantidadActualCarrito: number;
     AppData: any[] = [];
     subscription:any;
-
+    cantidadOn:any;
+    listas: any;
     constructor(
         private router: Router,
         private renderer: Renderer2,
@@ -79,42 +80,30 @@ export class PrincipalPage implements OnInit {
         public navCtrl: NavController,
         private nativeStorage: NativeStorage
     ) {
-        // this.platform.ready().then(() => {
-        //     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-        //         console.log('network was disconnected :-(');
-        //         this.ionLoader.showLoader();
-        //         //alert("Desconectado a Inernet");
-        //         //this.router.navigate(['/sinconexion']);
-        //     });
-        //     //disconnectSubscription.unsubscribe();
-        //     let connectSubscription = this.network.onConnect().subscribe(() => {
-        //         console.log('network was connected :-)');
-        //         this.ionLoader.hideLoader();
-        //         // alert("Conectado a Inernet");
-        //         //     this.nativeStorage.getItem('app')
-        //         //     .then(
-        //         //         app => {
-        //         //             //this.router.navigate(['/principal']);
-        //         //         },
-        //         //         error => {
-        //         //             this.router.navigate(['/home']);
-        //         //         }
-        //         //     );
-                
-        //         //this.navCtrl.pop();
-        //     });
-        //     //connectSubscription.unsubscribe();
-        // });
     }
     addMyClass() {
-        //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
-        // this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
-        //     // do on back button click
-        //     alert("NO!!");
-        // });
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         setTimeout(() => {
             this.addMyClass()
         }, 1500);
@@ -138,20 +127,24 @@ export class PrincipalPage implements OnInit {
     }
     ionViewWillEnter() {
         this.nativeStorage.getItem('app')
-            .then(
-                app => {
-                    console.log("==APP DATA==");
-                    console.log(app);
-                    console.log("uuid_cliente: " + app.uuid_cliente);
-                    this.taskService.getNotificaciones(app.uuid_cliente)
-                    
-                        .subscribe(notificaciones => {
-                            this.notificaciones = notificaciones;
-                            this.cantidadNot = this.notificaciones.length
-                        });
-                },
-                error => console.error("NO HAY UUID_CLIENTE")
-            );
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     }
     //ionViewWillEnter() {
     ionViewWillLeave() {

@@ -7,6 +7,7 @@ import {
     NavigationExtras,
     ActivatedRoute
 } from '@angular/router';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import {
     TaskService
 } from '../services/task.service';
@@ -18,7 +19,10 @@ import {
 export class UbicacionesPage implements OnInit {
     sucursales: any;
     tiendaSelected = 0;
-    constructor(private router: Router, private route: ActivatedRoute,
+    notificaciones: any;
+    cantidadNot: any = 0;
+    listas: any;
+    constructor(private router: Router, private route: ActivatedRoute,private nativeStorage: NativeStorage,
         private taskService: TaskService) {}
     ngOnInit() {
         this.taskService.getAllTasks()
@@ -26,15 +30,46 @@ export class UbicacionesPage implements OnInit {
                 this.sucursales = sucursales;
         });
         $("#categoria_select").val("0")
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     }
     ionViewWillEnter(){
-        //this.tiendaSelected=0;
-        // alert(this.tiendaSelected)
-        // this.taskService.getAllTasks()
-        //     .subscribe(sucursales => {
-        //         this.sucursales = sucursales;
-        // });
-
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     }
     goSucursales(event) {
         this.router.navigate(['/sucursales'], {
