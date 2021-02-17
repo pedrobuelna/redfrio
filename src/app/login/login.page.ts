@@ -2,34 +2,19 @@ import {
     Component,
     OnInit
 } from '@angular/core';
-import {
-    Router
-} from '@angular/router';
+import {Router} from '@angular/router';
 import {
     FormGroup,
     FormBuilder,
     Validators,
-    FormControl
-} from "@angular/forms";
-import {
-    TaskService
-} from '../services/task.service';
-import {
-    Task
-} from '../interfaces/task';
-import {
-    ActivatedRoute
-} from '@angular/router';
-import {
-    Md5
-} from 'ts-md5/dist/md5';
-import {
-    DbService
-} from '../services/db.service';
+    FormControl} from "@angular/forms";
+import {TaskService} from '../services/task.service';
+import {Task} from '../interfaces/task';
+import {ActivatedRoute} from '@angular/router';
+import {Md5} from 'ts-md5/dist/md5';
+import {DbService} from '../services/db.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AlertController,NavController } from '@ionic/angular';
-
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',

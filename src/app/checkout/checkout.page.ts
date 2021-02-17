@@ -49,7 +49,7 @@ export class CheckoutPage implements OnInit {
     paymentAmountEnvio: string;
     currency: string = 'USD';
     currencyIcon: string = '$';
-    tax: any = 10;
+    tax: any = .16;
     envio: any = 0;
     subtotal: any;
     total: any;
@@ -173,9 +173,8 @@ export class CheckoutPage implements OnInit {
         this.nativeStorage.getItem('totalCompra').then(
             totalCompra => {
                 this.subtotal = totalCompra;
-                var total1 = parseFloat(this.tax) + parseFloat(this.subtotal)
-                this.total = parseFloat(this.tax) + parseFloat(this.subtotal)
-                this.totalEnvio = parseFloat(this.tax) + parseFloat(this.subtotal) + parseFloat(this.envio)
+                this.total = parseFloat(this.subtotal)
+                this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio)
                 this.paymentAmount = this.total.toString()
                 this.paymentAmountEnvio = this.totalEnvio.toString()
                 var tax = parseFloat(this.tax)
@@ -184,12 +183,20 @@ export class CheckoutPage implements OnInit {
                         if ($(this).is(":checked")) {
                             if ($(this).val() == "gratis") {
                                 $(".envio").text(0)
-                                $(".total").text(total1)
+                                if(this.total != 0){
+                                    this.paymentAmount = this.paymentAmount + (this.paymentAmount *.16)
+                                    $(".total").text(this.paymentAmount)
+                                }else{
+                                    $(".total").text(0)
+                                }
                             } else {
                                 $(".envio").text(20)
-                                $(".total").text(total1 + 20)
-                                var tot = total1 + 20
-                                this.paymentAmount = tot.toString()
+                                if(this.total != 0){
+                                    this.paymentAmount = this.paymentAmount + (this.paymentAmount + 20) * .16
+                                    $(".total").text(this.paymentAmount)
+                                }else{
+                                    $(".total").text(0)
+                                }
                                 //alert(this.paymentAmount)
                             }
                         }
@@ -385,6 +392,7 @@ export class CheckoutPage implements OnInit {
                 console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
                 if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
                     this.payWithCard(false);
+                    
                 }else{
                     this.navCtrl.navigateRoot(['/pagonoexitoso'])
                 }

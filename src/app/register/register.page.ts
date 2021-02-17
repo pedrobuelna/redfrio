@@ -69,11 +69,6 @@ export class RegisterPage implements OnInit {
   }
   ngOnInit() {
     this.getTask()
-    // if(this.ionicForm.value.myBoolean == true){
-    //   this.mostrarDireccion1 = true;
-    // }else{
-    //   this.mostrarDireccion1 = false;
-    // }
     this.taskService.getCfdi()
     .subscribe(cfdis => {
        console.log("cfdis: ",cfdis);
@@ -86,24 +81,15 @@ export class RegisterPage implements OnInit {
        console.log("nombre: ",task);
     });
   }
-  // register(form) {
-  //   this.authService.register(form.value).subscribe((res) => {
-  //     this.router.navigateByUrl('home');
-  //   });
-  //}
   muestraDireccion2(){
     if(this.ionicForm.value.myBoolean == true){
       this.mostrarDireccion1 = true;
       this.calle2Required = true;
-      //alert("valor1: "+this.ionicForm.value.calle2)
       this.ionicForm["controls"]["rfc"].reset();
       this.ionicForm["controls"]["uso_cfdi"].reset();
     }else{
-      //alert("valor3: "+this.ionicForm.value.calle2)
       this.ionicForm.get('rfc').setValue("XAXX010101000");
       this.ionicForm.get('uso_cfdi').setValue("G03");
-      // this.ionicForm.value.rfc="XXXX000000XX3";
-      // this.ionicForm.value.uso_cfdi="XXX";
       this.mostrarDireccion1 = false;
       this.calle2Required = false;
     }
@@ -117,7 +103,6 @@ export class RegisterPage implements OnInit {
       console.log('Please provide all the required values!')
       return false;
     } else {
-      //alert('Form Completed' + this.ionicForm.value)
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
       this.emailcorreo = this.ionicForm.value.mail;
@@ -142,40 +127,28 @@ export class RegisterPage implements OnInit {
         if(cliente.length>0){
             alert("El correo ya se encuentra registrado.")
         }else{
-              this.taskService.createTask(task)
-                .subscribe((reply: any) => {
-                    //alert("Tus datos han sido guardados correctamente")
-                    //this.taskService.sendMailUsr(usrMail)
-                    console.log(usrMail)
-                    console.log(this.emailcorreo)
-                    this.taskService.sendMailActivacionUsuario(usrMail)
-                        .subscribe((sendMail: any) => {
-                            console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
-                        }, (err) => {
-                            console.log(err);
+          this.taskService.createTask(task)
+            .subscribe((reply: any) => {
+                //alert("Tus datos han sido guardados correctamente")
+                //this.taskService.sendMailUsr(usrMail)
+                console.log(usrMail)
+                console.log(this.emailcorreo)
+                this.taskService.sendMailActivacionUsuario(usrMail)
+                    .subscribe((sendMail: any) => {
+                        console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
+                        this.navCtrl.navigateRoot(['/registrado'],{
+                          queryParams: this.emailcorreo,
                         });
-                }, (err) => {
-                    console.log(err)
-                });
-                this.navCtrl.navigateRoot(['/login']);
+                    }, (err) => {
+                        console.log(err);
+                    });
+            }, (err) => {
+                console.log(err)
+            });
         }
       },er=>{});
-
     
-
-
-
-      // this.taskService.createTask(task)
-			// 	.subscribe((newTask) => {
-      //      // do happy stuff
-      //      alert("Tus datos han sido guardados correctamente")
-      //     }, (err) => {
-      //       // do alerty stuff
-      //       alert(err)
-      //     });
-      
-       }
-    
+      }
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

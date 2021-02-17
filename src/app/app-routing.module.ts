@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'agregardireccion',
     loadChildren: () => import('./agregardireccion/agregardireccion.module').then( m => m.AgregardireccionPageModule)
   },
+  {
+    path: 'registrado',
+    loadChildren: () => import('./registrado/registrado.module').then( m => m.RegistradoPageModule)
+  },
 ];
 
 @NgModule({

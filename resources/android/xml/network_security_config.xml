@@ -9,5 +9,6 @@
         <domain>localhost</domain>
         <domain>app.reacsa.mx</domain>
         <domain>app.reacsa.mx:3000</domain>
+        <domain>app.reacsa.mx:80</domain>
     </domain-config>
 </network-security-config>
