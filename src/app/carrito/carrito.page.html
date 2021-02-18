@@ -37,7 +37,6 @@
       </ion-grid>
     </div>
   </div>
-  
   <div class="content_subtotal">
     <div class="total">Total</div>
     <span class="subtotal_text">Subtotal</span>
@@ -47,7 +46,6 @@
         + Use código de descuento.
       </span>
     </div>
-    
   </div>
   <div class="content_boton">
       <ion-button expand="full" class="btn_pagar" (click)="onClickCheckout()">
@@ -55,12 +53,11 @@
           <ion-label style="position: absolute;right:10px">Forma de pago</ion-label>
       </ion-button>
   </div>
-  
 </ion-content>
 <div class="content_menu">
   <ul>
     <li>
-      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
     </li>
     <li>
       <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
@@ -69,7 +66,8 @@
       <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
     </li>
     <li>
-      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+        <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
     </li>
     <li>
       <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">

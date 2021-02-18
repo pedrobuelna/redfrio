@@ -112,7 +112,7 @@ export class RegisterPage implements OnInit {
         telefono: this.ionicForm.value.telefono,
         celular: this.ionicForm.value.celular,
         mail: this.ionicForm.value.mail,
-        persona_contacto: this.ionicForm.value.personaContacto,
+        persona_contacto: this.ionicForm.value.persona_contacto,
         sucursal: this.ionicForm.value.sucursal,
         tipo_empresa: this.ionicForm.value.tipoEmpresa,
         rfc: this.ionicForm.value.rfc.toUpperCase,
@@ -137,7 +137,9 @@ export class RegisterPage implements OnInit {
                     .subscribe((sendMail: any) => {
                         console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
                         this.navCtrl.navigateRoot(['/registrado'],{
-                          queryParams: this.emailcorreo,
+                          queryParams: {
+                            correo: this.emailcorreo
+                          },
                         });
                     }, (err) => {
                         console.log(err);

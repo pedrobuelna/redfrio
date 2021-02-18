@@ -60,7 +60,7 @@ export class EditarperfilPage implements OnInit {
     estados: any;
     uuid_notificacion: any;
     listas: any;
-    cantidadNot: any;
+    cantidadNot: any = 0;
     notificaciones: any;
     constructor(
         private router: Router,
@@ -68,22 +68,23 @@ export class EditarperfilPage implements OnInit {
         private taskService: TaskService,
         public navCtrl: NavController,
         private nativeStorage: NativeStorage) {
-        this.ionicForm = this.formBuilder.group({
-            nombre: ['', [Validators.required, Validators.pattern('[A-Z ]*'), Validators.minLength(5), Validators.maxLength(40)]],
-            nombre_2: ['', [Validators.maxLength(40)]],
-            telefono: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
-            celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
-            mail: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-            persona_contacto: ['', [Validators.required, Validators.pattern('[A-Z ]*'), Validators.maxLength(40)]],
-            sucursal: ['1', ],
-            tipo_empresa: ['1', ],
-            rfc: ['', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
-            uso_cfdi: ['', [Validators.required]],
-            password: ['', [Validators.minLength(8)]],
-            myBoolean: ['false', []],
-
-        })
+            this.ionicForm = this.formBuilder.group({
+                nombre: ['', ],
+                nombre_2: ['', ],
+                telefono: ['', ],
+                celular: ['', ],
+                mail: ['', ],
+                persona_contacto: ['', ],
+                sucursal: ['', ],
+                tipo_empresa: ['', ],
+                rfc: ['', ],
+                uso_cfdi: ['', ],
+                password: ['', ],
+                myBoolean: ['true', []],
+    
+            })
     }
+    
     get errorControl() {
         return this.ionicForm.controls;
     }
@@ -111,7 +112,6 @@ export class EditarperfilPage implements OnInit {
                 this.taskService.getNotificaciones(app.uuid_cliente)
                     .subscribe(notificaciones => {
                         this.listas = notificaciones;
-                        //this.cantidadNot = this.notificaciones.length
                     });
                 this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
                 .subscribe(notificaciones => {
@@ -133,7 +133,6 @@ export class EditarperfilPage implements OnInit {
               this.taskService.getNotificaciones(app.uuid_cliente)
                   .subscribe(notificaciones => {
                       this.listas = notificaciones;
-                      //this.cantidadNot = this.notificaciones.length
                   });
               this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
               .subscribe(notificaciones => {
@@ -191,18 +190,17 @@ export class EditarperfilPage implements OnInit {
                             console.log("JALADO: ", perfiles[0].nombre);
                             this.perfiles = perfiles;
                             this.ionicForm = this.formBuilder.group({
-                                id_cliente_sap: [perfiles[0].id_cliente_sap, ],
-                                nombre: [perfiles[0].nombre, ],
-                                nombre_2: [perfiles[0].nombre_2, ],
+                                nombre: [perfiles[0].nombre, [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5), Validators.maxLength(40)]],
+                                nombre_2: [perfiles[0].nombre_2, [Validators.maxLength(40)]],
                                 telefono: [perfiles[0].telefono, ],
-                                celular: [perfiles[0].celular, ],
-                                mail: [perfiles[0].mail, ],
-                                persona_contacto: [perfiles[0].persona_contacto, ],
+                                celular: [perfiles[0].celular, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
+                                mail: [perfiles[0].mail, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+                                persona_contacto: [perfiles[0].persona_contacto,[Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.maxLength(40)]],
                                 sucursal: [perfiles[0].sucursal, ],
                                 tipo_empresa: [perfiles[0].tipo_empresa, ],
-                                rfc: [perfiles[0].rfc, ],
-                                uso_cfdi: [perfiles[0].uso_cfdi, ],
-                                password: ["", ],
+                                rfc: [perfiles[0].rfc, [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
+                                uso_cfdi: [perfiles[0].uso_cfdi, [Validators.required]],
+                                password: ["", [Validators.minLength(8)]],
                                 myBoolean: ['true', []],
                             })
                         });
@@ -238,16 +236,16 @@ export class EditarperfilPage implements OnInit {
             //alert('Form Completed' + this.ionicForm.value)
             let usrMail = this.ionicForm.value.mail;
             let perfil = {
-                nombre: this.ionicForm.value.nombre,
-                nombre_2: this.ionicForm.value.nombre_2,
+                nombre: this.ionicForm.value.nombre.toUpperCase(),
+                nombre_2: this.ionicForm.value.nombre_2.toUpperCase(),
                 telefono: this.ionicForm.value.telefono,
                 celular: this.ionicForm.value.celular,
                 mail: this.ionicForm.value.mail,
-                persona_contacto: this.ionicForm.value.persona_contacto,
+                persona_contacto: this.ionicForm.value.persona_contacto.toUpperCase(),
                 sucursal: this.ionicForm.value.sucursal,
                 tipo_empresa: this.ionicForm.value.tipoEmpresa,
                 rfc: this.ionicForm.value.rfc,
-                persona_fisica: this.ionicForm.value.persona_fisica,
+                persona_fisica: 1,
                 status: "1",
                 uso_cfdi: this.ionicForm.value.uso_cfdi,
                 facturacion:true

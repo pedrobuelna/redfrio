@@ -249,19 +249,20 @@
 <div class="content_menu">
     <ul>
         <li>
-            <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
-        </li>
-        <li>
-            <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
-        </li>
-        <li>
-            <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
-        </li>
-        <li>
             <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
-        </li>
-        <li>
+          </li>
+          <li>
+            <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+          </li>
+          <li>
+            <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+          </li>
+          <li>
+            <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+              <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
+          </li>
+          <li>
             <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
-        </li>
+          </li>
     </ul>
 </div>

@@ -63,39 +63,22 @@ export class CheckoutPage implements OnInit {
     totalCompra:number;
     uuid_notificacion: any;
     listas: any;
-    cantidadNot: any;
+    notificaciones: any;
+    cantidadNot: any = 0;
+    cantidadOn:any;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
-        // this.ionicForm = new FormGroup({
-        //   nombre: new FormControl()
-        // });
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
             direccion: ['',[Validators.required]],
-            // nombre: ['', [Validators.required, Validators.minLength(2)]],
-            // apellido: ['', [Validators.required, Validators.minLength(2)]],
-            // calle: ['', [Validators.required]],
-            // numeroExterior: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10)]],
-            // estado: ['', [Validators.required]],
-            // poblacion: ['', [Validators.required]],
-            // celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]],
-            //celular2: ['', []],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
-            // colonia: ['', [Validators.required, Validators.minLength(2)]],
-            // cp: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(5), Validators.maxLength(5)]],
-            //telefono: ['', ],
-            //VALIDACION RFC: ^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})\d{2}((0[1-9]|1[012])(0[1-9]|1\d|2[0-8])|(0[13456789]|1[012])(29|30)|(0[13578]|1[02])31)(\w{2})([A|a|0-9]{1}))$|^(([ÑA-Z|ña-z|&]{3}|[A-Z|a-z]{4})([02468][048]|[13579][26])0229)(\w{2})([A|a|0-9]{1})$
-            //rfc: ['BUFP910825DE3', [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
             nombreTarjeta: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
-            //personaContacto: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
             numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(16), Validators.maxLength(16)]],
-            //fechaDiaTarjeta: ['', [Validators.required]],
             fechaMesTarjeta: ['', [Validators.required]],
             fechaAnoTarjeta: ['', [Validators.required]],
             cvvTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(3), Validators.maxLength(3)]],
-            //correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
         })
     }
     get errorControl() {
@@ -105,11 +88,7 @@ export class CheckoutPage implements OnInit {
         if (this.ionicForm.value.myBoolean == true) {
             this.mostrarDireccion1 = true;
             this.calle2Required = true;
-            //alert("valor1: "+this.ionicForm.value.calle2)
-            //this.ionicForm["controls"]["calle2"].reset();
-            //alert("valor2: "+this.ionicForm.value.calle2)
         } else {
-            //alert("valor3: "+this.ionicForm.value.calle2)
             this.ionicForm.value.calle2 = "";
             this.mostrarDireccion1 = false;
             this.calle2Required = false;
@@ -123,18 +102,13 @@ export class CheckoutPage implements OnInit {
         } else {
             this.ionicForm.get('rfc').setValue("BUFP910825DE3");
             this.mostrarFactura = false;
-            // this.ionicForm.value.rfc='x';
         }
-        //alert(this.ionicForm.value.rfc)
     }
     addMyClass() {
         //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
-        //this.route.queryParams.subscribe( queryParams => this.subtotal = queryParams.subtotal)
-        //this.total = parseFloat(this.tax) + parseFloat(this.subtotal) + parseFloat(this.envio) 
-        //this.paymentAmount = this.total.toString()
         //Radios de forma de envio
         this.nativeStorage.getItem('app')
         .then(
@@ -143,11 +117,14 @@ export class CheckoutPage implements OnInit {
                 console.log(app);
                 console.log("uuid_cliente: " + app.uuid_cliente);
                 this.taskService.getNotificaciones(app.uuid_cliente)
-                    .subscribe(listas => {
-                        this.listas = listas;
-                        this.cantidadNot = this.listas.length
-                        //ok pedro
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
                     });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
@@ -283,6 +260,7 @@ export class CheckoutPage implements OnInit {
     }
 
     payWithPaypal(envio: boolean) {
+        console.log("valor" + envio)
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
             PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
@@ -292,14 +270,17 @@ export class CheckoutPage implements OnInit {
                 // Only needed if you get an "Internal Service Error" after PayPal login!
                 //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
             })).then(() => {
-                let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
+                let costoenvio
+                if(envio==true){
+                    costoenvio = this.costoEnvio
+                }else{
+                    costoenvio = 0
+                }
+                console.log("valor" + envio)
+                let total2 =  (parseFloat(this.subtotal)) + (parseFloat(this.subtotal) * parseFloat(this.tax)) + costoenvio;
                 this.paymentAmountEnvio = total2.toString();
-                this.totalCompra=total2;
-                //alert("paypal"+this.paymentAmountEnvio)
                 let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en reacsa', 'sale');
-
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
-
                     setTimeout(() => {
                         this.addMyClass()
                     }, 1500);
@@ -307,6 +288,7 @@ export class CheckoutPage implements OnInit {
                     // Successfully paid
                 }, () => {
                     console.log("Error or render dialog closed without being successful")
+                    alert("Total debe ser mayor a 0")
                     // Error or render dialog closed without being successful
                 });
             }, () => {
@@ -377,13 +359,14 @@ export class CheckoutPage implements OnInit {
     submitForm(tipo) {
         this.isSubmitted = true;
         console.log(this.ionicForm.value.direccion);
-        //alert("ENVIAR valor RFC: "+this.ionicForm.value.rfc)
+        //alert("top" + tipo)
         if (!this.ionicForm.valid) {
             console.log('Valores cacios!')
             return false;
         } else {
             console.log('Formulario completado' + this.ionicForm.value)
             if (tipo == 1) {
+                console.log("sin envio")
                 this.payWithPaypal(false); //Sin envio
             } else if (tipo == 2) {
                 console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
@@ -397,6 +380,7 @@ export class CheckoutPage implements OnInit {
                     this.navCtrl.navigateRoot(['/pagonoexitoso'])
                 }
             } else if (tipo == 3) {
+                console.log("con envio")
                 this.payWithPaypal(true); //Con envio
             } else if (tipo == 4) {
                 console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
@@ -412,7 +396,7 @@ export class CheckoutPage implements OnInit {
         }
     }
     agregarDireccion() {
-        this.router.navigate(['/editarperfil']);
+        this.router.navigate(['/agregardireccion']);
     }
     onclickNotificaciones() {
         this.router.navigate(['/notificaciones']);

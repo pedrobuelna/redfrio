@@ -27,13 +27,9 @@ export class ProductoPage implements OnInit {
     idProducto:string;
     AppData: any[] = [];
     CarritoActivoData: any[]=[];
-
-    // public items = ["../../assets/images/aireblanco.png",
-    //     "../../assets/images/aireblanco.png",
-    //     "../../assets/images/aireblanco.png",
-    //     "../../assets/images/aireblanco.png"
-    // ];
-
+    notificaciones: any;
+    cantidadNot: any = 0;
+    listas: any;
     public sliderOptions = {
         initialSlide: 0,
         slidesPerView: 1,
@@ -43,7 +39,6 @@ export class ProductoPage implements OnInit {
         }
     };
     @ViewChild('slides') slides;
-
     producto2: any;
     imgProducto:Array<string> = [];
     constructor(
@@ -57,22 +52,45 @@ export class ProductoPage implements OnInit {
         console.log(slides)
         slides.slideTo(index)
     }
-    // move2(slides) {
-    //     console.log(slides)
-    //     slides.slideTo(1)
-    // }
-    // move3(slides) {
-    //     console.log(slides)
-    //     slides.slideTo(2)
-    // }
-    // move4(slides) {
-    //     console.log(slides)
-    //     slides.slideTo(3)
-    // }
     ngOnInit() {
-        
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     }
     ionViewWillEnter(){
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         let x = "";
         this.route.queryParams.subscribe(queryParams => x = queryParams.id);
         //    console.log("x:" + x)

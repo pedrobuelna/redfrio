@@ -29,6 +29,9 @@ export class CarritoPage implements OnInit {
         private nativeStorage: NativeStorage
     ) {}
     subtotal:any;
+    notificaciones: any;
+    cantidadNot: any = 0;
+    cantidadOn:any;
     listas: Array < any >= [{
             nombre: "YORK MINISPLIT",
             descripcion: "YHFE/YHGE SERIES COMPRESOR ON/OFF R-410A SOLO FRIO Y FRIO/CALOR 220V ",
@@ -51,7 +54,6 @@ export class CarritoPage implements OnInit {
                 this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carritoActivo => {
                     this.taskService.getCarritoActivoDetalles(carritoActivo[0].uuid_carrito).subscribe(dataCarrito=>{
                         this.carritoProductos=dataCarrito;
-
                         let cantidadCarrito=((carritoActivo[0].cantidad)?carritoActivo[0].cantidad:0);
                         this.nativeStorage.setItem('carrito', {cantidad: cantidadCarrito,uuid_carrito:carritoActivo[0].uuid_carrito})
                         .then(
@@ -123,8 +125,47 @@ export class CarritoPage implements OnInit {
         $(".subtotal_numero").text("$ " + total);
         $(".total_btnpago").text(total);
     }
-    ngOnInit() {}
+    ngOnInit() {
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
+    }
     ionViewWillEnter() {
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                        //this.cantidadNot = this.notificaciones.length
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {

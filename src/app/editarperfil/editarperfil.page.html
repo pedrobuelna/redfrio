@@ -8,7 +8,8 @@
       <div *ngFor="let perfil of perfiles;let i = index;let last = last;">
         <ion-item color="light" class="closed" >
           <ion-label position="floating">Cliente No.</ion-label>
-          <ion-input  type="text" disabled formControlName="id_cliente_sap"></ion-input>
+          <ion-input  type="text" disabled
+           value="{{perfil.id_cliente_sap}}"></ion-input>
         </ion-item>
         <br>
         <ion-item class="closed">
@@ -18,12 +19,12 @@
         <div class="espacios">
           <!-- Error messages -->
           <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.nombre.errors?.required || errorControl.nombre.errors?.maxlength || errorControl.nombre.errors?.minlength || errorControl.nombre.errors?.pattern)">
-            El Nombre es requerido, mayúsculas, minimo 5 y maximo 40 caractéres.
+            El Nombre es requerido, solo letras, minimo 5 y maximo 40 caractéres.
           </span>
         </div>
         <ion-item >
           <ion-label position="floating">Apellidos</ion-label>
-          <ion-input formControlName="nombre_2"></ion-input>
+          <ion-input formControlName="nombre_2" value="{{perfil.nombre_2}}"></ion-input>
         </ion-item>
         <div class="espacios">
           <span class="error ion-padding" *ngIf="isSubmitted && errorControl.nombre_2.errors?.maxlength">
@@ -57,7 +58,7 @@
         <!-- Error messages -->
         <div class="espacios">
           <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.mail.errors?.required || errorControl.mail.errors?.pattern)">
-            Campo email requerido y con formato correo@dominio.dominio
+            Campo email requerido y con formato correo@dominio
           </span>
         </div>
         <ion-item >
@@ -66,7 +67,7 @@
         </ion-item>
         <div class="espacios">
           <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.persona_contacto.errors?.required || errorControl.persona_contacto.errors?.maxlength || errorControl.persona_contacto.errors?.pattern)">
-            Campo Persona Contacto requerido solo letras mayusculas y máximo 40 caractéres.
+            Campo Persona Contacto requerido solo letras y máximo 40 caractéres.
           </span>
         </div>
         <ion-item >
@@ -114,14 +115,14 @@
       <ion-button expand="full" color="warning" (click)="agregarDirecciones()">
         <ion-label>Agregar Direcciones</ion-label>
       </ion-button>
-      <ion-item>
+      <ion-item *ngIf="direcciones?.length > 0">
         <ion-label position="floating">Direcciones</ion-label>
         <ion-select>
           <ion-select-option value="{{direccion.uuid_direccion}}" *ngFor="let direccion of direcciones;let i = index;let last = last;">{{direccion.sub_name}}</ion-select-option>
         </ion-select>
       </ion-item>
       <div class="content_boton">
-        <ion-button expand="full" class="btn_guardar" type="submit">
+        <ion-button expand="full" class="btn_guardar" type="submit" >
             <ion-label>GUARDAR</ion-label>
         </ion-button>
         <ion-button expand="full" class="btn_logOUt" (click)="logOut()">
@@ -133,8 +134,7 @@
   <div class="content_menu">
     <ul>
       <li>
-        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
-        <span class="cantidad" *ngIf="cantidadNot!=0">{{cantidadNot}}</span>
+        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
       </li>
       <li>
         <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
@@ -143,7 +143,8 @@
         <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
       </li>
       <li>
-        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+          <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
       </li>
       <li>
         <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">

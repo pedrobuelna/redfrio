@@ -65,12 +65,14 @@ export class PrincipalPage implements OnInit {
     productos2: any;
     notificaciones: any;
     cantidadNot: any = 0;
+    listas: any;
+    cantidadOn:any;
     banners: any;
     cantidadActualCarrito: number;
     AppData: any[] = [];
     subscription:any;
-    cantidadOn:any;
-    listas: any;
+    
+    
     constructor(
         private router: Router,
         private renderer: Renderer2,
@@ -135,7 +137,6 @@ export class PrincipalPage implements OnInit {
                 this.taskService.getNotificaciones(app.uuid_cliente)
                     .subscribe(notificaciones => {
                         this.listas = notificaciones;
-                        //this.cantidadNot = this.notificaciones.length
                     });
                 this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
                 .subscribe(notificaciones => {
@@ -146,34 +147,10 @@ export class PrincipalPage implements OnInit {
             error => console.error("NO HAY UUID_CLIENTE")
         );
     }
-    //ionViewWillEnter() {
     ionViewWillLeave() {
-        // this.subscription.unsubscribe();
+        
     }
     ionViewDidEnter(){
-        // this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
-        //     // do on back button click
-        //     alert("NO!!");
-        // });
-        
-        // this.network.onDisconnect().subscribe(() => {
-        //   console.log('network was disconnected :-(');
-        //   alert("FirstPage onDisconnect oninit");
-        //   // this.navCtrl.navigateRoot(['/principal']);
-        //   this.navCtrl.navigateRoot(['/sinconexion']);
-
-        //  });
-        //  this.network.onConnect().subscribe(() => {
-        //   console.log('network was connected :-)');
-        //   alert("FirstPage onConnect oninit");
-        //   this.navCtrl.navigateBack;
-        //  });
-        // this.taskService.getNotificacionesNoLeidas()
-        //     .subscribe(notificaciones => {
-        //         this.notificaciones = notificaciones;
-        //         this.cantidadNot = this.notificaciones.length
-        //     });
-
         this.nativeStorage.getItem('carrito')
         .then(
             data => {

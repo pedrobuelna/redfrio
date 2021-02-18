@@ -13,12 +13,10 @@ export class RegistradoPage implements OnInit {
   correo:any;
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((res)=>{
-      console.log(res);
-      this.correo = res
+      this.correo = res.correo;
     });
   }
-  principal() {
-    
+  login() {
     this.navCtrl.navigateRoot(['/login']);
   }
 

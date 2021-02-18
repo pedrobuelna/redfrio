@@ -91,3 +91,10 @@ ion-item > ion-label{
 .texto_circulo{position: relative; top: calc(50% - 8px); text-align: center; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); }
 .hide{display: none;}
 .btnpaypal{margin-bottom: 100px;}
+ion-checkbox{
+  --background:white;
+  --background-checked:white;
+  --border-color:#e3e4e7;
+  --border-color-checked:#e3e4e7;
+  --checkmark-color:black;
+}
