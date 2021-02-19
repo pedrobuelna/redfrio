@@ -10,10 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 export class RegistradoPage implements OnInit {
   constructor(public navCtrl: NavController,public activatedRoute : ActivatedRoute) { 
   }
-  correo:any;
+  nombreCompleto:any;
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((res)=>{
-      this.correo = res.correo;
+      this.nombreCompleto = res.nombreCompleto;
     });
   }
   login() {

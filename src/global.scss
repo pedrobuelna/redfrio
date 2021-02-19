@@ -105,4 +105,4 @@ ion-content {
 }
 .error{color:red;display: inline-block;margin-top: 20px;}
 .content_menu li{position: relative;}
-.cantidad{position: absolute;width: 20px; height: 20px; border-radius: 50%; background-color: white; right: calc(50% - 22px); top: -10px; vertical-align: middle; line-height: 20px; color: #0F0E9F; font-size: 12px;}
+.cantidad{position: absolute;width: 20px; height: 20px;background-color: white; right: calc(50% - 22px); top: -10px; vertical-align: middle; line-height: 20px; color: #0F0E9F; font-size: 12px;outline: none;}

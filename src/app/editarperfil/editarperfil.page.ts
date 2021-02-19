@@ -38,7 +38,6 @@ export class EditarperfilPage implements OnInit {
     isSubmitted = false;
     myBoolean: boolean;
     mostrarDireccion1: boolean = true;
-    calle2Required: boolean;
     tasks: Task[] = [];
     nombre: string;
     nombre_2: string;
@@ -62,6 +61,7 @@ export class EditarperfilPage implements OnInit {
     listas: any;
     cantidadNot: any = 0;
     notificaciones: any;
+    activa: boolean;
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
@@ -80,8 +80,7 @@ export class EditarperfilPage implements OnInit {
                 rfc: ['', ],
                 uso_cfdi: ['', ],
                 password: ['', ],
-                myBoolean: ['true', []],
-    
+                myBoolean: ['true', []]
             })
     }
     
@@ -201,28 +200,27 @@ export class EditarperfilPage implements OnInit {
                                 rfc: [perfiles[0].rfc, [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
                                 uso_cfdi: [perfiles[0].uso_cfdi, [Validators.required]],
                                 password: ["", [Validators.minLength(8)]],
-                                myBoolean: ['true', []],
+                                myBoolean: ['true', ],
                             })
+                            if(perfiles[0].rfc=="XAXX010101000"){   
+                                this.ionicForm.get('myBoolean').setValue("false");
+                                this.mostrarDireccion1=false;
+                            }
                         });
                 }
             );
-
     }
     muestraDireccion2() {
         if (this.ionicForm.value.myBoolean == true) {
+            if(this.ionicForm.value.rfc=="XAXX010101000"){
+                this.ionicForm.get('rfc').setValue("");
+                this.ionicForm.get('uso_cfdi').setValue("");
+            }
             this.mostrarDireccion1 = true;
-            this.calle2Required = true;
-            //alert("valor1: "+this.ionicForm.value.calle2)
-            //this.ionicForm["controls"]["rfc"].reset();
-            this.ionicForm["controls"]["uso_cfdi"].reset();
         } else {
-            //alert("valor3: "+this.ionicForm.value.calle2)
             this.ionicForm.get('rfc').setValue("XAXX010101000");
             this.ionicForm.get('uso_cfdi').setValue("G03");
-            // this.ionicForm.value.rfc="XAXX010101000";
-            // this.ionicForm.value.uso_cfdi="XXX";
             this.mostrarDireccion1 = false;
-            this.calle2Required = false;
         }
     }
     submitForm() {

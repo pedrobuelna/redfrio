@@ -94,7 +94,7 @@ export class RegisterPage implements OnInit {
       this.calle2Required = false;
     }
   }
-  emailcorreo:any;
+  nombreCompleto:any;
   submitForm() {
     this.isSubmitted = true;
     console.log(this.ionicForm.valid)
@@ -105,7 +105,7 @@ export class RegisterPage implements OnInit {
     } else {
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
-      this.emailcorreo = this.ionicForm.value.mail;
+      this.nombreCompleto = this.ionicForm.value.nombre + this.ionicForm.value.nombre_2;
       const task = {
         nombre: this.ionicForm.value.nombre,
         nombre_2: this.ionicForm.value.nombre_2,
@@ -132,13 +132,13 @@ export class RegisterPage implements OnInit {
                 //alert("Tus datos han sido guardados correctamente")
                 //this.taskService.sendMailUsr(usrMail)
                 console.log(usrMail)
-                console.log(this.emailcorreo)
+                console.log(this.nombreCompleto)
                 this.taskService.sendMailActivacionUsuario(usrMail)
                     .subscribe((sendMail: any) => {
                         console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
                         this.navCtrl.navigateRoot(['/registrado'],{
                           queryParams: {
-                            correo: this.emailcorreo
+                            nombreCompleto: this.nombreCompleto
                           },
                         });
                     }, (err) => {
