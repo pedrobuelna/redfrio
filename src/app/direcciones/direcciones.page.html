@@ -1,0 +1,12 @@
+<ion-content>
+  <br><br>
+    <div style="text-align: center;font-size: 26px;text-transform: uppercase;">Mis Direcciones</div>
+    <br><br>
+    <div class="pedido_content clearfix" *ngFor="let direccion of direcciones;let i = index;let last = last;" (click)="onclickEditarDireccion()">
+      <img alt="img_direccion" class="img_direcciones" src="../../assets/imgs/personas.png">
+      <div class="content_direcciones">
+        <div class="txt2">Direccion #{{i+1}}</div>
+        <div class="txt3">{{direccion.sub_name}}</div>
+      </div>
+    </div>
+</ion-content>

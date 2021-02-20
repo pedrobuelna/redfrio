@@ -1,0 +1,114 @@
+<ion-content>
+  <br><br>
+  <h1>Agregar Dirección</h1>
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-item class="closed">
+      <ion-label position="floating">Alias</ion-label>
+      <ion-input  formControlName="alias" type="text" required></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.alias.errors?.required || errorControl.alias.errors?.maxlength || errorControl.alias.errors?.minlength)">
+        El Alias es requerido, minimo 1 y maximo 40 caractéres.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Calle</ion-label>
+      <ion-input formControlName="calle"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.calle.errors?.required || errorControl.calle.errors?.maxlength || errorControl.calle.errors?.minlength)">
+        Calle es requerido, minimo 5 y maximo 40 caractéres.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Numero Exterior</ion-label>
+      <ion-input formControlName="numero"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.numero.errors?.required || errorControl.numero.errors?.pattern || errorControl.numero.errors?.maxlength || errorControl.numero.errors?.minlength)">
+        Numero es requerido.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Numero Interior</ion-label>
+      <ion-input formControlName="numerointerior"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.numerointerior.errors?.pattern || errorControl.numerointerior.errors?.maxlength || errorControl.numerointerior.errors?.minlength)">
+        Numero Interior es requerido.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Colonia</ion-label>
+      <ion-input formControlName="colonia"></ion-input>
+      <div class="espacios">
+        <!-- Error messages -->
+        <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.colonia.errors?.required || errorControl.colonia.errors?.maxlength || errorControl.colonia.errors?.minlength)">
+          Colonia es requerido, minimo 5 y maximo 40 caractéres.
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">C.P.</ion-label>
+      <ion-input formControlName="cp"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.cp.errors?.required || errorControl.cp.errors?.maxlength || errorControl.cp.errors?.minlength)">
+        El Código Postal es requerido y con 5 caractéres.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-select formControlName="estado">
+        <ion-select-option *ngFor="let estado of estados" value="{{estado.estado}}">
+          {{ estado.descripcion }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.estado.errors?.required)">
+        El Estado es requerido.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Ciudad</ion-label>
+      <ion-input formControlName="ciudad"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.ciudad.errors?.required || errorControl.ciudad.errors?.maxlength || errorControl.ciudad.errors?.minlength)">
+        Ciudad es requerido,minimo 5 caractéres maximo 40.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input formControlName="telefono" type="tel"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.telefono.errors?.required || errorControl.telefono.errors?.required || errorControl.telefono.errors?.maxlength || errorControl.telefono.errors?.minlength)">
+        El Telefono es requerido y con 10 caractéres.
+      </span>
+    </div>
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input formControlName="correo"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.correo.errors?.required || errorControl.correo.errors?.pattern || errorControl.correo.errors?.maxlength || errorControl.correo.errors?.minlength)">
+        El Correo es requerido y con formato correo@dominio
+      </span>
+    </div>
+    <div class="content_boton">
+      <ion-button expand="full" color="success" class="btn_guardar" type="submit">
+          <ion-label>GUARDAR</ion-label>
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

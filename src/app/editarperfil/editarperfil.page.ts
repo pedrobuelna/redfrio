@@ -293,6 +293,9 @@ export class EditarperfilPage implements OnInit {
     agregarDirecciones(){
         this.router.navigate(['/agregardireccion']);
     }
+    verDirecciones(){
+        this.router.navigate(['/direcciones']);
+    }
     logOut(){
         this.nativeStorage.clear()
         .then(
