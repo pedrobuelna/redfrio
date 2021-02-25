@@ -114,58 +114,24 @@ export class CarritoPage implements OnInit {
         let total = 0;
         $(".precio").each(function (i) {
             let uuid_producto=$(this).attr('id');
-            console.log(parseFloat($(this).text().replace('$',''))+" * "+parseInt($("#cantidad_"+uuid_producto).val()));
-            total = total + (parseFloat($(this).text().replace('$','')) * parseInt($("#cantidad_"+uuid_producto).val()))
+            let precio=$(this).text().replace('$','');
+            precio=precio.replace(',','');
+            console.log(parseFloat(precio)+" * "+parseInt($("#cantidad_"+uuid_producto).val()));
+            total = total + (precio * parseInt($("#cantidad_"+uuid_producto).val()))
             //total = total + (parseFloat($(this).text().replace('$','')) * parseInt($(".cantidad").val()))
         })
+        console.log('==TOTAL==');
+        console.log(total);
         this.nativeStorage.setItem('totalCompra',total).then(
             ()=>console.log("Se guardo el total de la compra"),
             error=>console.log("Error al guardar el total de la compra")
         );
-        $(".subtotal_numero").text("$ " + total);
-        $(".total_btnpago").text(total);
+        var t = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+        $(".subtotal_numero").text("$ " + t);
+        $(".total_btnpago").text(t);
     }
-    ngOnInit() {
-        this.nativeStorage.getItem('app')
-        .then(
-            app => {
-                console.log("==APP DATA==");
-                console.log(app);
-                console.log("uuid_cliente: " + app.uuid_cliente);
-                this.taskService.getNotificaciones(app.uuid_cliente)
-                    .subscribe(notificaciones => {
-                        this.listas = notificaciones;
-                        //this.cantidadNot = this.notificaciones.length
-                    });
-                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
-                .subscribe(notificaciones => {
-                    this.notificaciones = notificaciones;
-                    this.cantidadNot = this.notificaciones.length
-                });
-            },
-            error => console.error("NO HAY UUID_CLIENTE")
-        );
-    }
+    ngOnInit() {}
     ionViewWillEnter() {
-        this.nativeStorage.getItem('app')
-        .then(
-            app => {
-                console.log("==APP DATA==");
-                console.log(app);
-                console.log("uuid_cliente: " + app.uuid_cliente);
-                this.taskService.getNotificaciones(app.uuid_cliente)
-                    .subscribe(notificaciones => {
-                        this.listas = notificaciones;
-                        //this.cantidadNot = this.notificaciones.length
-                    });
-                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
-                .subscribe(notificaciones => {
-                    this.notificaciones = notificaciones;
-                    this.cantidadNot = this.notificaciones.length
-                });
-            },
-            error => console.error("NO HAY UUID_CLIENTE")
-        );
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
@@ -179,7 +145,7 @@ export class CarritoPage implements OnInit {
                     for(let i=0;i<this.carritoProductos.length;i++){
                         this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
                     }
-                    this.calcularTotales();
+                    //this.calcularTotales();
                 });
             },
             error =>{
@@ -188,8 +154,9 @@ export class CarritoPage implements OnInit {
         );
     }
     ionViewDidEnter() {
-        console.info("will did enter")
-        this.calcularTotales()
+        console.info("will did enter");
+        setTimeout(()=>{ this.calcularTotales() }, 1000);
+        //this.calcularTotales()
     }
    onclickNotificaciones(){
         this.router.navigate(['/notificaciones']);
