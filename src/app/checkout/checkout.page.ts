@@ -67,6 +67,7 @@ export class CheckoutPage implements OnInit {
     notificaciones: any;
     cantidadNot: any = 0;
     cantidadOn:any;
+    className: string = 'quitar';
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         this.costoEnvio = 20;
@@ -84,6 +85,14 @@ export class CheckoutPage implements OnInit {
     }
     get errorControl() {
         return this.ionicForm.controls;
+    }
+    cancelar(){
+        if(this.className == 'quitar'){
+          this.className = 'mostrar';
+        }else{
+          this.className = 'quitar';
+        }
+        return false;
     }
     muestraDireccion2() {
         if (this.ionicForm.value.myBoolean == true) {

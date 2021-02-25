@@ -132,20 +132,12 @@ export class LoginPage implements OnInit {
     onClickRegister() {
         this.router.navigate(['/register']);
     }
-    aceptar(){
-        if(this.className == 'quitar'){
-          this.className = 'mostrar';
-        }else{
-          this.className = 'quitar';
-        }
-        return false;
-      }
-      cancelar(){
-        if(this.className == 'quitar'){
-          this.className = 'mostrar';
-        }else{
-          this.className = 'quitar';
-        }
-        return false;
-      }
+    cancelar(){
+    if(this.className == 'quitar'){
+        this.className = 'mostrar';
+    }else{
+        this.className = 'quitar';
+    }
+    return false;
+    }
 }

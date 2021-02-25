@@ -66,6 +66,11 @@ export class TaskService {
         const path = `${this.api}/refacciones/${id}`
         return this.http.delete(path);
     }
+    deleteDireccion(uuid_direccion: string) {
+        // const path = `${this.api}/todos/${id}`;
+        const path = `${this.api}/direcciones/uuid_direccion=eq.${uuid_direccion}`
+        return this.http.delete(path);
+    }
     getLogin(mail: any, contrasena: any) {
         //const path = `${this.api}/todos/${id}`;
         const path = `${this.api}/clientes?mail=eq.${mail}&password=eq.${contrasena}&status=eq.1`;
@@ -218,6 +223,10 @@ export class TaskService {
     //Direcciones
     getDireccionCliente(uuid_cliente){
         const path = `${this.api}/direcciones?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get < any > (path);
+    }
+    getDireccionClienteSolo(uuid_direccion){
+        const path = `${this.api}/direcciones?uuid_direccion=eq.${uuid_direccion}`;
         return this.http.get < any > (path);
     }
     postDirecciones(dataDireccion){
