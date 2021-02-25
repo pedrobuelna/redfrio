@@ -68,10 +68,21 @@
     </div> -->
     <div id="descripcion_content">
       <div class="titulo1">{{producto.marca}} {{producto.nombre_familia}}</div>
+      <span>{{producto.cantidad}} disponibles</span>
       <p class="parrafo1">
         {{producto.desc_corta}}
       </p>
       <div class="parrafo2">
+          <ion-item>
+            <ion-label position="floating">Disponibilidad por zona</ion-label>
+            <ion-select formControlName="zonas" (ionChange)="getInventario($event)">
+                <ion-select-option *ngFor="let zona of zonas" value="{{zona.zona}}">
+                    {{ zona.zona }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <div *ngFor="let disp of disponibilidad;let i = index">
+            <span class="ion-text-capitalize">{{disp.sucursal}}: </span><span>{{disp.cantidad}}</span> <br>
+        </div>
         <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
         <span class="ion-text-capitalize">No. parte: </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
         <span class="ion-text-capitalize">Disponibilidad: <span *ngIf="producto.status==1">En stock</span><span *ngIf="producto.status==0">No hay disponibilidad</span> </span>

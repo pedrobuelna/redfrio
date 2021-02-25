@@ -202,6 +202,10 @@ export class TaskService {
         const path = `http://app.reacsa.mx/restapi/enviarCorreoRegistroCliente/${email}`;
         return this.http.get < Task > (path);
     }
+    sendMailPagoExitoso(uuid_carrito:string,email:string){
+        const path = `http://app.reacsa.mx/restapi/enviarCorreoPagoExitoso/${uuid_carrito},${email}`;
+        return this.http.get < Task > (path);
+    }
     getSucursales(){
         const path = `${this.api}/sucursales?status=eq.N`;
         return this.http.get < Task > (path);
@@ -218,6 +222,14 @@ export class TaskService {
     patchDirecciones(uuid_direccion:string,patchData:any){
         const path = `${this.api}/direcciones?uuid_direccion=eq.${uuid_direccion}`
         return this.http.patch<Task>(path,patchData);
+    }
+    getSucursalesZonas(){
+        const path = `${this.api}/sucursales_zonas`
+        return this.http.get<any>(path);
+    }
+    getDisponibilidadProducto(uuid_producto:string,zona:string){
+        const path = `${this.api}/productos_inventario?uuid_producto=eq.${uuid_producto}&&zona=eq.${zona}`
+        return this.http.get<any>(path);
     }
     //validaciones imagenes
     validarImg(url) {

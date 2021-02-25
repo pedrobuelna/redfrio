@@ -171,7 +171,7 @@ export class CheckoutPage implements OnInit {
             console.log("===SIN ENVIO===");
             console.log(this.subtotal);
             let total = (this.subtotal*parseFloat(1+this.tax));
-            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             $(".total").text(this.paymentAmount)
         }else{
             $(".total").text(0)
@@ -183,7 +183,7 @@ export class CheckoutPage implements OnInit {
             console.log("===SIN ENVIO===");
             console.log(this.subtotal);
             let total = ((this.subtotal+parseFloat(this.envio))*parseFloat(1+this.tax));
-            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             $(".total").text(this.paymentAmount)
         }else{
             $(".total").text(0)
@@ -205,12 +205,10 @@ export class CheckoutPage implements OnInit {
         );
         this.nativeStorage.getItem('totalCompra').then(
             totalCompra => {
-                let subtotal=totalCompra;
-                this.subtotal = subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
-                //this.subtotal = totalCompra;
+                this.subtotal = totalCompra;
                 //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
                 let total = parseFloat(this.subtotal)*(1+parseFloat(this.tax));
-                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 this.paymentAmountEnvio = this.paymentAmount;
                 this.total = this.paymentAmount;
                 $(".envio").text(0)
@@ -410,7 +408,9 @@ export class CheckoutPage implements OnInit {
                                             () => {
                                                 console.log('Actualizado APPDATA ==>');
                                                 console.log(carrito);
-                                                this.navCtrl.navigateRoot(['/pagoexitoso'])
+                                                this.taskService.sendMailPagoExitoso(carrito.uuid_carrito).subscribe(()=>{
+                                                    this.navCtrl.navigateRoot(['/pagoexitoso'])
+                                                });
                                             },
                                             error => console.error('Error storing item', error)
                                         );
