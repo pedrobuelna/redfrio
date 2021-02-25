@@ -155,7 +155,7 @@ export class CarritoPage implements OnInit {
     }
     ionViewDidEnter() {
         console.info("will did enter");
-        setTimeout(()=>{ this.calcularTotales() }, 1000);
+        setTimeout(()=>{ this.calcularTotales() }, 300);
         //this.calcularTotales()
     }
    onclickNotificaciones(){

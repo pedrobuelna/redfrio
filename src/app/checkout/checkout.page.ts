@@ -143,60 +143,48 @@ export class CheckoutPage implements OnInit {
                 this.sucursales = sucursales;
             });
     }
-    ionViewWillEnter() {
-        // this.nativeStorage.getItem('app')
-        // .then(
-        //     app => {
-        //         console.log("==APP DATA==");
-        //         console.log(app);
-        //         console.log("uuid_cliente: "+app.uuid_cliente);
-        //         this.taskService.getDireccionCliente(app.uuid_cliente)
-        //         .subscribe(direcciones => {
-        //             this.direcciones = direcciones;
-        //         });
-        //     },
-        //     error => console.error("NO HAY UUID_CLIENTE")
-        // );
-        // this.nativeStorage.getItem('totalCompra').then(
-        //     totalCompra => {
-        //         this.subtotal = totalCompra;
-        //         //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
-        //         let total = parseFloat(this.subtotal)*(1+parseFloat(this.tax));
-        //         this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-        //         this.paymentAmountEnvio = this.paymentAmount;
-        //         this.total = this.paymentAmount;
-        //         var tax = parseFloat(this.tax);
-        //         //this.inicializarVista();
-        //     },
-        //     error => {
-        //         this.router.navigate(['/principal']);
-        //     }
-        // );
-    }
-    envioGratis(){
-        $(".envio").text(0)
-        if(this.total != 0){
+    // envioGratis(){
+    //     $(".envio").text(0)
+    //     if(this.total != 0){
             
-            console.log("===SIN ENVIO===");
-            console.log(this.subtotal);
-            let total = (this.subtotal*parseFloat(1+this.tax));
-            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            $(".total").text(this.paymentAmount)
-        }else{
-            $(".total").text(0)
-        }
-    }
-    envioCobrado(){
-        $(".envio").text(this.envio)
-        if(this.total != 0){
-            console.log("===SIN ENVIO===");
-            console.log(this.subtotal);
-            let total = ((this.subtotal+parseFloat(this.envio))*parseFloat(1+this.tax));
-            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            $(".total").text(this.paymentAmount)
-        }else{
-            $(".total").text(0)
-        }
+    //         console.log("===SIN ENVIO===");
+    //         console.log(this.subtotal);
+    //         let total = (this.subtotal*parseFloat(1+this.tax));
+    //         this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+    //         $(".total").text(this.paymentAmount)
+    //     }else{
+    //         $(".total").text(0)
+    //     }
+    // }
+    // envioCobrado(){
+    //     $(".envio").text(this.envio)
+    //     if(this.total != 0){
+    //         console.log("===SIN ENVIO===");
+    //         console.log(this.subtotal);
+    //         let total = ((this.subtotal+parseFloat(this.envio))*parseFloat(1+this.tax));
+    //         this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+    //         $(".total").text(this.paymentAmount)
+    //     }else{
+    //         $(".total").text(0)
+    //     }
+    // }
+    ionViewWillEnter() {
+        this.nativeStorage.getItem('carrito')
+        .then(
+            carrito => {
+                console.log("==CARRITO DATA==");
+                console.log(carrito);
+                console.log("uuid_cliente: "+carrito.uuid_carrito);
+                this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
+                    console.log('===COSTO ENVIO===');
+                    console.log(envio);
+                    this.envio=envio[0].costo_envio.replace('$','');
+                });
+            },
+            error =>{
+                 console.error("NO HAY DATOS DEL CARRITO");
+            }
+        );
     }
     ionViewDidEnter() {
         this.nativeStorage.getItem('app')
@@ -212,53 +200,25 @@ export class CheckoutPage implements OnInit {
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
+
         this.nativeStorage.getItem('totalCompra').then(
             totalCompra => {
                 this.subtotal = totalCompra;
                 //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
-                let total = parseFloat(this.subtotal)*(1+parseFloat(this.tax));
+                let envio=this.envio.replace(',','');
+                let total = (parseFloat(this.subtotal)*(1+parseFloat(this.tax)))+parseFloat(envio);
                 this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 this.paymentAmountEnvio = this.paymentAmount;
                 this.total = this.paymentAmount;
-                $(".envio").text(0)
+                let subtotal=this.subtotal;
+                this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+                //$(".envio").text(0)
                 //this.inicializarVista();
             },
             error => {
                 this.router.navigate(['/principal']);
             }
         );
-        // let subtotal=this.subtotal;
-        // let total=this.total;
-        // let tax=(1+this.tax);
-        // let envio=this.envio;
-        // let precioFinal=0;
-        // $("input[name='radio1']") // select the radio by its id
-        //     .change(function () { // bind a function to the change event
-        //         if ($(this).is(":checked")) {
-        //             if ($(this).val() == "gratis") {
-        //                 $(".envio").text(0)
-        //                 if(total != 0){
-                            
-        //                     console.log("===SIN ENVIO===");
-        //                     console.log(this.subtotal);
-        //                     precioFinal = (subtotal*parseFloat(tax));
-        //                     $(".total").text(precioFinal)
-        //                 }else{
-        //                     $(".total").text(0)
-        //                 }
-        //             } else {
-        //                 $(".envio").text(envio)
-        //                 if(this.total != 0){
-        //                     console.log("===SIN ENVIO===");
-        //                     console.log(subtotal);
-        //                     precioFinal = ((subtotal+parseFloat(envio))*parseFloat(tax));
-        //                     $(".total").text(precioFinal)
-        //                 }else{
-        //                     $(".total").text(0)
-        //                 }
-        //             }
-        //         }
-        //     });
         $("input[name='radio1']") // select the radio by its id
             .change(function () { // bind a function to the change event
                 if ($(this).is(":checked")) {

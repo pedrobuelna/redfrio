@@ -208,6 +208,10 @@ export class TaskService {
         const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get<Task[]>(path);
     }
+    getPrecioEnvio(uuid_carrito:string){
+        const path = `${this.api}/peso_carrito?uuid_carrito=eq.${uuid_carrito}`;
+        return this.http.get<any>(path);
+    }
     sendMailActivacionUsuario(email:string){
         const path = `http://app.reacsa.mx/restapi/enviarCorreoRegistroCliente/${email}`;
         return this.http.get < Task > (path);
@@ -248,7 +252,7 @@ export class TaskService {
     //validaciones imagenes
     validarImg(url) {
         return new Promise(function(resolve, reject) {
-        var timeout = 1500;//5000;
+        var timeout = 2000;//5000;
         var timer, img = new Image();
         img.onerror = img.onabort = function() {
             clearTimeout(timer);
