@@ -13,7 +13,7 @@ export class CategoriasPage implements OnInit {
   constructor(
         private router: Router,
         private taskService: TaskService,
-        private nativeStorage: NativeStorage    
+        private nativeStorage: NativeStorage  
     ) { }
 
   familias:any;

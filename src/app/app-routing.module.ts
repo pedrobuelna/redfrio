@@ -107,6 +107,10 @@ const routes: Routes = [
     path: 'editardireccion',
     loadChildren: () => import('./editardireccion/editardireccion.module').then( m => m.EditardireccionPageModule)
   },
+  {
+    path: 'historialpedidos',
+    loadChildren: () => import('./historialpedidos/historialpedidos.module').then( m => m.HistorialpedidosPageModule)
+  },
 ];
 
 @NgModule({

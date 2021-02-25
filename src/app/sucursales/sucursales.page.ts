@@ -4,6 +4,7 @@ import { TaskService } from '../services/task.service';
 import { $ } from 'protractor';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 declare var google;
 interface MarcadoMap {
     position: {
@@ -36,9 +37,11 @@ export class SucursalesPage implements OnInit {
     cantmarkers: any;
     titulo: string;
     tiendaSelected: any;
-
+    notificaciones: any;
+    cantidadNot: any = 0;
+    listas: any;
     constructor(private router: Router,private geolocation: Geolocation, 
-        private route: ActivatedRoute, private renderer: Renderer2,
+        private route: ActivatedRoute, private renderer: Renderer2,private nativeStorage: NativeStorage,
         private taskService: TaskService,public loadingController: LoadingController) {
         this.route.queryParams.subscribe(params => {
             this.sucursalActual = {
@@ -52,6 +55,21 @@ export class SucursalesPage implements OnInit {
         });
     }
     ngOnInit() {
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
         this.tiendaSelected=0;
         this.taskService.getAllTasks()
         .subscribe(sucursales => {
@@ -59,12 +77,6 @@ export class SucursalesPage implements OnInit {
             this.sucursales.forEach(sucursal => {
                 if (sucursal.id_sucursal == this.sucursalActual.id_sucursal) {
                     let coordenadas = sucursal.coordenadas.split(", ");
-
-                    console.log("Parse Int:" + parseInt(coordenadas[0]))
-                    console.log("Parse Int:" + parseInt(coordenadas[0]))
-                    console.log("Parse Float:" + parseFloat(coordenadas[0]))
-                    console.log("Parse Float:" + parseFloat(coordenadas[0]))
-
                     let marcador: MarcadoMap = {
                         position: {
                             lat: parseFloat(coordenadas[0]),
@@ -72,7 +84,6 @@ export class SucursalesPage implements OnInit {
                         },
                         title: sucursal.nombre
                     }
-                    //$("#categoria_select").val(this.sucursalActual.id_sucursal)
                     setTimeout(() => {
                        this.sucursalActual={
                         id_sucursal:this.sucursalActual.id_sucursal,
@@ -91,7 +102,6 @@ export class SucursalesPage implements OnInit {
             });
         });
     }
-    
     checkValue(event) {
         this.sucursalActual.id_sucursal=event.detail.value;
         this.actualizarMarcador();
@@ -141,7 +151,6 @@ export class SucursalesPage implements OnInit {
             center: centerMap,
             zoom: 12
         });
-
         google.maps.event.addListenerOnce(this.map, 'idle', () => {
             console.log("a")
             this.renderMarkers();
@@ -154,57 +163,10 @@ export class SucursalesPage implements OnInit {
             map: this.map,
             title: marker.title
         });
-
     }
     renderMarkers() {
-        // this.marker.forEach(marker => {
         this.addMarker(this.marcadorActual);
-        // });1
     }
-    /*loadMap(lat,long) {
-      // create a new map by passing HTMLElement
-      const mapEle: HTMLElement = document.getElementById('map');
-      // create LatLng object
-      const myLatLng = {lat: lat, lng: long};
-      //Obtener coordenadas
-      const latLng = new google.maps.LatLng();
-
-      // create map
-      this.map = new google.maps.Map(mapEle, {
-        center: myLatLng,
-        zoom: 10,
-        disableDefaultUI:true
-      });
-      let infoWindow;
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            // infoWindow.setPosition(pos);
-            // infoWindow.setContent("Location found.");
-            // infoWindow.open(this.map);
-            this.map.setCenter(pos);
-          },
-          () => {
-            //handleLocationError(true, infoWindow, this.map.getCenter());
-          }
-        );
-      } else {
-        // Browser doesn't support Geolocation
-        alert("Error de Geolocalizacion")
-      }
-
-      google.maps.event.addListenerOnce(this.map, 'idle', () => {
-        //this.renderMarkers();
-        mapEle.classList.add('show-map');
-        this.renderMarkers();
-      });
-    }*/
-
-
     onclickNotificaciones() {
         this.router.navigate(['/notificaciones']);
     }

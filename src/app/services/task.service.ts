@@ -46,6 +46,11 @@ export class TaskService {
         const path = `${this.api}/clientes?mail=eq.${email}`;
         return this.http.get < any > (path);
     }
+    
+    getHistorialPedidos(uuid_cliente: any) {
+        const path = `${this.api}/carrito?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get < any > (path);
+    }
     createTask(task: Task) {
         // const path = `${this.api}/todos`;
         const path = `${this.api}/clientes`;
