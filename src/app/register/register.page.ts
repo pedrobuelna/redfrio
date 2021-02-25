@@ -38,6 +38,8 @@ export class RegisterPage implements OnInit {
   uso_cfdi: string;
   flag=0;
   cfdis:any;
+  myValue:any;
+  className: string = 'quitar';
   constructor(
     private  router:  Router,
     public formBuilder: FormBuilder,
@@ -60,6 +62,7 @@ export class RegisterPage implements OnInit {
       password:['', [Validators.required,Validators.minLength(8)]],
       confirmarcontrasena: ['', [Validators.required]],
       myBoolean: ['false',[]],
+      terminos: [false, [Validators.requiredTrue]],
     }, { 
       validator: ConfirmedValidator('password', 'confirmarcontrasena')
     })
@@ -151,6 +154,24 @@ export class RegisterPage implements OnInit {
       },er=>{});
     
       }
+  }
+  aceptar(){
+    this.myValue=true
+    if(this.className == 'quitar'){
+      this.className = 'mostrar';
+    }else{
+      this.className = 'quitar';
+    }
+    return false;
+  }
+  cancelar(){
+    this.myValue=false
+    if(this.className == 'quitar'){
+      this.className = 'mostrar';
+    }else{
+      this.className = 'quitar';
+    }
+    return false;
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

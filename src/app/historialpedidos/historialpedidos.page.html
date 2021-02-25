@@ -1,0 +1,17 @@
+<ion-content>
+  <br><br>
+    <div style="text-align: center;font-size: 26px;text-transform: uppercase;">Historial de pedidos</div>
+    <br><br>
+    <div class="pedido_content clearfix" *ngFor="let pedido of pedidos;let i = index;let last = last;">
+      <div class="content_direcciones">
+        <div class="txt2">pedido #{{pedido.id_orden_sap}}</div>
+        {{pedido.create_date}}
+        monto
+        {{pedido.estatus}}
+        <div class="txt3">{{pedido.estatus}}</div>
+      </div>
+      <div class="content_controles">
+        <div class="editar">Ver pedido</div>
+      </div>
+    </div>
+</ion-content>

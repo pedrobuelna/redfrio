@@ -28,6 +28,7 @@ interface MarcadoMap {
   title: string;
 }
 import { LoadingController } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 interface informacionSucursal{
   id_sucursal:number;
   nombre:string;
@@ -36,6 +37,7 @@ interface informacionSucursal{
   mail:string;
   direccion:string;
 }
+
 @Component({
   selector: 'app-sucursalcerca',
   templateUrl: './sucursalcerca.page.html',
@@ -53,10 +55,13 @@ export class SucursalcercaPage implements OnInit {
   cantmarkers: any;
   titulo: string;
   distanciaSucursales: any[]=[];
-    
+  notificaciones: any;
+  cantidadNot: any = 0;
+  listas: any;
   constructor(private router: Router, private geolocation: Geolocation,public loadingController: LoadingController,
       private nativeGeocoder: NativeGeocoder, private route: ActivatedRoute, private renderer: Renderer2,
-      private taskService: TaskService,public navCtrl: NavController){
+      private taskService: TaskService,public navCtrl: NavController,
+      private nativeStorage: NativeStorage){
       this.route.queryParams.subscribe(params => {
           this.sucursalActual = {
               id_sucursal:params.sucursal,
@@ -81,10 +86,46 @@ export class SucursalcercaPage implements OnInit {
     this.presentLoading();
     console.log("Sucursal cerca")
     this.getCurrentPosition();
-    //$("#categoria_select").click()
+    this.nativeStorage.getItem('app')
+    .then(
+        app => {
+            console.log("==APP DATA==");
+            console.log(app);
+            console.log("uuid_cliente: " + app.uuid_cliente);
+            this.taskService.getNotificaciones(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.listas = notificaciones;
+                    //this.cantidadNot = this.notificaciones.length
+                });
+            this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+            .subscribe(notificaciones => {
+                this.notificaciones = notificaciones;
+                this.cantidadNot = this.notificaciones.length
+            });
+        },
+        error => console.error("NO HAY UUID_CLIENTE")
+    );
   }
   ionViewWillEnter(){
-    //$("#categoria_select").click()
+    this.nativeStorage.getItem('app')
+    .then(
+        app => {
+            console.log("==APP DATA==");
+            console.log(app);
+            console.log("uuid_cliente: " + app.uuid_cliente);
+            this.taskService.getNotificaciones(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.listas = notificaciones;
+                    //this.cantidadNot = this.notificaciones.length
+                });
+            this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+            .subscribe(notificaciones => {
+                this.notificaciones = notificaciones;
+                this.cantidadNot = this.notificaciones.length
+            });
+        },
+        error => console.error("NO HAY UUID_CLIENTE")
+    );
   }
   extraerDistanciaMenor(){
       let distanciaActual=9999;

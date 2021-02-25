@@ -105,7 +105,7 @@
             Campo RFC Obligatorio y debe llevar la clabe correcta y en mayusculas.
           </span>
         </div>
-        <ion-item >
+        <ion-item>
           <ion-label position="floating">Uso de CFDI</ion-label>
           <ion-select formControlName="uso_cfdi" value="">
             <ion-select-option value="">Selecciona CFDI</ion-select-option>
@@ -119,13 +119,80 @@
           </span>
         </div>
       </div>
-       <div class="content_boton">
+      <br>
+      <div class="content_enlaces">
+        <ion-router-link href="#" class="link1 underline" (click)="cancelar()">Estoy de acuerdo con terminos y condiciones</ion-router-link>
+        <ion-toggle slot="end" color="success" mode="ios" checked={{myValue}} formControlName="terminos"></ion-toggle>
+      </div>
+      <!-- Error messages -->
+      <span class="error" *ngIf="isSubmitted && errorControl.terminos.errors?.required">
+        * Terminos requerido.
+      </span>
+      <div class="content_boton">
         <ion-button expand="full" class="btn_pagar" type="submit">
             <ion-label>Registrar</ion-label>
         </ion-button>
       </div>
     </form>
-   
+  </div>
+  <div class="bg_llamanos" [class]="className">
+    <div class="content_llamanos">
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>POL&Iacute;TICA DE COMPRA</span></strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></p>
+        <ul style="list-style-type: disc;margin-left:0;padding-left: 0;">
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>&Uacute;nicamente podr&aacute;s comprar los productos que se encuentren disponibles para su venta y cuyos detalles aparezcan en la tienda online Reacsa.mx.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Todos nuestros precios est&aacute;n en moneda nacional y no incluyen impuestos.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Los productos elegidos se encontrar&aacute;n en tu carrito de compras, &eacute;ste debe pasar por el check-out para validar la informaci&oacute;n y/o modificar el pedido, en caso de estar de acuerdo con el pedido, debes finalizar la compra y llenar los formularios con la informaci&oacute;n solicitada, tales como: Nombre completo, tel&eacute;fono, correo electr&oacute;nico y direcci&oacute;n; teniendo los datos completos, puedes realizar tu pago.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Es responsabilidad del cliente que la informaci&oacute;n brindada sea la correcta, ya que en caso de existir errores por direcci&oacute;n la paqueter&iacute;a realizar&aacute; un cargo extra.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Productos no enviables solo disponibles para recolecci&oacute;n en sucursal,</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Gas refrigerante en cualquier modelo y presentaci&oacute;n:</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Foam cleaner</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Coil Cleaner</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Vitrinas</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Refrigeradores</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Cilindros Turner y de oxigeno</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Si se realiza la compra de alg&uacute;n art&iacute;culo de esta lista el cliente deber&aacute; recoger en alguna sucursal de lo contrario se har&aacute; la devoluci&oacute;n del&nbsp;pago</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Para cualquier duda o aclaraci&oacute;n de tus compras, nuestro correo de atenci&oacute;n al cliente es:&nbsp;</span><span style="font-size:10.5pt;color:#BE0404;"><a href="mailto:tiendaenlinea@reacsa.com.mx"><span style="color:#BE0404;text-decoration:none;">tiendaenlinea@reacsa.com.<strong>mx</strong></span></a></span></li>
+        </ul>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>TIENDA EN L&Iacute;NEA</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Las im&aacute;genes son ilustrativas no representan el producto</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>PROMOCIONES</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>POL&Iacute;TICA DE ENV&Iacute;O</span></strong></p>
+        <ul style="list-style-type: disc;margin-left:0;padding-left: 0;">
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Los env&iacute;os se realizan a cualquier parte de la Rep&uacute;blica Mexicana, seg&uacute;n lo establecido por los l&iacute;mites de la paqueter&iacute;a.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Los tiempos de entrega var&iacute;an en funci&oacute;n del destino, pueden ser entre 2 y 5 d&iacute;as h&aacute;biles aproximadamente.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Se enviara un mensaje al correo registrado por el cliente con el numero de gui&aacute; y la empresa encargada de hacer el env&iacute;o</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>REACSA no es responsable por &nbsp;da&ntilde;os como robo o extravi&oacute; del pedido durante su traslado a tu domicilio, la paqueter&iacute;a asignada es la responsable de las situaciones presentadas con la entrega, REACSA har&aacute; siempre lo mejor por brindarte el mejor servicio dando seguimiento oportuno a tu env&iacute;o.</span></li>
+            <li><span style='font-family:"Arial",sans-serif;font-size:10.5pt;color:#545454;'>Tendr&aacute;s hasta un m&aacute;ximo de dos intentos para realizar la entrega del pedido en el domicilio que nos indiques; en caso de no encontrarte, tu pedido ser&aacute; enviado de nuevo a nuestras instalaciones y se coordinar&aacute; un nuevo env&iacute;o con cargo adicional.</span></li>
+        </ul>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>POL&Iacute;TICAS DE PAGO</span></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Transferencia electr&oacute;nica / Dep&oacute;sito bancario:</span></em></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Para pagos realizados por transferencia SPEI o dep&oacute;sito bancario se solicita al cliente enviar comprobante de pago al correo <strong><em>tiendaenlineareacsa.com.mx</em></strong>; una vez que el pago se vea reflejado en nuestra cuenta, se enviara un correo al cliente con la confirmaci&oacute;n.</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></em></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Pago con tarjeta de debido</span></em></strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>:</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Una vez realizada tu compra recibir&aacute;s un correo electr&oacute;nico con tu n&uacute;mero de orden para confirmar tu pedido. <strong>&nbsp;MERCADO PAGO&nbsp;</strong>es nuestro intermediario para pago electr&oacute;nico por lo que cualquier situaci&oacute;n presentada se deber&aacute; consultar directamente con ellos.</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Pago en&nbsp;paypal</span></em></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>El cliente deber&aacute;&nbsp;contar con una cuenta con paypal para poder realizar la compra, cualquier problema con el pago es la pasarela de pago la encargada de resolver dudas, cargos no reconocidos o cobros indebidos,</span></em></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>&nbsp;</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Pol&iacute;ticas de Cambios</span></em></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Toda situaci&oacute;n presentada para cambio o devoluci&oacute;n se deber&aacute; notificar por correo electr&oacute;nico a:&nbsp;</span><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#BE0404;'><a href="mailto:tiendaenlinea@reacsa.com.mx"><span style="color:#BE0404;text-decoration:none;">tiendaenlinea@reacsa.com.mx</span></a></span></em></strong><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>, as&iacute; como el soporte (foto y/o video) de la falla del equipo para realizar la validaci&oacute;n.</span></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:11.25pt;margin-left:0cm;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;background:white;'><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>Para poder aplicar una devoluci&oacute;n de producto deber&aacute; contar con sus etiquetas, empaque original y sin defectos visibles ocasionados por un mal uso; los cu&aacute;les quedar&aacute;n a consideraci&oacute;n del equipo t&eacute;cnico de REACSA. *para mayor informaci&oacute;n consultar la pol&iacute;tica de Garant&iacute;as y Devoluciones*<br> <br>&nbsp;No se aceptan cambio ni devoluci&oacute;n de producto no comprado en nuestro sitio web&nbsp;</span><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#BE0404;'><a href="http://www.reacsa.com.mx/"><span style="color:#BE0404;text-decoration:none;">www.reacsa.</span></a></span></em></strong><strong><em><span style='font-size:14px;font-family:"Arial",sans-serif;color:#545454;'>mx</span></em></strong></p>
+        <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button color="transparent" class="btn2" expand="full" (click)="cancelar()">cancelar</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button class="btn1" expand="full" (click)="aceptar()">Aceptar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
   <div class="content_menu">
     <ul>

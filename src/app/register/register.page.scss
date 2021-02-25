@@ -26,3 +26,13 @@ ion-checkbox{
     --border-color-checked:#e3e4e7;
     --checkmark-color:black;
 }
+.content_enlaces{text-align: center;margin-top: 10px;display: flex;justify-content: space-between;align-items: center;}
+.link1{font-size: 13px;font-family: montserratMedium;color:black}
+.underline{text-decoration: underline;}
+.bg_llamanos{background: rgba(0,0,0,0.5); position: fixed; width: 100%; height: 100%; top: 0; z-index: 99;}
+.content_llamanos{background: white; width: 85%; margin: auto; position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%); text-align: center; color: black;padding: 20px 36px;border-radius: 5px;font-size: 17px;text-transform: uppercase;max-height: 80%;overflow: scroll;border-top: 20px solid white;border-bottom: 20px solid white;background-color: white;}
+.quitar{display: none;}
+.btn2{color: #0F0E9F;border:1px solid #0F0E9F;}
+.btn1{
+    --background: #0F0E9F;
+}
