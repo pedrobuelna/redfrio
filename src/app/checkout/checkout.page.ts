@@ -37,6 +37,7 @@ import { NavController } from '@ionic/angular';
     styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
+    klo:any;
     costoEnvio: number;
     ionicForm: FormGroup;
     isSubmitted = false;
@@ -50,7 +51,7 @@ export class CheckoutPage implements OnInit {
     currency: string = 'USD';
     currencyIcon: string = '$';
     tax: any = .16;
-    envio: any = 0;
+    envio: any = 20;
     subtotal: any;
     total: any;
     totalEnvio: any;
@@ -133,6 +134,61 @@ export class CheckoutPage implements OnInit {
                 this.sucursales = sucursales;
             });
     }
+    ionViewWillEnter() {
+        // this.nativeStorage.getItem('app')
+        // .then(
+        //     app => {
+        //         console.log("==APP DATA==");
+        //         console.log(app);
+        //         console.log("uuid_cliente: "+app.uuid_cliente);
+        //         this.taskService.getDireccionCliente(app.uuid_cliente)
+        //         .subscribe(direcciones => {
+        //             this.direcciones = direcciones;
+        //         });
+        //     },
+        //     error => console.error("NO HAY UUID_CLIENTE")
+        // );
+        // this.nativeStorage.getItem('totalCompra').then(
+        //     totalCompra => {
+        //         this.subtotal = totalCompra;
+        //         //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
+        //         let total = parseFloat(this.subtotal)*(1+parseFloat(this.tax));
+        //         this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+        //         this.paymentAmountEnvio = this.paymentAmount;
+        //         this.total = this.paymentAmount;
+        //         var tax = parseFloat(this.tax);
+        //         //this.inicializarVista();
+        //     },
+        //     error => {
+        //         this.router.navigate(['/principal']);
+        //     }
+        // );
+    }
+    envioGratis(){
+        $(".envio").text(0)
+        if(this.total != 0){
+            
+            console.log("===SIN ENVIO===");
+            console.log(this.subtotal);
+            let total = (this.subtotal*parseFloat(1+this.tax));
+            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+            $(".total").text(this.paymentAmount)
+        }else{
+            $(".total").text(0)
+        }
+    }
+    envioCobrado(){
+        $(".envio").text(this.envio)
+        if(this.total != 0){
+            console.log("===SIN ENVIO===");
+            console.log(this.subtotal);
+            let total = ((this.subtotal+parseFloat(this.envio))*parseFloat(1+this.tax));
+            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+            $(".total").text(this.paymentAmount)
+        }else{
+            $(".total").text(0)
+        }
+    }
     ionViewDidEnter() {
         this.nativeStorage.getItem('app')
         .then(
@@ -149,43 +205,53 @@ export class CheckoutPage implements OnInit {
         );
         this.nativeStorage.getItem('totalCompra').then(
             totalCompra => {
-                this.subtotal = totalCompra;
-                this.total = parseFloat(this.subtotal)
-                this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio)
-                this.paymentAmount = this.total.toString()
-                this.paymentAmountEnvio = this.totalEnvio.toString()
-                var tax = parseFloat(this.tax)
-                $("input[name='radio1']") // select the radio by its id
-                    .change(function () { // bind a function to the change event
-                        if ($(this).is(":checked")) {
-                            if ($(this).val() == "gratis") {
-                                $(".envio").text(0)
-                                if(this.total != 0){
-                                    this.paymentAmount = this.paymentAmount + (this.paymentAmount *.16)
-                                    $(".total").text(this.paymentAmount)
-                                }else{
-                                    $(".total").text(0)
-                                }
-                            } else {
-                                $(".envio").text(20)
-                                if(this.total != 0){
-                                    this.paymentAmount = this.paymentAmount + (this.paymentAmount + 20) * .16
-                                    $(".total").text(this.paymentAmount)
-                                }else{
-                                    $(".total").text(0)
-                                }
-                                //alert(this.paymentAmount)
-                            }
-                        }
-                    });
-                this.inicializarVista();
+                let subtotal=totalCompra;
+                this.subtotal = subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+                //this.subtotal = totalCompra;
+                //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
+                let total = parseFloat(this.subtotal)*(1+parseFloat(this.tax));
+                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 }).slice(0, -1);
+                this.paymentAmountEnvio = this.paymentAmount;
+                this.total = this.paymentAmount;
+                $(".envio").text(0)
+                //this.inicializarVista();
             },
             error => {
                 this.router.navigate(['/principal']);
             }
         );
-    }
-    inicializarVista() {
+        // let subtotal=this.subtotal;
+        // let total=this.total;
+        // let tax=(1+this.tax);
+        // let envio=this.envio;
+        // let precioFinal=0;
+        // $("input[name='radio1']") // select the radio by its id
+        //     .change(function () { // bind a function to the change event
+        //         if ($(this).is(":checked")) {
+        //             if ($(this).val() == "gratis") {
+        //                 $(".envio").text(0)
+        //                 if(total != 0){
+                            
+        //                     console.log("===SIN ENVIO===");
+        //                     console.log(this.subtotal);
+        //                     precioFinal = (subtotal*parseFloat(tax));
+        //                     $(".total").text(precioFinal)
+        //                 }else{
+        //                     $(".total").text(0)
+        //                 }
+        //             } else {
+        //                 $(".envio").text(envio)
+        //                 if(this.total != 0){
+        //                     console.log("===SIN ENVIO===");
+        //                     console.log(subtotal);
+        //                     precioFinal = ((subtotal+parseFloat(envio))*parseFloat(tax));
+        //                     $(".total").text(precioFinal)
+        //                 }else{
+        //                     $(".total").text(0)
+        //                 }
+        //             }
+        //         }
+        //     });
         $("input[name='radio1']") // select the radio by its id
             .change(function () { // bind a function to the change event
                 if ($(this).is(":checked")) {
@@ -277,8 +343,11 @@ export class CheckoutPage implements OnInit {
                     costoenvio = 0
                 }
                 console.log("valor" + envio)
-                let total2 =  (parseFloat(this.subtotal)) + (parseFloat(this.subtotal) * parseFloat(this.tax)) + costoenvio;
-                this.paymentAmountEnvio = total2.toString();
+                //let total2 =  (parseFloat(this.subtotal)) + (parseFloat(this.subtotal) * parseFloat(this.tax)) + costoenvio;
+                //this.paymentAmountEnvio = total2.toString();
+                this.paymentAmountEnvio=this.paymentAmount;
+                this.paymentAmountEnvio=this.paymentAmountEnvio.replace(',','');
+                alert("TOTAL PAYPAY: "+this.paymentAmountEnvio);
                 let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en reacsa', 'sale');
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
                     setTimeout(() => {
@@ -288,7 +357,7 @@ export class CheckoutPage implements OnInit {
                     // Successfully paid
                 }, () => {
                     console.log("Error or render dialog closed without being successful")
-                    alert("Total debe ser mayor a 0")
+                    alert("Ocurrio un error al realizar el pago.")
                     // Error or render dialog closed without being successful
                 });
             }, () => {
@@ -301,8 +370,9 @@ export class CheckoutPage implements OnInit {
         });
     }
     payWithCard(envio: boolean) {
-        let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
-        this.totalCompra=total2;
+        //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
+        //this.totalCompra=total2;
+        this.totalCompra=parseFloat(this.paymentAmount);
         alert("Gracias por su pago " + ((envio == true) ? "con envio" : " sin envio"));
         let id_transaccion = Math.floor(Math.random() * 10000000) + 1000000;;
         this.pagoAutorizado(2, id_transaccion)
