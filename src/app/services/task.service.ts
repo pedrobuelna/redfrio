@@ -202,8 +202,8 @@ export class TaskService {
         const path = `http://app.reacsa.mx/restapi/enviarCorreoRegistroCliente/${email}`;
         return this.http.get < Task > (path);
     }
-    sendMailPagoExitoso(uuid_carrito:string,email:string){
-        const path = `http://app.reacsa.mx/restapi/enviarCorreoPagoExitoso/${uuid_carrito},${email}`;
+    sendMailPagoExitoso(uuid_carrito:string){
+        const path = `http://app.reacsa.mx/restapi/enviarCorreoPagoExitoso/${uuid_carrito}`;
         return this.http.get < Task > (path);
     }
     getSucursales(){
