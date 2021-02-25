@@ -27,6 +27,8 @@ export class ProductoPage implements OnInit {
     idProducto:string;
     AppData: any[] = [];
     CarritoActivoData: any[]=[];
+    disponibilidad:any;
+    zonas:any;
     notificaciones: any;
     cantidadNot: any = 0;
     listas: any;
@@ -142,8 +144,17 @@ export class ProductoPage implements OnInit {
                     console.log("Img5 "+producto2[0].url_img5);
                     console.log("ER");
                 });
+                this.taskService.getSucursalesZonas().subscribe(zonas=>{
+                    this.zonas=zonas;
+                });
+                
                 console.log(this.imgProducto);
             });
+    }
+    getInventario($event){
+        this.taskService.getDisponibilidadProducto(this.idProducto,$event.target.value).subscribe(disponibilidad=>{
+            this.disponibilidad=disponibilidad;
+        });
     }
     onclickNotificaciones() {
         this.router.navigate(['/notificaciones']);
