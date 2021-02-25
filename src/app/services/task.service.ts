@@ -68,7 +68,7 @@ export class TaskService {
     }
     deleteDireccion(uuid_direccion: string) {
         // const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/direcciones/uuid_direccion=eq.${uuid_direccion}`
+        const path = `${this.api}/direcciones?uuid_direccion=eq.${uuid_direccion}`
         return this.http.delete(path);
     }
     getLogin(mail: any, contrasena: any) {

@@ -104,7 +104,7 @@ export class EditardireccionPage implements OnInit {
                     fiscal:false
                 };
                 this.taskService.patchDirecciones(this.uuid_direccion,direccion).subscribe(()=>{
-                    this.navCtrl.navigateRoot(['/direcciones']);
+                    this.navCtrl.navigateRoot(['/editarperfil']);
                 });
                   
               },
