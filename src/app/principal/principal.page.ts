@@ -103,6 +103,22 @@ export class PrincipalPage implements OnInit {
                     this.notificaciones = notificaciones;
                     this.cantidadNot = this.notificaciones.length
                 });
+                console.log('===========================');
+                console.log('===PRODCUTOS DESTACADOS====');
+                console.log('===========================');
+                let listaPrecio={idlistaprecio:app.lista_precio_id}
+                this.taskService.getProductosDestadados(listaPrecio)
+                    .subscribe(productos2 => {
+                        this.productos2 = productos2;
+                        console.log(productos2);
+                        console.log("imagenes...");
+                        console.log("images lenght :" +this.productos2.length);
+                        for(let i=0;i<this.productos2.length;i++){
+                            console.log("index : "+i);
+                            console.log(this.productos2[i]);
+                            this.taskService.validarImg(this.productos2[i].url_img1).then(()=>{},e=>{this.productos2[i].url_img1="../../assets/images/no-image.png"});
+                        }
+                    });
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
@@ -113,18 +129,6 @@ export class PrincipalPage implements OnInit {
             .subscribe(banners => {
                 this.banners = banners;
                 console.log(banners)
-            });
-        this.taskService.getProductosDestadados()
-            .subscribe(productos2 => {
-                this.productos2 = productos2;
-                console.log(productos2);
-                console.log("imagenes...");
-                console.log("images lenght :" +this.productos2.length);
-                for(let i=0;i<this.productos2.length;i++){
-                    console.log("index : "+i);
-                    console.log(this.productos2[i]);
-                    this.taskService.validarImg(this.productos2[i].url_img1).then(()=>{},e=>{this.productos2[i].url_img1="../../assets/images/no-image.png"});
-                }
             });
     }
     ionViewWillEnter() {

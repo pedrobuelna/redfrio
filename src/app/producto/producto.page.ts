@@ -75,6 +75,10 @@ export class ProductoPage implements OnInit {
         );
     }
     ionViewWillEnter(){
+        let x = "";
+        this.route.queryParams.subscribe(queryParams => x = queryParams.id);
+        //    console.log("x:" + x)
+        this.idProducto=x;
         this.nativeStorage.getItem('app')
         .then(
             app => {
@@ -90,66 +94,63 @@ export class ProductoPage implements OnInit {
                     this.notificaciones = notificaciones;
                     this.cantidadNot = this.notificaciones.length
                 });
+                let listaPrecio={idlistaprecio:app.lista_precio_id}
+                this.taskService.getProducto(x,listaPrecio)
+                    .subscribe(producto2 => {
+                        this.producto2 = producto2;
+                        console.log(producto2);
+                        this.imgProducto=[];
+                        this.taskService.validarImg(producto2[0].url_img1).then(()=>{
+                            console.log("Img1 "+producto2[0].url_img1);
+                            console.log("ok");
+                            this.imgProducto.push(producto2[0].url_img1);
+                        },e=>{
+                            console.log("Img1 "+producto2[0].url_img1);
+                            console.log("ER");
+                            this.imgProducto.push("../../assets/images/no-image.png");
+                        });
+                        this.taskService.validarImg(producto2[0].url_img2).then(()=>{
+                            console.log("Img2 "+producto2[0].url_img2);
+                            console.log("ok");
+                            this.imgProducto.push(producto2[0].url_img2);
+                        },e=>{
+                            console.log("Img2 "+producto2[0].url_img2);
+                            console.log("ERR");
+                        });
+                        this.taskService.validarImg(producto2[0].url_img3).then(()=>{
+                            console.log("Img3 "+producto2[0].url_img3);
+                            console.log("ok");
+                            this.imgProducto.push(producto2[0].url_img3);
+                        },e=>{
+                            console.log("Img3 "+producto2[0].url_img3);
+                            console.log("ERR");
+                        });
+                        this.taskService.validarImg(producto2[0].url_img4).then(()=>{
+                            console.log("Img4 "+producto2[0].url_img4);
+                            console.log("ok");
+                            this.imgProducto.push(producto2[0].url_img4);
+                        },e=>{
+                            console.log("Img4 "+producto2[0].url_img4);
+                            console.log("ERR");
+                            
+                        });
+                        this.taskService.validarImg(producto2[0].url_img5).then(()=>{
+                            console.log("Img5 "+producto2[0].url_img5);
+                            console.log("ok");
+                            this.imgProducto.push(producto2[0].url_img5);
+                        },e=>{
+                            console.log("Img5 "+producto2[0].url_img5);
+                            console.log("ER");
+                        });
+                        this.taskService.getSucursalesZonas().subscribe(zonas=>{
+                            this.zonas=zonas;
+                        });
+                        
+                        console.log(this.imgProducto);
+                    });
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
-        let x = "";
-        this.route.queryParams.subscribe(queryParams => x = queryParams.id);
-        //    console.log("x:" + x)
-        this.idProducto=x;
-        this.taskService.getProducto(x)
-            .subscribe(producto2 => {
-                this.producto2 = producto2;
-                console.log(producto2);
-                this.imgProducto=[];
-                this.taskService.validarImg(producto2[0].url_img1).then(()=>{
-                    console.log("Img1 "+producto2[0].url_img1);
-                    console.log("ok");
-                    this.imgProducto.push(producto2[0].url_img1);
-                },e=>{
-                    console.log("Img1 "+producto2[0].url_img1);
-                    console.log("ER");
-                    this.imgProducto.push("../../assets/images/no-image.png");
-                });
-                this.taskService.validarImg(producto2[0].url_img2).then(()=>{
-                    console.log("Img2 "+producto2[0].url_img2);
-                    console.log("ok");
-                    this.imgProducto.push(producto2[0].url_img2);
-                },e=>{
-                    console.log("Img2 "+producto2[0].url_img2);
-                    console.log("ERR");
-                });
-                this.taskService.validarImg(producto2[0].url_img3).then(()=>{
-                    console.log("Img3 "+producto2[0].url_img3);
-                    console.log("ok");
-                    this.imgProducto.push(producto2[0].url_img3);
-                },e=>{
-                    console.log("Img3 "+producto2[0].url_img3);
-                    console.log("ERR");
-                });
-                this.taskService.validarImg(producto2[0].url_img4).then(()=>{
-                    console.log("Img4 "+producto2[0].url_img4);
-                    console.log("ok");
-                    this.imgProducto.push(producto2[0].url_img4);
-                },e=>{
-                     console.log("Img4 "+producto2[0].url_img4);
-                     console.log("ERR");
-                     
-                });
-                this.taskService.validarImg(producto2[0].url_img5).then(()=>{
-                    console.log("Img5 "+producto2[0].url_img5);
-                    console.log("ok");
-                    this.imgProducto.push(producto2[0].url_img5);
-                },e=>{
-                    console.log("Img5 "+producto2[0].url_img5);
-                    console.log("ER");
-                });
-                this.taskService.getSucursalesZonas().subscribe(zonas=>{
-                    this.zonas=zonas;
-                });
-                
-                console.log(this.imgProducto);
-            });
     }
     getInventario($event){
         this.taskService.getDisponibilidadProducto(this.idProducto,$event.target.value).subscribe(disponibilidad=>{

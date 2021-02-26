@@ -89,17 +89,17 @@ export class TaskService {
         //alert(path)
         return this.http.get < Task > (path);
     }
-    getProductosDestadados() {
-        //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos_destacados`;
-        //alert(path)
-        return this.http.get < Task > (path);
+    getProductosDestadados(listaPrecio:any) {
+        // const path = `${this.api}/productos_destacados`;
+        // return this.http.get < Task > (path);
+        const path = `${this.api}/rpc/productosdestacado`;
+        return this.http.post<any>(path, listaPrecio);
     }
-    getAllProductos() {
-        //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos_info`;
-        //alert(path)
-        return this.http.get < Task > (path);
+    getAllProductos(listaPrecio:any) {
+        //const path = `${this.api}/productos_info`;
+        //return this.http.get < Task > (path);
+        const path = `${this.api}/rpc/productoinfo`;
+        return this.http.post<any>(path, listaPrecio);
     }
     // getProductos(id) {
     //     //const path = `${this.api}/todos/${id}`;
@@ -107,17 +107,17 @@ export class TaskService {
     //     //alert(path)
     //     return this.http.get < Task > (path);
     // }
-    getProductos(id,ordenarpor) {
-        //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos_info?familia_id=eq.${id}${ordenarpor}`;
-        //alert(path)
-        return this.http.get<Task>(path);
+    getProductos(id,ordenarpor,listaPrecio:any) {
+        // const path = `${this.api}/productos_info?familia_id=eq.${id}${ordenarpor}`;
+        // return this.http.get<Task>(path);
+        const path = `${this.api}/rpc/productoinfo?familia_id=eq.${id}${ordenarpor}`;
+        return this.http.post<any>(path, listaPrecio);
     }
-    getProducto(id: any) {
-        //const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/productos_info?uuid_producto=eq.${id}`;
-        //alert(path)
-        return this.http.get < any > (path);
+    getProducto(id: any,listaPrecio:any) {
+        // const path = `${this.api}/productos_info?uuid_producto=eq.${id}`;
+        // return this.http.get < any > (path);
+        const path = `${this.api}/rpc/productoinfo?uuid_producto=eq.${id}`;
+        return this.http.post<any>(path, listaPrecio);
     }
     sendMailUsr(usrMail: string) {
         const path = `http://carteraclientes.com/sistema/enviarCorreoRegistroCliente/${usrMail}`;

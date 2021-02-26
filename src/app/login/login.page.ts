@@ -74,7 +74,8 @@ export class LoginPage implements OnInit {
                     this.nativeStorage.setItem('app', {
                         nombre:cliente.nombre,
                         correo:cliente.mail,
-                        uuid_cliente:cliente.uuid_cliente 
+                        uuid_cliente:cliente.uuid_cliente,
+                        lista_precio_id:cliente.lista_precio_id
                     }).then(
                         () => {
                             console.log('Se actualizo la informacion APP')

@@ -33,39 +33,56 @@ export class CategoriaPage implements OnInit {
     cantidadNot: any = 0;
     listas: any;
     checkValue(event) {
-        console.log("valor: " + this.valorSelect)
-        let id = parseInt(event.detail.value);
-        let ordernarpor = $("#categoria_select2").val();
-        this.taskService.getProductos(id, ordernarpor)
-            .subscribe(productos2 => {
-                this.productos2 = productos2;
-                console.log(productos2)
-                for (let i = 0; i < this.productos2.length; i++) {
-                    console.log("index : " + i);
-                    console.log(this.productos2[i]);
-                    this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                        this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                let listaPrecio={idlistaprecio:app.lista_precio_id}
+                console.log("valor: " + this.valorSelect)
+                let id = parseInt(event.detail.value);
+                let ordernarpor = $("#categoria_select2").val();
+                this.taskService.getProductos(id, ordernarpor,listaPrecio)
+                    .subscribe(productos2 => {
+                        this.productos2 = productos2;
+                        console.log(productos2)
+                        for (let i = 0; i < this.productos2.length; i++) {
+                            console.log("index : " + i);
+                            console.log(this.productos2[i]);
+                            this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                                this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                            });
+                        }
                     });
-                }
-            });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     }
     filtroDestacados(event) {
-        let id = $("#categoria_select").val();
-        let ordernarpor = event.detail.value;
-        console.log("id: " + id)
-        console.log("ordenamiento: " + ordernarpor)
-        this.taskService.getProductos(id, ordernarpor)
-            .subscribe(productos2 => {
-                this.productos2 = productos2;
-                console.log(productos2);
-                for (let i = 0; i < this.productos2.length; i++) {
-                    console.log("index : " + i);
-                    console.log(this.productos2[i]);
-                    this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                        this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                let listaPrecio={idlistaprecio:app.lista_precio_id}
+                let id = $("#categoria_select").val();
+                let ordernarpor = event.detail.value;
+                console.log("id: " + id)
+                console.log("ordenamiento: " + ordernarpor)
+                this.taskService.getProductos(id, ordernarpor,listaPrecio)
+                    .subscribe(productos2 => {
+                        this.productos2 = productos2;
+                        console.log(productos2);
+                        for (let i = 0; i < this.productos2.length; i++) {
+                            console.log("index : " + i);
+                            console.log(this.productos2[i]);
+                            this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                                this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                            });
+                        }
                     });
-                }
-            });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     }
     loadVista() {
         this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
@@ -81,32 +98,47 @@ export class CategoriaPage implements OnInit {
         //alert(x)
         if (this.x == '0') {
             //alert("TODOS")
-            this.taskService.getAllProductos()
-                .subscribe(productos2 => {
-                    this.productos2 = productos2;
-                    for (let i = 0; i < this.productos2.length; i++) {
-                        console.log("index : " + i);
-                        console.log(this.productos2[i]);
-                        this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                            this.productos2[i].url_img1 = "../../assets/images/no-image.png"
-                        });
-                    }
+            this.nativeStorage.getItem('app')
+            .then(
+                app => {
+                    let listaPrecio={idlistaprecio:app.lista_precio_id}
+                    this.taskService.getAllProductos(listaPrecio)
+                    .subscribe(productos2 => {
+                        this.productos2 = productos2;
+                        for (let i = 0; i < this.productos2.length; i++) {
+                            console.log("index : " + i);
+                            console.log(this.productos2[i]);
+                            this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                                this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                            });
+                        }
 
-                });
+                    });
+                },
+                error => console.error("NO HAY UUID_CLIENTE")
+            );
+            
         } else {
-            //alert("familia "+ x)
-            let ordernarpor = $("#categoria_select2").val();
-            this.taskService.getProductos(this.x, ordernarpor)
-                .subscribe(productos2 => {
-                    this.productos2 = productos2;
-                    for (let i = 0; i < this.productos2.length; i++) {
-                        console.log("index : " + i);
-                        console.log(this.productos2[i]);
-                        this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                            this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+            this.nativeStorage.getItem('app')
+            .then(
+                app => {
+                    let listaPrecio={idlistaprecio:app.lista_precio_id}
+                    let ordernarpor = $("#categoria_select2").val();
+                    this.taskService.getProductos(this.x, ordernarpor,listaPrecio)
+                        .subscribe(productos2 => {
+                            this.productos2 = productos2;
+                            for (let i = 0; i < this.productos2.length; i++) {
+                                console.log("index : " + i);
+                                console.log(this.productos2[i]);
+                                this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
+                                    this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                                });
+                            }
                         });
-                    }
-                });
+                },
+                error => console.error("NO HAY UUID_CLIENTE")
+            );
+            //alert("familia "+ x)
         }
     }
     ngOnInit() {
