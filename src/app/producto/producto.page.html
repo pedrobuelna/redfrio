@@ -88,7 +88,7 @@
         <br>
         <span class="ion-text-capitalize"><b>Marca: </b> </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
         <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
-        <span class="ion-text-capitalize"><b>Disponibilidad: </b> <span *ngIf="producto.status==1" style="color: green;">EN STOCK</span><span *ngIf="producto.status==0" style="color: red;">No hay disponibilidad</span> </span>
+        <span *ngIf="producto.status==1" style="color: green;">DISPONIBLE</span><span *ngIf="producto.status==0" style="color: red;">NO HAY DISPONIBILIDAD</span> 
       </div> 
       <p class="parrafo3">
       {{producto.desc_larga}}

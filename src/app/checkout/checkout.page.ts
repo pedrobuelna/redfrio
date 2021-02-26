@@ -48,7 +48,7 @@ export class CheckoutPage implements OnInit {
     calle2Required: boolean;
     paymentAmount: string = '3.33';
     paymentAmountEnvio: string;
-    currency: string = 'USD';
+    currency: string = 'MXN';
     currencyIcon: string = '$';
     tax: any = .16;
     envio: any = 20;
@@ -296,7 +296,9 @@ export class CheckoutPage implements OnInit {
         console.log("valor" + envio)
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-            PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
+            //PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
+            PayPalEnvironmentSandbox: 'AbZEuRV0jsc2tNdw15dmAxMhLP5XMo8cBApBdZbkU-PJHGfeb4IO48IViBK8993b24jn6mDLjquHhKdx'
+            
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
             this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({

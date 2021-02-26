@@ -29,7 +29,7 @@
           <p>{{producto.desc_corta}}</p>
           <p>{{producto.marca}}</p>
           <span *ngIf="producto.status==0" style="color: red;">No hay disponibilidad</span>
-          <span *ngIf="producto.status==1" style="color: green; ">EN STOCK</span>
+          <span *ngIf="producto.status==1" style="color: green; ">DISPONIBLE</span>
           <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span>
           </p>
         </div>
