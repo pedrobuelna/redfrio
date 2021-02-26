@@ -76,7 +76,7 @@ export class CheckoutPage implements OnInit {
             direccion: ['',[Validators.required]],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
-            nombreTarjeta: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+            nombreTarjeta: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
             numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(16), Validators.maxLength(16)]],
             fechaMesTarjeta: ['', [Validators.required]],
             fechaAnoTarjeta: ['', [Validators.required]],
@@ -347,7 +347,7 @@ export class CheckoutPage implements OnInit {
         //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
         //this.totalCompra=total2;
         this.totalCompra=parseFloat(this.paymentAmount);
-        alert("Gracias por su pago " + ((envio == true) ? "con envio" : " sin envio"));
+        (envio == true) ? "con envio" : " sin envio";
         let id_transaccion = Math.floor(Math.random() * 10000000) + 1000000;;
         this.pagoAutorizado(2, id_transaccion)
     }
