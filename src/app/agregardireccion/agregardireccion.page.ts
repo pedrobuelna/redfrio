@@ -83,7 +83,10 @@ export class AgregardireccionPage implements OnInit {
                             direccion.fiscal=true;
                         }
                         this.taskService.postDirecciones(direccion).subscribe(()=>{
-                            this.navCtrl.navigateRoot(['/checkout']);
+                              this.navCtrl.back({
+                                animated: true,
+                                animationDirection: "back"
+                              })
                         });
                     });
                 },

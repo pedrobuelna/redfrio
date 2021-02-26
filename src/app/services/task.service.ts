@@ -48,7 +48,7 @@ export class TaskService {
     }
     
     getHistorialPedidos(uuid_cliente: any) {
-        const path = `${this.api}/carrito?uuid_cliente=eq.${uuid_cliente}`;
+        const path = `${this.api}/historial_pedido?cliente=eq.${uuid_cliente}`;
         return this.http.get < any > (path);
     }
     createTask(task: Task) {

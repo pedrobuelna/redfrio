@@ -4,14 +4,15 @@
     <br><br>
     <div class="pedido_content clearfix" *ngFor="let pedido of pedidos;let i = index;let last = last;">
       <div class="content_direcciones">
-        <div class="txt2">pedido #{{pedido.id_orden_sap}}</div>
-        {{pedido.create_date}}
-        monto
-        {{pedido.estatus}}
-        <div class="txt3">{{pedido.estatus}}</div>
+        <div class="txt2">Pedido #{{pedido.numero_pedido}}</div>
+        <div class="txt3">Estatus del pedido: {{pedido.status_pedido}}</div>
+        <div class="txt3">Fecha del pedido: {{pedido.fecha_pedido}}</div>
       </div>
-      <div class="content_controles">
-        <div class="editar">Ver pedido</div>
+      <div class="content_control">
+        <div class="left">VER PEDIDO</div>
       </div>
+    </div>
+    <div *ngIf="pedido==0">
+      No hay Historial de pedidos para mostrar agrega una dirección.
     </div>
 </ion-content>

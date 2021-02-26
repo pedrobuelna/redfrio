@@ -12,4 +12,7 @@
         <div class="left last" (click)="presentAlert(direccion.uuid_direccion)">Eliminar</div>
       </div>
     </div>
+    <div *ngIf="direcciones==0">
+      No hay direcciones para mostrar agrega una dirección.
+    </div>
 </ion-content>
