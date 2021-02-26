@@ -178,7 +178,12 @@ export class CheckoutPage implements OnInit {
                 this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
                     console.log('===COSTO ENVIO===');
                     console.log(envio);
-                    this.envio=envio[0].costo_envio.replace('$','');
+                    if(envio[0].peso_total>700){
+                        alert("La compra exede los 700 kilogramos maximos para un envio.");
+                        this.router.navigate(['/carrito']);
+                    }else{
+                        this.envio=envio[0].costo_envio.replace('$','');
+                    }
                 });
             },
             error =>{
