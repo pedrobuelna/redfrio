@@ -6,11 +6,11 @@
       <div class="content_direcciones">
         <div class="txt2">Pedido #{{pedido.numero_pedido}}</div>
         <div class="txt3">Estatus del pedido: {{pedido.status_pedido}}</div>
-        <div class="txt3">Fecha del pedido: {{pedido.fecha_pedido}}</div>
+        <div class="txt3">Fecha del pedido: {{ pedido.fecha_pedido | date:'dd/MM/yyyy' }}</div>
       </div>
-      <div class="content_control">
-        <div class="left">VER PEDIDO</div>
-      </div>
+      <!-- <div class="content_control">
+        <div>VER</div>
+      </div> -->
     </div>
     <div *ngIf="pedido==0">
       No hay Historial de pedidos para mostrar agrega una dirección.

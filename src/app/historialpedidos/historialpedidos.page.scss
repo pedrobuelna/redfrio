@@ -1,5 +1,5 @@
 .pedido_content{margin-bottom: 35px;border: 1px solid #707070;padding: 14px 0;vertical-align: middle;display: flex;align-items: center;width: 100%;}
-.txt3{font-size: 30px;font-weight: 500;color: #0B3B61;}
+.txt3{font-size: 18px;font-weight: 500;color: #0B3B61;}
 .img_direcciones{max-width: 34px;margin-left: 10px;}
 .txt2{color: #0B3B61;font-size: 13px !important;font-weight: 500;}
 .content_direcciones {
@@ -7,6 +7,6 @@
     vertical-align: sub;margin-left: 10px;
 }
 
-.content_control{position: absolute;right: 30px;color: #0B3B61;}
+.content_control{display:block;color: #0B3B61;}
 .left{float: left;}
 .last{margin-left: 20px;}
