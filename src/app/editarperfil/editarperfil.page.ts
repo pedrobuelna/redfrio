@@ -275,14 +275,14 @@ export class EditarperfilPage implements OnInit {
     onclickUbicaciones() {
         this.router.navigate(['/ubicaciones']);
     }
+    verHistorialPedidos(){
+        this.router.navigate(['/historialpedidos']);
+    }
     onclickMenu() {
         this.router.navigate(['/principal']);
     }
     onclickCategorias() {
         this.router.navigate(['/categorias']);
-    }
-    onclickUsuario() {
-        // this.router.navigate(['/register']);
     }
     onclickProducto() {
         this.router.navigate(['/producto']);
