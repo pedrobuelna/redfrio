@@ -27,7 +27,7 @@
                 <ion-label>Agregar dirección</ion-label>
             </ion-button>
             <div id="forma_envio_content">
-                <!-- <div class="forma_envio_subcontent" style="display: none;">
+                <div class="forma_envio_subcontent" style="display: none;">
                     <div class="titulo1_envio">Forma de envio</div>
                     <br>
                     <div class="content_radios1">
@@ -43,7 +43,7 @@
                             <span class="right">$20</span>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="forma_pago_subcontent radios">
                     <div class="titulo1_envio mt">Forma de pago</div>
                     <br><br>
@@ -64,13 +64,13 @@
             <div class="formulario padding30">
                 <div class="datosTarjeta">
                     <ion-item class="closed">
-                        <ion-label position="floating">Nombre en tarjeta *</ion-label>
+                        <ion-label position="floating">Nombre como esta en el plastico *</ion-label>
                         <ion-input type="text" id="nombreTarjeta" formControlName="nombreTarjeta"></ion-input>
                     </ion-item>
                     <!-- Error messages -->
                     <span class="error ion-padding" color="danger"
                         *ngIf="isSubmitted && (errorControl.nombreTarjeta.errors?.pattern || errorControl.nombreTarjeta.errors?.required)">
-                        El Nombre de tarjeta es obligatorio, debe tener letras en mayusculas.
+                        El Nombre de tarjeta es obligatorio.
                     </span>
                     <ion-item>
                         <ion-label position="floating">Numero de tarjeta *</ion-label>

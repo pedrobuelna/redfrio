@@ -48,7 +48,7 @@ export class CheckoutPage implements OnInit {
     calle2Required: boolean;
     paymentAmount: string = '3.33';
     paymentAmountEnvio: string;
-    currency: string = 'MXN';
+    currency: string = 'USD';
     currencyIcon: string = '$';
     tax: any = .16;
     envio: any = 20;
@@ -76,7 +76,7 @@ export class CheckoutPage implements OnInit {
             direccion: ['',[Validators.required]],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
-            nombreTarjeta: ['', [Validators.required, Validators.pattern('[A-Z]*')]],
+            nombreTarjeta: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
             numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(16), Validators.maxLength(16)]],
             fechaMesTarjeta: ['', [Validators.required]],
             fechaAnoTarjeta: ['', [Validators.required]],
@@ -321,7 +321,7 @@ export class CheckoutPage implements OnInit {
                 //this.paymentAmountEnvio = total2.toString();
                 this.paymentAmountEnvio=this.paymentAmount;
                 this.paymentAmountEnvio=this.paymentAmountEnvio.replace(',','');
-                alert("TOTAL PAYPAY: "+this.paymentAmountEnvio);
+                //alert("TOTAL PAYPAY: "+this.paymentAmountEnvio);
                 let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en reacsa', 'sale');
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
                     setTimeout(() => {

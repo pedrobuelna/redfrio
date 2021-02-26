@@ -32,6 +32,7 @@ export class SucursalesPage implements OnInit {
     @ViewChild("splash") splash: ElementRef;
     map = null;
     sucursalActual: informacionSucursal;
+    valor:any;
     sucursales: any;
     marcadorActual: MarcadoMap;
     cantmarkers: any;
@@ -44,6 +45,7 @@ export class SucursalesPage implements OnInit {
         private route: ActivatedRoute, private renderer: Renderer2,private nativeStorage: NativeStorage,
         private taskService: TaskService,public loadingController: LoadingController) {
         this.route.queryParams.subscribe(params => {
+
             this.sucursalActual = {
                 id_sucursal:params.sucursal,
                 nombre:"",
@@ -99,6 +101,9 @@ export class SucursalesPage implements OnInit {
                     
                     }, 200);
                 }
+                this.route.queryParams.subscribe(params => {
+                    this.valor = params.sucursal
+                });
             });
         });
     }

@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
     ) {
         this.ionicForm = this.formBuilder.group({
             correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-            password: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(6)]]
 
         })
     }

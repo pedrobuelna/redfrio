@@ -86,16 +86,15 @@ export class CategoriaPage implements OnInit {
     }
     loadVista() {
         this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
-        this.valorSelect = this.x;
         console.log("Valor queryParams");
         console.log(this.valorSelect);
         this.valorOrdenar = "&order=destacado.desc"
         this.taskService.getFamilias()
             .subscribe(familias => {
                 this.familias = familias;
-                console.log(familias)
+                console.log("Familias aaaa: "+familias)
+                this.valorSelect = this.x;
             });
-        //alert(x)
         if (this.x == '0') {
             //alert("TODOS")
             this.nativeStorage.getItem('app')
@@ -212,7 +211,7 @@ export class CategoriaPage implements OnInit {
         this.router.navigate(['/categorias']);
     }
     onclickUsuario() {
-        this.router.navigate(['/usuario']);
+        this.router.navigate(['/editarperfil']);
     }
     onclickProducto(id) {
         this.router.navigate(['/producto'], {

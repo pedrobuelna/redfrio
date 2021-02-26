@@ -112,13 +112,13 @@
         </div>
       </div>
       <br>
-      <ion-button expand="full" color="success" (click)="agregarDirecciones()">
-        <ion-label>Agregar Direcciones</ion-label>
+      <ion-button expand="full" class="btn1" (click)="agregarDirecciones()">
+        <ion-label>AGREGAR DIRECCIONES</ion-label>
       </ion-button>
-      <ion-button expand="full" color="warning" (click)="verDirecciones()">
-        <ion-label>Ver Direcciones</ion-label>
+      <ion-button expand="full" class="btn2" (click)="verDirecciones()">
+        <ion-label>VER DIRECCIONES</ion-label>
       </ion-button>
-      <ion-button expand="full" color="medium" (click)="verHistorialPedidos()">
+      <ion-button expand="full" class="btn3" (click)="verHistorialPedidos()">
         <ion-label>Historial de pedidos</ion-label>
       </ion-button>
       <ion-item *ngIf="direcciones?.length > 0">
