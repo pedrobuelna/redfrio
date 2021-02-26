@@ -47,12 +47,12 @@
                 <div class="forma_pago_subcontent radios">
                     <div class="titulo1_envio mt">Forma de pago</div>
                     <br><br>
-                    <div class="radio" style="width: 50%;display: inline-block;margin: 0;text-align: center;">
-                        <input id="radio-1" name="radio" type="radio" checked value="credito">
+                    <!-- <div class="radio" style="display:none !important;width: 50%;display: inline-block;margin: 0;text-align: center;">
+                        <input id="radio-1" name="radio" type="radio" value="credito">
                         <label for="radio-1" class="radio-label">Credito/Debito</label>
-                    </div>
-                    <div class="radio" style="width: 50%;display: inline-block;margin: 0;text-align: center;">
-                        <input id="radio-2" name="radio" type="radio" value="paypal">
+                    </div> -->
+                    <div class="radio"  style="display: inline-block;margin: 0;text-align: center;">
+                        <input id="radio-2" name="radio" type="radio" checked value="paypal">
                         <label for="radio-2" class="radio-label">Paypal</label>
                     </div>
                 </div>
@@ -62,22 +62,22 @@
                 </div>              
             </div>
             <div class="formulario padding30">
-                <div class="datosTarjeta">
+                <!-- <div class="datosTarjeta">
                     <ion-item class="closed">
                         <ion-label position="floating">Nombre como esta en el plastico *</ion-label>
                         <ion-input type="text" id="nombreTarjeta" formControlName="nombreTarjeta"></ion-input>
-                    </ion-item>
+                    </ion-item> -->
                     <!-- Error messages -->
-                    <span class="error ion-padding" color="danger"
+                    <!-- <span class="error ion-padding" color="danger"
                         *ngIf="isSubmitted && (errorControl.nombreTarjeta.errors?.pattern || errorControl.nombreTarjeta.errors?.required)">
                         El Nombre de tarjeta es obligatorio.
                     </span>
                     <ion-item>
                         <ion-label position="floating">Numero de tarjeta *</ion-label>
                         <ion-input formControlName="numeroTarjeta" id="numeroTarjeta" type="number"></ion-input>
-                    </ion-item>
+                    </ion-item> -->
                     <!-- Error messages -->
-                    <span class="error ion-padding" color="danger"
+                    <!-- <span class="error ion-padding" color="danger"
                         *ngIf="isSubmitted && (errorControl.numeroTarjeta.errors?.required || errorControl.numeroTarjeta.errors?.pattern || errorControl.numeroTarjeta.errors?.minlength || errorControl.numeroTarjeta.errors?.maxlength)">
                         El Numero de tarjeta debe tener 16 caractéres.
                     </span>
@@ -97,9 +97,9 @@
                             <ion-select-option value="11">11</ion-select-option>
                             <ion-select-option value="12">12</ion-select-option>
                         </ion-select>
-                    </ion-item>
+                    </ion-item> -->
                     <!-- Error messages -->
-                    <span class="error ion-padding" color="danger"
+                    <!-- <span class="error ion-padding" color="danger"
                         *ngIf="isSubmitted && (errorControl.fechaMesTarjeta.errors?.required)">
                         Campo Fecha de Expiracion MM de tarjeta es requerido.
                     </span>
@@ -116,9 +116,9 @@
                             <ion-select-option value="27">2027</ion-select-option>
                             <ion-select-option value="28">2028</ion-select-option>
                         </ion-select>
-                    </ion-item>
+                    </ion-item> -->
                     <!-- Error messages -->
-                    <span class="error ion-padding" color="danger"
+                    <!-- <span class="error ion-padding" color="danger"
                         *ngIf="isSubmitted && (errorControl.fechaAnoTarjeta.errors?.required)">
                         Campo Año de tarjeta es requerido.
                     </span>
@@ -130,7 +130,7 @@
                         *ngIf="isSubmitted && (errorControl.cvvTarjeta.errors?.required || errorControl.cvvTarjeta.errors?.pattern || errorControl.cvvTarjeta.errors?.minlength || errorControl.cvvTarjeta.errors?.maxlength)">
                         Campo CVV requerido y tener solo 3 numeros.
                     </span>
-                </div>
+                </div> -->
                 <br><br>
                 <div class="titulo_checkout">Total de la compra</div>
                 <br><br>
@@ -187,13 +187,13 @@
                     </ion-row>
                 </ion-grid>
             </div>
-            <ion-button expand="full" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal hide">
+            <ion-button expand="full" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal">
                 Paga
                 con PayPal</ion-button>
             <ion-button expand="full" color="success" (click)="submitForm(3)" class="btnpaypal enviopaypal hide">
                 Paga
                 con PayPal envio</ion-button>
-            <div class="content_boton btntarjeta sinenvio">
+            <div class="content_boton btntarjeta sinenvio hide">
                 <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(2)">
                     <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span>
                     </ion-label>

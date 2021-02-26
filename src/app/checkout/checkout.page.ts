@@ -73,14 +73,14 @@ export class CheckoutPage implements OnInit {
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
-            direccion: ['',[Validators.required]],
+            direccion: ['',],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
-            nombreTarjeta: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-            numeroTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(16), Validators.maxLength(16)]],
-            fechaMesTarjeta: ['', [Validators.required]],
-            fechaAnoTarjeta: ['', [Validators.required]],
-            cvvTarjeta: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(3), Validators.maxLength(3)]],
+            nombreTarjeta: ['', ],
+            numeroTarjeta: ['', ],
+            fechaMesTarjeta: ['', ],
+            fechaAnoTarjeta: ['', ],
+            cvvTarjeta: ['', ],
         })
     }
     get errorControl() {
@@ -301,8 +301,8 @@ export class CheckoutPage implements OnInit {
         console.log("valor" + envio)
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
-            PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
-            //PayPalEnvironmentSandbox: 'AbZEuRV0jsc2tNdw15dmAxMhLP5XMo8cBApBdZbkU-PJHGfeb4IO48IViBK8993b24jn6mDLjquHhKdx'
+            //PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
+            PayPalEnvironmentSandbox: 'AexiGyImMY7n7R0hYjsM7UEPNGDjPY49GWKNevzJIeu3VPVA9Ua2BO49QYKZqle72vdL5ofbt_Bj4Tsx'
             
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
