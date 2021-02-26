@@ -25,8 +25,11 @@
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
         <img src="{{producto.url_img1}}" alt="imgblanca.png">
         <div class="content_producto_textos">
-          <p> <span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br> </p>
-          <p> {{producto.desc_corta}}</p>
+          <p><span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br></p>
+          <p>{{producto.desc_corta}}</p>
+          <p>{{producto.marca}}</p>
+          <span *ngIf="producto.status==0" style="color: red;">No hay disponibilidad</span>
+          <span *ngIf="producto.status==1" style="color: green; ">EN STOCK</span>
           <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span>
           </p>
         </div>

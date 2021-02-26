@@ -68,7 +68,8 @@
     </div> -->
     <div id="descripcion_content">
       <div class="titulo1">{{producto.marca}} {{producto.nombre_familia}}</div>
-      <span>{{producto.cantidad}} disponibles</span>
+      <br>
+      <span style="color: green;">{{producto.cantidad}} Disponibles</span>
       <p class="parrafo1">
         {{producto.desc_corta}}
       </p>
@@ -80,12 +81,14 @@
                     {{ zona.zona }}</ion-select-option>
             </ion-select>
         </ion-item>
+        <br>
         <div *ngFor="let disp of disponibilidad;let i = index">
-            <span class="ion-text-capitalize">{{disp.sucursal}}: </span><span>{{disp.cantidad}}</span> <br>
+            <span class="ion-text-capitalize"><b>{{disp.sucursal}}:</b> </span><span>{{disp.cantidad}}</span> <br>
         </div>
-        <span class="ion-text-capitalize">Marca: </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
-        <span class="ion-text-capitalize">No. parte: </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
-        <span class="ion-text-capitalize">Disponibilidad: <span *ngIf="producto.status==1">En stock</span><span *ngIf="producto.status==0">No hay disponibilidad</span> </span>
+        <br>
+        <span class="ion-text-capitalize"><b>Marca: </b> </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
+        <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
+        <span class="ion-text-capitalize"><b>Disponibilidad: </b> <span *ngIf="producto.status==1" style="color: green;">EN STOCK</span><span *ngIf="producto.status==0" style="color: red;">No hay disponibilidad</span> </span>
       </div> 
       <p class="parrafo3">
       {{producto.desc_larga}}
