@@ -52,7 +52,8 @@ export class CarritoPage implements OnInit {
                 console.log(app);
                 console.log("uuid_cliente: "+app.uuid_cliente);
                 this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carritoActivo => {
-                    this.taskService.getCarritoActivoDetalles(carritoActivo[0].uuid_carrito).subscribe(dataCarrito=>{
+                    let listaPrecio={idlistaprecio:app.lista_precio_id}
+                    this.taskService.getCarritoActivoDetalles(carritoActivo[0].uuid_carrito,listaPrecio).subscribe(dataCarrito=>{
                         this.carritoProductos=dataCarrito;
                         let cantidadCarrito=((carritoActivo[0].cantidad)?carritoActivo[0].cantidad:0);
                         this.nativeStorage.setItem('carrito', {cantidad: cantidadCarrito,uuid_carrito:carritoActivo[0].uuid_carrito})
@@ -138,15 +139,22 @@ export class CarritoPage implements OnInit {
                 console.log("==CARRITO DATA==");
                 console.log(carrito);
                 console.log("uuid_cliente: "+carrito.uuid_carrito);
-                this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito).subscribe(dataCarrito=>{
-                    console.log("getCarritoActivoDetalles");
-                    console.log(dataCarrito);
-                    this.carritoProductos=dataCarrito;
-                    for(let i=0;i<this.carritoProductos.length;i++){
-                        this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
-                    }
-                    //this.calcularTotales();
-                });
+                this.nativeStorage.getItem('app')
+                .then(
+                    app => {
+                        let listaPrecio={idlistaprecio:app.lista_precio_id};
+                        this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito,listaPrecio).subscribe(dataCarrito=>{
+                        console.log("getCarritoActivoDetalles");
+                        console.log(dataCarrito);
+                        this.carritoProductos=dataCarrito;
+                        for(let i=0;i<this.carritoProductos.length;i++){
+                            this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
+                        }
+                        //this.calcularTotales();
+                    });
+                    },
+                    error => console.error("NO HAY UUID_CLIENTE")
+                );
             },
             error =>{
                  console.error("NO HAY DATOS DEL CARRITO");

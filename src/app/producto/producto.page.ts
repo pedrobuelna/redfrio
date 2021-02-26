@@ -219,39 +219,46 @@ export class ProductoPage implements OnInit {
             carrito => {
                 console.log("==CARRITO DATA==");
                 console.log(carrito);
-                this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito).subscribe(detallesCarrito=>{
-                    let cantidad=0; 
-                    let productoEncontrado=false;
-                    console.log("Detalles carrito:");
-                    console.log(detallesCarrito);
-                    detallesCarrito.forEach(detalle => {
-                        if(detalle.uuid_producto==this.idProducto){
-                            cantidad=detalle.cantidad;
-                            productoEncontrado=true;
+                this.nativeStorage.getItem('app')
+                .then(
+                    app => {
+                        let listaPrecio={idlistaprecio:app.lista_precio_id}
+                        this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito,listaPrecio).subscribe(detallesCarrito=>{
+                        let cantidad=0; 
+                        let productoEncontrado=false;
+                        console.log("Detalles carrito:");
+                        console.log(detallesCarrito);
+                        detallesCarrito.forEach(detalle => {
+                            if(detalle.uuid_producto==this.idProducto){
+                                cantidad=detalle.cantidad;
+                                productoEncontrado=true;
+                            }
+                        });
+                        if(productoEncontrado){
+                            console.log("Se encontro el producto :"+this.idProducto);
+                            let dataCantidad={
+                                cantidad:(cantidad+1)
+                            }
+                            this.taskService.updProductoCarrito(carrito.uuid_carrito,this.idProducto,dataCantidad).subscribe(()=>{
+                                this.getUuidCliente()
+                            });
+                        }else{
+                            console.log("No se encontro el producto :"+this.idProducto);
+                            let dataSetProducto={
+                                uuid_carrito:carrito.uuid_carrito,
+                                uuid_producto:this.idProducto,
+                                cantidad:1
+                            }
+                            console.log("Insertando producto al carrito...");
+                            console.log(dataSetProducto);
+                            this.taskService.setProductoToCarrito(dataSetProducto).subscribe(()=>{
+                                this.getUuidCliente()
+                            });
                         }
                     });
-                    if(productoEncontrado){
-                        console.log("Se encontro el producto :"+this.idProducto);
-                        let dataCantidad={
-                            cantidad:(cantidad+1)
-                        }
-                        this.taskService.updProductoCarrito(carrito.uuid_carrito,this.idProducto,dataCantidad).subscribe(()=>{
-                            this.getUuidCliente()
-                        });
-                    }else{
-                        console.log("No se encontro el producto :"+this.idProducto);
-                        let dataSetProducto={
-                            uuid_carrito:carrito.uuid_carrito,
-                            uuid_producto:this.idProducto,
-                            cantidad:1
-                        }
-                        console.log("Insertando producto al carrito...");
-                        console.log(dataSetProducto);
-                        this.taskService.setProductoToCarrito(dataSetProducto).subscribe(()=>{
-                            this.getUuidCliente()
-                        });
-                    }
-                });
+                    },
+                    error => console.error("NO HAY UUID_CLIENTE")
+                );
             },
             error =>{
                  console.error("NO HAY UUID_CLIENTE");

@@ -140,9 +140,12 @@ export class TaskService {
         const path = `${this.api}/carrito`;
         return this.http.post(path, dataUsuario);
     }
-    getCarritoActivoDetalles(uuid_carrito: string) {
-        const path = `${this.api}/carrito_activo_detalles?uuid_carrito=eq.${uuid_carrito}`;
-        return this.http.get < carrito_activo_detalles[] > (path);
+    getCarritoActivoDetalles(uuid_carrito: string,listaPrecio:any) {
+        //const path = `${this.api}/carrito_activo_detalles?uuid_carrito=eq.${uuid_carrito}`;
+        //return this.http.get < carrito_activo_detalles[] > (path);
+        const path = `${this.api}/rpc/carritoactivodetalles?uuid_carrito=eq.${uuid_carrito}`;
+        return this.http.post<any>(path, listaPrecio);
+        
     }
     setProductoToCarrito(dataCarrito: agregarProductoCarrito) {
         const path = `${this.api}/carrito_detalles`;
