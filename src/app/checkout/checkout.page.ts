@@ -73,7 +73,7 @@ export class CheckoutPage implements OnInit {
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
-            direccion: ['',],
+            direccion: ['',[Validators.required]],
             myBoolean: ['true', []],
             myBoolean2: ['false', []],
             nombreTarjeta: ['', ],

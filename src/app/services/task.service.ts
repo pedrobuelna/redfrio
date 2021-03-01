@@ -22,25 +22,16 @@ import {
 })
 
 export class TaskService {
-    //private api = 'https://jsonplaceholder.typicode.com';
-    //private api = 'http://webservicearca.000webhostapp.com';
-    //private api = 'http://178.128.14.243:3000';
-    private api = 'http://app.reacsa.mx:3000';
+    private api = 'https://app.reacsa.mx:3001';
+    private apiMail = 'https://app.reacsa.mx';
     constructor(
         private http: HttpClient
     ) {
 
     }
     getAllTasks() {
-        //const path = `${this.api}/todos`;
-        const path = `http://178.128.14.243:3000/sucursales`;
+        const path = `${this.api}/sucursales`;
         return this.http.get < Sucursal[] > (path);
-    }
-    
-    getTask(id: string) {
-        //const path = `${this.api}/todos/${id}`;
-        const path = `http://webservicearca.000webhostapp.com/refacciones/${id}`;
-        return this.http.get < Task > (path);
     }
     validarCorreo(email: string) {
         const path = `${this.api}/clientes?mail=eq.${email}`;
@@ -52,7 +43,6 @@ export class TaskService {
         return this.http.get < any > (path);
     }
     createTask(task: Task) {
-        // const path = `${this.api}/todos`;
         const path = `${this.api}/clientes`;
         return this.http.post(path, task);
     }
@@ -118,10 +108,6 @@ export class TaskService {
         // return this.http.get < any > (path);
         const path = `${this.api}/rpc/productoinfo?uuid_producto=eq.${id}`;
         return this.http.post<any>(path, listaPrecio);
-    }
-    sendMailUsr(usrMail: string) {
-        const path = `http://carteraclientes.com/sistema/enviarCorreoRegistroCliente/${usrMail}`;
-        return this.http.patch < Task > (path, false);
     }
     updInfoPerfil(uuid_cliente, dataPerfil: any) {
         const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
@@ -216,11 +202,11 @@ export class TaskService {
         return this.http.get<any>(path);
     }
     sendMailActivacionUsuario(email:string){
-        const path = `http://app.reacsa.mx/restapi/enviarCorreoRegistroCliente/${email}`;
+        const path = `${this.apiMail}/restapi/enviarCorreoRegistroCliente/${email}`;
         return this.http.get < Task > (path);
     }
     sendMailPagoExitoso(uuid_carrito:string){
-        const path = `http://app.reacsa.mx/restapi/enviarCorreoPagoExitoso/${uuid_carrito}`;
+        const path = `${this.apiMail}/restapi/enviarCorreoPagoExitoso/${uuid_carrito}`;
         return this.http.get < Task > (path);
     }
     getSucursales(){

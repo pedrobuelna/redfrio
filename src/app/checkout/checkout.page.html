@@ -32,13 +32,13 @@
                     <br>
                     <div class="content_radios1">
                         <div class="radio">
-                            <input id="radio-12" name="radio1" type="radio" checked value="gratis" (click)="envioGratis()">
+                            <input id="radio-12" name="radio1" type="radio" checked value="gratis">
                             <label for="radio-12" class="radio-label">DHL Standard (5 - 19 dias)</label>
                             <span class="right">$0</span>
                         </div>
                         <br>
                         <div class="radio">
-                            <input id="radio-22" name="radio1" type="radio" value="cobro" (click)="envioCobrado()">
+                            <input id="radio-22" name="radio1" type="radio" value="cobro">
                             <label for="radio-22" class="radio-label">DHL Express (2 - 5 dias)</label>
                             <span class="right">$20</span>
                         </div>
@@ -181,7 +181,7 @@
                         </ion-col>
                         <ion-col>
                             <div class="ion-text-right">
-                                $<span class="total">{{total}}</span>
+                                <span class="total">{{total | currency:"MXN":'symbol-narrow':'4.2-2'}}</span>
                             </div>
                         </ion-col>
                     </ion-row>

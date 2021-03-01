@@ -6,9 +6,6 @@
        </trust-anchors>
    </base-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain>localhost</domain>
-        <domain>app.reacsa.mx</domain>
-        <domain>app.reacsa.mx:3000</domain>
-        <domain>app.reacsa.mx:80</domain>
+        <domain>*.reacsa.mx</domain>
     </domain-config>
 </network-security-config>

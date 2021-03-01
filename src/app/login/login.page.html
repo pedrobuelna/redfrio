@@ -27,13 +27,13 @@
       El Password debe tener minimo 6 caractéres.
     </span>
     <div id="boton_content">
-      <ion-button type="submit" color="color1">
+      <ion-button type="submit" class="login" color="color1">
         <span class="txtBtn1">Login</span>
       </ion-button>
       <!-- <a  [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a> -->
       <!-- <ion-button type="submit" size="small"  >
       </ion-button> -->
-      <ion-router-link class="link1 ion-float-right mt10">Ayuda</ion-router-link>
+      <!-- <div class="link1 ion-float-right mt10">Ayuda</div> -->
       <br><br>
       <div class="content_enlaces">
         <div class="link1 underline" (click)="cancelar()">Aviso de Privacidad</div>
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div id="content_link">
-        <ion-router-link (click)="onClickRegister()" class="link1 ion-float-left">No soy socio.&nbsp;</ion-router-link><ion-router-link (click)="onClickRegister()" class="link2 ion-float-left">Necesito registrarme</ion-router-link>
+        <div (click)="onClickRegister()" class="link1 ion-float-left">No soy socio.&nbsp;</div><div (click)="onClickRegister()" class="link2 ion-float-left">Necesito registrarme</div>
       </div>
     </div>
   </form>
