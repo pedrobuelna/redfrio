@@ -1,0 +1,46 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <form id="login_form" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    <img src="assets/images/Icono_Reacsa.png" alt="logo_login" class="logo2">
+    <h1> Recuperar Contraseña </h1>
+    <ion-item lines="full" lines="none">
+      <ion-input type="email" formControlName="mail" required class="inputs" placeholder="Email"></ion-input>
+    </ion-item>
+    <!-- Error messages -->
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mail.errors?.required">
+      Campo Email requerido.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mail.errors?.pattern">
+      Formato debe ser correo@dominio.com.
+    </span>
+    <ion-item>
+      <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.password.errors?.required || errorControl.password.errors?.minlength)">
+        Campo Password requerido y minimo 6 caractéres
+      </span>
+    </div>
+    <ion-item>
+      <ion-input formControlName="confirmarcontrasena" type="password" placeholder="Confirmar Contraseña"></ion-input>
+    </ion-item>
+    <div class="espacios">
+      <span class="error" *ngIf="isSubmitted && errorControl.confirmarcontrasena.errors?.required">
+        * Campo confirmar contraseña requerido.
+      </span>
+      <div class="error" *ngIf="isSubmitted && errorControl.confirmarcontrasena.errors?.confirmedValidator">
+        No coinciden las contraseñas.
+      </div>
+    </div>
+    <div id="boton_content">
+      <ion-button type="submit" class="login" color="color1">
+        <span class="txtBtn1">Actualizar Contraseña</span>
+      </ion-button>
+      <br>
+    </div>
+  </form>
+</ion-content>

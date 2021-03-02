@@ -300,7 +300,7 @@ export class EditarperfilPage implements OnInit {
         this.nativeStorage.clear()
         .then(
             data =>{
-                this.router.navigate(['/login']);
+                this.navCtrl.navigateRoot(['/login']);
             },
             error => console.error(error)
         );

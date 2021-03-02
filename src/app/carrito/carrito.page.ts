@@ -131,7 +131,64 @@ export class CarritoPage implements OnInit {
         $(".subtotal_numero").text("$ " + t);
         $(".total_btnpago").text(t);
     }
-    ngOnInit() {}
+    ngOnInit() {
+    }
+
+    // mas(uuid_producto){
+    //     let x=0;
+    //     let cantidad=0;
+    //     $(".subcontent_carrito .mas").click(function(i){
+    //         console.log("JALA PERRO "+$(this).attr("attr-a"))
+    //         cantidad = parseInt($(this).parent().parent().parent().parent().parent().find(".cantidad").val());
+    //         cantidad = cantidad + 1;
+    //         console.log("CANTIDAD: "+cantidad)
+    //         $(".cantidad").val(cantidad)
+    //     })
+//        this.updCantidad(uuid_producto,cantidad)
+        // $(".subtotal_numero").text(x)
+        // $(".subtotal_numero").text("$ "+x)
+        // $(".total_btnpago").text(x)
+        
+        // $( ".cantidad" ).change(function() {
+        //   let valselect;
+        //   let x=0;
+        //   $(".subcontent_carrito").each(function(i){
+        //     valselect = parseInt($(this).find(".cantidad").val())
+        //     console.log("valor de select " + i +" "+ valselect)
+        //     console.log("valor de cantidad "  + i +" "+ parseInt($(this).find(".precio").text()))
+        //     console.log("Calculo total de cada 1 "  + i +" "+ parseInt(valselect) * parseInt($(this).find(".precio").text()))
+        //     x=x+(parseInt(valselect) * parseInt($(this).find(".precio").text()))
+        //   })
+        //   $(".subtotal_numero").text("$ "+x)
+        //   $(".total_btnpago").text(x)
+        // }); 
+    //}
+    // menos(){
+    //     let x=0;
+    //     $(".precio").each(function(i){
+    //         console.log("valor i: "+i)
+    //       x=x-parseInt($(this).text())
+    //       x=x-(parseInt($(this).text()) * parseInt($(".cantidad").val()))
+    //       console.log("valor - : "+x)
+    //     })
+    //     console.log("valor:"+x)
+    //     $(".subtotal_numero").text(x)
+    //     $(".subtotal_numero").text("$ "+x)
+    //     $(".total_btnpago").text(x)
+        // $( ".cantidad" ).change(function() {
+        //   let valselect;
+        //   let x=0;
+        //   $(".subcontent_carrito").each(function(i){
+        //     valselect = parseInt($(this).find(".cantidad").val())
+        //     console.log("valor de select " + i +" "+ valselect)
+        //     console.log("valor de cantidad "  + i +" "+ parseInt($(this).find(".precio").text()))
+        //     console.log("Calculo total de cada 1 "  + i +" "+ parseInt(valselect) * parseInt($(this).find(".precio").text()))
+        //     x=x+(parseInt(valselect) * parseInt($(this).find(".precio").text()))
+        //   })
+        //   $(".subtotal_numero").text("$ "+x)
+        //   $(".total_btnpago").text(x)
+        // }); 
+    //}
     ionViewWillEnter() {
         this.nativeStorage.getItem('carrito')
         .then(

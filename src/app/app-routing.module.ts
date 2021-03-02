@@ -111,6 +111,10 @@ const routes: Routes = [
     path: 'historialpedidos',
     loadChildren: () => import('./historialpedidos/historialpedidos.module').then( m => m.HistorialpedidosPageModule)
   },
+  {
+    path: 'recuperarcontrasena',
+    loadChildren: () => import('./recuperarcontrasena/recuperarcontrasena.module').then( m => m.RecuperarcontrasenaPageModule)
+  },
 ];
 
 @NgModule({

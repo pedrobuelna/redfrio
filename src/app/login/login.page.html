@@ -26,14 +26,13 @@
     <span class="error ion-padding"  *ngIf="isSubmitted && errorControl.password.errors?.minlength">
       El Password debe tener minimo 6 caractéres.
     </span>
+    <br>
+    <a [routerLink]="['/recuperarcontrasena']" class="small-text" style="color: black;">Recuperar Contraseña</a>
+    <br>
     <div id="boton_content">
       <ion-button type="submit" class="login" color="color1">
         <span class="txtBtn1">Login</span>
       </ion-button>
-      <!-- <a  [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a> -->
-      <!-- <ion-button type="submit" size="small"  >
-      </ion-button> -->
-      <!-- <div class="link1 ion-float-right mt10">Ayuda</div> -->
       <br><br>
       <div class="content_enlaces">
         <div class="link1 underline" (click)="cancelar()">Aviso de Privacidad</div>

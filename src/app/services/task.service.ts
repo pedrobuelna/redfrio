@@ -113,6 +113,10 @@ export class TaskService {
         const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.patch(path, dataPerfil);
     }
+    updateContrasena(mail, dataPerfil: any) {
+        const path = `${this.api}/clientes?mail=eq.${mail}`;
+        return this.http.patch(path, dataPerfil);
+    }
     //Carrito
     updCarritoInfo(uuid_carrito: string, dataStatus: any) {
         const path = `${this.api}/carrito?uuid_carrito=eq.${uuid_carrito}`;

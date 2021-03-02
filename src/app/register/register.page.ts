@@ -44,10 +44,7 @@ export class RegisterPage implements OnInit {
     private  router:  Router,
     public formBuilder: FormBuilder,
     public navCtrl: NavController,
-    private taskService: TaskService,) {
-    // this.ionicForm = new FormGroup({
-    //   nombre: new FormControl()
-    // });
+    private taskService: TaskService) {
     this.ionicForm = this.formBuilder.group({
       nombre: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(40)]],
       nombre_2: ['', [Validators.maxLength(40)]],

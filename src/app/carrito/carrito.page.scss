@@ -7,7 +7,7 @@
 .parrafo{font-size: 13px;text-transform: uppercase;color: #707070;margin: 30px 0 0 ;max-height: 96px;overflow: hidden;}
 .titulo{color: #151515;}
 .precio{color: #151515;font-size: 12px;margin-bottom: 20px;margin: 30px 0 30px;}
-.cantidad{-webkit-appearance: none;border: none; border-bottom: 2px solid #00257C; width: 100%; padding-left: 0; font-size: 12px; text-align: center; padding-bottom: 5px; color: black;border-radius: 0 !important;}
+.cantidad{-webkit-appearance: none;border: none; border-bottom: 2px solid #00257C; width: 100%; padding-left: 0; font-size: 12px; text-align: center; padding-bottom: 5px; color: black;border-radius: 0 !important;right: calc(50% - 9px);}
 .remover{border-bottom: 1px solid #95989A;padding-bottom: 3px;font-size: 12px;color: #95989A;position: absolute;bottom: 5px;margin-left: 5px;}
 .total{font-size: 18px;color: black;margin-bottom: 10px;}
 .content_subtotal{padding: 0 50px;margin-top: 40px;}
@@ -28,3 +28,14 @@ button .button-inner{
     justify-content: space-between !important;
 }
 .none{display: none;}
+.mas {
+    position: absolute;
+    top: -10px;
+    right: 100px;
+}
+.menos {
+    position: absolute;
+    top: -23px;
+    right: 0px;
+    font-size: 36px;
+}
