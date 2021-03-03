@@ -20,6 +20,8 @@
   </div>
   
   <ion-row class="content_categorias">
+    <div class="totalproductos">TOTAL: {{totalproductos}}</div>
+    <br>
     <ion-col *ngFor="let producto of productos2;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel" [class.last]="last">
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">

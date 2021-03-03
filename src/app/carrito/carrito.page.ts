@@ -145,7 +145,7 @@ export class CarritoPage implements OnInit {
         this.updCantidad(uuid_producto,cantidad);
     }
      menos(uuid_producto,producto){
-         if(producto.cantidad>=2){
+         if(producto.cantidad>=1){
             let cantidad = producto.cantidad -=1;
             this.updCantidad(uuid_producto,cantidad);
          }

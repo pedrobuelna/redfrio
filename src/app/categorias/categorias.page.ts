@@ -95,9 +95,7 @@ export class CategoriasPage implements OnInit {
   onclickMenu(){
     this.router.navigate(['/principal']);
   }
-  onclickAllCategoria(){
-    this.router.navigate(['/categoria']);
-  }
+
   onclickUsuario(){
     this.router.navigate(['/editarperfil']);
   }

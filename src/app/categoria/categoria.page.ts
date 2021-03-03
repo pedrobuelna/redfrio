@@ -32,6 +32,7 @@ export class CategoriaPage implements OnInit {
     notificaciones: any;
     cantidadNot: any = 0;
     listas: any;
+    totalproductos:any;
     checkValue(event) {
         this.nativeStorage.getItem('app')
         .then(
@@ -47,6 +48,7 @@ export class CategoriaPage implements OnInit {
                     .subscribe(productos2 => {
                         this.productos2 = productos2;
                         console.log(productos2)
+                        this.totalproductos = productos2.length;
                         for (let i = 0; i < this.productos2.length; i++) {
                             console.log("index : " + i);
                             console.log(this.productos2[i]);
@@ -71,6 +73,7 @@ export class CategoriaPage implements OnInit {
                 this.taskService.getProductos(id, ordernarpor,listaPrecio)
                     .subscribe(productos2 => {
                         this.productos2 = productos2;
+                        this.totalproductos = productos2.length;
                         console.log(productos2);
                         for (let i = 0; i < this.productos2.length; i++) {
                             console.log("index : " + i);
@@ -104,6 +107,7 @@ export class CategoriaPage implements OnInit {
                     this.taskService.getAllProductos(listaPrecio)
                     .subscribe(productos2 => {
                         this.productos2 = productos2;
+                        this.totalproductos = productos2.length;
                         for (let i = 0; i < this.productos2.length; i++) {
                             console.log("index : " + i);
                             console.log(this.productos2[i]);
@@ -126,6 +130,7 @@ export class CategoriaPage implements OnInit {
                     this.taskService.getProductos(this.x, ordernarpor,listaPrecio)
                         .subscribe(productos2 => {
                             this.productos2 = productos2;
+                            this.totalproductos = productos2.length;
                             for (let i = 0; i < this.productos2.length; i++) {
                                 console.log("index : " + i);
                                 console.log(this.productos2[i]);
