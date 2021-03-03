@@ -68,6 +68,9 @@ export class CheckoutPage implements OnInit {
     cantidadNot: any = 0;
     cantidadOn:any;
     className: string = 'quitar';
+    enviodireccion:any = "domicilio"
+    mostrarDireccion:any = true;
+    mostrarTienda:any = false;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         this.costoEnvio = 20;
@@ -179,7 +182,7 @@ export class CheckoutPage implements OnInit {
                     console.log('===COSTO ENVIO===');
                     console.log(envio);
                     if(envio[0].peso_total>700){
-                        alert("La compra exede los 700 kilogramos maximos para un envio.");
+                        alert("La compra excede los 700 kilogramos máximos para un envío.");
                         this.router.navigate(['/carrito']);
                     }else{
                         this.envio=envio[0].costo_envio.replace('$','');
@@ -190,6 +193,19 @@ export class CheckoutPage implements OnInit {
                  console.error("NO HAY DATOS DEL CARRITO");
             }
         );
+    }
+    muestraTienda(event) {
+        //console.log(this.enviodireccion)
+        console.log("muestraTienda",event.detail);
+        //this.muestraTienda = event.detail;
+        console.log("Value: " + event.detail.value)
+        if (event.detail.value == "domicilio") {
+            this.mostrarDireccion = true;
+            this.mostrarTienda = false;
+        }else{
+            this.mostrarTienda = true;
+            this.mostrarDireccion = false;
+        }
     }
     ionViewDidEnter() {
         this.nativeStorage.getItem('app')
@@ -205,13 +221,12 @@ export class CheckoutPage implements OnInit {
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
-
         this.nativeStorage.getItem('totalCompra').then(
             totalCompra => {
                 this.subtotal = totalCompra;
                 //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
                 let envio=this.envio.replace(',','');
-                let total = (parseFloat(this.subtotal)*(1+parseFloat(this.tax)))+parseFloat(envio);
+                let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
                 this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 this.paymentAmountEnvio = this.paymentAmount;
                 this.total = this.paymentAmount;
@@ -296,14 +311,12 @@ export class CheckoutPage implements OnInit {
                 }
             });
     }
-
     payWithPaypal(envio: boolean) {
         console.log("valor" + envio)
         this.payPal.init({
             PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
             //PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
             PayPalEnvironmentSandbox: 'AexiGyImMY7n7R0hYjsM7UEPNGDjPY49GWKNevzJIeu3VPVA9Ua2BO49QYKZqle72vdL5ofbt_Bj4Tsx'
-            
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
             this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
@@ -322,7 +335,7 @@ export class CheckoutPage implements OnInit {
                 this.paymentAmountEnvio=this.paymentAmount;
                 this.paymentAmountEnvio=this.paymentAmountEnvio.replace(',','');
                 //alert("TOTAL PAYPAY: "+this.paymentAmountEnvio);
-                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en reacsa', 'sale');
+                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en REACSA', 'sale');
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
                     setTimeout(() => {
                         this.addMyClass()
@@ -360,11 +373,24 @@ export class CheckoutPage implements OnInit {
                     console.log("==CARRITO DATA==");
                     console.log(carrito);
                     console.log("uuid_carrito: " + carrito.uuid_carrito);
+                    console.log("TOTAL: " +this.paymentAmount)
+                    let tipo_envio:any;
+                    let sucursal:any;
+                    let direccion:any;
+                    if(this.ionicForm.value.direccion.length<4){
+                        tipo_envio=1;//Sucursal
+                        sucursal = this.ionicForm.value.direccion
+                    }else{
+                        tipo_envio=2;//Direccion
+                        direccion = this.ionicForm.value.direccion
+                    }
                     this.taskService.updCarritoInfo(carrito.uuid_carrito, {
                         status: 2,
                         id_tipo_pago:tipo,
-                        total:this.totalCompra,
-                        uuid_direccion:this.ionicForm.value.direccion,
+                        total:this.paymentAmount,
+                        tipo_envio:tipo_envio,
+                        uuid_direccion:direccion,
+                        sucursal:sucursal,
                         info_pago:data
                     }).subscribe(() => {
                         this.nativeStorage.getItem('app')

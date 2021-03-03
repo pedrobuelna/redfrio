@@ -238,6 +238,7 @@ export class ProductoPage implements OnInit {
                             console.log("Se encontro el producto :"+this.idProducto);
                             let dataCantidad={
                                 cantidad:(cantidad+1)
+                                //cantidad:(cantidad+this.quantity)
                             }
                             this.taskService.updProductoCarrito(carrito.uuid_carrito,this.idProducto,dataCantidad).subscribe(()=>{
                                 this.getUuidCliente()
@@ -248,6 +249,7 @@ export class ProductoPage implements OnInit {
                                 uuid_carrito:carrito.uuid_carrito,
                                 uuid_producto:this.idProducto,
                                 cantidad:1
+                                //cantidad:this.quantity)
                             }
                             console.log("Insertando producto al carrito...");
                             console.log(dataSetProducto);

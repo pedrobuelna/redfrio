@@ -29,9 +29,9 @@
               <span class="remover" (click)="delete(producto.uuid_producto)">Eliminar</span>
               <ion-col size="4">
                 <div class="precio" id="{{producto.uuid_producto}}">{{producto.precio}}</div>
-                <span class="mas" (click)="mas(producto.uuid_producto)" attr-a="a">+</span>
-                <input type="number" class="cantidad" id="cantidad_{{producto.uuid_producto}}" placeholder="Cantidad" value="{{producto.cantidad}}" (change)="updCantidad(producto.uuid_producto,$event.target.value)">
-                <span class="menos" (click)="menos()">-</span>
+                <ion-icon name="add-circle-outline" class="mas" (click)="mas(producto.uuid_producto,producto)"></ion-icon>
+                <input type="number" min="1" max="10" class="cantidad" id="cantidad_{{producto.uuid_producto}}" placeholder="Cantidad" value="{{producto.cantidad}}" (change)="updCantidad(producto.uuid_producto,$event.target.value)">
+                <ion-icon name="remove-circle-outline" class="menos" (click)="menos(producto.uuid_producto,producto)"></ion-icon>
               </ion-col>
             </ion-row>
           </ion-col>

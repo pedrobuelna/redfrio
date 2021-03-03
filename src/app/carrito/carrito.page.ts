@@ -54,7 +54,13 @@ export class CarritoPage implements OnInit {
                 this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carritoActivo => {
                     let listaPrecio={idlistaprecio:app.lista_precio_id}
                     this.taskService.getCarritoActivoDetalles(carritoActivo[0].uuid_carrito,listaPrecio).subscribe(dataCarrito=>{
-                        this.carritoProductos=dataCarrito;
+                            console.log("getCarritoActivoDetalles");
+                            console.log(dataCarrito);
+                            this.carritoProductos=dataCarrito;
+                            for(let i=0;i<this.carritoProductos.length;i++){
+                                this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
+                            }
+                            //this.calcularTotales();
                         let cantidadCarrito=((carritoActivo[0].cantidad)?carritoActivo[0].cantidad:0);
                         this.nativeStorage.setItem('carrito', {cantidad: cantidadCarrito,uuid_carrito:carritoActivo[0].uuid_carrito})
                         .then(
@@ -84,6 +90,7 @@ export class CarritoPage implements OnInit {
                     let cantidadData={cantidad:cantidad}
                     this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
                         this.actualizarListaProductosCarrito()
+                        
                     });
                 },
                 error =>{
@@ -133,62 +140,16 @@ export class CarritoPage implements OnInit {
     }
     ngOnInit() {
     }
-
-    // mas(uuid_producto){
-    //     let x=0;
-    //     let cantidad=0;
-    //     $(".subcontent_carrito .mas").click(function(i){
-    //         console.log("JALA PERRO "+$(this).attr("attr-a"))
-    //         cantidad = parseInt($(this).parent().parent().parent().parent().parent().find(".cantidad").val());
-    //         cantidad = cantidad + 1;
-    //         console.log("CANTIDAD: "+cantidad)
-    //         $(".cantidad").val(cantidad)
-    //     })
-//        this.updCantidad(uuid_producto,cantidad)
-        // $(".subtotal_numero").text(x)
-        // $(".subtotal_numero").text("$ "+x)
-        // $(".total_btnpago").text(x)
-        
-        // $( ".cantidad" ).change(function() {
-        //   let valselect;
-        //   let x=0;
-        //   $(".subcontent_carrito").each(function(i){
-        //     valselect = parseInt($(this).find(".cantidad").val())
-        //     console.log("valor de select " + i +" "+ valselect)
-        //     console.log("valor de cantidad "  + i +" "+ parseInt($(this).find(".precio").text()))
-        //     console.log("Calculo total de cada 1 "  + i +" "+ parseInt(valselect) * parseInt($(this).find(".precio").text()))
-        //     x=x+(parseInt(valselect) * parseInt($(this).find(".precio").text()))
-        //   })
-        //   $(".subtotal_numero").text("$ "+x)
-        //   $(".total_btnpago").text(x)
-        // }); 
-    //}
-    // menos(){
-    //     let x=0;
-    //     $(".precio").each(function(i){
-    //         console.log("valor i: "+i)
-    //       x=x-parseInt($(this).text())
-    //       x=x-(parseInt($(this).text()) * parseInt($(".cantidad").val()))
-    //       console.log("valor - : "+x)
-    //     })
-    //     console.log("valor:"+x)
-    //     $(".subtotal_numero").text(x)
-    //     $(".subtotal_numero").text("$ "+x)
-    //     $(".total_btnpago").text(x)
-        // $( ".cantidad" ).change(function() {
-        //   let valselect;
-        //   let x=0;
-        //   $(".subcontent_carrito").each(function(i){
-        //     valselect = parseInt($(this).find(".cantidad").val())
-        //     console.log("valor de select " + i +" "+ valselect)
-        //     console.log("valor de cantidad "  + i +" "+ parseInt($(this).find(".precio").text()))
-        //     console.log("Calculo total de cada 1 "  + i +" "+ parseInt(valselect) * parseInt($(this).find(".precio").text()))
-        //     x=x+(parseInt(valselect) * parseInt($(this).find(".precio").text()))
-        //   })
-        //   $(".subtotal_numero").text("$ "+x)
-        //   $(".total_btnpago").text(x)
-        // }); 
-    //}
+    mas(uuid_producto,producto){
+        let cantidad = producto.cantidad +=1;
+        this.updCantidad(uuid_producto,cantidad);
+    }
+     menos(uuid_producto,producto){
+         if(producto.cantidad>=2){
+            let cantidad = producto.cantidad -=1;
+            this.updCantidad(uuid_producto,cantidad);
+         }
+    }
     ionViewWillEnter() {
         this.nativeStorage.getItem('carrito')
         .then(

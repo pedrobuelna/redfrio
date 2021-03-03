@@ -3,11 +3,10 @@
 .content_img img{height: 143px;box-shadow: 0px 3px 6px #00000029;}
 .content_select{padding: 15px;}
 #categoria_select{border: 2px solid #015BEE;width: 100%; text-transform: uppercase; padding: 0 30px; -webkit-appearance: none; -moz-appearance: none; height: 60px;background: url(../../assets/images/flecha_abajo.png);background-position: right 20px center;background-repeat: no-repeat;background-size: 10px;font-size: 12px;letter-spacing: 2px;color: black;}
-
 .parrafo{font-size: 13px;text-transform: uppercase;color: #707070;margin: 30px 0 0 ;max-height: 96px;overflow: hidden;}
 .titulo{color: #151515;}
 .precio{color: #151515;font-size: 12px;margin-bottom: 20px;margin: 30px 0 30px;}
-.cantidad{-webkit-appearance: none;border: none; border-bottom: 2px solid #00257C; width: 100%; padding-left: 0; font-size: 12px; text-align: center; padding-bottom: 5px; color: black;border-radius: 0 !important;right: calc(50% - 9px);}
+.cantidad{-webkit-appearance: none;border: none; border-bottom: 2px solid #00257C; width: 100%; padding-left: 0; font-size: 12px; text-align: center; padding-bottom: 5px; color: black;border-radius: 0 !important;right: calc(50% - -4px);}
 .remover{border-bottom: 1px solid #95989A;padding-bottom: 3px;font-size: 12px;color: #95989A;position: absolute;bottom: 5px;margin-left: 5px;}
 .total{font-size: 18px;color: black;margin-bottom: 10px;}
 .content_subtotal{padding: 0 50px;margin-top: 40px;}
@@ -15,27 +14,9 @@
 .subtotal_numero{font-size: 13px;color: black;}
 .codigo{font-size: 12px;border-bottom: 2px solid #0F0E9F;padding-right: 5px;color: #151515;}
 .content_codigo{margin-top: 15px;}
-.btn_pagar{
-    margin-top: 30px;
-    height: 60px;text-transform:inherit;
-    font-size: 12px;
-    --background: var(--ion-rojo-btn);
-    margin-bottom: 100px;
-}
+.btn_pagar{margin-top: 30px; height: 60px;text-transform:inherit; font-size: 12px; --background: var(--ion-rojo-btn); margin-bottom: 100px; }
 .content_boton{padding: 0 30px;margin-top: 20px;}
-
-button .button-inner{
-    justify-content: space-between !important;
-}
+button .button-inner{justify-content: space-between !important;}
 .none{display: none;}
-.mas {
-    position: absolute;
-    top: -10px;
-    right: 100px;
-}
-.menos {
-    position: absolute;
-    top: -23px;
-    right: 0px;
-    font-size: 36px;
-}
+.mas{position: absolute; top: -19px; right: 100px; font-size: 36px; }
+.menos{position: absolute; top: -20px; right: 0px; font-size: 36px; }
