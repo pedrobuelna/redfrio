@@ -1,9 +1,47 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>historialdetallepedidos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content >
+  <ion-row class="content_categorias ion-padding">
+    <h1>DETALLES DEL PEDIDO</h1>
+    <br>
+    <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
+      <div *ngIf="i==0">
+        <p>{{detalle_pedido.folio_pedido}}</p>
+        <p>{{detalle_pedido.nombre_cliente}}</p>
+        <p>{{detalle_pedido.fecha_pago}}</p>
+      </div>
+      <div id="content_producto_carrusel" [class.last]="last">
+        <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+        <img src="{{detalle_pedido.imagen}}" alt="imgblanca.png">
+        <div class="content_producto_textos">
+          <p><span class="titletxt1">{{detalle_pedido.producto}}</span><br></p>
+          <p>{{detalle_pedido.desc_corta}}</p>
+          <p>{{detalle_pedido.marca}}</p>
+          <p>{{detalle_pedido.sku}}</p>
+          <p>{{detalle_pedido.cantidad}}</p>
+          <p><span class="pricetxt1">{{detalle_pedido.precio}}</span></p>
+          <p>{{detalle_pedido.costo_envio}}</p>
+          <p>{{detalle_pedido.subtotal}}</p>
+        </div>
+      </div>
+      </ion-col>
+  </ion-row>
+  <div class="content_menu">
+    <ul>
+      <li>
+        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+      </li>
+      <li>
+        <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+      </li>
+      <li>
+        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+          <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
+      </li>
+      <li>
+        <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+      </li>
+    </ul>
+  </div>
 </ion-content>

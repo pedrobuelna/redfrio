@@ -34,33 +34,19 @@ export class CategoriasPage implements OnInit {
   get errorControl() {
     return this.ionicForm.controls;
   }
-  
   submitForm() {
     this.isSubmitted = true;
     console.log(this.ionicForm.valid)
     if (!this.ionicForm.valid){
       console.log('Please provide all the required values! categorias')
       return false;
-    } else {  
-      // const task = {
-      //   nombre: this.ionicForm.value.nombre
-      // };
+    } else {
       console.log(this.ionicForm.value.nombre)
       this.router.navigate(['/resultadobusqueda'], {
           queryParams: {
               consultaBusqueda: this.ionicForm.value.nombre
           }
       });
-      // this.route.queryParams.subscribe(params => {
-      //       this.sucursalActual = {
-      //           id_sucursal:params.sucursal,
-      //           nombre:"",
-      //           telefono_1:"",
-      //           telefono_2:"",
-      //           mail:"",
-      //           direccion:""
-      //       };
-      //   });
     }
   }
   ngOnInit() {

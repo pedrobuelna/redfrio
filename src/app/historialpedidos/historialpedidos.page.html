@@ -3,7 +3,7 @@
     <div style="text-align: center;font-size: 26px;text-transform: uppercase;">Historial de pedidos</div>
     <br><br>
     <div class="pedido_content clearfix" *ngFor="let pedido of pedidos;let i = index;let last = last;">
-      <div class="content_direcciones">
+      <div class="content_direcciones" (click)="detalle_pedido(pedido.carrito)">
         <div class="txt2">Pedido #{{pedido.numero_pedido}}</div>
         <div class="txt3">Estatus del pedido: {{pedido.status_pedido}}</div>
         <div class="txt3">Fecha del pedido: {{ pedido.fecha_pedido | date:'dd/MM/yyyy' }}</div>

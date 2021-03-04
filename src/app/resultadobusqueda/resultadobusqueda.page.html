@@ -5,16 +5,16 @@
     <br> -->
     <ion-col *ngFor="let producto of productos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel" [class.last]="last">
-        <!-- <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
-        <img src="{{producto.url_img1}}" alt="imgblanca.png"> -->
+        <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+        <img src="{{producto.url_img1}}" alt="imgblanca.png">
         <div class="content_producto_textos" (click)="onclickProducto(producto.uuid_producto)">
           <p><span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br></p>
           <p>{{producto.desc_corta}}</p>
           <p>{{producto.marca}}</p>
-          <!-- <span *ngIf="producto.status==0" style="color: red;">No hay disponibilidad</span>
-          <span *ngIf="producto.status==1" style="color: green; ">DISPONIBLE</span> -->
-          <!-- <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span> -->
-          <!-- </p> -->
+          <span *ngIf="producto.status==0" style="color: red;">NO HAY DISPONIBILIDAD</span>
+          <span *ngIf="producto.status==1" style="color: green; ">DISPONIBLE</span>
+          <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span>
+          </p>
         </div>
       </div>
       </ion-col>

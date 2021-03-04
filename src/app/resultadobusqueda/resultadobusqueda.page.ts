@@ -63,8 +63,14 @@ export class ResultadobusquedaPage implements OnInit {
     .subscribe(productos => {
         this.productos = productos;
         console.log("Productos: "+this.productos)
+        for (let i = 0; i < this.productos.length; i++) {
+            console.log("index : " + i);
+            console.log(this.productos[i]);
+            this.taskService.validarImg(this.productos[i].url_img1).then(() => {}, e => {
+                this.productos[i].url_img1 = "../../assets/images/no-image.png"
+            });
+        }
     });
-
   }
   onclickNotificaciones() {
       this.router.navigate(['/notificaciones']);

@@ -1,5 +1,8 @@
 <ion-content>
   <div class="content_img_buscar">
+    
+  </div>
+  <div id="content_categorias">
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
       <ion-item>
         <ion-label position="floating">Buscar</ion-label>
@@ -16,8 +19,6 @@
       </ion-button>
       <br>
     </form>
-  </div>
-  <div id="content_categorias">
     <div class="carrito" (click)="onClickCarrito()">
       <span class="numero">{{cantidadActualCarrito}}</span>
       <img src="../../assets/images/carrito.png" alt="carrito" >

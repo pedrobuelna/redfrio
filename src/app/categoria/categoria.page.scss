@@ -4,13 +4,11 @@
 #categoria_select{margin-top: 30px;}
 #categoria_select,
 #categoria_select2{border: 2px solid #015BEE;width: 100%; text-transform: uppercase; padding: 0 30px; -webkit-appearance: none; -moz-appearance: none; height: 60px;font-size: 12px;letter-spacing: 2px;color: black;}
-
 #categoria_select2{margin-bottom: 30px;}
 .txt3{text-transform: uppercase;margin-bottom: 10px;}
 .marks{position: absolute;top: 15px;left: 10px;}
-.content_categorias{padding:0 30px;margin: 247px 0 0;}
+.content_categorias{padding:0 30px;margin: 357px 0 0;}
 .last{margin-bottom: 130px;}
 .totalproductos{width: 100%;margin-bottom: 20px;}
-ion-select::part(icon) {
-	color: black !important;opacity: 1;
-}
+.buscar{--background: #0F0E9F;}
+ion-select::part(icon){color: black !important;opacity: 1;}

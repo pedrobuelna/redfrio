@@ -23,7 +23,7 @@
               <ion-col size="8">
                 <p class="parrafo">
                   <span class="titulo">{{producto.nombre}}</span> <br>
-                  {{producto.desc_corta}}
+                  <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.producto_id}}</span> 
                 </p>
               </ion-col>
               <span class="remover" (click)="delete(producto.uuid_producto)">Eliminar</span>

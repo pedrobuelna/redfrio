@@ -11,6 +11,7 @@ import {
 import {
     TaskService
 } from '../services/task.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
@@ -20,8 +21,13 @@ import {
     styleUrls: ['./categoria.page.scss'],
 })
 export class CategoriaPage implements OnInit {
-    constructor(private router: Router, private taskService: TaskService,
-        private route: ActivatedRoute, private nativeStorage: NativeStorage) {}
+    ionicForm: FormGroup;
+    constructor(private router: Router, private taskService: TaskService,private formBuilder: FormBuilder,
+        private route: ActivatedRoute, private nativeStorage: NativeStorage) {
+            this.ionicForm = this.formBuilder.group({
+                busqueda: ['', [Validators.required]],
+            })
+        }
     @ViewChild('mylbl') mylblRef: ElementRef;
     productos2: any;
     familias: any;
@@ -33,6 +39,26 @@ export class CategoriaPage implements OnInit {
     cantidadNot: any = 0;
     listas: any;
     totalproductos:any;
+    isSubmitted:any;
+    get errorControl() {
+        return this.ionicForm.controls;
+    }
+    submitForm() {
+        this.isSubmitted = true;
+        console.log(this.ionicForm.valid)
+        if (!this.ionicForm.valid){
+          console.log('Please provide all the required values! categorias')
+          return false;
+        } else {
+            console.log('Exito')
+            console.log(this.ionicForm.value.busqueda)
+            this.router.navigate(['/resultadobusqueda'], {
+                queryParams: {
+                    consultaBusqueda: this.ionicForm.value.busqueda
+                }
+            });
+        }
+    }
     checkValue(event) {
         this.nativeStorage.getItem('app')
         .then(

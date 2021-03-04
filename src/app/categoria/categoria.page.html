@@ -4,6 +4,22 @@
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
   <div id="content_filtro">
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+      <ion-item>
+        <ion-label position="floating">Buscar</ion-label>
+        <ion-input formControlName="busqueda"></ion-input>
+      </ion-item>
+      <!-- Error messages -->
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.busqueda.errors?.required)">
+        Campo requerido.
+      </span>
+      <br>
+      <ion-button expand="full" class="buscar" type="submit">
+        BUSCAR
+        <!-- <img src="../../assets/images/buscar.png" alt="buscar" class="buscar_img"> -->
+      </ion-button>
+      <br>
+    </form>
     <ion-select name="categoria_select" id="categoria_select" value="{{valorSelect}}" (ionChange)="checkValue($event)">
       <!-- <ion-select-option value="0">Seleccionar</ion-select-option> -->
       <ion-select-option *ngFor="let familia of familias;let i = index;let last = last;" value="{{familia.id_familia}}">{{familia.nombre_familia}}</ion-select-option>

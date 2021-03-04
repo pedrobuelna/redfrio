@@ -1,29 +1,16 @@
-import {
-    Component,
-    OnInit,
-    ViewChild
-} from '@angular/core';
-import {
-    ActivatedRoute,
-    Router
-} from '@angular/router';
+import {Component,OnInit,ViewChild} from '@angular/core';
+import {ActivatedRoute,Router} from '@angular/router';
 import { Console } from 'console';
-import {
-    TaskService
-} from '../services/task.service';
-import {
-    DbService
-} from '../services/db.service';
+import {TaskService} from '../services/task.service';
+import {DbService} from '../services/db.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { uuid_usuario } from '../interfaces/task';
-
 @Component({
     selector: 'app-producto',
     templateUrl: './producto.page.html',
     styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
-    
     idProducto:string;
     AppData: any[] = [];
     CarritoActivoData: any[]=[];
