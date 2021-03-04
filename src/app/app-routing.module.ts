@@ -115,6 +115,14 @@ const routes: Routes = [
     path: 'recuperarcontrasena',
     loadChildren: () => import('./recuperarcontrasena/recuperarcontrasena.module').then( m => m.RecuperarcontrasenaPageModule)
   },
+  {
+    path: 'resultadobusqueda',
+    loadChildren: () => import('./resultadobusqueda/resultadobusqueda.module').then( m => m.ResultadobusquedaPageModule)
+  },
+  {
+    path: 'historialdetallepedidos',
+    loadChildren: () => import('./historialdetallepedidos/historialdetallepedidos.module').then( m => m.HistorialdetallepedidosPageModule)
+  },
 ];
 
 @NgModule({

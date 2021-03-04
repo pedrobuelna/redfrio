@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>RedFrio</name>
+<widget id="io.ionic.starter" version="0.9.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Reacsa Móvil</name>
     <description>Aplicacion mobil de venta de productos</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Pedro Arturo Buelna Fausto</author>
+    <author email="pedrobuelna@gmail.com" href="http://ionicframework.com/">Pedro Arturo Buelna Fausto</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />

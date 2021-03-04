@@ -1,0 +1,45 @@
+<ion-content>
+  <ion-row class="content_categorias">
+    <div class="totalproductos">Resultado de búsqueda:</div>
+    <!-- <div class="totalproductos">TOTAL: {{totalproductos}}</div>
+    <br> -->
+    <ion-col *ngFor="let producto of productos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
+      <div id="content_producto_carrusel" [class.last]="last">
+        <!-- <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+        <img src="{{producto.url_img1}}" alt="imgblanca.png"> -->
+        <div class="content_producto_textos" (click)="onclickProducto(producto.uuid_producto)">
+          <p><span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br></p>
+          <p>{{producto.desc_corta}}</p>
+          <p>{{producto.marca}}</p>
+          <!-- <span *ngIf="producto.status==0" style="color: red;">No hay disponibilidad</span>
+          <span *ngIf="producto.status==1" style="color: green; ">DISPONIBLE</span> -->
+          <!-- <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span> -->
+          <!-- </p> -->
+        </div>
+      </div>
+      </ion-col>
+      <div style="color:black" *ngIf="!productos2?.length">
+        No se encuentran productos en esta búsqueda
+      </div>
+  </ion-row>
+  <div class="content_menu">
+    <ul>
+      <li>
+        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+      </li>
+      <li>
+        <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+      </li>
+      <li>
+        <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+      </li>
+      <li>
+        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+          <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
+      </li>
+      <li>
+        <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+      </li>
+    </ul>
+  </div>
+</ion-content>

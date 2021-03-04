@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Task, Sucursal } from '../interfaces/task';
 import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
@@ -10,17 +12,57 @@ import {
   styleUrls: ['./categorias.page.scss'],
 })
 export class CategoriasPage implements OnInit {
+  ionicForm: FormGroup;
   constructor(
-        private router: Router,
-        private taskService: TaskService,
-        private nativeStorage: NativeStorage  
-    ) { }
+      private formBuilder: FormBuilder,
+      private router: Router,
+      private taskService: TaskService,
+      private route: ActivatedRoute,
+      private nativeStorage: NativeStorage  
+    ) { 
+      this.ionicForm = this.formBuilder.group({
+        nombre: ['', [Validators.required]],
+      })
+    }
 
   familias:any;
   cantidadActualCarrito:any;
   notificaciones: any;
   cantidadNot: any = 0;
   listas: any;
+  isSubmitted:any;
+  get errorControl() {
+    return this.ionicForm.controls;
+  }
+  
+  submitForm() {
+    this.isSubmitted = true;
+    console.log(this.ionicForm.valid)
+    if (!this.ionicForm.valid){
+      console.log('Please provide all the required values! categorias')
+      return false;
+    } else {  
+      // const task = {
+      //   nombre: this.ionicForm.value.nombre
+      // };
+      console.log(this.ionicForm.value.nombre)
+      this.router.navigate(['/resultadobusqueda'], {
+          queryParams: {
+              consultaBusqueda: this.ionicForm.value.nombre
+          }
+      });
+      // this.route.queryParams.subscribe(params => {
+      //       this.sucursalActual = {
+      //           id_sucursal:params.sucursal,
+      //           nombre:"",
+      //           telefono_1:"",
+      //           telefono_2:"",
+      //           mail:"",
+      //           direccion:""
+      //       };
+      //   });
+    }
+  }
   ngOnInit() {
     this.nativeStorage.getItem('app')
     .then(
