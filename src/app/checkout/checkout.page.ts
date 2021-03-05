@@ -186,6 +186,7 @@ export class CheckoutPage implements OnInit {
                         alert("La compra excede los 700 kilogramos máximos para un envío.");
                         this.router.navigate(['/carrito']);
                     }else{
+                        this.costoEnvio=envio[0].costo_envio.replace('$','');
                         this.envio=envio[0].costo_envio.replace('$','');
                     }
                 });
@@ -204,22 +205,44 @@ export class CheckoutPage implements OnInit {
             this.mostrarDireccion = true;
             this.mostrarTienda = false;
             this.tipoEnvio=1;
-            let envio=this.envio.replace(',','');
+
+            this.envio=this.costoEnvio;
+            console.log("Subtotal");
+            console.log(this.subtotal);
+            console.log("Envio");
+            console.log(this.envio);
+            console.log("Tax");
+            console.log(this.tax);
+            let subtotal=this.subtotal.toString().replace(',','');
+            this.subtotal=subtotal;
+            let envio=this.envio.toString().replace(',','');
             let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.paymentAmountEnvio = this.paymentAmount;
-            this.total = this.paymentAmount;
-            let subtotal=this.subtotal;
+            this.total = "$"+this.paymentAmount;
+            subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+
         }else{
             this.mostrarTienda = true;
             this.mostrarDireccion = false;
             this.tipoEnvio=0;
-            let total = ( parseFloat(this.subtotal) ) * ( 1 + parseFloat(this.tax) );
+
+            this.envio=0;
+            console.log("Subtotal");
+            console.log(this.subtotal);
+            console.log("Envio");
+            console.log(this.envio);
+            console.log("Tax");
+            console.log(this.tax);
+            let subtotal=this.subtotal.toString().replace(',','');
+            this.subtotal=subtotal;
+            let envio=this.envio.toString().replace(',','');
+            let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.paymentAmountEnvio = this.paymentAmount;
-            this.total = this.paymentAmount;
-            let subtotal=this.subtotal;
+            this.total = "$"+this.paymentAmount;
+            subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
         }
     }
@@ -245,7 +268,7 @@ export class CheckoutPage implements OnInit {
                 let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
                 this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 this.paymentAmountEnvio = this.paymentAmount;
-                this.total = this.paymentAmount;
+                this.total = "$"+this.paymentAmount;
                 let subtotal=this.subtotal;
                 this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 //$(".envio").text(0)
