@@ -11,6 +11,7 @@
           <p><span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br></p>
           <p>{{producto.desc_corta}}</p>
           <p>{{producto.marca}}</p>
+          <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
           <span *ngIf="producto.status==0" style="color: red;">NO HAY DISPONIBILIDAD</span>
           <span *ngIf="producto.status==1" style="color: green; ">DISPONIBLE</span>
           <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span>
@@ -18,8 +19,8 @@
         </div>
       </div>
       </ion-col>
-      <div style="color:black" *ngIf="!productos2?.length">
-        No se encuentran productos en esta búsqueda
+      <div style="color:black" *ngIf="!productos?.length">
+        No se encuentran productos en esta búsqueda intenta buscar con otra busqueda.
       </div>
   </ion-row>
   <div class="content_menu">
