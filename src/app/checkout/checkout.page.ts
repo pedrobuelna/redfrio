@@ -37,6 +37,7 @@ import { NavController } from '@ionic/angular';
     styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
+    tipoEnvio:any;
     klo:any;
     costoEnvio: number;
     ionicForm: FormGroup;
@@ -51,7 +52,7 @@ export class CheckoutPage implements OnInit {
     currency: string = 'USD';
     currencyIcon: string = '$';
     tax: any = .16;
-    envio: any = 20;
+    envio: any = 0;
     subtotal: any;
     total: any;
     totalEnvio: any;
@@ -202,9 +203,24 @@ export class CheckoutPage implements OnInit {
         if (event.detail.value == "domicilio") {
             this.mostrarDireccion = true;
             this.mostrarTienda = false;
+            this.tipoEnvio=1;
+            let envio=this.envio.replace(',','');
+            let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            this.paymentAmountEnvio = this.paymentAmount;
+            this.total = this.paymentAmount;
+            let subtotal=this.subtotal;
+            this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
         }else{
             this.mostrarTienda = true;
             this.mostrarDireccion = false;
+            this.tipoEnvio=0;
+            let total = ( parseFloat(this.subtotal) ) * ( 1 + parseFloat(this.tax) );
+            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            this.paymentAmountEnvio = this.paymentAmount;
+            this.total = this.paymentAmount;
+            let subtotal=this.subtotal;
+            this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
         }
     }
     ionViewDidEnter() {
