@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { TaskService } from '../services/task.service';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-resultadobusqueda',
   templateUrl: './resultadobusqueda.page.html',
@@ -11,7 +11,8 @@ import { TaskService } from '../services/task.service';
 export class ResultadobusquedaPage implements OnInit {
 
   constructor(private router: Router, private taskService: TaskService,
-    private route: ActivatedRoute, private nativeStorage: NativeStorage) { }
+    private route: ActivatedRoute, private nativeStorage: NativeStorage,
+    private navCtrl: NavController) { }
   consultaBusqueda:any;
   productos:any;
   notificaciones: any;
@@ -21,7 +22,6 @@ export class ResultadobusquedaPage implements OnInit {
   ngOnInit() {
     
   }
-  
   ionViewWillEnter() {
         this.nativeStorage.getItem('app')
         .then(
@@ -59,17 +59,40 @@ export class ResultadobusquedaPage implements OnInit {
             );
     this.route.queryParams.subscribe(queryParams => this.consultaBusqueda = queryParams.consultaBusqueda);
     console.log("Cachado: "+this.consultaBusqueda)
+    this.consultaBusqueda = this.consultaBusqueda.toUpperCase()
     this.taskService.getBusquedaProductos(this.consultaBusqueda)
     .subscribe(productos => {
-        this.productos = productos;
-        console.log("Productos: "+this.productos)
-        for (let i = 0; i < this.productos.length; i++) {
-            console.log("index : " + i);
-            console.log(this.productos[i]);
-            this.taskService.validarImg(this.productos[i].url_img1).then(() => {}, e => {
-                this.productos[i].url_img1 = "../../assets/images/no-image.png"
+        if(productos.length==0){
+            this.taskService.getBusquedaProductosLike(this.consultaBusqueda)
+            .subscribe(productos => {
+                if(productos.length==0){
+                    setTimeout(() => {
+                        this.navCtrl.back();
+                    }, 3000);
+                }
+                this.productos = productos;
+                console.log("Productos: "+this.productos)
+                for (let i = 0; i < this.productos.length; i++) {
+                    console.log("index : " + i);
+                    console.log(this.productos[i]);
+                    this.taskService.validarImg(this.productos[i].url_img1).then(() => {}, e => {
+                        this.productos[i].url_img1 = "../../assets/images/no-image.png"
+                    });
+                }
             });
+            
+        }else{
+            this.productos = productos;
+            console.log("Productos: "+this.productos)
+            for (let i = 0; i < this.productos.length; i++) {
+                console.log("index : " + i);
+                console.log(this.productos[i]);
+                this.taskService.validarImg(this.productos[i].url_img1).then(() => {}, e => {
+                    this.productos[i].url_img1 = "../../assets/images/no-image.png"
+                });
+            }
         }
+        
     });
   }
   onclickNotificaciones() {

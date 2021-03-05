@@ -102,7 +102,12 @@ export class TaskService {
     //     return this.http.get < Task > (path);
     // }
     getBusquedaProductos(consultaBusqueda) {
-        const path = `${this.api}/busqueda?producto=fts.*${consultaBusqueda}*`;
+        const path = `${this.api}/busqueda?producto=plfts.*${consultaBusqueda}*`;
+        //const path = `${this.api}/rpc/busqueda?producto=fts.*${consultaBusqueda}*&select=${uuid_producto}`;
+        return this.http.get <any>(path);
+    }
+    getBusquedaProductosLike(consultaBusqueda) {
+        const path = `${this.api}/busqueda?producto=like.*${consultaBusqueda}*`;
         //const path = `${this.api}/rpc/busqueda?producto=fts.*${consultaBusqueda}*&select=${uuid_producto}`;
         return this.http.get <any>(path);
     }
