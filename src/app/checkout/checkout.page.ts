@@ -49,7 +49,7 @@ export class CheckoutPage implements OnInit {
     calle2Required: boolean;
     paymentAmount: string = '3.33';
     paymentAmountEnvio: string;
-    currency: string = 'USD';
+    currency: string = 'MXN';
     currencyIcon: string = '$';
     tax: any = .16;
     envio: any = 0;
@@ -186,7 +186,6 @@ export class CheckoutPage implements OnInit {
     // }
     
     ionViewWillEnter() {
-        
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
@@ -367,12 +366,12 @@ export class CheckoutPage implements OnInit {
     payWithPaypal(envio: boolean) {
         console.log("valor" + envio)
         this.payPal.init({
-            PayPalEnvironmentProduction: 'YOUR_PRODUCTION_CLIENT_ID',
+            PayPalEnvironmentProduction: 'ARL8d2sNnhY1ljzD2Z_XVxFzwS3XRHkgDeICVtMuO04MGTO6cO9GUm1kYWVk293i_I3YacE48631i9xQ',
             //PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
             PayPalEnvironmentSandbox: 'AexiGyImMY7n7R0hYjsM7UEPNGDjPY49GWKNevzJIeu3VPVA9Ua2BO49QYKZqle72vdL5ofbt_Bj4Tsx'
         }).then(() => {
             // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-            this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+            this.payPal.prepareToRender('PayPalEnvironmentProduction', new PayPalConfiguration({
                 // Only needed if you get an "Internal Service Error" after PayPal login!
                 //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
             })).then(() => {
@@ -383,12 +382,9 @@ export class CheckoutPage implements OnInit {
                     costoenvio = 0
                 }
                 console.log("valor" + envio)
-                //let total2 =  (parseFloat(this.subtotal)) + (parseFloat(this.subtotal) * parseFloat(this.tax)) + costoenvio;
-                //this.paymentAmountEnvio = total2.toString();
                 this.paymentAmountEnvio=this.paymentAmount;
                 this.paymentAmountEnvio=this.paymentAmountEnvio.replace(',','');
-                //alert("TOTAL PAYPAY: "+this.paymentAmountEnvio);
-                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'Compra en REACSA', 'sale');
+                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'COMPRA EN REACSA', 'COMPRA');
                 this.payPal.renderSinglePaymentUI(payment).then((res) => {
                     setTimeout(() => {
                         this.addMyClass()
