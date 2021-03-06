@@ -60,10 +60,10 @@ export class ResultadobusquedaPage implements OnInit {
     this.route.queryParams.subscribe(queryParams => this.consultaBusqueda = queryParams.consultaBusqueda);
     console.log("Cachado: "+this.consultaBusqueda)
     this.consultaBusqueda = this.consultaBusqueda.toUpperCase()
-    this.taskService.getBusquedaProductos(this.consultaBusqueda)
+    this.taskService.getBusquedaProductosLike(this.consultaBusqueda)
     .subscribe(productos => {
         if(productos.length==0){
-            this.taskService.getBusquedaProductosLike(this.consultaBusqueda)
+            this.taskService.getBusquedaProductos(this.consultaBusqueda)
             .subscribe(productos => {
                 if(productos.length==0){
                     setTimeout(() => {

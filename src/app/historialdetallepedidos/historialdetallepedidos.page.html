@@ -2,12 +2,20 @@
   <ion-row class="content_categorias ion-padding">
     <h1>DETALLES DEL PEDIDO</h1>
     <br>
-    <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
+    <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="12" class="productos_carrusel">
       <div *ngIf="i==0">
-        <p>{{detalle_pedido.folio_pedido}}</p>
-        <p>{{detalle_pedido.nombre_cliente}}</p>
-        <p>{{detalle_pedido.fecha_pago}}</p>
-      </div>
+        <b>Nombre:</b> <p>{{detalle_pedido.nombre_cliente}}</p>
+        <b>Numero de Pedido:</b><p>{{detalle_pedido.folio_pedido}}</p>
+        <b>Fecha del pedido:</b><p>{{detalle_pedido.fecha_pago | date:'dd/MM/yyyy'}}</p>
+        <b>Costo de envío: </b><p>{{detalle_pedido.costo_envio}}</p>
+        <b>Subtotal: </b> {{comprasubtotal | currency}} <br>
+        <b>IVA: </b> 16% <br>
+        <b>Total: </b>{{total | currency}}
+      </div>  
+      
+    </ion-col>
+    
+    <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel" [class.last]="last">
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
         <img src="{{detalle_pedido.imagen}}" alt="imgblanca.png">
@@ -15,11 +23,11 @@
           <p><span class="titletxt1">{{detalle_pedido.producto}}</span><br></p>
           <p>{{detalle_pedido.desc_corta}}</p>
           <p>{{detalle_pedido.marca}}</p>
-          <p>{{detalle_pedido.sku}}</p>
-          <p>{{detalle_pedido.cantidad}}</p>
-          <p><span class="pricetxt1">{{detalle_pedido.precio}}</span></p>
-          <p>{{detalle_pedido.costo_envio}}</p>
-          <p>{{detalle_pedido.subtotal}}</p>
+          <b>No. de Parte: </b>{{detalle_pedido.sku}} <br>
+          <b>Cantidad: </b>{{detalle_pedido.cantidad}} <br>
+          <b>Precio: </b>{{detalle_pedido.precio}} <br>
+          <!-- <p><span class="pricetxt1">{{detalle_pedido.precio}}</span></p> -->
+          <b>Subtotal: </b>{{detalle_pedido.subtotal}}
         </div>
       </div>
       </ion-col>

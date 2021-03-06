@@ -18,6 +18,9 @@ export class HistorialdetallepedidosPage implements OnInit {
     notificaciones: any;
     listas: any;
     id_carrito:any;
+    comprasubtotal:any;
+    total:any;
+    envio:any;
   ngOnInit() {
   }
   ionViewWillEnter() {
@@ -26,6 +29,14 @@ export class HistorialdetallepedidosPage implements OnInit {
     this.taskService.getDetallePedidos(this.id_carrito)
     .subscribe(detalle_pedidos => {
         this.detalle_pedidos = detalle_pedidos
+        let subtotal=0;
+        detalle_pedidos.forEach(detalle => {
+            console.log(detalle.subtotal.replace('$','').replace(',',''))
+            subtotal+=parseFloat(detalle.subtotal.replace('$','').replace(',',''));
+        });
+        this.envio = parseFloat(detalle_pedidos[0].costo_envio.replace('$','').replace(',',''));
+        this.comprasubtotal = subtotal;
+        this.total = subtotal + (subtotal * .16) + parseFloat(this.envio);
         console.log("detalle_pedidos: ", detalle_pedidos)
     });
     this.nativeStorage.getItem('app')
