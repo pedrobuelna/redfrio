@@ -172,7 +172,13 @@ export class CheckoutPage implements OnInit {
     //         $(".total").text(0)
     //     }
     // }
+    flag_inventario:any=0;
+    flag_viable_paqueteria:any=0;
     ionViewWillEnter() {
+        this.route.queryParams.subscribe(params => {
+            this.flag_inventario = params.flag_inventario,
+            this.flag_viable_paqueteria = params.flag_viable_paqueteria
+        });
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {

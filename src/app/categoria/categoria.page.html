@@ -3,7 +3,13 @@
     <span class="numero">{{cantidadActualCarrito}}</span>
     <img src="../../assets/images/carrito.png" alt="carrito" >
   </div>
-  <div id="content_filtro">
+  <div id="content_filtro" [class]="className">
+    <div style="text-align: right;font-size: 30px; margin-top: 10px;">
+      <ion-icon name="filter" [class]="hideMinus" (click)="control()"></ion-icon>
+      <ion-icon name="filter-outline" [class]="hidePlus" (click)="control()"></ion-icon>
+      <!-- <ion-icon style="display: inline-block;" name="add-outline" [class]="hidePlus" (click)="control()"></ion-icon>
+      <ion-icon style="display: inline-block;" name="remove-outline" [class]="hideMinus" (click)="control()"></ion-icon> -->
+    </div>
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
       <ion-item>
         <ion-label position="floating">Buscar</ion-label>
@@ -40,7 +46,7 @@
     <br>
     <ion-col *ngFor="let producto of productos2;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel" [class.last]="last">
-        <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+        <img *ngIf="producto.nuevo" src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
         <img src="{{producto.url_img1}}" alt="imgblanca.png">
         <div class="content_producto_textos">
           <p><span class="titletxt1"> {{producto.marca}} {{producto.nombre}} </span><br></p>

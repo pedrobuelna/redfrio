@@ -32,6 +32,8 @@ export class CarritoPage implements OnInit {
     notificaciones: any;
     cantidadNot: any = 0;
     cantidadOn:any;
+    flag_viable_paqueteria:any;
+    flag_inventario:any;
     listas: Array < any >= [{
             nombre: "YORK MINISPLIT",
             descripcion: "YHFE/YHGE SERIES COMPRESOR ON/OFF R-410A SOLO FRIO Y FRIO/CALOR 220V ",
@@ -144,11 +146,11 @@ export class CarritoPage implements OnInit {
         let cantidad = producto.cantidad +=1;
         this.updCantidad(uuid_producto,cantidad);
     }
-     menos(uuid_producto,producto){
+    menos(uuid_producto,producto){
          if(producto.cantidad>=1){
             let cantidad = producto.cantidad -=1;
             this.updCantidad(uuid_producto,cantidad);
-         }
+        }
     }
     ionViewWillEnter() {
         this.nativeStorage.getItem('carrito')
@@ -167,6 +169,12 @@ export class CarritoPage implements OnInit {
                         this.carritoProductos=dataCarrito;
                         for(let i=0;i<this.carritoProductos.length;i++){
                             this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
+                            if(this.carritoProductos[i].viable_paqueteria==0){
+                                this.flag_inventario = 1
+                            }
+                            if(this.carritoProductos[i].inventario==0){
+                                this.flag_viable_paqueteria = 1
+                            }
                         }
                         //this.calcularTotales();
                     });
@@ -208,7 +216,9 @@ export class CarritoPage implements OnInit {
     onClickCheckout(){
     this.router.navigate(['/checkout'], {
         queryParams: {
-          subtotal: this.subtotal
+          subtotal: this.subtotal,
+          flag_inventario:this.flag_inventario,
+          flag_viable_paqueteria:this.flag_viable_paqueteria
         }
     });  
   }

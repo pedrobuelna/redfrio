@@ -21,3 +21,7 @@ button .button-inner{justify-content: space-between !important;}
 .mas{position: absolute;top: -19px;right: -2px;font-size: 36px;}
 .menos{position: absolute;top: -19px;right: 100px;font-size: 36px;}
 .nopadding{padding: 5px 0;}
+.control .mostrar:after{font-size: 20px;content: "+";}
+.control .menos:after{font-size: 20px;content: "-";}
+.show{display: block;}
+.hide{display: none;}

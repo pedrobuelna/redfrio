@@ -20,7 +20,7 @@
                         </ion-label>
                       </div>
                   </ion-list-header>
-                  <ion-item>
+                  <ion-item *ngIf="flag_viable_paqueteria==0">
                     <ion-label>Enviar a domicilio</ion-label>
                     <ion-radio slot="start" value="domicilio"></ion-radio>
                   </ion-item>

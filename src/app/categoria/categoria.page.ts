@@ -40,8 +40,23 @@ export class CategoriaPage implements OnInit {
     listas: any;
     totalproductos:any;
     isSubmitted:any;
+    className:any
+    hidePlus:any = "hide";
+    hideMinus:any = "show";
     get errorControl() {
         return this.ionicForm.controls;
+    }
+    control(){
+        if(this.className == 'mostrar_content'){
+          this.className = '';
+          this.hideMinus = 'show';
+          this.hidePlus = 'hide';
+        }else{
+          this.className = 'mostrar_content';
+          this.hideMinus = 'hide';
+          this.hidePlus = 'show';
+          
+        }
     }
     submitForm() {
         this.isSubmitted = true;

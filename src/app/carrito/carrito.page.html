@@ -12,7 +12,6 @@
     </div>
     <div class="subcontent_carrito" *ngFor="let producto of carritoProductos; let i = index">
       <ion-grid>
-        Este producto se puede comprar solo recogiendo en tienda.
         <ion-row>
           <ion-col size="5" >
             <div class="content_img">
@@ -36,36 +35,11 @@
               </ion-col>
             </ion-row>
           </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="5" >
-            <div class="content_img">
-              <img src="{{producto.url_img1}}" alt="aire">
-            </div>
-          </ion-col>
-          <ion-col size="7" class="ion-no-padding ion-position-relative">
-            <ion-row>
-              <ion-col size="8">
-                <p class="parrafo">
-                  <span class="titulo">{{producto.nombre}}</span> <br>
-                  <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.producto_id}}</span> 
-                </p>
-              </ion-col>
-              <span class="remover" (click)="delete(producto.uuid_producto)">Eliminar</span>
-              <ion-col size="4" class="nopadding">
-                <ion-icon name="remove-circle-outline" class="menos" (click)="menos(producto.uuid_producto,producto)"></ion-icon>
-                <div class="precio" id="{{producto.uuid_producto}}">{{producto.precio}}</div>
-                <ion-icon name="add-circle-outline" class="mas" (click)="mas(producto.uuid_producto,producto)"></ion-icon>
-                <input type="number" min="1" max="10" class="cantidad" id="cantidad_{{producto.uuid_producto}}" placeholder="Cantidad" value="{{producto.cantidad}}" (change)="updCantidad(producto.uuid_producto,$event.target.value)">
-              </ion-col>
-            </ion-row>
-          </ion-col>
+          <div *ngIf="producto.viable_paqueteria==0" style="color: red;font-size: 12px;">Producto solo disponible en tienda</div>
+          <div *ngIf="producto.inventario==0" style="color: red;font-size: 12px;">No hay existencia en la sucursal seleccionada</div>
         </ion-row>
       </ion-grid>
     </div>
-    
   </div>
   <div class="content_subtotal">
     <div class="total">Total</div>
