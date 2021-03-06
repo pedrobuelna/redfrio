@@ -123,6 +123,10 @@ export class TaskService {
         const path = `${this.api}/rpc/productoinfo?uuid_producto=eq.${id}`;
         return this.http.post<any>(path, listaPrecio);
     }
+    getTokenBraintree() {
+        const path = `${this.api}/clientes?uuid_cliente=eq`;
+        return this.http.get<any>(path);
+    }
     updInfoPerfil(uuid_cliente, dataPerfil: any) {
         const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.patch(path, dataPerfil);
