@@ -98,7 +98,8 @@
       "cordova-plugin-nativegeocoder": {},
       "com.paypal.cordova.mobilesdk": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-nativestorage": {}
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-braintree": {}
     },
     "platforms": [
       "android"
