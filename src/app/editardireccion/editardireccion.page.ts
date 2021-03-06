@@ -101,7 +101,7 @@ export class EditardireccionPage implements OnInit {
                     telefono: this.ionicForm.value.telefono,
                     mail: this.ionicForm.value.correo,
                     uuid_cliente: app.uuid_cliente,
-                    fiscal:false
+                    fiscal:true
                 };
                 this.taskService.patchDirecciones(this.uuid_direccion,direccion).subscribe(()=>{
                     this.navCtrl.navigateRoot(['/editarperfil']);
