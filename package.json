@@ -1,7 +1,7 @@
 {
   "name": "redfrio",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "version": "9.13.2",
+  "author": "GitAdvising",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
