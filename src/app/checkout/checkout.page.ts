@@ -72,6 +72,8 @@ export class CheckoutPage implements OnInit {
     enviodireccion:any = "domicilio"
     mostrarDireccion:any = true;
     mostrarTienda:any = false;
+    flag_inventario:any=0;
+    flag_viable_paqueteria:any=0;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         this.costoEnvio = 20;
@@ -123,6 +125,16 @@ export class CheckoutPage implements OnInit {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
+        this.route.queryParams.subscribe(params => {
+            this.flag_inventario = params.flag_inventario;
+            this.flag_viable_paqueteria = params.flag_viable_paqueteria;
+            console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
+            if(params.flag_viable_paqueteria==1){
+                this.enviodireccion="sucursal";
+                this.mostrarTienda=true;
+                this.mostrarDireccion=false;
+            }
+        });
         //Radios de forma de envio
         this.nativeStorage.getItem('app')
         .then(
@@ -172,13 +184,9 @@ export class CheckoutPage implements OnInit {
     //         $(".total").text(0)
     //     }
     // }
-    flag_inventario:any=0;
-    flag_viable_paqueteria:any=0;
+    
     ionViewWillEnter() {
-        this.route.queryParams.subscribe(params => {
-            this.flag_inventario = params.flag_inventario,
-            this.flag_viable_paqueteria = params.flag_viable_paqueteria
-        });
+        
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
@@ -270,7 +278,7 @@ export class CheckoutPage implements OnInit {
             totalCompra => {
                 this.subtotal = totalCompra;
                 //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
-                let envio=this.envio.replace(',','');
+                let envio=this.envio.toString().replace(',','');
                 let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
                 this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 this.paymentAmountEnvio = this.paymentAmount;

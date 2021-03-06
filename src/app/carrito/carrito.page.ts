@@ -32,8 +32,8 @@ export class CarritoPage implements OnInit {
     notificaciones: any;
     cantidadNot: any = 0;
     cantidadOn:any;
-    flag_viable_paqueteria:any;
-    flag_inventario:any;
+    flag_viable_paqueteria:any = 0;
+    flag_inventario:any = 0;
     listas: Array < any >= [{
             nombre: "YORK MINISPLIT",
             descripcion: "YHFE/YHGE SERIES COMPRESOR ON/OFF R-410A SOLO FRIO Y FRIO/CALOR 220V ",
@@ -62,7 +62,6 @@ export class CarritoPage implements OnInit {
                             for(let i=0;i<this.carritoProductos.length;i++){
                                 this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
                             }
-                            //this.calcularTotales();
                         let cantidadCarrito=((carritoActivo[0].cantidad)?carritoActivo[0].cantidad:0);
                         this.nativeStorage.setItem('carrito', {cantidad: cantidadCarrito,uuid_carrito:carritoActivo[0].uuid_carrito})
                         .then(
@@ -72,6 +71,7 @@ export class CarritoPage implements OnInit {
                                     this.router.navigate(['/principal']);
                                 }
                                 this.calcularTotales();
+                                this.validarFlags();
                             },
                             error => console.error('Error storing item', error)
                         );
@@ -110,6 +110,7 @@ export class CarritoPage implements OnInit {
                 console.log("uuid_carrito: "+carrito.uuid_carrito);
                 this.taskService.delProducto(carrito.uuid_carrito,uuid_producto).subscribe(()=>{
                     this.actualizarListaProductosCarrito();
+                    this.validarFlags();
                 });
             },
             error =>{
@@ -152,7 +153,7 @@ export class CarritoPage implements OnInit {
             this.updCantidad(uuid_producto,cantidad);
         }
     }
-    ionViewWillEnter() {
+    validarFlags(){
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
@@ -167,15 +168,19 @@ export class CarritoPage implements OnInit {
                         console.log("getCarritoActivoDetalles");
                         console.log(dataCarrito);
                         this.carritoProductos=dataCarrito;
+                        this.flag_viable_paqueteria = 0
+                        this.flag_inventario = 0
                         for(let i=0;i<this.carritoProductos.length;i++){
                             this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
                             if(this.carritoProductos[i].viable_paqueteria==0){
-                                this.flag_inventario = 1
-                            }
-                            if(this.carritoProductos[i].inventario==0){
                                 this.flag_viable_paqueteria = 1
                             }
+                            if(this.carritoProductos[i].inventario==0){
+                                this.flag_inventario = 1
+                            }
                         }
+                        console.log("flag_viable_paqueteria:"+this.flag_viable_paqueteria)
+                        console.log("flagInventario:"+this.flag_inventario)
                         //this.calcularTotales();
                     });
                     },
@@ -186,6 +191,9 @@ export class CarritoPage implements OnInit {
                  console.error("NO HAY DATOS DEL CARRITO");
             }
         );
+    }
+    ionViewWillEnter() {
+        this.validarFlags();
     }
     ionViewDidEnter() {
         console.info("will did enter");
@@ -214,13 +222,15 @@ export class CarritoPage implements OnInit {
         this.router.navigate(['/carrito']);
     }
     onClickCheckout(){
-    this.router.navigate(['/checkout'], {
-        queryParams: {
-          subtotal: this.subtotal,
-          flag_inventario:this.flag_inventario,
-          flag_viable_paqueteria:this.flag_viable_paqueteria
-        }
-    });  
+        console.log("flag_inventario carrito: "+this.flag_inventario)
+        console.log("flag_viable_paqueteria carrito: "+this.flag_viable_paqueteria)
+        this.router.navigate(['/checkout'], {
+            queryParams: {
+                subtotal: this.subtotal,
+                flag_inventario:this.flag_inventario,
+                flag_viable_paqueteria:this.flag_viable_paqueteria
+            }
+        });  
   }
 
 }
