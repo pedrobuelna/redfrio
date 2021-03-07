@@ -74,6 +74,7 @@ export class CheckoutPage implements OnInit {
     mostrarTienda:any = false;
     flag_inventario:any=0;
     flag_viable_paqueteria:any=0;
+    mensajeInventario:string;
     @ViewChild("splash") splash: ElementRef;
     constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
         this.costoEnvio = 20;
@@ -258,6 +259,45 @@ export class CheckoutPage implements OnInit {
             subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
         }
+    }
+    verificarInventarioTienda(event){
+        console.log('==INVENTARIO TIENDA==');
+        let sucursal=event.detail.value;
+        this.validacionInventario(sucursal)
+    }
+    validacionInventario(sucursal){
+        this.mensajeInventario="";
+        this.nativeStorage.getItem('carrito')
+        .then(
+            carrito => {
+                this.nativeStorage.getItem('app')
+                .then(
+                    app => {
+                        let listaPrecio={idlistaprecio:app.lista_precio_id};
+                        this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito,listaPrecio).subscribe(dataCarrito=>{
+                            dataCarrito.forEach(articulo => {
+                                //let data='{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}';
+                                //let data={material:articulo.producto_id,sucursal:sucursal};
+                                //let data=JSON.stringify({material:articulo.producto_id,sucursal:sucursal});
+                                let data=JSON.parse('{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}');
+                                this.taskService.getInventarioSucursal(data).subscribe(inventario=>{
+                                    console.log("Inventario");
+                                    console.log(inventario);
+                                    if(parseInt(inventario.cantidad)<1){
+                                        this.mensajeInventario+="El articulo \""+articulo.nombre+"\" no se encuentra disponible en la sucursal";
+                                    }
+                                });
+                                
+                            });    
+                        });
+                    },
+                    error => console.error("NO HAY UUID_CLIENTE")
+                );
+            },
+            error =>{
+                 console.error("NO HAY DATOS DEL CARRITO");
+            }
+        );
     }
     ionViewDidEnter() {
         this.nativeStorage.getItem('app')

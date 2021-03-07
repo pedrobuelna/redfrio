@@ -24,6 +24,7 @@ import {
 export class TaskService {
     private api = 'https://app.reacsa.mx:3001';
     private apiMail = 'https://app.reacsa.mx';
+    private apiSAP = 'https://app.reacsa.mx:3003';
     constructor(
         private http: HttpClient
     ) {
@@ -277,5 +278,10 @@ export class TaskService {
         }, timeout); 
         img.src = url;
         });
+    }
+    getInventarioSucursal(datos:any) {
+        const path = `${this.apiSAP}/inventario_sucursal`;
+        return this.http.post<any>(path, datos);
+        
     }
 }

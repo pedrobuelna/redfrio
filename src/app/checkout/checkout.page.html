@@ -42,7 +42,7 @@
             </ion-item>
             <ion-item *ngIf=mostrarTienda>
                 <ion-label position="floating">Tiendas</ion-label>
-                <ion-select formControlName="direccion" value="">
+                <ion-select formControlName="direccion" value="" (ionChange)="verificarInventarioTienda($event)">
                     <ion-select-option value="">Seleccione una tienda</ion-select-option>
                     <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.sid_sucursal}}">
                         {{ sucursal.nombre }}</ion-select-option>
@@ -160,6 +160,7 @@
                         Campo CVV requerido y tener solo 3 numeros.
                     </span>
                 </div> -->
+                <div id="noDisponibles">{{mensajeInventario}}</div>
                 <br><br>
                 <div class="titulo_checkout">Total de la compra</div>
                 <br><br>
