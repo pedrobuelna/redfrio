@@ -44,7 +44,7 @@ export class PagopendientePage implements OnInit {
                 'collection_id': params.collection_id,
                 'collection_status': params.collection_status,
                 'payment_id': params.collection_idpayment_id,
-                'status': params.status,
+                'status': 3,
                 'external_reference': params.external_reference,
                 'payment_type': params.payment_type,
                 'merchant_order_id': params.merchant_order_id,
