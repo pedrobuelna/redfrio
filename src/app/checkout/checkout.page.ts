@@ -31,6 +31,11 @@ import {
 } from '../services/task.service';
 import { NavController } from '@ionic/angular';
 
+import {
+    HttpClient,HttpHeaders
+} from '@angular/common/http';
+
+
 @Component({
     selector: 'app-checkout',
     templateUrl: './checkout.page.html',
@@ -75,8 +80,11 @@ export class CheckoutPage implements OnInit {
     flag_inventario:any=0;
     flag_viable_paqueteria:any=0;
     mensajeInventario:string;
+    mpData:any;
+    uuidCarrito:any;
+    uuidcliente:any;
     @ViewChild("splash") splash: ElementRef;
-    constructor(public navCtrl: NavController,private route: ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService, ) {
+    constructor(private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
@@ -129,6 +137,22 @@ export class CheckoutPage implements OnInit {
         this.route.queryParams.subscribe(params => {
             this.flag_inventario = params.flag_inventario;
             this.flag_viable_paqueteria = params.flag_viable_paqueteria;
+            if(params.status=="failure"){
+                alert("Su pago no fue aprobado");
+            }
+            let mpInfo={
+                'collection_id':params.collection_id,
+                'collection_status':params.collection_status,
+                'payment_id':params.collection_idpayment_id,
+                'status':params.status,
+                'external_reference':params.external_reference,
+                'payment_type':params.payment_type,
+                'merchant_order_id':params.merchant_order_id,
+                'preference_id':params.preference_id,
+                'site_id':params.site_id,
+                'processing_mode':params.processing_mode,
+                'merchant_account_id':params.merchant_account_id
+            }
             console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
             if(params.flag_viable_paqueteria==1){
                 this.enviodireccion="sucursal";
@@ -185,14 +209,63 @@ export class CheckoutPage implements OnInit {
     //         $(".total").text(0)
     //     }
     // }
-    
+    generarMp(){
+        let tipo_envio:any;
+        let sucursal:any;
+        let direccion:any;
+        if(this.ionicForm.value.direccion.length<4){
+            tipo_envio=1;//Sucursal
+            sucursal = this.ionicForm.value.direccion;
+            direccion=0;
+        }else{
+            tipo_envio=2;//Direccion
+            direccion = this.ionicForm.value.direccion;
+            sucursal=0;
+        }
+        let postData = 
+        {
+            "items": [
+                {
+                    "title": "SU COMPRA EN REACSA MOVIL",
+                    "quantity": 1,
+                    "unit_price": parseFloat(this.paymentAmount)
+                }
+            ],
+            "back_urls": {
+                "success": "localhost/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
+                "failure": "localhost/checkout",
+                "pending": "localhost/pending"
+            },
+            "auto_return": "approved",
+            "tipoEnvio":tipo_envio,
+            "sucursal":sucursal,
+            "direccion":direccion
+        };
+        const headers = new HttpHeaders({
+            "Authorization":"Bearer TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
+            "cache-control": "no-cache",
+            "Content-Type":"application/json"
+        }); 
+        this.http.post("https://api.mercadopago.com/checkout/preferences", postData, { headers: headers })
+        .subscribe(data => {
+            console.log('==========INFO MP==========');
+            console.log(data);
+            // $('#scriptMp').html('<script src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js" data-preference-id="'+data.id+'"></script>');
+            //this.mpData=data;
+            window.open(data['init_point'], '_blank');
+        }, error => {
+            console.log(error);
+        });
+    }
     ionViewWillEnter() {
+        //this.mpData=this.taskService.callMp();
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
                 console.log("==CARRITO DATA==");
                 console.log(carrito);
                 console.log("uuid_cliente: "+carrito.uuid_carrito);
+                this.uuidCarrito=carrito.uuid_carrito;
                 this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
                     console.log('===COSTO ENVIO===');
                     console.log(envio);
@@ -283,8 +356,13 @@ export class CheckoutPage implements OnInit {
                                 this.taskService.getInventarioSucursal(data).subscribe(inventario=>{
                                     console.log("Inventario");
                                     console.log(inventario);
+                                    let todosDisponibles=true;
                                     if(parseInt(inventario.cantidad)<1){
                                         this.mensajeInventario+="El articulo \""+articulo.nombre+"\" no se encuentra disponible en la sucursal";
+                                        todosDisponibles=false;
+                                    }
+                                    if(!todosDisponibles){
+                                        //Deshabilitar el boton
                                     }
                                 });
                                 
@@ -306,6 +384,7 @@ export class CheckoutPage implements OnInit {
                 console.log("==APP DATA==");
                 console.log(app);
                 console.log("uuid_cliente: "+app.uuid_cliente);
+                this.uuidcliente=app.uuid_cliente;
                 this.taskService.getDireccionCliente(app.uuid_cliente)
                 .subscribe(direcciones => {
                     this.direcciones = direcciones;
@@ -528,7 +607,8 @@ export class CheckoutPage implements OnInit {
             console.log('Formulario completado' + this.ionicForm.value)
             if (tipo == 1) {
                 console.log("sin envio")
-                this.payWithPaypal(false); //Sin envio
+                //this.payWithPaypal(false); //Sin envio
+                this.generarMp();
             } else if (tipo == 2) {
                 console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
                 console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
@@ -542,7 +622,8 @@ export class CheckoutPage implements OnInit {
                 }
             } else if (tipo == 3) {
                 console.log("con envio")
-                this.payWithPaypal(true); //Con envio
+                this.generarMp();
+                //this.payWithPaypal(true); //Con envio
             } else if (tipo == 4) {
                 console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
                 console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)

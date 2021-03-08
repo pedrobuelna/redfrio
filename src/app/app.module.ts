@@ -18,7 +18,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { PayPal } from '@ionic-native/paypal/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import {Braintree} from '@ionic-native/braintree/ngx'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,7 +28,6 @@ import {Braintree} from '@ionic-native/braintree/ngx'
     SQLite,
     SQLitePorter,
     NativeStorage,
-    Braintree,
     Geolocation,
     PayPal,
     Network,

@@ -19,7 +19,6 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
-    "@ionic-native/braintree": "^5.31.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/geolocation": "^5.31.1",
     "@ionic-native/native-geocoder": "^5.31.1",
@@ -99,8 +98,7 @@
       "cordova-plugin-nativegeocoder": {},
       "com.paypal.cordova.mobilesdk": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-nativestorage": {},
-      "cordova-plugin-braintree": {}
+      "cordova-plugin-nativestorage": {}
     },
     "platforms": [
       "android"

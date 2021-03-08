@@ -2,7 +2,7 @@ import {
     Injectable
 } from '@angular/core';
 import {
-    HttpClient
+    HttpClient,HttpHeaders
 } from '@angular/common/http';
 import {
     Notificaciones,
@@ -287,5 +287,37 @@ export class TaskService {
         const path = `${this.apiSAP}/inventario_sucursal`;
         return this.http.post<any>(path, datos);
         
+    }
+    callMp(){
+        let postData = 
+        {
+            "items": [
+                {
+                    "title": "Mi producto",
+                    "quantity": 1,
+                    "unit_price": 75.76
+                }
+            ],
+            "back_urls": {
+                "success": "/home",
+                "failure": "/carrito",
+                "pending": "/sucursales"
+            },
+            "auto_return": "approved",
+        };
+        const headers = new HttpHeaders({
+            "Authorization":"Bearer TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
+            "cache-control": "no-cache",
+            "Content-Type":"application/json"
+        }); 
+        this.http.post("https://api.mercadopago.com/checkout/preferences", postData, { headers: headers })
+        .subscribe(data => {
+            console.log('==========INFO MP==========');
+            console.log(data);
+            // $('#scriptMp').html('<script src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js" data-preference-id="'+data.id+'"></script>');
+            return data;
+        }, error => {
+            console.log(error);
+        });
     }
 }

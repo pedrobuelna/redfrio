@@ -123,10 +123,6 @@ const routes: Routes = [
     path: 'historialdetallepedidos',
     loadChildren: () => import('./historialdetallepedidos/historialdetallepedidos.module').then( m => m.HistorialdetallepedidosPageModule)
   },
-  {
-    path: 'braintree',
-    loadChildren: () => import('./braintree/braintree.module').then( m => m.BraintreePageModule)
-  },
 ];
 
 @NgModule({
