@@ -234,7 +234,7 @@ export class CheckoutPage implements OnInit {
             "back_urls": {
                 "success": "localhost/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "failure": "localhost/checkout",
-                "pending": "localhost/pending"
+                "pending": "localhost/pagonoexisto?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
             },
             "auto_return": "approved",
             "tipoEnvio":tipo_envio,
@@ -336,6 +336,7 @@ export class CheckoutPage implements OnInit {
     verificarInventarioTienda(event){
         console.log('==INVENTARIO TIENDA==');
         let sucursal=event.detail.value;
+        console.log(event);
         this.validacionInventario(sucursal)
     }
     validacionInventario(sucursal){
@@ -352,14 +353,16 @@ export class CheckoutPage implements OnInit {
                                 //let data='{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}';
                                 //let data={material:articulo.producto_id,sucursal:sucursal};
                                 //let data=JSON.stringify({material:articulo.producto_id,sucursal:sucursal});
+                                $('#btnPagar').show();
                                 let data=JSON.parse('{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}');
                                 this.taskService.getInventarioSucursal(data).subscribe(inventario=>{
                                     console.log("Inventario");
                                     console.log(inventario);
                                     let todosDisponibles=true;
                                     if(parseInt(inventario.cantidad)<1){
-                                        this.mensajeInventario+="El articulo \""+articulo.nombre+"\" no se encuentra disponible en la sucursal";
+                                        this.mensajeInventario+="</div>El articulo \""+articulo.nombre+"\" no se encuentra disponible en la sucursal</div>";
                                         todosDisponibles=false;
+                                        $('#btnPagar').hide();
                                     }
                                     if(!todosDisponibles){
                                         //Deshabilitar el boton

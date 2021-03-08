@@ -122,7 +122,11 @@ const routes: Routes = [
   {
     path: 'historialdetallepedidos',
     loadChildren: () => import('./historialdetallepedidos/historialdetallepedidos.module').then( m => m.HistorialdetallepedidosPageModule)
+  },  {
+    path: 'pagopendiente',
+    loadChildren: () => import('./pagopendiente/pagopendiente.module').then( m => m.PagopendientePageModule)
   },
+
 ];
 
 @NgModule({
