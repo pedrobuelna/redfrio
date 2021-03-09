@@ -1,21 +1,21 @@
 <ion-content>
-  <div id="content_producto" class="padding" *ngFor="let producto of producto2;let i = index" >
-    <div class="content_carrusel">
-      <ion-slides pager="true" #slides [options]="sliderOptions" class="content_img_gde">
-        <!-- <ion-slide *ngFor="let item of items">
+    <div id="content_producto" class="padding" *ngFor="let producto of producto2;let i = index">
+        <div class="content_carrusel">
+            <ion-slides pager="true" #slides [options]="sliderOptions" class="content_img_gde">
+                <!-- <ion-slide *ngFor="let item of items">
           <img src="{{item}}" alt="{{item}}" alt="aire" class="img_gde">
         </ion-slide> -->
-        <ion-slide *ngFor="let item of imgProducto">
-          <img src="{{item}}"  class="img_gde">
-        </ion-slide>
-      </ion-slides>
-      <div class="content_img_ch" >
-        <ion-grid>
-          <ion-row>
-            <!-- <ion-col *ngFor="let img of imgProducto;let i = index">
+                <ion-slide *ngFor="let item of imgProducto">
+                    <img src="{{item}}" class="img_gde">
+                </ion-slide>
+            </ion-slides>
+            <div class="content_img_ch">
+                <ion-grid>
+                    <ion-row>
+                        <!-- <ion-col *ngFor="let img of imgProducto;let i = index">
                 <img src="{{img}}" class="img_ch"  (click)="moveSlide(slides,(i-1))" >
             </ion-col> -->
-            <!-- <ion-col>
+                        <!-- <ion-col>
               <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch"  (click)="move1(slides)" >
             </ion-col>
             <ion-col>
@@ -27,11 +27,11 @@
             <ion-col>
               <img src="../../assets/images/aireblanco.png" alt="aire" class="img_ch" (click)="move4(slides)">
             </ion-col> -->
-          </ion-row>
-        </ion-grid>
-      </div>
-    </div>
-    <!-- <div id="configurador_content">
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+        <!-- <div id="configurador_content">
       <div class="titulo2">Configurador</div>
       <ion-grid>
         <ion-row>
@@ -66,63 +66,69 @@
         </ion-row>
       </ion-grid>
     </div> -->
-    <div id="descripcion_content">
-      <div class="titulo1">{{producto.marca}} {{producto.nombre_familia}}</div>
-      <br>
-      <span *ngIf="producto.cantidad==null" style="color: red;">No hay disponibilidad</span>
-      <span *ngIf="producto.cantidad!=null" style="color: green; ">{{producto.cantidad}} DISPONIBLE(S)</span>
-      <p class="parrafo1">
-        {{producto.desc_corta}}
-      </p>
-      <div class="parrafo2">
-          <ion-item>
-            <ion-label position="floating">Disponibilidad por zona</ion-label>
-            <ion-select formControlName="zonas" (ionChange)="getInventario($event)">
-                <ion-select-option *ngFor="let zona of zonas" value="{{zona.zona}}">
-                    {{ zona.zona }}</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <br>
-        <div *ngFor="let disp of disponibilidad;let i = index">
-            <span class="ion-text-capitalize"><b>{{disp.sucursal}}:</b> </span><span>{{disp.cantidad}}</span> <br>
+        <div id="descripcion_content">
+            <div class="titulo1">{{producto.marca}} {{producto.nombre_familia}}</div>
+            <br>
+            <span *ngIf="producto.cantidad==null || producto.cantidad==0" style="color: red;">No hay
+                disponibilidad</span>
+            <span *ngIf="producto.cantidad!=null && producto.cantidad!=0" style="color: green; ">DISPONIBLE</span>
+            <p class="parrafo1">
+                {{producto.desc_corta}}
+            </p>
+            <div class="parrafo2">
+                <ion-item>
+                    <ion-label position="floating">Disponibilidad por zona</ion-label>
+                    <ion-select formControlName="zonas" (ionChange)="getInventario($event)">
+                        <ion-select-option *ngFor="let zona of zonas" value="{{zona.zona}}">
+                            {{ zona.zona }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <br>
+                <div *ngFor="let disp of disponibilidad;let i = index">
+                    <span class="ion-text-capitalize"><b>{{disp.sucursal}}:</b> </span><span>{{disp.cantidad}}</span>
+                    <br>
+                </div>
+                <br>
+                <span class="ion-text-capitalize"><b>Marca: </b> </span><span
+                    class="ion-text-uppercase">{{producto.marca}}</span> <br>
+                <span class="ion-text-capitalize"><b>No. parte: </b> </span><span
+                    class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
+                <!-- <span *ngIf="producto.status==1" style="color: green;">DISPONIBLE</span><span *ngIf="producto.status==0" style="color: red;">NO HAY DISPONIBILIDAD</span>  -->
+            </div>
+            <p class="parrafo3">
+                {{producto.desc_larga}}
+            </p>
+            <div class="precios">
+                <span class="precio1"> {{producto.precio}}</span>&nbsp;<span
+                    class="precio2"><s>{{producto.precio_viejo}}</s></span>
+            </div>
+            <section class="full-width" *ngIf="producto.cantidad==null">
+                <ion-button expand="full" class="btn_agregar">No disponible</ion-button>
+            </section>
+            <section class="full-width" *ngIf="producto.cantidad!=null && producto.cantidad!=0">
+                <ion-button expand="full" class="btn_agregar" (click)="onClickCarrito()">Agregar al carrito</ion-button>
+            </section>
+            
         </div>
-        <br>
-        <span class="ion-text-capitalize"><b>Marca: </b> </span><span class="ion-text-uppercase">{{producto.marca}}</span> <br>
-        <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
-        <!-- <span *ngIf="producto.status==1" style="color: green;">DISPONIBLE</span><span *ngIf="producto.status==0" style="color: red;">NO HAY DISPONIBILIDAD</span>  -->
-      </div> 
-      <p class="parrafo3">
-      {{producto.desc_larga}}
-      </p>
-      <div class="precios">
-         <span class="precio1"> {{producto.precio}}</span>&nbsp;<span class="precio2"><s>{{producto.precio_viejo}}</s></span>
-      </div>
-      <section class="full-width" *ngIf="producto.cantidad==null">
-        <ion-button expand="full" class="btn_agregar">No disponible</ion-button>
-      </section>
-      <section class="full-width" *ngIf="producto.cantidad!=null">
-        <ion-button expand="full" class="btn_agregar" (click)="onClickCarrito()">Agregar al carrito</ion-button>
-      </section>
     </div>
-  </div>
 </ion-content>
 <div class="content_menu">
-  <ul>
-    <li>
-      <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
-    </li>
-    <li>
-      <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
-    </li>
-    <li>
-      <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
-    </li>
-    <li>
-      <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
-        <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
-    </li>
-    <li>
-      <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
-    </li>
-  </ul>
+    <ul>
+        <li>
+            <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+        </li>
+        <li>
+            <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+        </li>
+        <li>
+            <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+        </li>
+        <li>
+            <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+            <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
+        </li>
+        <li>
+            <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+        </li>
+    </ul>
 </div>

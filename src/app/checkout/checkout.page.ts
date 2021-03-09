@@ -213,6 +213,8 @@ export class CheckoutPage implements OnInit {
     //     }
     // }
     generarMp(){
+        alert(parseFloat(this.paymentAmount));
+        alert(this.paymentAmount);
         let tipo_envio:any;
         let sucursal:any;
         let direccion:any;
