@@ -159,7 +159,9 @@ export class CheckoutPage implements OnInit {
                 this.enviodireccion="sucursal";
                 this.mostrarTienda=true;
                 this.mostrarDireccion=false;
+                this.envio = 0.00;
             }
+
         });
         //Radios de forma de envio
         this.nativeStorage.getItem('app')
@@ -227,9 +229,9 @@ export class CheckoutPage implements OnInit {
         {
             "items": [
                 {
-                    "title": "SU COMPRA EN REACSA MOVIL" + parseFloat(this.totalMp),
+                    "title": "SU COMPRA EN REACSA MOVIL",
                     "quantity": 1,
-                    "unit_price": parseFloat(this.totalMp)
+                    "unit_price": parseFloat(this.paymentAmount)
                 }
             ],
             "back_urls": {
@@ -274,8 +276,12 @@ export class CheckoutPage implements OnInit {
                         alert("La compra excede los 700 kilogramos máximos para un envío.");
                         this.router.navigate(['/carrito']);
                     }else{
-                        this.costoEnvio=envio[0].costo_envio.replace('$','');
-                        this.envio=envio[0].costo_envio.replace('$','');
+                        if(this.flag_viable_paqueteria==1){
+                            this.costoEnvio=this.envio=0.00;
+                        }else{
+                            this.costoEnvio=envio[0].costo_envio.replace('$','');
+                            this.envio=envio[0].costo_envio.replace('$','');
+                        }
                     }
                 });
             },
@@ -287,6 +293,8 @@ export class CheckoutPage implements OnInit {
     muestraTienda(event) {
         //console.log(this.enviodireccion)
         console.log("muestraTienda",event.detail);
+        $('#btnPagar').hide();
+        this.ionicForm.value.direccion="";
         //this.muestraTienda = event.detail;
         console.log("Value: " + event.detail.value)
         if (event.detail.value == "domicilio") {
@@ -295,7 +303,6 @@ export class CheckoutPage implements OnInit {
             this.mostrarDireccion = true;
             this.mostrarTienda = false;
             this.tipoEnvio=1;
-
             this.envio=this.costoEnvio;
             console.log("Subtotal");
             console.log(this.subtotal);
@@ -306,9 +313,9 @@ export class CheckoutPage implements OnInit {
             let subtotal=this.subtotal.toString().replace(',','');
             this.subtotal=subtotal;
             let envio=this.envio.toString().replace(',','');
-            let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+            let total = (parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            this.totalMp = total
+            this.totalMp = this.paymentAmount
             this.paymentAmountEnvio = this.paymentAmount;
             this.total = "$"+this.paymentAmount;
             subtotal=this.subtotal;
@@ -330,7 +337,7 @@ export class CheckoutPage implements OnInit {
             this.subtotal=subtotal;
             let envio=this.envio.toString().replace(',','');
             let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-            this.totalMp = total;
+            this.totalMp = this.paymentAmount;
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.paymentAmountEnvio = this.paymentAmount;
             this.total = "$"+this.paymentAmount;

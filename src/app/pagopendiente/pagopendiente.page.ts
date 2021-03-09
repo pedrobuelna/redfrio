@@ -96,4 +96,7 @@ export class PagopendientePage implements OnInit {
             });
         });
     }
+    principal() {
+        this.navCtrl.navigateRoot(['/principal']);
+    }
 }
