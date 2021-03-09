@@ -69,8 +69,8 @@
     <div id="descripcion_content">
       <div class="titulo1">{{producto.marca}} {{producto.nombre_familia}}</div>
       <br>
-      <span *ngIf="producto.cantidad==null" style="color: red;">No hay disponibilidad</span>
-      <span *ngIf="producto.cantidad!=null" style="color: green; ">{{producto.cantidad}} DISPONIBLE(S)</span>
+      <span *ngIf="producto.cantidad==null || producto.cantidad==0" style="color: red;">No hay disponibilidad</span>
+      <span *ngIf="producto.cantidad!=null || producto.cantidad>0" style="color: green; ">{{producto.cantidad}} DISPONIBLE(S)</span>
       <p class="parrafo1">
         {{producto.desc_corta}}
       </p>
@@ -97,10 +97,10 @@
       <div class="precios">
          <span class="precio1"> {{producto.precio}}</span>&nbsp;<span class="precio2"><s>{{producto.precio_viejo}}</s></span>
       </div>
-      <section class="full-width" *ngIf="producto.cantidad==null">
+      <section class="full-width" *ngIf="producto.cantidad==null || producto.cantidad==0">
         <ion-button expand="full" class="btn_agregar">No disponible</ion-button>
       </section>
-      <section class="full-width" *ngIf="producto.cantidad!=null">
+      <section class="full-width" *ngIf="producto.cantidad!=null || producto.cantidad>0">
         <ion-button expand="full" class="btn_agregar" (click)="onClickCarrito()">Agregar al carrito</ion-button>
       </section>
     </div>
