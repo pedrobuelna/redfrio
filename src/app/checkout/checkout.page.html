@@ -160,8 +160,7 @@
                         Campo CVV requerido y tener solo 3 numeros.
                     </span>
                 </div> -->
-                <div id="noDisponibles">{{mensajeInventario}}</div>
-                <br><br>
+                <div id="noDisponibles" [innerHTML]="mensajeInventario"></div>
                 <div class="titulo_checkout">Total de la compra</div>
                 <br><br>
                 <ion-grid>
@@ -221,6 +220,7 @@
             <!-- <ion-button expand="full" class="btn_guardar" type="button" (click)="generarMp()">
                 <ion-label>PAGAR MP</ion-label>
             </ion-button> -->
+
             <ion-button expand="full" id="btnPagar" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal">
                 IR A PAGAR</ion-button>
             <ion-button expand="full" color="success" (click)="submitForm(3)" class="btnpaypal enviopaypal hide">

@@ -51,6 +51,7 @@ export class CheckoutPage implements OnInit {
     myBoolean2: boolean;
     mostrarDireccion1: boolean;
     mostrarFactura: boolean;
+    totalMp:any;
     calle2Required: boolean;
     paymentAmount: string = '3.33';
     paymentAmountEnvio: string;
@@ -79,7 +80,7 @@ export class CheckoutPage implements OnInit {
     mostrarTienda:any = false;
     flag_inventario:any=0;
     flag_viable_paqueteria:any=0;
-    mensajeInventario:string;
+    mensajeInventario:string = "";
     mpData:any;
     uuidCarrito:any;
     uuidcliente:any;
@@ -226,15 +227,15 @@ export class CheckoutPage implements OnInit {
         {
             "items": [
                 {
-                    "title": "SU COMPRA EN REACSA MOVIL",
+                    "title": "SU COMPRA EN REACSA MOVIL" + parseFloat(this.totalMp),
                     "quantity": 1,
-                    "unit_price": parseFloat(this.paymentAmount)
+                    "unit_price": parseFloat(this.totalMp)
                 }
             ],
             "back_urls": {
                 "success": "localhost/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "failure": "localhost/checkout",
-                "pending": "localhost/pagonoexisto?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
+                "pending": "localhost/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
             },
             "auto_return": "approved",
             "tipoEnvio":tipo_envio,
@@ -289,6 +290,8 @@ export class CheckoutPage implements OnInit {
         //this.muestraTienda = event.detail;
         console.log("Value: " + event.detail.value)
         if (event.detail.value == "domicilio") {
+            this.mensajeInventario="";
+            $('#btnPagar').show();
             this.mostrarDireccion = true;
             this.mostrarTienda = false;
             this.tipoEnvio=1;
@@ -305,6 +308,7 @@ export class CheckoutPage implements OnInit {
             let envio=this.envio.toString().replace(',','');
             let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            this.totalMp = total
             this.paymentAmountEnvio = this.paymentAmount;
             this.total = "$"+this.paymentAmount;
             subtotal=this.subtotal;
@@ -326,6 +330,7 @@ export class CheckoutPage implements OnInit {
             this.subtotal=subtotal;
             let envio=this.envio.toString().replace(',','');
             let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+            this.totalMp = total;
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.paymentAmountEnvio = this.paymentAmount;
             this.total = "$"+this.paymentAmount;
@@ -360,7 +365,7 @@ export class CheckoutPage implements OnInit {
                                     console.log(inventario);
                                     let todosDisponibles=true;
                                     if(parseInt(inventario.cantidad)<1){
-                                        this.mensajeInventario+="</div>El articulo \""+articulo.nombre+"\" no se encuentra disponible en la sucursal</div>";
+                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no se encuentra disponible en la sucursal, eliminar el producto para poder pagar o elige otra tienda.</div><br>";
                                         todosDisponibles=false;
                                         $('#btnPagar').hide();
                                     }
@@ -381,6 +386,7 @@ export class CheckoutPage implements OnInit {
         );
     }
     ionViewDidEnter() {
+        this.mensajeInventario="";
         this.nativeStorage.getItem('app')
         .then(
             app => {
