@@ -12,8 +12,8 @@
           <p>{{producto.desc_corta}}</p>
           <p>{{producto.marca}}</p>
           <span class="ion-text-capitalize"><b>No. parte: </b> </span><span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
-          <span *ngIf="producto.cantidad==null || producto.cantidad==0;then content" style="color: red;">No hay disponibilidad</span>
-          <span #content style="color: green; ">DISPONIBLE</span>
+          <span *ngIf="producto.cantidad==null || producto.cantidad==0" style="color: red;">No hay disponibilidad</span>
+          <span *ngIf="producto.cantidad!=null && producto.cantidad!=0" style="color: green; ">DISPONIBLE</span>
           <p><span class="pricetxt1">{{producto.precio}}<span class="oferta"> <s *ngIf="producto.precio_viejo">${{producto.precio_viejo}}</s></span></span>
           </p>
         </div>
