@@ -213,8 +213,6 @@ export class CheckoutPage implements OnInit {
     //     }
     // }
     generarMp(){
-        alert(parseFloat(this.paymentAmount));
-        alert(this.paymentAmount);
         let tipo_envio:any;
         let sucursal:any;
         let direccion:any;
@@ -233,7 +231,7 @@ export class CheckoutPage implements OnInit {
                 {
                     "title": "SU COMPRA EN REACSA MOVIL",
                     "quantity": 1,
-                    "unit_price": parseFloat(this.paymentAmount)
+                    "unit_price": parseFloat(this.paymentAmount.replace(',',''))
                 }
             ],
             "back_urls": {
