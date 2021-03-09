@@ -232,6 +232,10 @@ export class TaskService {
         const path = `${this.apiMail}/restapi/enviarCorreoPagoExitoso/${uuid_carrito}`;
         return this.http.get < Task > (path);
     }
+    sendMailRecuperarPwd(email:string){
+        const path = `${this.apiMail}/restapi/sendMailActualizarPwd/${email}`;
+        return this.http.get < Task > (path);
+    }
     getSucursales(){
         const path = `${this.api}/sucursales?status=eq.N`;
         return this.http.get < Task > (path);
