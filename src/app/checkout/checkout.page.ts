@@ -84,6 +84,7 @@ export class CheckoutPage implements OnInit {
     mpData:any;
     uuidCarrito:any;
     uuidcliente:any;
+    defaultSelectValue:any;
     @ViewChild("splash") splash: ElementRef;
     constructor(private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
         this.costoEnvio = 20;
@@ -234,6 +235,7 @@ export class CheckoutPage implements OnInit {
         });
     }
     ionViewWillEnter() {
+        this.defaultSelectValue=""
         this.route.queryParams.subscribe(params => {
             this.flag_inventario = params.flag_inventario;
             this.flag_viable_paqueteria = params.flag_viable_paqueteria;
