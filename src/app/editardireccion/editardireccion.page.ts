@@ -68,7 +68,7 @@ export class EditardireccionPage implements OnInit {
             calle: [direccion[0].calle, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
             numero: [direccion[0].numero_exterior, [Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(1)]],
             numerointerior: [direccion[0].numero_interior, [Validators.pattern('^[a-zA-Z0-9 -]+$'), Validators.maxLength(10), Validators.minLength(1)]],
-            colonia: [direccion[0].colonia, [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
+            colonia: [direccion[0].colonia, [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
             cp: [direccion[0].cp, [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             estado: [direccion[0].estado, Validators.required],
             ciudad: [direccion[0].poblacion, [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],

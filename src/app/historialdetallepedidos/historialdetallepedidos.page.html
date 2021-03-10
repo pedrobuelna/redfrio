@@ -12,9 +12,7 @@
         <b>IVA: </b> 16% <br>
         <b>Total: </b>{{total | currency}}
       </div>  
-      
     </ion-col>
-    
     <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(producto.uuid_producto)">
       <div id="content_producto_carrusel" [class.last]="last">
         <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">

@@ -33,7 +33,7 @@ export class AgregardireccionPage implements OnInit {
             calle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
             numero: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(1)]],
             numerointerior: ['', [Validators.pattern('^[a-zA-Z0-9 -]+$'), Validators.maxLength(10), Validators.minLength(1)]],
-            colonia: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
+            colonia: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
             cp: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             estado: ['', Validators.required],
             ciudad: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],

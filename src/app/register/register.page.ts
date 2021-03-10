@@ -106,6 +106,7 @@ export class RegisterPage implements OnInit {
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
       this.nombreCompleto = this.ionicForm.value.nombre +" "+ this.ionicForm.value.nombre_2;
+      console.log("RFC: "+this.ionicForm.value.rfc.toUpperCase())
       const task = {
         nombre: this.ionicForm.value.nombre,
         nombre_2: this.ionicForm.value.nombre_2,
@@ -115,7 +116,7 @@ export class RegisterPage implements OnInit {
         persona_contacto: this.ionicForm.value.persona_contacto,
         sucursal: this.ionicForm.value.sucursal,
         tipo_empresa: this.ionicForm.value.tipoEmpresa,
-        rfc: this.ionicForm.value.rfc.toUpperCase,
+        rfc: this.ionicForm.value.rfc.toUpperCase(),
         persona_fisica: this.ionicForm.value.persona_fisica,
         password: this.ionicForm.value.password,
         status: "0",

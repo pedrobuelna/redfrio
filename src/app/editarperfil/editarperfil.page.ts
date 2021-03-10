@@ -62,6 +62,7 @@ export class EditarperfilPage implements OnInit {
     cantidadNot: any = 0;
     notificaciones: any;
     activa: boolean;
+    usrMailViejo:any;
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
@@ -124,6 +125,46 @@ export class EditarperfilPage implements OnInit {
     }
     ionViewWillEnter(){
         this.nativeStorage.getItem('app')
+            .then(
+                app => {
+                    console.log("==APP DATA==");
+                    console.log(app);
+                    console.log("uuid_cliente: " + app.uuid_cliente);
+                    this.taskService.getDireccionCliente(app.uuid_cliente)
+                    .subscribe(direcciones => {
+                        this.direcciones = direcciones;
+                        console.log("direcciones: ", direcciones);
+                    });
+                    this.taskService.getPerfiles(app.uuid_cliente)
+                        .subscribe(perfiles => {
+                            console.log(perfiles);
+                            console.log("JALADO: ", perfiles[0].nombre);
+                            this.perfiles = perfiles;
+                            this.usrMailViejo = perfiles[0].mail;
+                            console.log("ARRE1"+this.usrMailViejo )
+                            console.log("ARRE2"+this.ionicForm.value.mail)
+                            this.ionicForm = this.formBuilder.group({
+                                nombre: [perfiles[0].nombre, [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5), Validators.maxLength(40)]],
+                                nombre_2: [perfiles[0].nombre_2, [Validators.maxLength(40)]],
+                                telefono: [perfiles[0].telefono, ],
+                                celular: [perfiles[0].celular, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
+                                mail: [perfiles[0].mail, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+                                persona_contacto: [perfiles[0].persona_contacto,[Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.maxLength(40)]],
+                                sucursal: [perfiles[0].sucursal, ],
+                                tipo_empresa: [perfiles[0].tipo_empresa, ],
+                                rfc: [perfiles[0].rfc, [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
+                                uso_cfdi: [perfiles[0].uso_cfdi, [Validators.required]],
+                                password: ["", [Validators.minLength(8)]],
+                                myBoolean: ['true', ],
+                            })
+                            if(perfiles[0].rfc=="XAXX010101000"){   
+                                this.ionicForm.get('myBoolean').setValue("false");
+                                this.mostrarDireccion1=false;
+                            }
+                        });
+                }
+            );
+        this.nativeStorage.getItem('app')
         .then(
           app => {
               console.log("==APP DATA==");
@@ -141,7 +182,7 @@ export class EditarperfilPage implements OnInit {
           },
           error => console.error("NO HAY UUID_CLIENTE")
         );
-      }
+    }
     ionViewDidEnter() {
         this.nativeStorage.getItem('app')
         .then(
@@ -171,44 +212,6 @@ export class EditarperfilPage implements OnInit {
             this.estados = estados;
             console.log("estados: ", estados);
         });
-        
-        this.nativeStorage.getItem('app')
-            .then(
-                app => {
-                    console.log("==APP DATA==");
-                    console.log(app);
-                    console.log("uuid_cliente: " + app.uuid_cliente);
-                    this.taskService.getDireccionCliente(app.uuid_cliente)
-                    .subscribe(direcciones => {
-                        this.direcciones = direcciones;
-                        console.log("direcciones: ", direcciones);
-                    });
-                    this.taskService.getPerfiles(app.uuid_cliente)
-                        .subscribe(perfiles => {
-                            console.log(perfiles);
-                            console.log("JALADO: ", perfiles[0].nombre);
-                            this.perfiles = perfiles;
-                            this.ionicForm = this.formBuilder.group({
-                                nombre: [perfiles[0].nombre, [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5), Validators.maxLength(40)]],
-                                nombre_2: [perfiles[0].nombre_2, [Validators.maxLength(40)]],
-                                telefono: [perfiles[0].telefono, ],
-                                celular: [perfiles[0].celular, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
-                                mail: [perfiles[0].mail, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-                                persona_contacto: [perfiles[0].persona_contacto,[Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.maxLength(40)]],
-                                sucursal: [perfiles[0].sucursal, ],
-                                tipo_empresa: [perfiles[0].tipo_empresa, ],
-                                rfc: [perfiles[0].rfc, [Validators.required, Validators.pattern('^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([A-Z]|[0-9]){2}([A]|[0-9]){1})?$')]],
-                                uso_cfdi: [perfiles[0].uso_cfdi, [Validators.required]],
-                                password: ["", [Validators.minLength(8)]],
-                                myBoolean: ['true', ],
-                            })
-                            if(perfiles[0].rfc=="XAXX010101000"){   
-                                this.ionicForm.get('myBoolean').setValue("false");
-                                this.mostrarDireccion1=false;
-                            }
-                        });
-                }
-            );
     }
     muestraDireccion2() {
         if (this.ionicForm.value.myBoolean == true) {
@@ -223,6 +226,7 @@ export class EditarperfilPage implements OnInit {
             this.mostrarDireccion1 = false;
         }
     }
+    
     submitForm() {
         this.isSubmitted = true;
         console.log(this.ionicForm.valid)
@@ -260,10 +264,31 @@ export class EditarperfilPage implements OnInit {
                     console.log(app);
                     console.log("uuid_cliente: "+app.uuid_cliente);
                     perfil.rfc=perfil.rfc.toUpperCase();
-                    this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                        alert("Tus datos se han actualizado correctamente.");
-                        this.router.navigate(['/principal']);
-                    });
+                    this.taskService.validarCorreo(usrMail).subscribe((cliente)=>{
+                        console.log("Found");
+                        console.log(cliente);
+                        console.log("USUARIO "+usrMail)
+                        console.log("USUARIO VIEJO "+this.usrMailViejo)
+                        if(cliente.length>0){
+                            console.log("USUARIO2 "+cliente[0].mail)
+                            console.log("USUARIO VIEJO2 "+this.usrMailViejo)
+                            if(cliente[0].mail==this.usrMailViejo){
+                                this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
+                                    alert("Tus datos se han actualizado correctamente.");
+                                    // this.router.navigate(['/principal']);
+                                });
+                            }else{
+                                alert("El correo ya se encuentra registrado.")
+                            }
+                        }else{
+                            this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
+                                alert("Tus datos se han actualizado correctamente.");
+                                // this.router.navigate(['/principal']);
+                            });
+                        }
+                      },er=>{});
+
+                    
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );

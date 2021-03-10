@@ -30,6 +30,13 @@ export class HistorialdetallepedidosPage implements OnInit {
     .subscribe(detalle_pedidos => {
         this.detalle_pedidos = detalle_pedidos
         let subtotal=0;
+        for (let i = 0; i < this.detalle_pedidos.length; i++) {
+            console.log("index : " + i);
+            console.log(this.detalle_pedidos[i]);
+            this.taskService.validarImg(this.detalle_pedidos[i].url_img1).then(() => {}, e => {
+                this.detalle_pedidos[i].url_img1 = "../../assets/images/no-image.png"
+            });
+        }
         detalle_pedidos.forEach(detalle => {
             console.log(detalle.subtotal.replace('$','').replace(',',''))
             subtotal+=parseFloat(detalle.subtotal.replace('$','').replace(',',''));
