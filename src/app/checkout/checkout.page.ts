@@ -219,7 +219,7 @@ export class CheckoutPage implements OnInit {
             "direccion":direccion
         };
         const headers = new HttpHeaders({
-            "Authorization":"Bearer TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
+            "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
             "cache-control": "no-cache",
             "Content-Type":"application/json"
         }); 

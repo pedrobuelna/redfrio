@@ -16,12 +16,13 @@ export class RecuperarcontrasenaPage implements OnInit {
   constructor(private  router:  Router,public formBuilder: FormBuilder,
     private taskService: TaskService,private network: Network) { 
     this.ionicForm = this.formBuilder.group({
-      mail:['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password:['', [Validators.required,Validators.minLength(8)]],
-      confirmarcontrasena: ['', [Validators.required]]
-    }, { 
-      validator: ConfirmedValidator('password', 'confirmarcontrasena')
+      mail:['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]]
+      // password:['', [Validators.required,Validators.minLength(8)]],
+      // confirmarcontrasena: ['', [Validators.required]]
     })
+    // , { 
+    //   validator: ConfirmedValidator('password', 'confirmarcontrasena')
+    // })
   }
   get errorControl() {
     return this.ionicForm.controls;
@@ -35,15 +36,21 @@ export class RecuperarcontrasenaPage implements OnInit {
       alert('Captura todos los valores!');
       return false;
     } else {
-      this.ionicForm.value.password = Md5.hashStr(this.ionicForm.value.password)
+      //this.ionicForm.value.password = Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
-      let perfil = {
-        password: this.ionicForm.value.password
-      };
-      this.taskService.updateContrasena(usrMail,perfil).subscribe(()=>{
-        alert("Tus datos se han actualizado correctamente.");
-        this.router.navigate(['/login']);
-      });
+      // let perfil = {
+      //   password: this.ionicForm.value.password
+      // };
+      //this.taskService.updateContrasena(usrMail,perfil).subscribe(()=>{
+        this.taskService.sendMailRecuperarPwd(usrMail).subscribe((reply: any) => {
+          alert("Tu contraseña ha sido actualizada verifica tu correo.");
+          this.router.navigate(['/login']);
+        }, (err) => {
+          alert("Ha ocurrido un error intentalo más tarde")
+            console.log("error mail: " + err);
+        });
+        
+      //});
     }
   }
 }

@@ -105,7 +105,7 @@ export class RegisterPage implements OnInit {
     } else {
       this.ionicForm.value.password= Md5.hashStr(this.ionicForm.value.password)
       let usrMail = this.ionicForm.value.mail;
-      this.nombreCompleto = this.ionicForm.value.nombre + this.ionicForm.value.nombre_2;
+      this.nombreCompleto = this.ionicForm.value.nombre +" "+ this.ionicForm.value.nombre_2;
       const task = {
         nombre: this.ionicForm.value.nombre,
         nombre_2: this.ionicForm.value.nombre_2,
