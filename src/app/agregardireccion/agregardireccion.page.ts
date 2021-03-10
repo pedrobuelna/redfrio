@@ -29,16 +29,16 @@ export class AgregardireccionPage implements OnInit {
         private nativeStorage: NativeStorage,
         public navCtrl: NavController) {
         this.ionicForm = this.formBuilder.group({
-            alias: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(40)]],
-            calle: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
+            alias: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
+            calle: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]],
             numero: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(1)]],
             numerointerior: ['', [Validators.pattern('^[a-zA-Z0-9 -]+$'), Validators.maxLength(10), Validators.minLength(1)]],
             colonia: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
             cp: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             estado: ['', Validators.required],
             ciudad: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
-            telefono: ['', ],
-            celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
+            telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
+            celular: ['',],
             correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]]
         })
     }

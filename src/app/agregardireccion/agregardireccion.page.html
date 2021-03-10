@@ -9,7 +9,7 @@
     <div class="espacios">
       <!-- Error messages -->
       <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.alias.errors?.required || errorControl.alias.errors?.maxlength || errorControl.alias.errors?.minlength)">
-        El Alias es requerido, minimo 1 y maximo 40 caractéres.
+        El Alias es requerido, minimo 2 y maximo 40 caractéres.
       </span>
     </div>
     <ion-item>
@@ -19,7 +19,7 @@
     <div class="espacios">
       <!-- Error messages -->
       <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.calle.errors?.required || errorControl.calle.errors?.maxlength || errorControl.calle.errors?.minlength)">
-        Calle es requerido, minimo 5 y maximo 40 caractéres.
+        Calle es requerido, minimo 2 y maximo 40 caractéres.
       </span>
     </div>
     <ion-item>
@@ -86,19 +86,19 @@
       </span>
     </div>
     <ion-item>
-      <ion-label position="floating">Telefono</ion-label>
+      <ion-label position="floating">Teléfono*</ion-label>
       <ion-input formControlName="telefono" type="tel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Celular*</ion-label>
-      <ion-input formControlName="celular" type="tel"></ion-input>
     </ion-item>
     <div class="espacios">
       <!-- Error messages -->
-      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.celular.errors?.required || errorControl.celular.errors?.required || errorControl.celular.errors?.maxlength || errorControl.celular.errors?.minlength)">
-        El Celular es requerido y con 10 caractéres.
+      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.telefono.errors?.required || errorControl.telefono.errors?.maxlength || errorControl.telefono.errors?.minlength)">
+        El Teléfono es requerido y con 10 caractéres.
       </span>
     </div>
+    <ion-item>
+      <ion-label position="floating">Celular</ion-label>
+      <ion-input formControlName="celular" type="tel"></ion-input>
+    </ion-item>
     <ion-item>
       <ion-label position="floating">Correo</ion-label>
       <ion-input formControlName="correo"></ion-input>
