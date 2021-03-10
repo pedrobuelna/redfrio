@@ -250,8 +250,7 @@ export class CheckoutPage implements OnInit {
         });
     }
     ionViewWillEnter() {
-        this.defaultSelectValue=""
-        
+        this.defaultSelectValue="";
         this.nativeStorage.getItem('url')
         .then(
             (data) => {
@@ -270,7 +269,7 @@ export class CheckoutPage implements OnInit {
             this.flag_inventario = params.flag_inventario;
             this.flag_viable_paqueteria = params.flag_viable_paqueteria;
             if(params.status=="failure"){
-                alert("Su pago no fue aprobado");
+                alert("Su pago no fue aprobado.");
             }
             console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
             if(params.flag_viable_paqueteria==1){
@@ -279,35 +278,47 @@ export class CheckoutPage implements OnInit {
                 this.mostrarDireccion=false;
                 this.envio = 0.00;
             }
-
-        });
-        this.nativeStorage.getItem('carrito')
-        .then(
-            carrito => {
-                console.log("==CARRITO DATA==");
-                console.log(carrito);
-                console.log("uuid_cliente: "+carrito.uuid_carrito);
-                this.uuidCarrito=carrito.uuid_carrito;
-                this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
-                    console.log('===COSTO ENVIO===');
-                    console.log(envio);
-                    if(envio[0].peso_total>700){
-                        alert("La compra excede los 700 kilogramos máximos para un envío.");
-                        this.router.navigate(['/carrito']);
-                    }else{
-                        if(this.flag_viable_paqueteria==1){
-                            this.costoEnvio=this.envio=0.00;
+            this.nativeStorage.getItem('carrito')
+            .then(
+                carrito => {
+                    console.log("==CARRITO DATA==");
+                    console.log(carrito);
+                    console.log("uuid_cliente: "+carrito.uuid_carrito);
+                    this.uuidCarrito=carrito.uuid_carrito;
+                    this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
+                        console.log('===COSTO ENVIO===');
+                        console.log(envio);
+                        if(envio[0].peso_total>700){
+                            alert("La compra excede los 700 kilogramos máximos para un envío.");
+                            this.router.navigate(['/carrito']);
                         }else{
-                            this.costoEnvio=envio[0].costo_envio.replace('$','');
-                            this.envio=envio[0].costo_envio.replace('$','');
+                            if(this.flag_viable_paqueteria==1){
+                                console.log("Tipo 1");
+                                this.costoEnvio=this.envio=0.00;
+                            }else{
+                                this.costoEnvio=envio[0].costo_envio.replace('$','');
+                                this.envio=envio[0].costo_envio.replace('$','');
+                                console.log("Tipo 2");
+                                console.log(this.envio);
+                            }
                         }
-                    }
-                });
-            },
-            error =>{
-                 console.error("NO HAY DATOS DEL CARRITO");
-            }
-        );
+                        let datosDefault={
+                            'detail':{
+                                'value':'domicilio'
+                            }
+                        }
+                        console.log("datosDefault:");
+                        console.log(datosDefault);
+                        
+                        this.muestraTienda(datosDefault);
+                    });
+                },
+                error =>{
+                    alert("No hay datos carrito")
+                    console.error("NO HAY DATOS DEL CARRITO");
+                }
+            );
+        });
     }
     muestraTienda(event) {
         //console.log(this.enviodireccion)
