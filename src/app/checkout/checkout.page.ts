@@ -135,34 +135,6 @@ export class CheckoutPage implements OnInit {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
-        this.route.queryParams.subscribe(params => {
-            this.flag_inventario = params.flag_inventario;
-            this.flag_viable_paqueteria = params.flag_viable_paqueteria;
-            if(params.status=="failure"){
-                alert("Su pago no fue aprobado");
-            }
-            let mpInfo={
-                'collection_id':params.collection_id,
-                'collection_status':params.collection_status,
-                'payment_id':params.collection_idpayment_id,
-                'status':params.status,
-                'external_reference':params.external_reference,
-                'payment_type':params.payment_type,
-                'merchant_order_id':params.merchant_order_id,
-                'preference_id':params.preference_id,
-                'site_id':params.site_id,
-                'processing_mode':params.processing_mode,
-                'merchant_account_id':params.merchant_account_id
-            }
-            console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
-            if(params.flag_viable_paqueteria==1){
-                this.enviodireccion="sucursal";
-                this.mostrarTienda=true;
-                this.mostrarDireccion=false;
-                this.envio = 0.00;
-            }
-
-        });
         //Radios de forma de envio
         this.nativeStorage.getItem('app')
         .then(
@@ -183,9 +155,9 @@ export class CheckoutPage implements OnInit {
             error => console.error("NO HAY UUID_CLIENTE")
         );
         this.taskService.getSucursales()
-            .subscribe(sucursales => {
-                this.sucursales = sucursales;
-            });
+        .subscribe(sucursales => {
+            this.sucursales = sucursales;
+        });
     }
     // envioGratis(){
     //     $(".envio").text(0)
@@ -238,6 +210,7 @@ export class CheckoutPage implements OnInit {
                 "success": "localhost/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "failure": "localhost/checkout",
                 "pending": "localhost/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
+                "notification_url":"https://app.reacsa.mx:3004/notificacion_mp",
             },
             "auto_return": "approved",
             "tipoEnvio":tipo_envio,
@@ -261,7 +234,21 @@ export class CheckoutPage implements OnInit {
         });
     }
     ionViewWillEnter() {
-        //this.mpData=this.taskService.callMp();
+        this.route.queryParams.subscribe(params => {
+            this.flag_inventario = params.flag_inventario;
+            this.flag_viable_paqueteria = params.flag_viable_paqueteria;
+            if(params.status=="failure"){
+                alert("Su pago no fue aprobado");
+            }
+            console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
+            if(params.flag_viable_paqueteria==1){
+                this.enviodireccion="sucursal";
+                this.mostrarTienda=true;
+                this.mostrarDireccion=false;
+                this.envio = 0.00;
+            }
+
+        });
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
