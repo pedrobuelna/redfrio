@@ -29,7 +29,7 @@ import {
 import {
     TaskService
 } from '../services/task.service';
-import { NavController } from '@ionic/angular';
+import { NavController,Platform } from '@ionic/angular';
 
 import {
     HttpClient,HttpHeaders
@@ -78,15 +78,16 @@ export class CheckoutPage implements OnInit {
     enviodireccion:any = "domicilio"
     mostrarDireccion:any = true;
     mostrarTienda:any = false;
-    flag_inventario:any=0;
-    flag_viable_paqueteria:any=0;
+    flag_inventario:any=null;
+    flag_viable_paqueteria:any=null;
     mensajeInventario:string = "";
     mpData:any;
     uuidCarrito:any;
     uuidcliente:any;
     defaultSelectValue:any;
     @ViewChild("splash") splash: ElementRef;
-    constructor(private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
+    constructor(public platform: Platform,private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
+        
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
         this.ionicForm = this.formBuilder.group({
@@ -100,6 +101,19 @@ export class CheckoutPage implements OnInit {
             cvvTarjeta: ['', ],
         })
     }
+    initializeApp() {
+        
+        // this.platform.ready().then(() => {
+        //   this.platform.backButton.subscribeWithPriority(9999, () => {
+        //     document.addEventListener('backbutton', function (event) {
+        //       event.preventDefault();
+        //       event.stopPropagation();
+        //       console.log('hello');
+        //     }, false);
+        //   });
+        //   this.statusBar.styleDefault();
+        // });
+      }
     get errorControl() {
         return this.ionicForm.controls;
     }
@@ -209,7 +223,7 @@ export class CheckoutPage implements OnInit {
             ],
             "back_urls": {
                 "success": "localhost/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
-                "failure": "localhost/checkout",
+                "failure": "localhost/carrito",
                 "pending": "localhost/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "notification_url":"https://app.reacsa.mx:3004/notificacion_mp",
             },
@@ -229,6 +243,7 @@ export class CheckoutPage implements OnInit {
             console.log(data);
             // $('#scriptMp').html('<script src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js" data-preference-id="'+data.id+'"></script>');
             //this.mpData=data;
+            
             window.open(data['init_point'], '_blank');
         }, error => {
             console.log(error);
@@ -236,6 +251,21 @@ export class CheckoutPage implements OnInit {
     }
     ionViewWillEnter() {
         this.defaultSelectValue=""
+        
+        this.nativeStorage.getItem('url')
+        .then(
+            (data) => {
+                console.log('DATA URL'+data.url)
+                let bandera;
+                bandera=data.url
+                console.log(bandera)
+                if(bandera!="/carrito"){
+                    this.navCtrl.navigateRoot(['/carrito'])
+                }
+            },
+            error => console.error('Error al actualizar la informacion APP', error)
+        );
+        
         this.route.queryParams.subscribe(params => {
             this.flag_inventario = params.flag_inventario;
             this.flag_viable_paqueteria = params.flag_viable_paqueteria;
@@ -282,8 +312,6 @@ export class CheckoutPage implements OnInit {
     muestraTienda(event) {
         //console.log(this.enviodireccion)
         console.log("muestraTienda",event.detail);
-        $('#btnPagar').hide();
-        this.ionicForm.value.direccion="";
         //this.muestraTienda = event.detail;
         console.log("Value: " + event.detail.value)
         if (event.detail.value == "domicilio") {
@@ -309,12 +337,17 @@ export class CheckoutPage implements OnInit {
             this.total = "$"+this.paymentAmount;
             subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-
+            $('#btnPagar').hide();
+            this.ionicForm = this.formBuilder.group({
+                direccion: ['',[Validators.required]]
+            })
         }else{
             this.mostrarTienda = true;
             this.mostrarDireccion = false;
             this.tipoEnvio=0;
-
+            this.ionicForm = this.formBuilder.group({
+                direccion: ['',[Validators.required]]
+            })
             this.envio=0;
             console.log("Subtotal");
             console.log(this.subtotal);

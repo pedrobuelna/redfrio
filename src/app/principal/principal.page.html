@@ -27,9 +27,12 @@
       <div id="content_producto_carrusel" (click)="onClickProducto(producto.uuid_producto)">
         <img src="{{producto.url_img1}}" alt="producto1@3x.png">
         <div class="content_producto_textos">
-          <p> <span class="titletxt1"> {{producto.marca}} {{producto.familia}} </span><br>
-            {{producto.desc_corta}}
-             <span class="pricetxt1"> {{producto.precio}} <s>  {{producto.precio_viejo}}</s></span>
+          <p> 
+            <span class="titletxt1"> {{producto.marca}} {{producto.familia}} </span><br>
+            <span class="ion-text-capitalize"><b>No. parte: </b> </span>
+            <span class="ion-text-uppercase">{{producto.no_parte}}</span> <br>
+            {{producto.desc_corta}} <br>
+            <span class="pricetxt1"> {{producto.precio}} <s>  {{producto.precio_viejo}}</s></span> <span *ngIf="producto.precio">+ IVA</span>
           </p>
         </div>
       </div>

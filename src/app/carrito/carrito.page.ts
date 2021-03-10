@@ -228,9 +228,15 @@ export class CarritoPage implements OnInit {
             queryParams: {
                 subtotal: this.subtotal,
                 flag_inventario:this.flag_inventario,
-                flag_viable_paqueteria:this.flag_viable_paqueteria
+                flag_viable_paqueteria:this.flag_viable_paqueteria,
+                url: this.router.url
             }
         });  
+        this.nativeStorage.setItem('url', {url: this.router.url})
+        .then(
+            () => console.log('Stored item!'),
+            error => console.error('Error storing item', error)
+        );
   }
 
 }

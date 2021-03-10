@@ -35,22 +35,22 @@
             <ion-item *ngIf=mostrarDireccion>
                 <ion-label position="floating">Direcciones</ion-label>
                 <ion-select formControlName="direccion" value="">
-                    <ion-select-option value="" selected>Seleccione una dirección</ion-select-option>
+                    <ion-select-option value="">Seleccione una dirección</ion-select-option>
                     <ion-select-option *ngFor="let direccion of direcciones" value="{{direccion.uuid_direccion}}">
                         {{ direccion.sub_name }}</ion-select-option>
                 </ion-select>
             </ion-item>
             <ion-item *ngIf=mostrarTienda>
                 <ion-label position="floating">Tiendas</ion-label>
-                <ion-select formControlName="direccion" value="" (ionChange)="verificarInventarioTienda($event)">
-                    <ion-select-option value="" selected>Seleccione una tienda</ion-select-option>
+                 <ion-select formControlName="direccion" value="" (ionChange)="verificarInventarioTienda($event)">
+                    <ion-select-option value="">Seleccione una tienda</ion-select-option>
                     <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.sid_sucursal}}">
                         {{ sucursal.nombre }}</ion-select-option>
                 </ion-select>
             </ion-item>
             <span class="error ion-padding" color="danger"
                 *ngIf="isSubmitted && errorControl.direccion.errors?.required">
-                Es necesario seleccionar una dirección
+                <span style="margin-left: 10px;">Es necesario seleccionar una dirección o tienda</span>
             </span>
             <ion-button expand="full" class="btn_guardar" type="button" (click)="agregarDireccion()">
                 <ion-label>Agregar dirección</ion-label>

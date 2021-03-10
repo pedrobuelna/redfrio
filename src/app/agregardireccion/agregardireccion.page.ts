@@ -37,7 +37,8 @@ export class AgregardireccionPage implements OnInit {
             cp: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             estado: ['', Validators.required],
             ciudad: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
-            telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
+            telefono: ['', ],
+            celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
             correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]]
         })
     }
@@ -75,6 +76,7 @@ export class AgregardireccionPage implements OnInit {
                             estado: this.ionicForm.value.estado,
                             poblacion: this.ionicForm.value.ciudad,
                             telefono: this.ionicForm.value.telefono,
+                            celular: this.ionicForm.value.celular,
                             mail: this.ionicForm.value.correo,
                             uuid_cliente: app.uuid_cliente,
                             fiscal:false
