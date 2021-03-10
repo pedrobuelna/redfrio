@@ -36,7 +36,7 @@ export class HistorialdetallepedidosPage implements OnInit {
         });
         this.envio = parseFloat(detalle_pedidos[0].costo_envio.replace('$','').replace(',',''));
         this.comprasubtotal = subtotal;
-        this.total = subtotal + (subtotal * .16) + parseFloat(this.envio);
+        this.total = (subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
         console.log("detalle_pedidos: ", detalle_pedidos)
     });
     this.nativeStorage.getItem('app')

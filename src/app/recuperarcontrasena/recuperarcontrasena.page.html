@@ -11,7 +11,7 @@
       <ion-input type="email" formControlName="mail" required class="inputs" placeholder="Email"></ion-input>
     </ion-item>
     <!-- Error messages -->
-    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mail.errors?.required">
+    <!-- <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mail.errors?.required">
       Campo Email requerido.
     </span>
     <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mail.errors?.pattern">
@@ -19,8 +19,8 @@
     </span>
     <ion-item>
       <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
-    </ion-item>
-    <div class="espacios">
+    </ion-item> -->
+    <!-- <div class="espacios">
       <span class="error ion-padding" *ngIf="isSubmitted && (errorControl.password.errors?.required || errorControl.password.errors?.minlength)">
         Campo Password requerido y minimo 6 caractéres
       </span>
@@ -35,7 +35,7 @@
       <div class="error" *ngIf="isSubmitted && errorControl.confirmarcontrasena.errors?.confirmedValidator">
         No coinciden las contraseñas.
       </div>
-    </div>
+    </div> -->
     <div id="boton_content">
       <ion-button type="submit" class="login" color="color1">
         <span class="txtBtn1">Actualizar Contraseña</span>
