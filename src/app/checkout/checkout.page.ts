@@ -151,6 +151,7 @@ export class CheckoutPage implements OnInit {
     }
     ngOnInit() {
         this.sucursales=[];
+        console.log("sucursales aaaa: "+this.sucursales)
         //Radios de forma de envio
         this.nativeStorage.getItem('app')
         .then(
@@ -252,20 +253,6 @@ export class CheckoutPage implements OnInit {
     }
     ionViewWillEnter() {
         this.defaultSelectValue="";
-        this.nativeStorage.getItem('url')
-        .then(
-            (data) => {
-                console.log('DATA URL'+data.url)
-                let bandera;
-                bandera=data.url
-                console.log(bandera)
-                if(bandera!="/carrito"){
-                    this.navCtrl.navigateRoot(['/carrito'])
-                }
-            },
-            error => console.error('Error al actualizar la informacion APP', error)
-        );
-        
         this.route.queryParams.subscribe(params => {
             this.flag_inventario = params.flag_inventario;
             this.flag_viable_paqueteria = params.flag_viable_paqueteria;
@@ -278,6 +265,8 @@ export class CheckoutPage implements OnInit {
                 this.mostrarTienda=true;
                 this.mostrarDireccion=false;
                 this.envio = 0.00;
+            }else{
+                this.enviodireccion="domicilio";
             }
             console.log("Mostrar tienda: "+this.mostrarTienda);
             console.log("Mostrar direccion: "+this.mostrarDireccion)
@@ -656,43 +645,47 @@ export class CheckoutPage implements OnInit {
     }
     submitForm(tipo) {
         this.isSubmitted = true;
-        console.log(this.ionicForm.value.direccion);
-        //alert("top" + tipo)
-        if (!this.ionicForm.valid) {
-            console.log('Valores cacios!')
-            return false;
-        } else {
-            console.log('Formulario completado' + this.ionicForm.value)
-            if (tipo == 1) {
-                console.log("sin envio")
-                //this.payWithPaypal(false); //Sin envio
-                this.generarMp();
-            } else if (tipo == 2) {
-                console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
-                console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
-                console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
-                console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
-                if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
-                    this.payWithCard(false);
-                    
-                }else{
-                    this.navCtrl.navigateRoot(['/pagonoexitoso'])
-                }
-            } else if (tipo == 3) {
-                console.log("con envio")
-                this.generarMp();
-                //this.payWithPaypal(true); //Con envio
-            } else if (tipo == 4) {
-                console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
-                console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
-                console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
-                console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
-                if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
-                    this.payWithCard(true);
-                }else{
-                    this.navCtrl.navigateRoot(['/pagonoexitoso'])
+        if(parseFloat(this.paymentAmount.replace(',',''))>0){
+            console.log(this.ionicForm.value.direccion);
+            if (!this.ionicForm.valid) {
+                console.log('Valores cacios!')
+                return false;
+            } else {
+                console.log('Formulario completado' + this.ionicForm.value)
+                if (tipo == 1) {
+                    console.log("sin envio")
+                    //this.payWithPaypal(false); //Sin envio
+                    this.generarMp();
+                } else if (tipo == 2) {
+                    console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+                    console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+                    console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+                    console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+                    if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+                        this.payWithCard(false);
+                        
+                    }else{
+                        this.navCtrl.navigateRoot(['/pagonoexitoso'])
+                    }
+                } else if (tipo == 3) {
+                    console.log("con envio")
+                    this.generarMp();
+                    //this.payWithPaypal(true); //Con envio
+                } else if (tipo == 4) {
+                    console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+                    console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+                    console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+                    console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+                    if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+                        this.payWithCard(true);
+                    }else{
+                        this.navCtrl.navigateRoot(['/pagonoexitoso'])
+                    }
                 }
             }
+        }else{
+            this.ionViewWillEnter();
+            this.ionViewDidEnter();
         }
     }
     agregarDireccion() {

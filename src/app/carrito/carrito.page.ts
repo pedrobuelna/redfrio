@@ -121,7 +121,6 @@ export class CarritoPage implements OnInit {
     }
     calcularTotales(){
         console.log("Obteniendo totales");
-        
         let total = 0;
         $(".precio").each(function (i) {
             let uuid_producto=$(this).attr('id');
@@ -172,7 +171,10 @@ export class CarritoPage implements OnInit {
                         this.flag_inventario = 0
                         for(let i=0;i<this.carritoProductos.length;i++){
                             this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
-                            if(this.carritoProductos[i].viable_paqueteria==0){
+                            // if(this.carritoProductos[i].viable_paqueteria==1){//No es un gas
+                            //     this.flag_viable_paqueteria = 0
+                            // }
+                            if(this.carritoProductos[i].viable_paqueteria==0){//Es un gas
                                 this.flag_viable_paqueteria = 1
                             }
                             if(this.carritoProductos[i].inventario==0){
@@ -193,12 +195,15 @@ export class CarritoPage implements OnInit {
         );
     }
     ionViewWillEnter() {
+        console.log("JALATE PERRO!")
         this.validarFlags();
     }
     ionViewDidEnter() {
         console.info("will did enter");
+        this.validarFlags();
         setTimeout(()=>{ this.calcularTotales() }, 300);
         //this.calcularTotales()
+
     }
    onclickNotificaciones(){
         this.router.navigate(['/notificaciones']);
@@ -232,11 +237,6 @@ export class CarritoPage implements OnInit {
                 url: this.router.url
             }
         });  
-        this.nativeStorage.setItem('url', {url: this.router.url})
-        .then(
-            () => console.log('Stored item!'),
-            error => console.error('Error storing item', error)
-        );
   }
 
 }
