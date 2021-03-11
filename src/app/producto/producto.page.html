@@ -78,7 +78,7 @@
             <div class="parrafo2">
                 <ion-item>
                     <ion-label position="floating">Disponibilidad por zona</ion-label>
-                    <ion-select formControlName="zonas" (ionChange)="getInventario($event)">
+                    <ion-select name="zonas" (ionChange)="getInventario($event)" value="">
                         <ion-select-option *ngFor="let zona of zonas" value="{{zona.zona}}">
                             {{ zona.zona }}</ion-select-option>
                     </ion-select>
@@ -100,7 +100,7 @@
             </p>
             <div class="precios">
                 <span class="precio1"> {{producto.precio}}</span>
-                <span *ngIf="producto.precio_viejo" class="precio2">&nbsp;<s>{{producto.precio_viejo}}</s></span> + IVA
+                <span *ngIf="producto.precio_viejo" class="precio2">&nbsp;<s>{{producto.precio_viejo}}</s></span> <span *ngIf="producto.precio">+ IVA</span>
             </div>
             <section class="full-width" *ngIf="producto.cantidad==null">
                 <ion-button expand="full" class="btn_agregar">No disponible</ion-button>

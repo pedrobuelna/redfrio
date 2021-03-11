@@ -63,7 +63,7 @@ export class PagopendientePage implements OnInit {
             console.log("MPINFO");
             console.log(mpInfo);
             let updCarrito = {
-                status: 2,
+                status: 3,
                 id_tipo_pago: 1,
                 total: this.paymentAmount,
                 tipo_envio: this.tipo_envio,

@@ -63,6 +63,13 @@ export class ProductoPage implements OnInit {
             error => console.error("NO HAY UUID_CLIENTE")
         );
     }
+    ionViewDidEnter(){
+        this.zonas="";
+        console.log("A:"+this.disponibilidad)
+        console.log("ENTRA DID ENTER")
+        this.disponibilidad=[];
+        console.log("B:"+this.disponibilidad)
+    }
     ionViewWillEnter(){
         let x = "";
         this.route.queryParams.subscribe(queryParams => x = queryParams.id);
