@@ -150,6 +150,7 @@ export class CheckoutPage implements OnInit {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
+        this.sucursales=[];
         //Radios de forma de envio
         this.nativeStorage.getItem('app')
         .then(
@@ -278,6 +279,8 @@ export class CheckoutPage implements OnInit {
                 this.mostrarDireccion=false;
                 this.envio = 0.00;
             }
+            console.log("Mostrar tienda: "+this.mostrarTienda);
+            console.log("Mostrar direccion: "+this.mostrarDireccion)
             this.nativeStorage.getItem('carrito')
             .then(
                 carrito => {
@@ -307,6 +310,14 @@ export class CheckoutPage implements OnInit {
                                 'value':'domicilio'
                             }
                         }
+                        if(this.flag_viable_paqueteria==1){
+                            datosDefault={
+                                'detail':{
+                                    'value':'sucursal'
+                                }
+                            }
+                        }
+                        
                         console.log("datosDefault:");
                         console.log(datosDefault);
                         
@@ -327,17 +338,16 @@ export class CheckoutPage implements OnInit {
         console.log("Value: " + event.detail.value)
         if (event.detail.value == "domicilio") {
             this.mensajeInventario="";
-            $('#btnPagar').show();
             this.mostrarDireccion = true;
             this.mostrarTienda = false;
             this.tipoEnvio=1;
             this.envio=this.costoEnvio;
-            console.log("Subtotal");
-            console.log(this.subtotal);
-            console.log("Envio");
-            console.log(this.envio);
-            console.log("Tax");
-            console.log(this.tax);
+            // console.log("Subtotal");
+            // console.log(this.subtotal);
+            // console.log("Envio");
+            // console.log(this.envio);
+            // console.log("Tax");
+            // console.log(this.tax);
             let subtotal=this.subtotal.toString().replace(',','');
             this.subtotal=subtotal;
             let envio=this.envio.toString().replace(',','');
@@ -348,7 +358,6 @@ export class CheckoutPage implements OnInit {
             this.total = "$"+this.paymentAmount;
             subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            $('#btnPagar').hide();
             this.ionicForm = this.formBuilder.group({
                 direccion: ['',[Validators.required]]
             })
@@ -360,12 +369,12 @@ export class CheckoutPage implements OnInit {
                 direccion: ['',[Validators.required]]
             })
             this.envio=0;
-            console.log("Subtotal");
-            console.log(this.subtotal);
-            console.log("Envio");
-            console.log(this.envio);
-            console.log("Tax");
-            console.log(this.tax);
+            // console.log("Subtotal");
+            // console.log(this.subtotal);
+            // console.log("Envio");
+            // console.log(this.envio);
+            // console.log("Tax");
+            // console.log(this.tax);
             let subtotal=this.subtotal.toString().replace(',','');
             this.subtotal=subtotal;
             let envio=this.envio.toString().replace(',','');
