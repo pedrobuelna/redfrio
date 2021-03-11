@@ -26,8 +26,9 @@ export class UbicacionesPage implements OnInit {
         private taskService: TaskService) {}
     ngOnInit() {
         this.taskService.getAllTasks()
-            .subscribe(sucursales => {
-                this.sucursales = sucursales;
+        .subscribe(sucursales => {
+            console.log("SUCURSALES:" + sucursales)
+            this.sucursales = sucursales;
         });
         $("#categoria_select").val("0")
         this.nativeStorage.getItem('app')

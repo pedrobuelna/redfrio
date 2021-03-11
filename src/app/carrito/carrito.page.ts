@@ -83,6 +83,7 @@ export class CarritoPage implements OnInit {
         );
     }
     updCantidad(uuid_producto:any,cantidad:number){
+        let cantidadUsuario = cantidad
         if(cantidad >0){
                 this.nativeStorage.getItem('carrito')
                 .then(
@@ -90,17 +91,34 @@ export class CarritoPage implements OnInit {
                         console.log("==CARRITO DATA==");
                         console.log(carrito);
                         console.log("uuid_carrito: "+carrito.uuid_carrito);
-                        let cantidadData={cantidad:cantidad}
-                        this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
-                            this.actualizarListaProductosCarrito()
-                            
+                        
+                        this.taskService.getCantidadProducto(uuid_producto).subscribe(data =>{
+                            console.log("CANTIDAD: "+data[0].cantidad);
+                            if(data[0].cantidad<cantidad){
+                                //alert("La cantidad máxima de este producto es de " + data[0].cantidad);
+                                let cantidadData={cantidad: data[0].cantidad}
+                                this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
+                                    this.actualizarListaProductosCarrito()
+                                });
+                            }else{
+                                //alert("La cantidad normal es de " + cantidad);
+                                let cantidadData={cantidad: cantidad}
+                                this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
+                                    this.actualizarListaProductosCarrito()
+                                }); 
+                            }
+                            // else{
+                            //     this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidad).subscribe(()=>{
+                            //         this.actualizarListaProductosCarrito()
+                            //     });
+                            // }
                         });
                     },
                     error =>{
                         console.error("NO HAY UUID_CLIENTE");
                     }
                 );
-            }else this.delete(uuid_producto);
+        }else this.delete(uuid_producto);
     }
     delete(uuid_producto:any) {
         this.nativeStorage.getItem('carrito')
@@ -145,14 +163,14 @@ export class CarritoPage implements OnInit {
     }
     mas(uuid_producto,producto){
         let cantidad = producto.cantidad +=1;
-        let cantidadMax=this.cantidadMaximaProducto[uuid_producto];
-        console.log("Cantidad maxima:"+this.cantidadMaximaProducto[uuid_producto]);
-        if(cantidad<=parseInt(cantidadMax)){
+        // let cantidadMax=this.cantidadMaximaProducto[uuid_producto];
+        // console.log("Cantidad maxima:"+this.cantidadMaximaProducto[uuid_producto]);
+        //if(cantidad<=parseInt(cantidadMax)){
             this.updCantidad(uuid_producto,cantidad);
-        }else{
-            alert("La cantidad máxima de este producto es de "+cantidadMax)
-            this.updCantidad(uuid_producto,cantidadMax);
-        }
+        // }else{
+        //     alert("La cantidad máxima de este producto es de "+cantidadMax)
+        //     this.updCantidad(uuid_producto,cantidadMax);
+        // }
     }
     menos(uuid_producto,producto){
          if(producto.cantidad>=1){

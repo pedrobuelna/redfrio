@@ -31,7 +31,7 @@ export class TaskService {
 
     }
     getAllTasks() {
-        const path = `${this.api}/sucursales`;
+        const path = `${this.api}/sucursales?order=nombre&status=eq.N`;
         return this.http.get < Sucursal[] > (path);
     }
     validarCorreo(email: string) {
@@ -163,6 +163,10 @@ export class TaskService {
     updProductoCarrito(uuid_carrito: string,uuid_producto: string, dataCantidad: any) {
         const path = `${this.api}/carrito_detalles?uuid_carrito=eq.${uuid_carrito}&&uuid_producto=eq.${uuid_producto}`;
         return this.http.patch(path, dataCantidad);
+    }
+    getCantidadProducto(uuid_producto: string) {
+        const path = `${this.api}/productos_info?uuid_producto=eq.${uuid_producto}&select=cantidad`;
+        return this.http.get<any>(path);
     }
     delProducto(uuid_carrito:string,uuid_producto: string){
         const path = `${this.api}/carrito_detalles?uuid_carrito=eq.${uuid_carrito}&&uuid_producto=eq.${uuid_producto}`;
