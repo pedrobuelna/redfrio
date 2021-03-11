@@ -402,8 +402,8 @@ export class CheckoutPage implements OnInit {
                                     console.log("Inventario");
                                     console.log(inventario);
                                     let todosDisponibles=true;
-                                    if(parseInt(inventario.cantidad)<1){
-                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no se encuentra disponible en la sucursal, eliminar el producto para poder pagar o elige otra tienda.</div><br>";
+                                    if(parseInt(inventario.cantidad)<1 || articulo.cantidad>inventario.cantidad){
+                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no se encuentra disponible en la sucursal o a superado la cantidad disponible en la sucursal seleccionada, elimine el producto o disminuya la cantidad para poder pagar o elige otra tienda. Cantidad máxima: "+inventario.cantidad+"</div><br>";
                                         todosDisponibles=false;
                                         $('#btnPagar').hide();
                                     }

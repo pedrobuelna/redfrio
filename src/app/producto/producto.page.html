@@ -71,7 +71,7 @@
             <br>
             <span *ngIf="producto.cantidad==null || producto.cantidad==0" style="color: red;">No hay
                 disponibilidad</span>
-            <span *ngIf="producto.cantidad!=null && producto.cantidad!=0" style="color: green; ">DISPONIBLE</span>
+            <span *ngIf="producto.cantidad!=null && producto.cantidad!=0" style="color: green; ">DISPONIBLE {{producto.cantidad}}</span>
             <p class="parrafo1">
                 {{producto.desc_corta}}
             </p>

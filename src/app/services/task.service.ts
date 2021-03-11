@@ -237,7 +237,7 @@ export class TaskService {
         return this.http.get < Task > (path);
     }
     getSucursales(){
-        const path = `${this.api}/sucursales?status=eq.N`;
+        const path = `${this.api}/sucursales?order=nombre&status=eq.N`;
         return this.http.get < Task > (path);
     }
     //Direcciones

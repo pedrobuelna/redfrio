@@ -34,6 +34,7 @@ export class CarritoPage implements OnInit {
     cantidadOn:any;
     flag_viable_paqueteria:any = 0;
     flag_inventario:any = 0;
+    cantidadMaximaProducto:any={};
     listas: Array < any >= [{
             nombre: "YORK MINISPLIT",
             descripcion: "YHFE/YHGE SERIES COMPRESOR ON/OFF R-410A SOLO FRIO Y FRIO/CALOR 220V ",
@@ -83,23 +84,23 @@ export class CarritoPage implements OnInit {
     }
     updCantidad(uuid_producto:any,cantidad:number){
         if(cantidad >0){
-            this.nativeStorage.getItem('carrito')
-            .then(
-                carrito => {
-                    console.log("==CARRITO DATA==");
-                    console.log(carrito);
-                    console.log("uuid_carrito: "+carrito.uuid_carrito);
-                    let cantidadData={cantidad:cantidad}
-                    this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
-                        this.actualizarListaProductosCarrito()
-                        
-                    });
-                },
-                error =>{
-                    console.error("NO HAY UUID_CLIENTE");
-                }
-            );
-        }else this.delete(uuid_producto);
+                this.nativeStorage.getItem('carrito')
+                .then(
+                    carrito => {
+                        console.log("==CARRITO DATA==");
+                        console.log(carrito);
+                        console.log("uuid_carrito: "+carrito.uuid_carrito);
+                        let cantidadData={cantidad:cantidad}
+                        this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
+                            this.actualizarListaProductosCarrito()
+                            
+                        });
+                    },
+                    error =>{
+                        console.error("NO HAY UUID_CLIENTE");
+                    }
+                );
+            }else this.delete(uuid_producto);
     }
     delete(uuid_producto:any) {
         this.nativeStorage.getItem('carrito')
@@ -144,7 +145,14 @@ export class CarritoPage implements OnInit {
     }
     mas(uuid_producto,producto){
         let cantidad = producto.cantidad +=1;
-        this.updCantidad(uuid_producto,cantidad);
+        let cantidadMax=this.cantidadMaximaProducto[uuid_producto];
+        console.log("Cantidad maxima:"+this.cantidadMaximaProducto[uuid_producto]);
+        if(cantidad<=parseInt(cantidadMax)){
+            this.updCantidad(uuid_producto,cantidad);
+        }else{
+            alert("La cantidad máxima de este producto es de "+cantidadMax)
+            this.updCantidad(uuid_producto,cantidadMax);
+        }
     }
     menos(uuid_producto,producto){
          if(producto.cantidad>=1){
@@ -170,6 +178,7 @@ export class CarritoPage implements OnInit {
                         this.flag_viable_paqueteria = 0
                         this.flag_inventario = 0
                         for(let i=0;i<this.carritoProductos.length;i++){
+                            this.cantidadMaximaProducto[this.carritoProductos[i].uuid_producto]=this.carritoProductos[i].inventario;
                             this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
                             // if(this.carritoProductos[i].viable_paqueteria==1){//No es un gas
                             //     this.flag_viable_paqueteria = 0
@@ -181,6 +190,8 @@ export class CarritoPage implements OnInit {
                                 this.flag_inventario = 1
                             }
                         }
+                        console.log("==CANTIDAD MAXIMA PRODUCTO==");
+                        console.log(this.cantidadMaximaProducto);
                         console.log("flag_viable_paqueteria:"+this.flag_viable_paqueteria)
                         console.log("flagInventario:"+this.flag_inventario)
                         //this.calcularTotales();
@@ -195,11 +206,9 @@ export class CarritoPage implements OnInit {
         );
     }
     ionViewWillEnter() {
-        console.log("JALATE PERRO!")
         this.validarFlags();
     }
     ionViewDidEnter() {
-        console.info("will did enter");
         this.validarFlags();
         setTimeout(()=>{ this.calcularTotales() }, 300);
         //this.calcularTotales()

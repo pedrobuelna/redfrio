@@ -19,6 +19,7 @@ export class ProductoPage implements OnInit {
     notificaciones: any;
     cantidadNot: any = 0;
     listas: any;
+    precioProdcuto:any;
     public sliderOptions = {
         initialSlide: 0,
         slidesPerView: 1,
@@ -30,6 +31,7 @@ export class ProductoPage implements OnInit {
     @ViewChild('slides') slides;
     producto2: any;
     imgProducto:Array<string> = [];
+    cantidadesMaximas:[];
     constructor(
         private router: Router,
         private taskService: TaskService,
@@ -85,6 +87,7 @@ export class ProductoPage implements OnInit {
                 this.taskService.getProducto(x,listaPrecio)
                     .subscribe(producto2 => {
                         this.producto2 = producto2;
+                        this.precioProdcuto=producto2[0].precio;
                         console.log(producto2);
                         this.imgProducto=[];
                         this.taskService.validarImg(producto2[0].url_img1).then(()=>{
@@ -224,8 +227,9 @@ export class ProductoPage implements OnInit {
                         if(productoEncontrado){
                             console.log("Se encontro el producto :"+this.idProducto);
                             let dataCantidad={
-                                cantidad:(cantidad+1)
+                                cantidad:(cantidad+1),
                                 //cantidad:(cantidad+this.quantity)
+                                precio:this.precioProdcuto
                             }
                             this.taskService.updProductoCarrito(carrito.uuid_carrito,this.idProducto,dataCantidad).subscribe(()=>{
                                 this.getUuidCliente()
@@ -235,7 +239,8 @@ export class ProductoPage implements OnInit {
                             let dataSetProducto={
                                 uuid_carrito:carrito.uuid_carrito,
                                 uuid_producto:this.idProducto,
-                                cantidad:1
+                                cantidad:1,
+                                precio:this.precioProdcuto
                                 //cantidad:this.quantity)
                             }
                             console.log("Insertando producto al carrito...");
