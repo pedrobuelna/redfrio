@@ -61,7 +61,7 @@ export class CarritoPage implements OnInit {
                             console.log(dataCarrito);
                             this.carritoProductos=dataCarrito;
                             for(let i=0;i<this.carritoProductos.length;i++){
-                                this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
+                                this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/Icono_Reacsa.png"});
                             }
                         let cantidadCarrito=((carritoActivo[0].cantidad)?carritoActivo[0].cantidad:0);
                         this.nativeStorage.setItem('carrito', {cantidad: cantidadCarrito,uuid_carrito:carritoActivo[0].uuid_carrito})
@@ -95,7 +95,7 @@ export class CarritoPage implements OnInit {
                         this.taskService.getCantidadProducto(uuid_producto).subscribe(data =>{
                             console.log("CANTIDAD: "+data[0].cantidad);
                             if(data[0].cantidad<cantidad){
-                                //alert("La cantidad máxima de este producto es de " + data[0].cantidad);
+                                alert("La disponibilidad de este producto es de " + data[0].cantidad);
                                 let cantidadData={cantidad: data[0].cantidad}
                                 this.taskService.updProductoCarrito(carrito.uuid_carrito,uuid_producto,cantidadData).subscribe(()=>{
                                     this.actualizarListaProductosCarrito()
@@ -197,7 +197,7 @@ export class CarritoPage implements OnInit {
                         this.flag_inventario = 0
                         for(let i=0;i<this.carritoProductos.length;i++){
                             this.cantidadMaximaProducto[this.carritoProductos[i].uuid_producto]=this.carritoProductos[i].inventario;
-                            this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/no-image.png"});
+                            this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/Icono_Reacsa.png"});
                             // if(this.carritoProductos[i].viable_paqueteria==1){//No es un gas
                             //     this.flag_viable_paqueteria = 0
                             // }

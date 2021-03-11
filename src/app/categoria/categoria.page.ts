@@ -15,6 +15,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms"
 import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
+import { LoadingController } from '@ionic/angular';
 @Component({
     selector: 'app-categoria',
     templateUrl: './categoria.page.html',
@@ -23,7 +24,7 @@ import {
 export class CategoriaPage implements OnInit {
     ionicForm: FormGroup;
     constructor(private router: Router, private taskService: TaskService,private formBuilder: FormBuilder,
-        private route: ActivatedRoute, private nativeStorage: NativeStorage) {
+        private route: ActivatedRoute, private nativeStorage: NativeStorage,public loadingController: LoadingController) {
             this.ionicForm = this.formBuilder.group({
                 busqueda: ['', [Validators.required]],
             })
@@ -58,6 +59,21 @@ export class CategoriaPage implements OnInit {
           
         }
     }
+    showLoader() {
+        this.loadingController.create({
+          message: 'Buscando productos...'
+        }).then((res) => {
+          res.present();
+        });
+    }
+    // Hide the loader if already created otherwise return error
+    hideLoader() {
+        this.loadingController.dismiss().then((res) => {
+            console.log('Busqueda de productos terminada!', res);
+        }).catch((error) => {
+            console.log('error', error);
+        });
+    }
     submitForm() {
         this.isSubmitted = true;
         console.log(this.ionicForm.valid)
@@ -87,6 +103,7 @@ export class CategoriaPage implements OnInit {
                 let ordernarpor = $("#categoria_select2").val();
                 this.taskService.getProductos(id, ordernarpor,listaPrecio)
                     .subscribe(productos2 => {
+                        this.hideLoader();
                         this.productos2 = productos2;
                         console.log(productos2)
                         this.totalproductos = productos2.length;
@@ -94,9 +111,10 @@ export class CategoriaPage implements OnInit {
                             console.log("index : " + i);
                             console.log(this.productos2[i]);
                             this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                                this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                                this.productos2[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                             });
                         }
+                        
                     });
             },
             error => console.error("NO HAY UUID_CLIENTE")
@@ -113,6 +131,7 @@ export class CategoriaPage implements OnInit {
                 console.log("ordenamiento: " + ordernarpor)
                 this.taskService.getProductos(id, ordernarpor,listaPrecio)
                     .subscribe(productos2 => {
+                        this.hideLoader();
                         this.productos2 = productos2;
                         this.totalproductos = productos2.length;
                         console.log(productos2);
@@ -120,15 +139,17 @@ export class CategoriaPage implements OnInit {
                             console.log("index : " + i);
                             console.log(this.productos2[i]);
                             this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                                this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                                this.productos2[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                             });
                         }
+                        
                     });
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
     }
     loadVista() {
+        //this.showLoader();
         this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
         console.log("Valor queryParams");
         console.log(this.valorSelect);
@@ -147,16 +168,17 @@ export class CategoriaPage implements OnInit {
                     let listaPrecio={idlistaprecio:app.lista_precio_id}
                     this.taskService.getAllProductos(listaPrecio)
                     .subscribe(productos2 => {
+                        this.hideLoader();
                         this.productos2 = productos2;
                         this.totalproductos = productos2.length;
                         for (let i = 0; i < this.productos2.length; i++) {
                             console.log("index : " + i);
                             console.log(this.productos2[i]);
                             this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                                this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                                this.productos2[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                             });
                         }
-
+                        
                     });
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
@@ -170,15 +192,17 @@ export class CategoriaPage implements OnInit {
                     let ordernarpor = $("#categoria_select2").val();
                     this.taskService.getProductos(this.x, ordernarpor,listaPrecio)
                         .subscribe(productos2 => {
+                            this.hideLoader();
                             this.productos2 = productos2;
                             this.totalproductos = productos2.length;
                             for (let i = 0; i < this.productos2.length; i++) {
                                 console.log("index : " + i);
                                 console.log(this.productos2[i]);
                                 this.taskService.validarImg(this.productos2[i].url_img1).then(() => {}, e => {
-                                    this.productos2[i].url_img1 = "../../assets/images/no-image.png"
+                                    this.productos2[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                                 });
                             }
+                            
                         });
                 },
                 error => console.error("NO HAY UUID_CLIENTE")

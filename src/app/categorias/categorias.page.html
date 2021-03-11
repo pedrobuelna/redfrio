@@ -8,10 +8,6 @@
         <ion-label position="floating">Buscar</ion-label>
         <ion-input formControlName="nombre"></ion-input>
       </ion-item>
-      <!-- Error messages -->
-      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.nombre.errors?.required)">
-        Campo requerido.
-      </span>
       <br>
       <ion-button expand="full" class="buscar" type="submit">
         BUSCAR
@@ -36,14 +32,10 @@
         <img *ngIf="i==7" src="../../assets/images/REFACCIONES.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
         <img *ngIf="i==8" src="../../assets/images/HERRAMIENTAS.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
         <img *ngIf="i==9" src="../../assets/images/FRIGORIFICOS.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==10" src="../../assets/images/FLOW.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==11" src="../../assets/images/SUMINISTROS.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==12" src="../../assets/images/CONTROLES.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==13" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==14" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==15" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==16" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
-        <img *ngIf="i==17" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==10" src="../../assets/images/CONTROLES.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==11" src="../../assets/images/EXTRACCIONYVENTILACION.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==12" src="../../assets/images/FLOW.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
+        <img *ngIf="i==13" src="../../assets/images/INSUMOS.png" alt="familia.id_familia" class="categorias_img" (click)="onclickCategoria(familia.id_familia)">
       </ion-col>
       <ion-col size="6" style="margin-bottom: 120px;">
         <span class="titulo">TODOS</span>

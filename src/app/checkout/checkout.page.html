@@ -34,7 +34,7 @@
               </ion-list>
             <ion-item *ngIf="mostrarDireccion">
                 <ion-label position="floating">Direcciones</ion-label>
-                <ion-select formControlName="direccion" value="{{defaultSelectValue}}">
+                <ion-select formControlName="direccion" value="{{defaultSelectValue}}" (ionChange)="verificarInventarioDomicilio($event)">
                     <ion-select-option value="" selected>Seleccione una dirección</ion-select-option>
                     <ion-select-option *ngFor="let direccion of direcciones" value="{{direccion.uuid_direccion}}">
                         {{ direccion.sub_name }}</ion-select-option>

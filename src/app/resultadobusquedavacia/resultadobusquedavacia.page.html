@@ -18,6 +18,9 @@
         </div>
       </div>
       </ion-col>
+      <div style="color:black" *ngIf="!productos?.length">
+        No se encuentran productos en esta búsqueda intenta buscar con otra busqueda.
+      </div>
   </ion-row>
   <div class="content_menu">
     <ul>

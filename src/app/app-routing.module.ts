@@ -126,6 +126,10 @@ const routes: Routes = [
     path: 'pagopendiente',
     loadChildren: () => import('./pagopendiente/pagopendiente.module').then( m => m.PagopendientePageModule)
   },
+  {
+    path: 'resultadobusquedavacia',
+    loadChildren: () => import('./resultadobusquedavacia/resultadobusquedavacia.module').then( m => m.ResultadobusquedavaciaPageModule)
+  },
 
 ];
 

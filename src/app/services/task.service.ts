@@ -294,7 +294,10 @@ export class TaskService {
     getInventarioSucursal(datos:any) {
         const path = `${this.apiSAP}/inventario_sucursal`;
         return this.http.post<any>(path, datos);
-        
+    }
+    getInventarioDomicilio(datos:any) {
+        const path = `${this.apiSAP}/inventario`;
+        return this.http.post<any>(path, datos);
     }
     callMp(){
         let postData = 

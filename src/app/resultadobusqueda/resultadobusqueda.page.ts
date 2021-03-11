@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { TaskService } from '../services/task.service';
-import { NavController } from '@ionic/angular';
+import { NavController,LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-resultadobusqueda',
   templateUrl: './resultadobusqueda.page.html',
@@ -12,7 +12,7 @@ export class ResultadobusquedaPage implements OnInit {
 
   constructor(private router: Router, private taskService: TaskService,
     private route: ActivatedRoute, private nativeStorage: NativeStorage,
-    private navCtrl: NavController) { }
+    private navCtrl: NavController,public loadingController: LoadingController) { }
   consultaBusqueda:any;
   productos:any;
   notificaciones: any;
@@ -22,7 +22,27 @@ export class ResultadobusquedaPage implements OnInit {
   ngOnInit() {
     
   }
+  showLoader() {
+    this.loadingController.create({
+      message: 'Buscando productos...'
+    }).then((res) => {
+      res.present();
+    });
+
+  }
+
+  // Hide the loader if already created otherwise return error
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Busqueda de productos terminada!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
+
+  }
+
   ionViewWillEnter() {
+      //this.showLoader();
         this.nativeStorage.getItem('app')
         .then(
             app => {
@@ -68,7 +88,7 @@ export class ResultadobusquedaPage implements OnInit {
                 if(productos.length==0){
                     setTimeout(() => {
                         this.navCtrl.back();
-                    }, 3000);
+                    }, 1000);
                 }
                 this.productos = productos;
                 console.log("Productos: "+this.productos)
@@ -76,7 +96,7 @@ export class ResultadobusquedaPage implements OnInit {
                     console.log("index : " + i);
                     console.log(this.productos[i]);
                     this.taskService.validarImg(this.productos[i].url_img1).then(() => {}, e => {
-                        this.productos[i].url_img1 = "../../assets/images/no-image.png"
+                        this.productos[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                     });
                 }
             });
@@ -88,11 +108,11 @@ export class ResultadobusquedaPage implements OnInit {
                 console.log("index : " + i);
                 console.log(this.productos[i]);
                 this.taskService.validarImg(this.productos[i].url_img1).then(() => {}, e => {
-                    this.productos[i].url_img1 = "../../assets/images/no-image.png"
+                    this.productos[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                 });
             }
         }
-        
+        this.hideLoader();
     });
   }
   onclickNotificaciones() {

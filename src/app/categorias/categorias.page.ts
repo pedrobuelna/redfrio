@@ -21,7 +21,7 @@ export class CategoriasPage implements OnInit {
       private nativeStorage: NativeStorage  
     ) { 
       this.ionicForm = this.formBuilder.group({
-        nombre: ['', [Validators.required]],
+        nombre: ['', []],
       })
     }
 
@@ -70,7 +70,11 @@ export class CategoriasPage implements OnInit {
         error => console.error("NO HAY UUID_CLIENTE")
     );
   }
+  ionViewDidLeave(){
+    this.ionicForm.value.nombre="";
+  }
   ionViewWillEnter(){
+    this.ionicForm.value.nombre="";
     this.nativeStorage.getItem('app')
     .then(
       app => {
@@ -113,6 +117,7 @@ export class CategoriasPage implements OnInit {
         this.familias = familias;
         console.log(familias);
     });
+    this.ionicForm.value.nombre="";
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

@@ -97,7 +97,7 @@ export class ProductoPage implements OnInit {
                         },e=>{
                             console.log("Img1 "+producto2[0].url_img1);
                             console.log("ER");
-                            this.imgProducto.push("../../assets/images/no-image.png");
+                            this.imgProducto.push("../../assets/images/Icono_Reacsa.png");
                         });
                         this.taskService.validarImg(producto2[0].url_img2).then(()=>{
                             console.log("Img2 "+producto2[0].url_img2);

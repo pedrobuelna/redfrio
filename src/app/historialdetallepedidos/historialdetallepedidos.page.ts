@@ -36,7 +36,7 @@ export class HistorialdetallepedidosPage implements OnInit {
             this.taskService.validarImg(this.detalle_pedidos[i].imagen).then(() => {
                 
             }, e => {
-                this.detalle_pedidos[i].imagen = "../../assets/images/no-image.png"
+                this.detalle_pedidos[i].imagen = "../../assets/images/Icono_Reacsa.png"
             });
         }
         detalle_pedidos.forEach(detalle => {
