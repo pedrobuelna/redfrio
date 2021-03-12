@@ -15,11 +15,6 @@
         <ion-label position="floating">Buscar</ion-label>
         <ion-input formControlName="busqueda"></ion-input>
       </ion-item>
-      <!-- Error messages -->
-      <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.busqueda.errors?.required)">
-        Campo requerido.
-      </span>
-      <br>
       <ion-button expand="full" class="buscar" type="submit">
         BUSCAR
         <!-- <img src="../../assets/images/buscar.png" alt="buscar" class="buscar_img"> -->

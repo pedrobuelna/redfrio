@@ -26,7 +26,7 @@ export class CategoriaPage implements OnInit {
     constructor(private router: Router, private taskService: TaskService,private formBuilder: FormBuilder,
         private route: ActivatedRoute, private nativeStorage: NativeStorage,public loadingController: LoadingController) {
             this.ionicForm = this.formBuilder.group({
-                busqueda: ['', [Validators.required]],
+                busqueda: ['', []],
             })
         }
     @ViewChild('mylbl') mylblRef: ElementRef;
