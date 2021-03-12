@@ -225,10 +225,11 @@ export class CarritoPage implements OnInit {
     }
     ionViewWillEnter() {
         this.validarFlags();
+        setTimeout(()=>{ this.calcularTotales(); }, 400);
     }
     ionViewDidEnter() {
         this.validarFlags();
-        setTimeout(()=>{ this.calcularTotales() }, 300);
+        setTimeout(()=>{ this.calcularTotales(); }, 400);
         //this.calcularTotales()
 
     }
