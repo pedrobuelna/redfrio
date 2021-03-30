@@ -198,9 +198,11 @@ export class RegisterPage implements OnInit {
                         console.log("cfdis: ",cfdis);
                         this.cfdis = cfdis;
                       });
-                            console.log(this.photoService.data[0]);
+                          console.log("FOTO 1"+this.photoService.data);
+                          //this.storage.create();
+                          //console.log("FOTO 2"+this.storage.get('photos'));
                           this.nativeStorage.setItem('photos', {
-                            data:this.photoService.data[0],
+                            data: this.photoService.data,
                           }).then(
                               () => {
                                   console.log('Se guarda la foto: '+this.data)

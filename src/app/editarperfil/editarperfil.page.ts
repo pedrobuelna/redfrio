@@ -70,6 +70,7 @@ export class EditarperfilPage implements OnInit {
         public formBuilder: FormBuilder,
         private taskService: TaskService,
         public navCtrl: NavController,
+        public photoService: PhotoService,
         private nativeStorage: NativeStorage) {
             this.ionicForm = this.formBuilder.group({
                 nombre: ['', ],
@@ -124,6 +125,10 @@ export class EditarperfilPage implements OnInit {
             error => console.error("NO HAY UUID_CLIENTE")
         );
               
+    }
+    capturarFoto(){
+        this.photoService.guardarImagen();
+        console.log("IMAGEN DE EDITAR PERFIL");
     }
     ionViewWillEnter(){
         this.nativeStorage.getItem('photos')

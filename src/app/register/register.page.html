@@ -9,7 +9,7 @@
       <div class="inline-block">
         <!-- <img *ngIf="!photoService.photos" src="../../assets/images/img_registro.png" alt="img_registro"> -->
         <!-- <img *ngIf="!data" src="../../assets/images/img_registro.png" alt="img_registro"/> -->
-        <img *ngIf="!photoService.flag" src="../../assets/images/user.jpeg" alt="img_registro1" (click)="capturarFoto()"/>
+        <img *ngIf="!photoService.flag" src="../../assets/images/user.jpeg" alt="img_registro1" (click)="capturarFoto()" class="perfil"/>
         <!-- <img [src]="data" alt="img_registropedro" class="perfil" (click)="photoService.takePicture()"/> -->
         <div *ngFor="let photo of photoService.photos; let first = first;">
           <img *ngIf="first" [src]="photo.data" alt="img_registro2" class="perfil" (click)="capturarFoto()"/>
