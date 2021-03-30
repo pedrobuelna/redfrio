@@ -18,6 +18,14 @@ export class LoaderService {
     });
 
   }
+  showLoaderMsg(msg:string) {
+    this.loadingController.create({
+      message: msg
+    }).then((res) => {
+      res.present();
+    });
+
+  }
 
   // Hide the loader if already created otherwise return error
   hideLoader() {

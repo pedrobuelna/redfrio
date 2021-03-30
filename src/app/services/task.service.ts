@@ -16,6 +16,9 @@ import {
     carrito_activo_detalles,
     carrito_activo
 } from './../interfaces/task';
+import {
+    LoaderService
+} from '../services/loader.service';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +29,8 @@ export class TaskService {
     private apiMail = 'https://app.reacsa.mx';
     private apiSAP = 'https://app.reacsa.mx:3003';
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private loader: LoaderService,
     ) {
 
     }
@@ -271,6 +275,7 @@ export class TaskService {
     }
     //validaciones imagenes
     validarImg(url) {
+        this.loader.showLoaderMsg("Cargando..");
         return new Promise(function(resolve, reject) {
         var timeout = 2000;//5000;
         var timer, img = new Image();
@@ -290,6 +295,7 @@ export class TaskService {
         }, timeout); 
         img.src = url;
         });
+        this.loader.hideLoader();
     }
     getInventarioSucursal(datos:any) {
         const path = `${this.apiSAP}/inventario_sucursal`;

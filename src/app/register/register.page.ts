@@ -44,6 +44,7 @@ export class RegisterPage implements OnInit {
   className: string = 'quitar';
   currentImage: any;
   photos:any;
+  imagenPerfil:any;
   data:any=""
   constructor(
     public photoService: PhotoService,
@@ -197,7 +198,16 @@ export class RegisterPage implements OnInit {
                         console.log("cfdis: ",cfdis);
                         this.cfdis = cfdis;
                       });
+                        this.nativeStorage.setItem('photos', {
+                        data:this.imagenPerfil,
+                        }).then(
+                            () => {
+                                console.log('Se guarda la foto: '+this.data)
+                            },
+                            error => console.error('Error al actualizar la informacion APP', error)
+                        );
                         console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
+                        }, (err) => {
                         this.navCtrl.navigateRoot(['/registrado'],{
                           queryParams: {
                             nombreCompleto: this.nombreCompleto
@@ -231,6 +241,11 @@ export class RegisterPage implements OnInit {
       this.className = 'quitar';
     }
     return false;
+  }
+  capturarFoto(){
+      this.imagenPerfil=this.photoService.takePicture();
+      console.log("IMAGEN DE PERFIL");
+      console.log(this.imagenPerfil);
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

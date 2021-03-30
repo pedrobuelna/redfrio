@@ -30,15 +30,16 @@ export class PhotoService {
       this.storage.create();
       this.storage.set('photos', this.photos);
       
-      this.nativeStorage.setItem('photos', {
-        data:'data:image/jpeg;base64,' + imageData,
-      }).then(
-          () => {
-              this.data = 'data:image/jpeg;base64,' + imageData
-              console.log('Se guarda la foto: '+this.data)
-          },
-        error => console.error('Error al actualizar la informacion APP', error)
-      );
+      return 'data:image/jpeg;base64,' + imageData;
+    //   this.nativeStorage.setItem('photos', {
+    //     data:'data:image/jpeg;base64,' + imageData,
+    //   }).then(
+    //       () => {
+    //           this.data = 'data:image/jpeg;base64,' + imageData
+    //           console.log('Se guarda la foto: '+this.data)
+    //       },
+    //     error => console.error('Error al actualizar la informacion APP', error)
+    //   );
     }, (err) => {
      // Handle error
      console.log("Camera issue: " + err);
