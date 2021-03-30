@@ -63,6 +63,7 @@ export class EditarperfilPage implements OnInit {
     notificaciones: any;
     activa: boolean;
     usrMailViejo:any;
+    data:any;
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
@@ -124,6 +125,17 @@ export class EditarperfilPage implements OnInit {
               
     }
     ionViewWillEnter(){
+        this.nativeStorage.getItem('photos')
+        .then(
+        data => {
+                console.log("URL de la imagen guardada 2"+data.data);
+                this.data = data.data;
+            },
+            error => {
+            this.data = false;
+            console.log("No hay FOTO")
+            }
+        );
         this.nativeStorage.getItem('app')
             .then(
                 app => {

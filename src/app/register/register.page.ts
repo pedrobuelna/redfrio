@@ -10,7 +10,9 @@ import {
     DbService
 } from '../services/db.service';
 import { NavController } from '@ionic/angular';
-
+import { PhotoService } from '../services/photo.service';
+import { Storage } from '@ionic/storage';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -40,10 +42,15 @@ export class RegisterPage implements OnInit {
   cfdis:any;
   myValue:any;
   className: string = 'quitar';
+  currentImage: any;
+  photos:any;
+  data:any=""
   constructor(
+    public photoService: PhotoService,
+    private storage: Storage,
     private  router:  Router,
     public formBuilder: FormBuilder,
-    public navCtrl: NavController,
+    public navCtrl: NavController,private nativeStorage: NativeStorage,
     private taskService: TaskService) {
     this.ionicForm = this.formBuilder.group({
       nombre: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(40)]],
@@ -68,6 +75,18 @@ export class RegisterPage implements OnInit {
     return this.ionicForm.controls;
   }
   ngOnInit() {
+    //this.photoService.loadSaved();
+    this.nativeStorage.getItem('photos')
+    .then(
+      data => {
+            console.log("URL de la imagen guardada"+data.data);
+            this.data = data.data;
+        },
+        error => {
+          this.data = false;
+          console.log("No hay FOTO")
+        }
+    );
     this.getTask()
     this.taskService.getCfdi()
     .subscribe(cfdis => {
@@ -95,6 +114,31 @@ export class RegisterPage implements OnInit {
     }
   }
   nombreCompleto:any;
+  
+  ionViewWillEnter(){
+    this.photoService.photos=[];
+    this.photoService.flag=false;
+    // this.nativeStorage.setItem('photos', {
+    //   data:'',
+    // }).then(
+    //     () => {
+    //         this.data = ''
+    //         console.log('Se borra la foto: '+this.data)
+    //     },
+    //   error => console.error('Error al actualizar la informacion APP', error)
+    // );
+    // this.nativeStorage.getItem('photos')
+    // .then(
+    //   data => {
+    //         console.log("URL de la imagen guardada 2"+data.data);
+    //         this.data = data.data;
+    //     },
+    //     error => {
+    //       this.data = false;
+    //       console.log("No hay FOTO")
+    //     }
+    // );
+  }
   submitForm() {
     this.isSubmitted = true;
     console.log(this.ionicForm.valid)
@@ -136,6 +180,23 @@ export class RegisterPage implements OnInit {
                 console.log(this.nombreCompleto)
                 this.taskService.sendMailActivacionUsuario(usrMail)
                     .subscribe((sendMail: any) => {
+                      this.nativeStorage.getItem('photos')
+                      .then(
+                        data => {
+                              console.log("URL de la imagen guardada"+data.data);
+                              this.data = data.data;
+                          },
+                          error => {
+                            this.data = false;
+                            console.log("No hay FOTO")
+                          }
+                      );
+                      this.getTask()
+                      this.taskService.getCfdi()
+                      .subscribe(cfdis => {
+                        console.log("cfdis: ",cfdis);
+                        this.cfdis = cfdis;
+                      });
                         console.log("Tus datos han sido guardados correctamente, enviaremos un email para confirmar tu correo y activar tu usuario.")
                         this.navCtrl.navigateRoot(['/registrado'],{
                           queryParams: {

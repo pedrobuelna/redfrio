@@ -6,7 +6,16 @@
 <ion-content>
   <div class="registro">
     <div class="content_img_txt">
-      <div class="inline-block"><img src="../../assets/images/img_registro.png" alt="img_registro"></div><div class="inline-block txt_registro"><span>Registro<br>perfil personal</span></div>
+      <div class="inline-block">
+        <!-- <img *ngIf="!photoService.photos" src="../../assets/images/img_registro.png" alt="img_registro"> -->
+        <!-- <img *ngIf="!data" src="../../assets/images/img_registro.png" alt="img_registro"/> -->
+        <img *ngIf="!photoService.flag" src="../../assets/images/img_registro.png" alt="img_registro1" (click)="photoService.takePicture()"/>
+        <!-- <img [src]="data" alt="img_registropedro" class="perfil" (click)="photoService.takePicture()"/> -->
+        <div *ngFor="let photo of photoService.photos; let first = first;">
+          <img *ngIf="first" [src]="photo.data"  alt="img_registro2" class="perfil" (click)="photoService.takePicture()"/>
+        </div>
+      </div>
+      <div class="inline-block txt_registro"><span>Registro<br>perfil personal</span></div>
     </div>
     <br>
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
@@ -133,6 +142,18 @@
             <ion-label>Registrar</ion-label>
         </ion-button>
       </div>
+      <!-- <ion-grid>
+        <ion-row>
+          <ion-col col-6 *ngFor="let photo of photoService.photos;">
+            <img [src]="photo.data" />
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+      <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+          <ion-fab-button (click)="photoService.takePicture()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+      </ion-fab> -->
     </form>
   </div>
   <div class="bg_llamanos" [class]="className">

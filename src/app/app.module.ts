@@ -18,6 +18,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { PayPal } from '@ionic-native/paypal/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { Storage } from '@ionic/storage';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,10 +30,12 @@ import { Network } from '@ionic-native/network/ngx';
     SQLite,
     SQLitePorter,
     NativeStorage,
+    Storage,
     Geolocation,
     PayPal,
     Network,
     NativeGeocoder,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

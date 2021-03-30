@@ -1,7 +1,10 @@
 <ion-content>
   <div class="registro">
     <div class="content_img_txt">
-      <div class="inline-block"><img src="../../assets/images/img_registro.png" alt="img_registro"></div><div class="inline-block txt_registro"><span>Editar<br>perfil personal</span></div>
+      <div class="inline-block">
+        <img *ngIf="!data" src="../../assets/images/img_registro.png" alt="img_registro1" (click)="photoService.takePicture()"/>
+        <img [src]="data" alt="img_registropedro" class="perfil" (click)="photoService.takePicture()"/>
+      </div><div class="inline-block txt_registro"><span>Editar<br>perfil personal</span></div>
     </div>
     <br>
     <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
