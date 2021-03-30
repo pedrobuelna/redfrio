@@ -26,7 +26,8 @@ import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
 import { NavController } from '@ionic/angular';
-
+import { PhotoService } from '../services/photo.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'app-editarperfil',
