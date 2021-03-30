@@ -275,7 +275,7 @@ export class TaskService {
     }
     //validaciones imagenes
     validarImg(url) {
-        this.loader.showLoaderMsg("Cargando..");
+        //this.loader.showLoaderMsg("Cargando..");
         return new Promise(function(resolve, reject) {
         var timeout = 2000;//5000;
         var timer, img = new Image();
@@ -295,7 +295,7 @@ export class TaskService {
         }, timeout); 
         img.src = url;
         });
-        this.loader.hideLoader();
+        //this.loader.hideLoader();
     }
     getInventarioSucursal(datos:any) {
         const path = `${this.apiSAP}/inventario_sucursal`;
