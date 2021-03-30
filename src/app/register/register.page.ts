@@ -198,8 +198,9 @@ export class RegisterPage implements OnInit {
                         console.log("cfdis: ",cfdis);
                         this.cfdis = cfdis;
                       });
+                            console.log(this.photoService.data[0]);
                           this.nativeStorage.setItem('photos', {
-                            data:this.imagenPerfil,
+                            data:this.photoService.data[0],
                           }).then(
                               () => {
                                   console.log('Se guarda la foto: '+this.data)
@@ -242,9 +243,8 @@ export class RegisterPage implements OnInit {
     return false;
   }
   capturarFoto(){
-      this.imagenPerfil=this.photoService.takePicture();
+      this.photoService.takePicture();
       console.log("IMAGEN DE PERFIL");
-      console.log(this.imagenPerfil);
   }
   onclickNotificaciones(){
     this.router.navigate(['/notificaciones']);

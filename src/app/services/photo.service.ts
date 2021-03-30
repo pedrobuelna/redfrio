@@ -30,7 +30,6 @@ export class PhotoService {
       this.storage.create();
       this.storage.set('photos', this.photos);
       
-      return 'data:image/jpeg;base64,' + imageData;
     //   this.nativeStorage.setItem('photos', {
     //     data:'data:image/jpeg;base64,' + imageData,
     //   }).then(
