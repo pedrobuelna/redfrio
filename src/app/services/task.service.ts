@@ -17,6 +17,7 @@ import {
     carrito_activo
 } from './../interfaces/task';
 import {
+import { uuid_usuario } from '../interfaces/task';
     LoaderService
 } from '../services/loader.service';
 
@@ -25,9 +26,16 @@ import {
 })
 
 export class TaskService {
-    private api = 'https://app.reacsa.mx:3001';
-    private apiMail = 'https://app.reacsa.mx';
-    private apiSAP = 'https://app.reacsa.mx:3003';
+    //Operativo
+    //private api = 'https://app.reacsa.mx:3001';
+    //private apiMail = 'https://app.reacsa.mx';
+    //private apiSAP = 'https://app.reacsa.mx:3003';
+
+    //Pruebas
+    private api='https://qas.reacsa.mx:3001';
+    private apiMail = 'https://qas.reacsa.mx';
+    private apiSAP='https://qas.reacsa.mx:3003';
+    
     constructor(
         private http: HttpClient,
         private loader: LoaderService,
@@ -336,5 +344,37 @@ export class TaskService {
         }, error => {
             console.log(error);
         });
+    }
+    generarNotificacion(titulo:string,descripcion:string,uuid_cliente:any){
+        let created_by:'39e048de-1422-4dc0-8851-71bf89208672'
+        let datos={
+            titulo,
+            fecha:"",
+            descripcion,
+            created_by
+        }
+        this.setNotificacion(datos).subscribe(()=>{
+            this.getUltimaNotificacion(created_by).subscribe(uuid_notificacion=>{
+                let d={
+                    uuid_notificacion,
+                    uuid_cliente
+                }
+                this.setNotificacionUsuario(d).subscribe(()=>{
+
+                })  
+            })
+        });
+    }
+    setNotificacion(datos){
+        const path = `${this.api}/notificaciones`;
+        return this.http.post<any>(path, datos);
+    }
+    getUltimaNotificacion(created_by:string){
+        const path = `${this.api}/notificaciones?created_by=eq.${created_by}&order=creacion.desc?limit=1`;
+        return this.http.get<any>(path);
+    }
+    setNotificacionUsuario(datos){
+        const path = `${this.api}/notificaciones_detalles`;
+        return this.http.post<any>(path, datos);
     }
 }
