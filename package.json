@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "@ionic-native/camera": "^5.31.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/geolocation": "^5.31.1",
     "@ionic-native/native-geocoder": "^5.31.1",
@@ -30,6 +31,7 @@
     "@ionic-native/sqlite-porter": "^5.30.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "@ionic/storage": "^3.0.2",
     "@types/jquery": "^3.5.5",
     "card.io.cordova.mobilesdk": "^2.1.0",
     "com.paypal.cordova.mobilesdk": "^3.5.0",
@@ -60,6 +62,7 @@
     "codelyzer": "^6.0.0",
     "cordova-android": "^9.0.0",
     "cordova-browser": "^6.0.0",
+    "cordova-plugin-camera": "^5.0.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
@@ -98,7 +101,10 @@
       "cordova-plugin-nativegeocoder": {},
       "com.paypal.cordova.mobilesdk": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-nativestorage": {}
+      "cordova-plugin-nativestorage": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android"
