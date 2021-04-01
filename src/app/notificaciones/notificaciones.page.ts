@@ -109,7 +109,7 @@ export class NotificacionesPage implements OnInit {
                     month: 'long',
                     day: 'numeric'
                 };
-                this.currentDate = fecha.toLocaleDateString("es-ES", options)
+                this.currentDate = fecha.toLocaleDateString("es-ES")
 
             });
 
@@ -130,7 +130,7 @@ export class NotificacionesPage implements OnInit {
             month: 'long',
             day: 'numeric'
         };
-        this.currentDate = fecha.toLocaleDateString("es-ES", options)
+        this.currentDate = fecha.toLocaleDateString("es-ES")
         this.nativeStorage.getItem('app')
             .then(
                 app => {
@@ -213,9 +213,9 @@ export class NotificacionesPage implements OnInit {
             day: 'numeric'
         };
         console.log(
-            fecha.toLocaleDateString("es-ES", options)
+            fecha.toLocaleDateString("es-ES")
         );
-        this.currentDate = fecha.toLocaleDateString("es-ES", options)
+        this.currentDate = fecha.toLocaleDateString("es-ES")
         this.router.navigate(['/notificaciones']);
     }
     onclickUbicaciones() {
