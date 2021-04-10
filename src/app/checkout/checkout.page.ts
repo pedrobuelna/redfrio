@@ -208,8 +208,7 @@ export class CheckoutPage implements OnInit {
             console.log('==========INFO MP==========');
             console.log(data);
             // $('#scriptMp').html('<script src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js" data-preference-id="'+data.id+'"></script>');
-            //this.mpData=data;
-            
+            //this.mpData=data;            
             //window.open(data['init_point'], '_blank');
             window.open(data['init_point'], '_self','location=no,transitionstyle=crossdissolve');
         }, error => {
