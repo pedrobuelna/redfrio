@@ -82,7 +82,6 @@ export class NotificacionesPage implements OnInit {
         };
         this.taskService.updateNotificacion(Notificacion, uuidcliente, idNotificacion)
             .subscribe(listas => {
-                
                 this.nativeStorage.getItem('app')
                 .then(
                     app => {
@@ -109,7 +108,7 @@ export class NotificacionesPage implements OnInit {
                     month: 'long',
                     day: 'numeric'
                 };
-                this.currentDate = fecha.toLocaleDateString("es-ES")
+                this.currentDate = fecha.toLocaleDateString("es-ES", {year: 'numeric',month: 'long',day: 'numeric'})
 
             });
 
@@ -130,7 +129,7 @@ export class NotificacionesPage implements OnInit {
             month: 'long',
             day: 'numeric'
         };
-        this.currentDate = fecha.toLocaleDateString("es-ES")
+        this.currentDate = fecha.toLocaleDateString("es-ES",{year: 'numeric',month: 'long',day: 'numeric'})
         this.nativeStorage.getItem('app')
             .then(
                 app => {
@@ -215,7 +214,7 @@ export class NotificacionesPage implements OnInit {
         console.log(
             fecha.toLocaleDateString("es-ES")
         );
-        this.currentDate = fecha.toLocaleDateString("es-ES")
+        this.currentDate = fecha.toLocaleDateString("es-ES",{year: 'numeric',month: 'long',day: 'numeric'})
         this.router.navigate(['/notificaciones']);
     }
     onclickUbicaciones() {

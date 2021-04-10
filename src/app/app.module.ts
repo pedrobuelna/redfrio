@@ -20,11 +20,16 @@ import { PayPal } from '@ionic-native/paypal/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
+import { LOCALE_ID } from '@angular/core';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(es);
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
   providers: [
+    {provide: LOCALE_ID, useValue: 'es-MX' },
     StatusBar,
     SplashScreen,
     SQLite,
