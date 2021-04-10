@@ -177,6 +177,7 @@ export class CheckoutPage implements OnInit {
             direccion = this.ionicForm.value.direccion;
             sucursal=0;
         }
+        let rutaPlataforma= ((this.platform.is('android'))?"http://localhost":"https://qas.reacsa.mx:3004/mpios");
         let postData = 
         {
             "items": [
@@ -187,9 +188,9 @@ export class CheckoutPage implements OnInit {
                 }
             ],
             "back_urls": {
-                "success": "localhost/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
-                "failure": "localhost/carrito",
-                "pending": "localhost/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
+                "success": rutaPlataforma+"/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
+                "failure": rutaPlataforma+"/carrito",
+                "pending": rutaPlataforma+"/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "notification_url":"https://app.reacsa.mx:3004/notificacion_mp",
             },
             "auto_return": "approved",
@@ -209,7 +210,8 @@ export class CheckoutPage implements OnInit {
             // $('#scriptMp').html('<script src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js" data-preference-id="'+data.id+'"></script>');
             //this.mpData=data;
             
-            window.open(data['init_point'], '_blank');
+            //window.open(data['init_point'], '_blank');
+            window.open(data['init_point'], '_self','location=no,transitionstyle=crossdissolve');
         }, error => {
             console.log(error);
         });
