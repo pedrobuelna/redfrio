@@ -14,7 +14,7 @@ export class ProductoPage implements OnInit {
     idProducto:string;
     AppData: any[] = [];
     CarritoActivoData: any[]=[];
-    disponibilidad:any;
+    disponibilidad:any[]=[];
     zonas:any;
     notificaciones: any;
     cantidadNot: any = 0;

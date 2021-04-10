@@ -216,6 +216,53 @@ export class CheckoutPage implements OnInit {
             console.log(error);
         });
     }
+    verificarInventarioDomicilio(event){
+        console.log('==INVENTARIO DOMICILIO==');
+        let domicilio=event.detail.value;
+        console.log(event);
+        this.validacionInventario2(domicilio)
+    }
+    validacionInventario2(sucursal){
+        this.mensajeInventario="";
+        this.nativeStorage.getItem('carrito')
+        .then(
+            carrito => {
+                this.nativeStorage.getItem('app')
+                .then(
+                    app => {
+                        let listaPrecio={idlistaprecio:app.lista_precio_id};
+                        this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito,listaPrecio).subscribe(dataCarrito=>{
+                            dataCarrito.forEach(articulo => {
+                                //let data='{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}';
+                                //let data={material:articulo.producto_id,sucursal:sucursal};
+                                //let data=JSON.stringify({material:articulo.producto_id,sucursal:sucursal});
+                                $('#btnPagar').show();
+                                let data=JSON.parse('{"material":"'+articulo.producto_id+'"}');
+                                this.taskService.getInventarioDomicilio(data).subscribe(inventario=>{
+                                    console.log("InventarioDomicilio");
+                                    console.log(inventario);
+                                    let todosDisponibles=true;
+                                    if(parseInt(inventario.total_unidades)<1 || articulo.cantidad>inventario.total_unidades){
+                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no tiene la disponibilidad de la cantidad deseada. Favor de disminuir la cantidad deseada o eliminar del carrito.<br> LA DISPONIBILIDAD ES DE "+inventario.total_unidades+"</div><br>";
+                                        todosDisponibles=false;
+                                        $('#btnPagar').hide();
+                                    }
+                                    if(!todosDisponibles){
+                                        //Deshabilitar el boton
+                                    }
+                                });
+                                
+                            });    
+                        });
+                    },
+                    error => console.error("NO HAY UUID_CLIENTE")
+                );
+            },
+            error =>{
+                 console.error("NO HAY DATOS DEL CARRITO");
+            }
+        );
+    }
     ionViewWillEnter() {
         this.defaultSelectValue="";
         this.route.queryParams.subscribe(params => {
