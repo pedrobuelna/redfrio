@@ -19,6 +19,7 @@ export class ResultadobusquedaPage implements OnInit {
   cantidadNot: any = 0;
   cantidadActualCarrito: number;
   listas: any;
+  totalproductos:any;
   ngOnInit() {
     
   }
@@ -91,7 +92,9 @@ export class ResultadobusquedaPage implements OnInit {
                     }, 1000);
                 }
                 this.productos = productos;
+                this.totalproductos = this.productos.length;
                 console.log("Productos: "+this.productos)
+                console.log("TOTAL Productos: "+this.totalproductos)
                 for (let i = 0; i < this.productos.length; i++) {
                     console.log("index : " + i);
                     console.log(this.productos[i]);
@@ -103,7 +106,9 @@ export class ResultadobusquedaPage implements OnInit {
             
         }else{
             this.productos = productos;
+            this.totalproductos = this.productos.length;
             console.log("Productos: "+this.productos)
+            console.log("TOTAL Productos: "+this.totalproductos)
             for (let i = 0; i < this.productos.length; i++) {
                 console.log("index : " + i);
                 console.log(this.productos[i]);

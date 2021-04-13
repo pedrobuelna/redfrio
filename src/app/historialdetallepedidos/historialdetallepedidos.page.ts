@@ -24,11 +24,11 @@ export class HistorialdetallepedidosPage implements OnInit {
   ngOnInit() {
   }
   onclickProducto(id) {
-        this.router.navigate(['/producto'], {
-            queryParams: {
-                id: id
-            }
-        });
+    this.router.navigate(['/producto'], {
+        queryParams: {
+            id: id
+        }
+    });
     }
   ionViewWillEnter() {
     this.route.queryParams.subscribe(queryParams => this.id_carrito = queryParams.id_carrito)

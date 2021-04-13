@@ -210,6 +210,10 @@ export class CategoriaPage implements OnInit {
             //alert("familia "+ x)
         }
     }
+    ionViewDidLeave(){
+        this.ionicForm.value.busqueda="";
+        this.ionicForm.get('busqueda').setValue("");
+      }
     ngOnInit() {
         this.loadVista();
         this.nativeStorage.getItem('app')

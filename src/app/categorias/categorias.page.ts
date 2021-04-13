@@ -72,6 +72,7 @@ export class CategoriasPage implements OnInit {
   }
   ionViewDidLeave(){
     this.ionicForm.value.nombre="";
+    this.ionicForm.get('nombre').setValue("");
   }
   ionViewWillEnter(){
     this.ionicForm.value.nombre="";

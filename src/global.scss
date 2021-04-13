@@ -74,7 +74,7 @@ ion-button{height: 47px;}
 .content_menu ul li a{color: black;font-size: 1rem;display: inline-block;}
 .content_menu ul ul > li:nth-child(3){margin-top: 37px;}
 //Notificaciones
-#content1_notificaciones{margin-top: 30px;margin-bottom: 35px;margin-left: 30px;margin-bottom: 20px;position: relative;}
+#content1_notificaciones{margin-top: 70px;margin-bottom: 35px;margin-left: 30px;margin-bottom: 20px;position: relative;}
 .content2_notificaciones{margin-bottom: 60px;position: relative;}
 .subcontent_content2_notificaciones{box-shadow: -4px -4px 5px rgba(0, 0, 0, 0.16);border-top-right-radius: 25px;border-top-left-radius: 25px;padding:15px 25px;background-color: #EFEFEF;}
 .content_texto{padding: 0 25px;font-size: 17px;color: #00257C;margin-top: 20px;}
@@ -106,3 +106,5 @@ ion-content {
 .error{color:red;display: inline-block;margin-top: 20px;}
 .content_menu li{position: relative;}
 .cantidad{position: absolute;width: 20px; height: 20px;background-color: white; right: calc(50% - 22px); top: -10px; vertical-align: middle; line-height: 20px; color: #0F0E9F; font-size: 12px;outline: none;border-radius:50%;}
+.ios .content_menu{height: 108px;}
+.ios .registro{padding-top: 70px !important;}
