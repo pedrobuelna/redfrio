@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.movil_reacsa" version="9.16.07" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Reacsa Móvil</name>
+    <name>Reacsa Movil</name>
     <description>Aplicacion mobil de venta de productos</description>
     <author email="pedrobuelna@gmail.com" href="http://ionicframework.com/">Pedro Arturo Buelna Fausto</author>
     <content src="index.html" />
@@ -89,7 +89,6 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
-        <icon height="1024" src="resources/ios/icon/icon.png" width="1024" />
         <splash height="768" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
         <splash height="1125" src="resources/ios/splash/Default-Landscape-2436h.png" width="2436" />
         <splash height="1242" src="resources/ios/splash/Default-Landscape-736h.png" width="2208" />
