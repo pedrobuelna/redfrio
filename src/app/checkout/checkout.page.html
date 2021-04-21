@@ -44,7 +44,7 @@
                 <ion-label position="floating">Tiendas</ion-label>
                 <ion-select formControlName="direccion" value="{{defaultSelectValue}}" (ionChange)="verificarInventarioTienda($event)">
                     <ion-select-option value="" selected>Seleccione una tienda</ion-select-option>
-                    <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.sid_sucursal}}">
+                    <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.sid_sucursal}}" tipo_iva="{{sucursal.tasa_iva}}">
                         {{ sucursal.nombre }}</ion-select-option>
                 </ion-select>
             </ion-item>
@@ -197,7 +197,7 @@
                         </ion-col>
                         <ion-col>
                             <div class="ion-text-right black">
-                                16%
+                                {{tax}}
                             </div>
                         </ion-col>
                     </ion-row>

@@ -216,6 +216,7 @@ export class CheckoutPage implements OnInit {
         });
     }
     verificarInventarioDomicilio(event){
+        this.tax=.16;
         console.log('==INVENTARIO DOMICILIO==');
         let domicilio=event.detail.value;
         console.log(event);
@@ -390,7 +391,15 @@ export class CheckoutPage implements OnInit {
     verificarInventarioTienda(event){
         console.log('==INVENTARIO TIENDA==');
         let sucursal=event.detail.value;
-        console.log(event);
+        this.sucursales.forEach(s => {
+            console.log(s);
+            console.log(s.sid_sucursal+"=="+sucursal);
+             if(s.sid_sucursal==sucursal){
+                console.log("Esta es!..");
+                console.log(sucursal);
+                this.tax=(s.tasa_iva==1)?.16:.08;
+             }
+        });
         this.validacionInventario(sucursal)
     }
     validacionInventario(sucursal){
