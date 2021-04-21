@@ -16,7 +16,6 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
-import { PayPal } from '@ionic-native/paypal/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
@@ -37,7 +36,6 @@ registerLocaleData(es);
     NativeStorage,
     Storage,
     Geolocation,
-    PayPal,
     Network,
     NativeGeocoder,
     Camera,

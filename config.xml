@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.movil_reacsa" version="9.16.07" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.reacsamovil" version="9.16.07" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Reacsa Movil</name>
     <description>Aplicacion mobil de venta de productos</description>
     <author email="pedrobuelna@gmail.com" href="http://ionicframework.com/">Pedro Arturo Buelna Fausto</author>
@@ -20,13 +20,16 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string>Se necesita acceso a la cámara para tomar fotos</string>
+        <string>Necesitamos acceso a la camara para poder tomar foto y personalizar tu perfil de usuario</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-        <string>Se necesita acceso a la biblioteca de fotos para obtener imágenes desde allí</string>
+        <string>Necesario el acceso a la libreria para subir imagenes</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
         <string>Se necesita acceso a la biblioteca de fotos para guardar fotos allí</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Necesitamos tu localizacion para poder encontrar las tiendas Reacsa mas cercanas a ti</string>
     </edit-config>
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
@@ -54,6 +57,11 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <preference name="WKWebViewOnly" value="true" />
+        <feature name="CDVWKWebViewEngine">
+            <param name="ios-package" value="CDVWKWebViewEngine" />
+        </feature>
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
@@ -158,6 +166,5 @@
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
 </widget>

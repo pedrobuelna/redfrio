@@ -40,8 +40,8 @@ export class PrincipalPage implements OnInit {
     public sliderOptions = {
         initialSlide: 0,
         speed: 350,
-        loop: true,
-        autoplay: true,
+        //loop: true,
+        //autoplay: true,
         pagination: {
             el: ".swiper-pagination",
             type: "bullets",
@@ -57,7 +57,7 @@ export class PrincipalPage implements OnInit {
         initialSlide: 0,
         speed: 350,
         slidesPerView: 2,
-        loop: true,
+        //loop: true,
         centeredSlides: true,
         spaceBetween: 20
     };

@@ -86,7 +86,7 @@ export class CheckoutPage implements OnInit {
     uuidcliente:any;
     defaultSelectValue:any;
     @ViewChild("splash") splash: ElementRef;
-    constructor(public platform: Platform,private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private payPal: PayPal, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
+    constructor(public platform: Platform,private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
         
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
@@ -191,7 +191,7 @@ export class CheckoutPage implements OnInit {
                 "success": rutaPlataforma+"/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "failure": rutaPlataforma+"/carrito",
                 "pending": rutaPlataforma+"/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
-                "notification_url":"https://app.reacsa.mx:3004/notificacion_mp",
+                "notification_url":"https://qas.reacsa.mx:3004/notificacion_mp",
             },
             "auto_return": "approved",
             "tipoEnvio":tipo_envio,
@@ -541,48 +541,7 @@ export class CheckoutPage implements OnInit {
                 }
             });
     }
-    payWithPaypal(envio: boolean) {
-        console.log("valor" + envio)
-        this.payPal.init({
-            PayPalEnvironmentProduction: 'ARL8d2sNnhY1ljzD2Z_XVxFzwS3XRHkgDeICVtMuO04MGTO6cO9GUm1kYWVk293i_I3YacE48631i9xQ',
-            //PayPalEnvironmentSandbox: 'ARE7r02GjCYmQqYCrEbHfyIIGuPZw7sn_FhDy9lmu5beERPf5Js8uW1Zs3RIB5HXV949tqloCKLW9xmA'
-            PayPalEnvironmentSandbox: 'AexiGyImMY7n7R0hYjsM7UEPNGDjPY49GWKNevzJIeu3VPVA9Ua2BO49QYKZqle72vdL5ofbt_Bj4Tsx'
-        }).then(() => {
-            // Environments: PayPalEnvironmentNoNetwork, PayPalEnvironmentSandbox, PayPalEnvironmentProduction
-            this.payPal.prepareToRender('PayPalEnvironmentProduction', new PayPalConfiguration({
-                // Only needed if you get an "Internal Service Error" after PayPal login!
-                //payPalShippingAddressOption: 2 // PayPalShippingAddressOptionPayPal
-            })).then(() => {
-                let costoenvio
-                if(envio==true){
-                    costoenvio = this.costoEnvio
-                }else{
-                    costoenvio = 0
-                }
-                console.log("valor" + envio)
-                this.paymentAmountEnvio=this.paymentAmount;
-                this.paymentAmountEnvio=this.paymentAmountEnvio.replace(',','');
-                let payment = new PayPalPayment(this.paymentAmountEnvio, this.currency, 'COMPRA EN REACSA', 'COMPRA');
-                this.payPal.renderSinglePaymentUI(payment).then((res) => {
-                    setTimeout(() => {
-                        this.addMyClass()
-                    }, 1500);
-                    this.pagoAutorizado(1, res);
-                    // Successfully paid
-                }, () => {
-                    console.log("Error or render dialog closed without being successful")
-                    alert("Ocurrio un error al realizar el pago.")
-                    // Error or render dialog closed without being successful
-                });
-            }, () => {
-                console.log("Error in configuration")
-                // Error in configuration
-            });
-        }, () => {
-            console.log("Error in initialization, maybe PayPal isn't supported or something else")
-            // Error in initialization, maybe PayPal isn't supported or something else
-        });
-    }
+    
     payWithCard(envio: boolean) {
         //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
         //this.totalCompra=total2;
