@@ -188,6 +188,7 @@ export class CarritoPage implements OnInit {
                 this.nativeStorage.getItem('app')
                 .then(
                     app => {
+                        this.taskService.patchListaPrecios(carrito.uuid_carrito);
                         let listaPrecio={idlistaprecio:app.lista_precio_id};
                         this.taskService.getCarritoActivoDetalles(carrito.uuid_carrito,listaPrecio).subscribe(dataCarrito=>{
                         console.log("getCarritoActivoDetalles");

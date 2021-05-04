@@ -290,6 +290,7 @@ export class CheckoutPage implements OnInit {
                     console.log("uuid_cliente: "+carrito.uuid_carrito);
                     this.uuidCarrito=carrito.uuid_carrito;
                     this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
+                        this.taskService.patchListaPrecios(carrito.uuid_carrito);
                         console.log('===COSTO ENVIO===');
                         console.log(envio);
                         if(envio[0].peso_total>700){

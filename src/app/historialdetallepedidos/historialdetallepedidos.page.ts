@@ -21,6 +21,7 @@ export class HistorialdetallepedidosPage implements OnInit {
     comprasubtotal:any;
     total:any;
     envio:any;
+    iva:any;
   ngOnInit() {
   }
   onclickProducto(id) {
@@ -50,8 +51,9 @@ export class HistorialdetallepedidosPage implements OnInit {
             subtotal+=parseFloat(detalle.subtotal.replace('$','').replace(',',''));
         });
         this.envio = parseFloat(detalle_pedidos[0].costo_envio.replace('$','').replace(',',''));
-        this.comprasubtotal = subtotal;
-        this.total = (subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
+        this.comprasubtotal = subtotal/1.16;
+        this.iva=parseFloat(this.comprasubtotal)*.16;
+        this.total = subtotal;//(subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
         console.log("detalle_pedidos: ", detalle_pedidos)
     });
     this.nativeStorage.getItem('app')
