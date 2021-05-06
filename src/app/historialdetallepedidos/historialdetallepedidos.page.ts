@@ -35,8 +35,9 @@ export class HistorialdetallepedidosPage implements OnInit {
     this.route.queryParams.subscribe(queryParams => this.id_carrito = queryParams.id_carrito)
     console.log("PARAM CARRITOID: "+ this.id_carrito)
     this.taskService.getDetallePedidos(this.id_carrito)
-    .subscribe(detalle_pedidos => {
+    .subscribe(detalle_pedidos => { 
         this.detalle_pedidos = detalle_pedidos
+        console.log(this.detalle_pedidos[0]);
         let subtotal=0;
         for(let i = 0; i < this.detalle_pedidos.length; i++){
             console.log("index a : " + i);
@@ -50,7 +51,8 @@ export class HistorialdetallepedidosPage implements OnInit {
             console.log(detalle.subtotal.replace('$','').replace(',',''))
             subtotal+=parseFloat(detalle.subtotal.replace('$','').replace(',',''));
         });
-        this.envio = parseFloat(detalle_pedidos[0].costo_envio.replace('$','').replace(',',''));
+        let tp=String(detalle_pedidos[0].costo_envio).replace('$','').replace(',','');
+        this.envio = parseFloat(tp);
         this.comprasubtotal = subtotal/1.16;
         this.iva=parseFloat(this.comprasubtotal)*.16;
         this.total = subtotal;//(subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);

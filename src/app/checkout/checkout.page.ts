@@ -58,6 +58,7 @@ export class CheckoutPage implements OnInit {
     currency: string = 'MXN';
     currencyIcon: string = '$';
     tax: any = .16;
+    iva:any=16;
     envio: any = 0;
     subtotal: any;
     total: any;
@@ -217,6 +218,7 @@ export class CheckoutPage implements OnInit {
     }
     verificarInventarioDomicilio(event){
         this.tax=.16;
+        this.iva="16%";
         console.log('==INVENTARIO DOMICILIO==');
         let domicilio=event.detail.value;
         console.log(event);
@@ -339,6 +341,8 @@ export class CheckoutPage implements OnInit {
         //this.muestraTienda = event.detail;
         console.log("Value: " + event.detail.value)
         if (event.detail.value == "domicilio") {
+            this.tax=.16;
+            this.iva="16%";
             this.mensajeInventario="";
             this.mostrarDireccion = true;
             this.mostrarTienda = false;
@@ -357,7 +361,7 @@ export class CheckoutPage implements OnInit {
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.totalMp = this.paymentAmount
             this.paymentAmountEnvio = this.paymentAmount;
-            this.total = "$"+this.paymentAmount;
+            this.total = this.paymentAmount;
             subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.ionicForm = this.formBuilder.group({
@@ -384,7 +388,7 @@ export class CheckoutPage implements OnInit {
             this.totalMp = this.paymentAmount;
             this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.paymentAmountEnvio = this.paymentAmount;
-            this.total = "$"+this.paymentAmount;
+            this.total = this.paymentAmount;
             subtotal=this.subtotal;
             this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
         }
@@ -399,6 +403,8 @@ export class CheckoutPage implements OnInit {
                 console.log("Esta es!..");
                 console.log(sucursal);
                 this.tax=(s.tasa_iva==1)?.16:.08;
+                this.iva=(s.tasa_iva==1)?"16%":"8%";
+                this.actualizarTotales();
              }
         });
         this.validacionInventario(sucursal)
@@ -444,6 +450,26 @@ export class CheckoutPage implements OnInit {
             }
         );
     }
+    actualizarTotales(){
+        this.nativeStorage.getItem('totalCompra').then(
+            totalCompra => {
+                this.subtotal = totalCompra;
+                //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
+                let envio=this.envio.toString().replace(',','');
+                let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+                this.paymentAmountEnvio = this.paymentAmount;
+                this.total = this.paymentAmount;
+                let subtotal=this.subtotal;
+                this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+                //$(".envio").text(0)
+                //this.inicializarVista();
+            },
+            error => {
+                this.router.navigate(['/principal']);
+            }
+        );
+    }
     ionViewDidEnter() {
         $("#radioDomicilio").prop("checked", true).trigger("click");
         this.mensajeInventario="";
@@ -461,24 +487,7 @@ export class CheckoutPage implements OnInit {
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
-        this.nativeStorage.getItem('totalCompra').then(
-            totalCompra => {
-                this.subtotal = totalCompra;
-                //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
-                let envio=this.envio.toString().replace(',','');
-                let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-                this.paymentAmountEnvio = this.paymentAmount;
-                this.total = "$"+this.paymentAmount;
-                let subtotal=this.subtotal;
-                this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-                //$(".envio").text(0)
-                //this.inicializarVista();
-            },
-            error => {
-                this.router.navigate(['/principal']);
-            }
-        );
+        this.actualizarTotales();
         $("input[name='radio1']") // select the radio by its id
             .change(function () { // bind a function to the change event
                 if ($(this).is(":checked")) {

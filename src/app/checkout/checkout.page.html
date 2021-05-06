@@ -172,7 +172,7 @@
                         </ion-col>
                         <ion-col>
                             <div class="ion-text-right black">
-                                $<span class="subtotal">{{subtotal}}</span>
+                                <span class="subtotal">{{subtotal  | currency}}</span>
                             </div>
                         </ion-col>
                     </ion-row>
@@ -184,7 +184,7 @@
                         </ion-col>
                         <ion-col>
                             <div class="ion-text-right black">
-                                $<span class="envio">{{envio}}</span>
+                                <span class="envio">{{envio  | currency}}</span>
                             </div>
                         </ion-col>
                     </ion-row>
@@ -197,7 +197,7 @@
                         </ion-col>
                         <ion-col>
                             <div class="ion-text-right black">
-                                {{tax}}
+                                {{iva}}
                             </div>
                         </ion-col>
                     </ion-row>
@@ -211,7 +211,7 @@
                         <ion-col>
                             <div class="ion-text-right">
                                 <!-- <span class="total">{{total | currency:"MXN":'symbol-narrow':'4.2-2'}}</span> -->
-                                <span class="total">{{total}}</span>
+                                <span class="total">{{total | currency}}</span>
                             </div>
                         </ion-col>
                     </ion-row>
