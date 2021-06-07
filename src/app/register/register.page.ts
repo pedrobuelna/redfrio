@@ -54,7 +54,7 @@ export class RegisterPage implements OnInit {
     public navCtrl: NavController,private nativeStorage: NativeStorage,
     private taskService: TaskService) {
     this.ionicForm = this.formBuilder.group({
-      nombre: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(40)]],
+      nombre: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(40)]],
       nombre_2: ['', [Validators.maxLength(40)]],
       telefono:['', [Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]],
       celular:['',  [Validators.required,Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]],

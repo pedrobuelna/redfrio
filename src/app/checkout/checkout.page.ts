@@ -20,6 +20,8 @@ import {
     PayPalPayment,
     PayPalConfiguration
 } from '@ionic-native/paypal/ngx';
+import { AlertController } from '@ionic/angular';
+
 import {
     errorMonitor
 } from 'events';
@@ -87,7 +89,9 @@ export class CheckoutPage implements OnInit {
     uuidcliente:any;
     defaultSelectValue:any;
     @ViewChild("splash") splash: ElementRef;
-    constructor(public platform: Platform,private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
+    constructor(public platform: Platform,
+        public alertController: AlertController,
+        private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
         
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
@@ -548,6 +552,7 @@ export class CheckoutPage implements OnInit {
                         $("#fechaMesTarjeta").val("")
                         $("#fechaAnoTarjeta").val("")
                         $("#cvvTarjeta").val("")
+                        alert("SALDO")
                         if ($("input[name=radio1][value='gratis']").is(":checked")) {
                             //alert("Radio Gratis envio DHL esta en checked y paypal")
                             $(".enviopaypal,.envionormal").addClass("hide")
@@ -560,7 +565,29 @@ export class CheckoutPage implements OnInit {
                 }
             });
     }
-    
+    showConfirm() {
+        this.alertController.create({
+          header: 'Confirm Alert',
+          subHeader: 'Beware lets confirm',
+          message: 'Estas seguro que quieres pagar con saldo?',
+          buttons: [
+            {
+              text: 'Si',
+              handler: () => {
+                console.log('Si');
+              }
+            },
+            {
+              text: 'No',
+              handler: () => {
+                console.log('No');
+              }
+            }
+          ]
+        }).then(res => {
+          res.present();
+        });
+      }
     payWithCard(envio: boolean) {
         //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
         //this.totalCompra=total2;
