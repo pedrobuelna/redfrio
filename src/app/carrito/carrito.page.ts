@@ -159,8 +159,6 @@ export class CarritoPage implements OnInit {
         $(".subtotal_numero").text("$ " + t);
         $(".total_btnpago").text(t);
     }
-    ngOnInit() {
-    }
     mas(uuid_producto,producto){
         let cantidad = producto.cantidad +=1;
         // let cantidadMax=this.cantidadMaximaProducto[uuid_producto];
@@ -223,6 +221,10 @@ export class CarritoPage implements OnInit {
                  console.error("NO HAY DATOS DEL CARRITO");
             }
         );
+    }
+    ngOnInit() {
+        this.validarFlags();
+        setTimeout(() => { this.calcularTotales(); }, 400);
     }
     ionViewWillEnter() {
         this.validarFlags();

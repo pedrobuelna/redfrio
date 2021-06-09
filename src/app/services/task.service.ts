@@ -41,6 +41,10 @@ export class TaskService {
     ) {
 
     }
+    getCoverturaEnvios(cp:any){
+        const path = `${this.api}/cobertura_envios?cp=eq.${cp}`;
+        return this.http.get < any > (path);
+    }
     getAllTasks() {
         const path = `${this.api}/sucursales?order=nombre&status=eq.N`;
         return this.http.get < Sucursal[] > (path);

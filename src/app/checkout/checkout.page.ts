@@ -225,8 +225,24 @@ export class CheckoutPage implements OnInit {
         this.iva="16%";
         console.log('==INVENTARIO DOMICILIO==');
         let domicilio=event.detail.value;
+        console.log('===DOMICILIO===');
         console.log(event);
-        this.validacionInventario2(domicilio)
+        this.direcciones.forEach(d=>{
+            console.log(d);
+            if(d.uuid_direccion==domicilio){
+                console.log('==cp==');
+                console.log(d.cp);
+                this.taskService.getCoverturaEnvios(d.cp).subscribe(disponible=>{
+                    if(disponible.length>0){
+                        $('#btnPagar').show();
+                        this.validacionInventario2(domicilio)
+                    }else{
+                        this.mensajeInventario+="<div>Actualmente no es posible enviar al código postal "+d.cp+" de su dirección</div>";
+                        $('#btnPagar').hide();
+                    }
+                });
+            }
+        });
     }
     validacionInventario2(sucursal){
         this.mensajeInventario="";
@@ -307,8 +323,8 @@ export class CheckoutPage implements OnInit {
                                 console.log("Tipo 1");
                                 this.costoEnvio=this.envio=0.00;
                             }else{
-                                this.costoEnvio=envio[0].costo_envio.replace('$','');
-                                this.envio=envio[0].costo_envio.replace('$','');
+                                this.costoEnvio=envio[0].costo_envio.replace('$','').replace(',','');
+                                this.envio=envio[0].costo_envio.replace('$','').replace(',','');
                                 console.log("Tipo 2");
                                 console.log(this.envio);
                             }
@@ -358,16 +374,17 @@ export class CheckoutPage implements OnInit {
             // console.log(this.envio);
             // console.log("Tax");
             // console.log(this.tax);
-            let subtotal=this.subtotal.toString().replace(',','');
-            this.subtotal=subtotal;
-            let envio=this.envio.toString().replace(',','');
-            let total = (parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            this.totalMp = this.paymentAmount
-            this.paymentAmountEnvio = this.paymentAmount;
-            this.total = this.paymentAmount;
-            subtotal=this.subtotal;
-            this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            // let subtotal=this.subtotal.toString().replace(',','');
+            // this.subtotal=subtotal;
+            // let envio=this.envio.toString().replace(',','');
+            // let total = (parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+            // this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            // this.totalMp = this.paymentAmount
+            // this.paymentAmountEnvio = this.paymentAmount;
+            // this.total = this.paymentAmount;
+            // subtotal=this.subtotal;
+            // this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            this.actualizarTotales();
             this.ionicForm = this.formBuilder.group({
                 direccion: ['',[Validators.required]]
             })
@@ -385,16 +402,17 @@ export class CheckoutPage implements OnInit {
             // console.log(this.envio);
             // console.log("Tax");
             // console.log(this.tax);
-            let subtotal=this.subtotal.toString().replace(',','');
-            this.subtotal=subtotal;
-            let envio=this.envio.toString().replace(',','');
-            let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-            this.totalMp = this.paymentAmount;
-            this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            this.paymentAmountEnvio = this.paymentAmount;
-            this.total = this.paymentAmount;
-            subtotal=this.subtotal;
-            this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            // let subtotal=this.subtotal.toString().replace(',','');
+            // this.subtotal=subtotal;
+            // let envio=this.envio.toString().replace(',','');
+            // let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+            // this.totalMp = this.paymentAmount;
+            // this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            // this.paymentAmountEnvio = this.paymentAmount;
+            // this.total = this.paymentAmount;
+            // subtotal=this.subtotal;
+            // this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            this.actualizarTotales();
         }
     }
     verificarInventarioTienda(event){
@@ -457,13 +475,16 @@ export class CheckoutPage implements OnInit {
     actualizarTotales(){
         this.nativeStorage.getItem('totalCompra').then(
             totalCompra => {
-                this.subtotal = totalCompra;
+                console.log('====Total compra====');
+                console.log(totalCompra);
+                
+                this.subtotal = totalCompra.toString().replace(',','');
                 //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
                 let envio=this.envio.toString().replace(',','');
                 let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
                 this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 this.paymentAmountEnvio = this.paymentAmount;
-                this.total = this.paymentAmount;
+                this.total = this.paymentAmount.replace(',','');
                 let subtotal=this.subtotal;
                 this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                 //$(".envio").text(0)
