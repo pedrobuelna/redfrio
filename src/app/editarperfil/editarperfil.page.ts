@@ -162,7 +162,7 @@ export class EditarperfilPage implements OnInit {
                             console.log("ARRE1"+this.usrMailViejo )
                             console.log("ARRE2"+this.ionicForm.value.mail)
                             this.ionicForm = this.formBuilder.group({
-                                nombre: [perfiles[0].nombre, [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(5), Validators.maxLength(40)]],
+                                nombre: [perfiles[0].nombre, [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2), Validators.maxLength(40)]],
                                 nombre_2: [perfiles[0].nombre_2, [Validators.maxLength(40)]],
                                 telefono: [perfiles[0].telefono, ],
                                 celular: [perfiles[0].celular, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
