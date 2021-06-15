@@ -159,6 +159,7 @@ export class CarritoPage implements OnInit {
         $(".subtotal_numero").text("$ " + t);
         $(".total_btnpago").text(t);
     }
+    
     mas(uuid_producto,producto){
         let cantidad = producto.cantidad +=1;
         // let cantidadMax=this.cantidadMaximaProducto[uuid_producto];

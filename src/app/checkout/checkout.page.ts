@@ -5,6 +5,7 @@ import {
     Renderer2,
     ViewChild
 } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import {
     ActivatedRoute,
     Router
@@ -20,8 +21,6 @@ import {
     PayPalPayment,
     PayPalConfiguration
 } from '@ionic-native/paypal/ngx';
-import { AlertController } from '@ionic/angular';
-
 import {
     errorMonitor
 } from 'events';
@@ -89,9 +88,7 @@ export class CheckoutPage implements OnInit {
     uuidcliente:any;
     defaultSelectValue:any;
     @ViewChild("splash") splash: ElementRef;
-    constructor(public platform: Platform,
-        public alertController: AlertController,
-        private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
+    constructor(public alertController: AlertController,public platform: Platform,private http: HttpClient,public navCtrl: NavController,private route:ActivatedRoute, private router: Router, public formBuilder: FormBuilder, private renderer: Renderer2, private nativeStorage: NativeStorage, private taskService: TaskService,) {
         
         this.costoEnvio = 20;
         this.mostrarDireccion1 = true;
@@ -110,6 +107,115 @@ export class CheckoutPage implements OnInit {
     get errorControl() {
         return this.ionicForm.controls;
     }
+    async presentAlertConfirm() {
+        const alert = await this.alertController.create({
+          cssClass: 'botonesCofirmar',
+          header: '',
+          message: '<strong>¿Estas seguro de pagar con saldo?</strong>',
+          buttons: [
+            {
+              text: 'NO',
+              role: 'NO',
+              cssClass: 'secondary',
+              handler: (blah) => {
+                console.log('Confirm Cancel: blah');
+              }
+            }, {
+              text: 'SI',
+              handler: () => {
+                this.presentAlertPrompt();
+              }
+            }
+          ]
+        });
+    
+        await alert.present();
+      }
+
+      async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+        cssClass: 'nipContent',
+        header: '',
+        message: '<strong>Introduce tu NIP</strong>',
+      inputs: [
+        // {
+        //   name: 'name1',
+        //   type: 'text',
+        //   placeholder: 'Placeholder 1'
+        // },
+        // {
+        //   name: 'name2',
+        //   type: 'text',
+        //   id: 'name2-id',
+        //   value: 'hello',
+        //   placeholder: 'Placeholder 2'
+        // },
+        // // multiline input.
+        // {
+        //   name: 'paragraph',
+        //   id: 'paragraph',
+        //   type: 'textarea',
+        //   placeholder: 'Placeholder 3'
+        // },
+        // {
+        //   name: 'name3',
+        //   value: 'http://ionicframework.com',
+        //   type: 'url',
+        //   placeholder: 'Favorite site ever'
+        // },
+        // // input date with min & max
+        // {
+        //   name: 'name4',
+        //   type: 'date',
+        //   min: '2017-03-01',
+        //   max: '2018-01-12'
+        // },
+        // // input date without min nor max
+        // {
+        //   name: 'name5',
+        //   type: 'date'
+        // },
+        {
+          name: 'name6',
+          type: 'number',
+          placeholder: 'NIP',
+          min: 0,
+          max: 99999
+        },
+        // {
+        //   name: 'name7',
+        //   type: 'number'
+        // },
+        // {
+        //   name: 'name8',
+        //   type: 'password',
+        //   placeholder: 'Advanced Attributes',
+        //   cssClass: 'specialClass',
+        //   attributes: {
+        //     maxlength: 4,
+        //     inputmode: 'decimal'
+        //   }
+        // }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancelar',
+          cssClass: 'cancelar',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Confirm Aceptar');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
     cancelar(){
         if(this.className == 'quitar'){
           this.className = 'mostrar';
@@ -204,7 +310,8 @@ export class CheckoutPage implements OnInit {
             "direccion":direccion
         };
         const headers = new HttpHeaders({
-            "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
+            // "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
+            "Authorization":"TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
             "cache-control": "no-cache",
             "Content-Type":"application/json"
         }); 
@@ -519,21 +626,21 @@ export class CheckoutPage implements OnInit {
                     var val = $(this).val(); // retrieve the value
                     if ($(this).val() == "cobro") {
                         if ($("input[name=radio][value='credito']").is(":checked")) {
-                            //alert("Forma de envio cobro y Form a de pago credito")
-                            $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
-                            $(".envionormal").removeClass("hide")
+                            alert("Forma de envio cobro y Form a de pago credito")
+                            // $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
+                            // $(".envionormal").removeClass("hide")
                         } else if ($("input[name=radio][value='paypal']").is(":checked")) {
-                            //alert("Forma de envio cobro y Form a de pago paypal")
+                            alert("Forma de envio cobro y Form a de pago paypal")
                             $(".paypalnormal,.sinenvio,.envionormal").addClass("hide")
                             $(".enviopaypal").removeClass("hide")
                         }
                     } else {
                         if ($("input[name=radio][value='credito']").is(":checked")) {
-                            //alert("Forma de envio sin cobro y Form a de pago credito")
-                            $(".enviopaypal,.paypalnormal,.envionormal").addClass("hide")
-                            $(".sinenvio").removeClass("hide")
+                            alert("Forma de envio sin cobro y Form a de pago credito")
+                            // $(".enviopaypal,.paypalnormal,.envionormal").addClass("hide")
+                            // $(".sinenvio").removeClass("hide")
                         } else if ($("input[name=radio][value='paypal']").is(":checked")) {
-                            //alert("Forma de envio sin cobro y Form a de pago Paypal")
+                            alert("Forma de envio sin cobro y Form a de pago Paypal")
                             $(".enviopaypal,.sinenvio,.envionormal").addClass("hide")
                             $(".paypalnormal").removeClass("hide")
                         }
@@ -573,42 +680,19 @@ export class CheckoutPage implements OnInit {
                         $("#fechaMesTarjeta").val("")
                         $("#fechaAnoTarjeta").val("")
                         $("#cvvTarjeta").val("")
-                        alert("SALDO")
                         if ($("input[name=radio1][value='gratis']").is(":checked")) {
                             //alert("Radio Gratis envio DHL esta en checked y paypal")
                             $(".enviopaypal,.envionormal").addClass("hide")
                         } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
                             //alert("Forma de envio cobro y Forma de credito")
-                            $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
-                            $(".envionormal").removeClass("hide")
+                            // $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
+                            // $(".envionormal").removeClass("hide")
                         }
                     }
                 }
             });
     }
-    showConfirm() {
-        this.alertController.create({
-          header: 'Confirm Alert',
-          subHeader: 'Beware lets confirm',
-          message: 'Estas seguro que quieres pagar con saldo?',
-          buttons: [
-            {
-              text: 'Si',
-              handler: () => {
-                console.log('Si');
-              }
-            },
-            {
-              text: 'No',
-              handler: () => {
-                console.log('No');
-              }
-            }
-          ]
-        }).then(res => {
-          res.present();
-        });
-      }
+    
     payWithCard(envio: boolean) {
         //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
         //this.totalCompra=total2;
@@ -695,16 +779,17 @@ export class CheckoutPage implements OnInit {
                     //this.payWithPaypal(false); //Sin envio
                     this.generarMp();
                 } else if (tipo == 2) {
-                    console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
-                    console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
-                    console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
-                    console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
-                    if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
-                        this.payWithCard(false);
+                    this.presentAlertConfirm();
+                    // console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+                    // console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+                    // console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+                    // console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+                    // if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+                    //     this.payWithCard(false);
                         
-                    }else{
-                        this.navCtrl.navigateRoot(['/pagonoexitoso'])
-                    }
+                    // }else{
+                    //     this.navCtrl.navigateRoot(['/pagonoexitoso'])
+                    // }
                 } else if (tipo == 3) {
                     console.log("con envio")
                     this.generarMp();

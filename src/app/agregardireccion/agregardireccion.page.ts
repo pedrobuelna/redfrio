@@ -39,7 +39,7 @@ export class AgregardireccionPage implements OnInit {
             ciudad: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]],
             telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(10), Validators.minLength(10)]],
             celular: ['',],
-            correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]]
+            correo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]]
         })
     }
     get errorControl() {
