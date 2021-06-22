@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "40358047180",
+    "project_id": "pnreacsap",
+    "storage_bucket": "pnreacsap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40358047180:android:29515bdeb0f095fcce8169",
+        "android_client_info": {
+          "package_name": "io.reacsa_movil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40358047180-bkssd5p87spbdbcjbr1d7a1b163v9fn3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmgkOu9NdoAw0B7tFTY8YONBH39hUDNN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40358047180-bkssd5p87spbdbcjbr1d7a1b163v9fn3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

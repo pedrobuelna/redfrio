@@ -341,15 +341,32 @@ export class CheckoutPage implements OnInit {
                 console.log(d.cp);
                 this.taskService.getCoverturaEnvios(d.cp).subscribe(disponible=>{
                     if(disponible.length>0){
-                        $('#btnPagar').show();
+                        //$('#btnPagar').show();
+                        this.accionBotonPagar(1);
                         this.validacionInventario2(domicilio)
                     }else{
+                        this.mensajeInventario="";
                         this.mensajeInventario+="<div>Actualmente no es posible enviar al código postal "+d.cp+" de su dirección</div>";
-                        $('#btnPagar').hide();
+                        //$('#btnPagar').hide();
+                        this.accionBotonPagar(0);
                     }
                 });
             }
         });
+    }
+    accionBotonPagar(accion){
+        if(accion==1){//show
+            if($('input[name=radio]:checked').val()=="paypal"){
+                $('#btnPagar').show();
+                $('#btnSaldo').hide();
+            }else{
+                $('#btnSaldo').show();
+                $('#btnPagar').hide();
+            }
+        }else{//hide
+            $('#btnSaldo').hide();
+            $('#btnPagar').hide();
+        }
     }
     validacionInventario2(sucursal){
         this.mensajeInventario="";
@@ -365,7 +382,8 @@ export class CheckoutPage implements OnInit {
                                 //let data='{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}';
                                 //let data={material:articulo.producto_id,sucursal:sucursal};
                                 //let data=JSON.stringify({material:articulo.producto_id,sucursal:sucursal});
-                                $('#btnPagar').show();
+                                //$('#btnPagar').show();
+                                this.accionBotonPagar(1);
                                 let data=JSON.parse('{"material":"'+articulo.producto_id+'"}');
                                 this.taskService.getInventarioDomicilio(data).subscribe(inventario=>{
                                     console.log("InventarioDomicilio");
@@ -374,7 +392,8 @@ export class CheckoutPage implements OnInit {
                                     if(parseInt(inventario.total_unidades)<1 || articulo.cantidad>inventario.total_unidades){
                                         this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no tiene la disponibilidad de la cantidad deseada. Favor de disminuir la cantidad deseada o eliminar del carrito.<br> LA DISPONIBILIDAD ES DE "+inventario.total_unidades+"</div><br>";
                                         todosDisponibles=false;
-                                        $('#btnPagar').hide();
+                                        //$('#btnPagar').hide();
+                                        this.accionBotonPagar(0);
                                     }
                                     if(!todosDisponibles){
                                         //Deshabilitar el boton
@@ -552,7 +571,8 @@ export class CheckoutPage implements OnInit {
                                 //let data='{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}';
                                 //let data={material:articulo.producto_id,sucursal:sucursal};
                                 //let data=JSON.stringify({material:articulo.producto_id,sucursal:sucursal});
-                                $('#btnPagar').show();
+                                //$('#btnPagar').show();
+                                this.accionBotonPagar(1);
                                 let data=JSON.parse('{"material":"'+articulo.producto_id+'","sucursal":"'+sucursal+'"}');
                                 this.taskService.getInventarioSucursal(data).subscribe(inventario=>{
                                     console.log("Inventario");
@@ -561,7 +581,8 @@ export class CheckoutPage implements OnInit {
                                     if(parseInt(inventario.cantidad)<1 || articulo.cantidad>inventario.cantidad){
                                         this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no se encuentra disponible en la sucursal o a superado la cantidad disponible en la sucursal seleccionada, elimine el producto o disminuya la cantidad para poder pagar o elige otra tienda. Cantidad máxima: "+inventario.cantidad+"</div><br>";
                                         todosDisponibles=false;
-                                        $('#btnPagar').hide();
+                                        //$('#btnPagar').hide();
+                                        this.accionBotonPagar(0);
                                     }
                                     if(!todosDisponibles){
                                         //Deshabilitar el boton
@@ -620,79 +641,24 @@ export class CheckoutPage implements OnInit {
             error => console.error("NO HAY UUID_CLIENTE")
         );
         this.actualizarTotales();
-        $("input[name='radio1']") // select the radio by its id
-            .change(function () { // bind a function to the change event
-                if ($(this).is(":checked")) {
-                    var val = $(this).val(); // retrieve the value
-                    if ($(this).val() == "cobro") {
-                        if ($("input[name=radio][value='credito']").is(":checked")) {
-                            alert("Forma de envio cobro y Form a de pago credito")
-                            // $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
-                            // $(".envionormal").removeClass("hide")
-                        } else if ($("input[name=radio][value='paypal']").is(":checked")) {
-                            alert("Forma de envio cobro y Form a de pago paypal")
-                            $(".paypalnormal,.sinenvio,.envionormal").addClass("hide")
-                            $(".enviopaypal").removeClass("hide")
-                        }
-                    } else {
-                        if ($("input[name=radio][value='credito']").is(":checked")) {
-                            alert("Forma de envio sin cobro y Form a de pago credito")
-                            // $(".enviopaypal,.paypalnormal,.envionormal").addClass("hide")
-                            // $(".sinenvio").removeClass("hide")
-                        } else if ($("input[name=radio][value='paypal']").is(":checked")) {
-                            alert("Forma de envio sin cobro y Form a de pago Paypal")
-                            $(".enviopaypal,.sinenvio,.envionormal").addClass("hide")
-                            $(".paypalnormal").removeClass("hide")
-                        }
-                    }
-                }
-            });
-        //Forma de pago
-        $("input[name='radio']") // select the radio by its id
-            .change(function () { // bind a function to the change event
-                if ($(this).is(":checked")) { // check if the radio is checked
-                    var val = $(this).val(); // retrieve the value
-                    if ($(this).val() == "paypal") {
-                        $(".btntarjeta").addClass("hide")
-                        $(".btnpaypal").removeClass("hide")
-                        $(".datosTarjeta").addClass("hide")
-                        $("#nombreTarjeta").val("PAYPAL")
-                        $("#numeroTarjeta").val("1234567890123456")
-                        $("#fechaDiaTarjeta").val("10")
-                        $("#fechaMesTarjeta").val("10")
-                        $("#fechaAnoTarjeta").val("20")
-                        $("#cvvTarjeta").val("000")
-                        if ($("input[name=radio1][value='gratis']").is(":checked")) {
-                           //alert("Radio Gratis envio DHL esta en checked y paypal jala 1")
-                            $(".enviopaypal").addClass("hide")
-                        } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
-                            //alert("Radio Cobro envio DHL esta en checked y con paypal jala 1")
-                            $(".paypalnormal").addClass("hide")
-                        }
-                    } else {
-                        //alert("JALA 2")
-                        $(".btntarjeta").removeClass("hide")
-                        $(".btnpaypal").addClass("hide")
-                        $(".datosTarjeta").removeClass("hide")
-                        $("#nombreTarjeta").val("")
-                        $("#numeroTarjeta").val("")
-                        $("#fechaDiaTarjeta").val("")
-                        $("#fechaMesTarjeta").val("")
-                        $("#fechaAnoTarjeta").val("")
-                        $("#cvvTarjeta").val("")
-                        if ($("input[name=radio1][value='gratis']").is(":checked")) {
-                            //alert("Radio Gratis envio DHL esta en checked y paypal")
-                            $(".enviopaypal,.envionormal").addClass("hide")
-                        } else if ($("input[name=radio1][value='cobro']").is(":checked")) {
-                            //alert("Forma de envio cobro y Forma de credito")
-                            // $(".enviopaypal,.paypalnormal,.sinenvio").addClass("hide")
-                            // $(".envionormal").removeClass("hide")
-                        }
-                    }
-                }
-            });
     }
-    
+    pagoTarjeta(){
+        this.mensajeInventario="";
+    }
+    getSaldoCliente(){
+        console.log('====UUIDCLIENTE====');
+        console.log(this.uuidcliente);
+        this.taskService.getSaldoCliente(this.uuidcliente)
+        .subscribe(credito => {
+            console.log('====CREDITO====');
+            console.log(credito);
+            if(credito[0].has_credit==0){
+                this.accionBotonPagar(0);
+                this.mensajeInventario="";
+                this.mensajeInventario+="Lo sentimos NO cuentas con saldo suficiente.";
+            }
+        });
+    }
     payWithCard(envio: boolean) {
         //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
         //this.totalCompra=total2;

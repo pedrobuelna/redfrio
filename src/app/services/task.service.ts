@@ -389,4 +389,8 @@ export class TaskService {
         return this.http.patch<any>(path,data);
         
     }
+    getSaldoCliente(uuid_cliente:any){
+        const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get < any > (path);
+    }
 }

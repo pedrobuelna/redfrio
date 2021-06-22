@@ -45,7 +45,7 @@
                 <ion-label position="floating">Tiendas</ion-label>
                 <ion-select formControlName="direccion" value="{{defaultSelectValue}}" (ionChange)="verificarInventarioTienda($event)">
                     <ion-select-option value="" selected>Seleccione una tienda</ion-select-option>
-                    <ion-select-option *ngFor="let sucursal of sucursales" value="{{sucursal.sid_sucursal}}" tipo_iva="{{sucursal.tasa_iva}}">
+                    <ion-select-option *ngFor="let sucursal of sucursales" value="{{ sucursal.sid_sucursal }}" >
                         {{ sucursal.nombre }}</ion-select-option>
                 </ion-select>
             </ion-item>
@@ -77,11 +77,11 @@
                 <div class="forma_pago_subcontent radios">
                     <div class="titulo1_envio mt">Forma de pago</div>
                     <br><br>
-                    <div class="radio"  style="display: inline-block;margin: 0;text-align: center;">
+                    <div class="radio"  style="display: inline-block;margin: 0;text-align: center;" (click)="pagoTarjeta()">
                         <input id="radio-2" name="radio" type="radio" checked value="paypal">
                         <label for="radio-2" class="radio-label">Pago con tarjeta Débito/Crédito/MercadoPago</label>
                     </div>
-                    <div class="radio" style="display: inline-block;margin: 25px 0 0;text-align: center;">
+                    <div class="radio" style="display: inline-block;margin: 25px 0 0;text-align: center;" (click)="getSaldoCliente()">
                         <input id="radio-1" name="radio" type="radio" value="credito">
                         <label for="radio-1" class="radio-label">Pago con Saldo</label>
                     </div>
@@ -92,76 +92,7 @@
                 </div>              
             </div>
             <div class="formulario padding30">
-                <!-- <div class="datosTarjeta">
-                    <ion-item class="closed">
-                        <ion-label position="floating">Nombre como esta en el plastico *</ion-label>
-                        <ion-input type="text" id="nombreTarjeta" formControlName="nombreTarjeta"></ion-input>
-                    </ion-item> -->
-                    <!-- Error messages -->
-                    <!-- <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && (errorControl.nombreTarjeta.errors?.pattern || errorControl.nombreTarjeta.errors?.required)">
-                        El Nombre de tarjeta es obligatorio.
-                    </span>
-                    <ion-item>
-                        <ion-label position="floating">Numero de tarjeta *</ion-label>
-                        <ion-input formControlName="numeroTarjeta" id="numeroTarjeta" type="number"></ion-input>
-                    </ion-item> -->
-                    <!-- Error messages -->
-                    <!-- <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && (errorControl.numeroTarjeta.errors?.required || errorControl.numeroTarjeta.errors?.pattern || errorControl.numeroTarjeta.errors?.minlength || errorControl.numeroTarjeta.errors?.maxlength)">
-                        El Numero de tarjeta debe tener 16 caractéres.
-                    </span>
-                    <ion-item>
-                        <ion-label position="floating">Fecha de Expiracion (MM)*</ion-label>
-                        <ion-select formControlName="fechaMesTarjeta" id="fechaMesTarjeta">
-                            <ion-select-option value="01">01</ion-select-option>
-                            <ion-select-option value="02">02</ion-select-option>
-                            <ion-select-option value="03">03</ion-select-option>
-                            <ion-select-option value="04">04</ion-select-option>
-                            <ion-select-option value="05">05</ion-select-option>
-                            <ion-select-option value="06">06</ion-select-option>
-                            <ion-select-option value="07">07</ion-select-option>
-                            <ion-select-option value="08">08</ion-select-option>
-                            <ion-select-option value="09">09</ion-select-option>
-                            <ion-select-option value="10">10</ion-select-option>
-                            <ion-select-option value="11">11</ion-select-option>
-                            <ion-select-option value="12">12</ion-select-option>
-                        </ion-select>
-                    </ion-item> -->
-                    <!-- Error messages -->
-                    <!-- <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && (errorControl.fechaMesTarjeta.errors?.required)">
-                        Campo Fecha de Expiracion MM de tarjeta es requerido.
-                    </span>
-                    <ion-item>
-                        <ion-label position="floating">Año *</ion-label>
-                        <ion-select formControlName="fechaAnoTarjeta" id="fechaAnoTarjeta">
-                            <ion-select-option value="20">2020</ion-select-option>
-                            <ion-select-option value="21">2021</ion-select-option>
-                            <ion-select-option value="22">2022</ion-select-option>
-                            <ion-select-option value="23">2023</ion-select-option>
-                            <ion-select-option value="24">2024</ion-select-option>
-                            <ion-select-option value="25">2025</ion-select-option>
-                            <ion-select-option value="26">2026</ion-select-option>
-                            <ion-select-option value="27">2027</ion-select-option>
-                            <ion-select-option value="28">2028</ion-select-option>
-                        </ion-select>
-                    </ion-item> -->
-                    <!-- Error messages -->
-                    <!-- <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && (errorControl.fechaAnoTarjeta.errors?.required)">
-                        Campo Año de tarjeta es requerido.
-                    </span>
-                    <ion-item>
-                        <ion-label position="floating">Codigo de seguridad (CVV) *</ion-label>
-                        <ion-input formControlName="cvvTarjeta" id="cvvTarjeta" type="number"></ion-input>
-                    </ion-item>
-                    <span class="error ion-padding" color="danger"
-                        *ngIf="isSubmitted && (errorControl.cvvTarjeta.errors?.required || errorControl.cvvTarjeta.errors?.pattern || errorControl.cvvTarjeta.errors?.minlength || errorControl.cvvTarjeta.errors?.maxlength)">
-                        Campo CVV requerido y tener solo 3 numeros.
-                    </span>
-                </div> -->
-                <div id="noDisponibles" [innerHTML]="mensajeInventario"></div>
+                <div id="noDisponibles" >{{mensajeInventario}}</div>
                 <div class="titulo_checkout">Total de la compra</div>
                 <br><br>
                 <ion-grid>
@@ -222,24 +153,14 @@
                 <ion-label>PAGAR MP</ion-label>
             </ion-button> -->
 
-            <ion-button expand="full" id="btnPagar" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal">
+            <ion-button id="btnPagar" expand="full" color="success" (click)="submitForm(1)" class="btnpaypal paypalnormal">
                 IR A PAGAR</ion-button>
-            <ion-button expand="full" color="success" (click)="submitForm(3)" class="btnpaypal enviopaypal hide">
-                IR A PAGAR CON ENVÍO</ion-button>
-            <div class="content_boton btntarjeta sinenvio hide">
-                <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(2)">
-                    <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span>
-                    </ion-label>
-                    <ion-label style="position: absolute;right:10px">Comprar</ion-label>
-                </ion-button>
-            </div>
-            <div class="content_boton btntarjeta envionormal hide">
-                <ion-button expand="full" class="btn_pagar" type="submit" (click)="submitForm(4)">
-                    <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span>
-                    </ion-label>
-                    <ion-label style="position: absolute;right:10px">Comprar envio</ion-label>
-                </ion-button>
-            </div>
+            <ion-button id="btnSaldo"  expand="full" class="btn_pagar" type="submit" (click)="submitForm(2)">
+                <ion-label style="position: absolute;left:10px">$<span class="total">{{total}}</span>
+                </ion-label>
+                <ion-label style="position: absolute;right:10px">Comprar</ion-label>
+            </ion-button>
+            
         </form>
     </div>
 </ion-content>
