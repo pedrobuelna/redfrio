@@ -67,7 +67,6 @@ export class AppModule {
     console.log('Subscribing to token updates');
     this.fcm.onTokenRefresh().subscribe((newToken) => {
       this.token = newToken;
-      alert(this.token);
       console.log('onTokenRefresh received event with: ', newToken);
       console.log("TRYING PUSH_ID");
       this.nativeStorage.getItem('app')
