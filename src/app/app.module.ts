@@ -24,6 +24,8 @@ import localeMx from '@angular/common/locales/es-MX';
 
 import { INotificationPayload } from 'cordova-plugin-fcm-with-dependecy-updated';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import { TaskService } from '../app/services/task.service';
+import { FCMPlugin } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/src/www/FCMPlugin';
 
 registerLocaleData(localeMx,'ex-MX');
 @NgModule({
@@ -50,7 +52,7 @@ export class AppModule {
     public hasPermission: boolean;
     public token: string;
     public pushPayload: INotificationPayload;
-    constructor(private platform: Platform, private fcm: FCM) {
+    constructor(private platform: Platform, private fcm: FCM,private taskService: TaskService,private nativeStorage: NativeStorage) {
         this.setupFCM();
     }
     private async setupFCM() {
@@ -67,6 +69,19 @@ export class AppModule {
       this.token = newToken;
       alert(this.token);
       console.log('onTokenRefresh received event with: ', newToken);
+      console.log("TRYING PUSH_ID");
+      this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("ACTUALIZANDO PUSH_ID!!");
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                console.log("push_id: " + this.token);
+                this.taskService.updInfoPerfil(app.uuid_cliente,{push_id:this.token}).subscribe(data=>{
+                    console.log("PATCH PERFIL");
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
     });
 
     console.log('Subscribing to new notifications');
@@ -79,6 +94,19 @@ export class AppModule {
     console.log('requestPushPermission result: ', this.hasPermission);
 
     this.token = await this.fcm.getToken();
+   
+    this.nativeStorage.getItem('app')
+    .then(
+        app => {
+            console.log("ACTUALIZANDO PUSH_ID GET TOKEN!!");
+            console.log("uuid_cliente: " + app.uuid_cliente);
+            console.log("push_id: " + this.token);
+            this.taskService.updInfoPerfil(app.uuid_cliente,{push_id:this.token}).subscribe(data=>{
+                console.log("Se envio push_id");
+            });
+        },
+        error => console.error("NO HAY UUID_CLIENTE");
+    );
     console.log('getToken result: ', this.token);
 
     this.pushPayload = await this.fcm.getInitialPushPayload();
