@@ -104,7 +104,7 @@ export class AppModule {
                 console.log("Se envio push_id");
             });
         },
-        error => console.error("NO HAY UUID_CLIENTE");
+        error => console.error("NO HAY UUID_CLIENTE")
     );
     console.log('getToken result: ', this.token);
 
