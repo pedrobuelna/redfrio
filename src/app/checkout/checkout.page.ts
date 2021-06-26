@@ -308,7 +308,6 @@ export class CheckoutPage implements OnInit {
     }
     accionBotonPagar(accion){
         if(accion==1){//show
-            alert($('input[name=radio]:checked').val());
             if($('input[name=radio]:checked').val()=="paypal"){
                 $('#btnPagar').show();
                 $('#btnSaldo').hide();
