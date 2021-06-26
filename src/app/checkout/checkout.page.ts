@@ -197,6 +197,7 @@ export class CheckoutPage implements OnInit {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
+        this.accionBotonPagar(0);
         this.sucursales=[];
         console.log("sucursales aaaa: "+this.sucursales)
         //Radios de forma de envio
@@ -360,6 +361,7 @@ export class CheckoutPage implements OnInit {
         );
     }
     ionViewWillEnter() {
+        this.accionBotonPagar(0);
         this.defaultSelectValue="";
         this.route.queryParams.subscribe(params => {
             this.flag_inventario = params.flag_inventario;
@@ -534,6 +536,7 @@ export class CheckoutPage implements OnInit {
         );
     }
     ionViewDidEnter() {
+        this.accionBotonPagar(0);
         $("#radioDomicilio").prop("checked", true).trigger("click");
         this.mensajeInventario="";
         this.nativeStorage.getItem('app')
