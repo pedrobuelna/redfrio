@@ -343,7 +343,7 @@ export class CheckoutPage implements OnInit {
                                     console.log(inventario);
                                     let todosDisponibles=true;
                                     if(parseInt(inventario.total_unidades)<1 || articulo.cantidad>inventario.total_unidades){
-                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no tiene la disponibilidad de la cantidad deseada. Favor de disminuir la cantidad deseada o eliminar del carrito.<br> LA DISPONIBILIDAD ES DE "+inventario.total_unidades+"</div><br>";
+                                        this.mensajeInventario+="El articulo "+articulo.nombre+" no tiene la disponibilidad de la cantidad deseada. Favor de disminuir la cantidad deseada o eliminar del carrito.<br> LA DISPONIBILIDAD ES DE "+inventario.total_unidades+"";
                                         todosDisponibles=false;
                                         //$('#btnPagar').hide();
                                         this.accionBotonPagar(0);

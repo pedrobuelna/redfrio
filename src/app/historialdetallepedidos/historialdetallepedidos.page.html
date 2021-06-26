@@ -1,6 +1,6 @@
 <ion-content >
   <ion-row class="content_categorias ion-padding">
-    <h1>DETALLES DEL PEDIDO</h1>
+    <h1 class="titulo">DETALLES DEL PEDIDO</h1>
     <br>
     <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="12" class="productos_carrusel">
       <div *ngIf="i==0">
@@ -9,7 +9,7 @@
         <b>Fecha del pedido:</b><p>{{detalle_pedido.fecha_pago | date:'dd/MM/yyyy'}}</p>
         <b>Costo de envío: </b><p>{{detalle_pedido.costo_envio}}</p>
         <b>Subtotal: </b> {{comprasubtotal | currency}} <br>
-        <b>IVA: </b> 16% <br>
+        <b>IVA: </b> {detalle_pedido.iva}}% <br>
         <b>Total: </b>{{total | currency}}
       </div>  
     </ion-col>
