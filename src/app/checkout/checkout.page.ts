@@ -560,11 +560,12 @@ export class CheckoutPage implements OnInit {
         this.actualizarTotales();
     }
     pagoTarjeta(){
-        $('input[name=radio]:checked').val('paypal')
+        $('input[name=radio]:checked').val('paypal');
         this.accionBotonPagar(1);
         this.mensajeInventario="";
     }
     getSaldoCliente(){
+        $('input[name=radio]:checked').val('credito');
         this.accionBotonPagar(0);
         console.log('====UUIDCLIENTE====');
         console.log(this.uuidcliente);
