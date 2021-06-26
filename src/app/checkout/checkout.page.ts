@@ -645,42 +645,42 @@ export class CheckoutPage implements OnInit {
     //             }
     //         );
     // }
-    // submitForm(tipo) {
-    //     this.isSubmitted = true;
-    //     if(parseFloat(this.paymentAmount.replace(',',''))>0){
-    //         console.log(this.ionicForm.value.direccion);
-    //         if (!this.ionicForm.valid) {
-    //             console.log('Valores cacios!')
-    //             return false;
-    //         } else {
-    //             console.log('Formulario completado' + this.ionicForm.value)
-    //             if (tipo == 1) {
-    //                 console.log("sin envio")
-    //                 //this.payWithPaypal(false); //Sin envio
-    //                 this.generarMp();
-    //             } else if (tipo == 2) {
-    //                 this.presentAlertConfirm();
-    //             } else if (tipo == 3) {
-    //                 console.log("con envio")
-    //                 this.generarMp();
-    //                 //this.payWithPaypal(true); //Con envio
-    //             } else if (tipo == 4) {
-    //                 console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
-    //                 console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
-    //                 console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
-    //                 console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
-    //                 if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
-    //                     this.payWithCard(true);
-    //                 }else{
-    //                     this.navCtrl.navigateRoot(['/pagonoexitoso'])
-    //                 }
-    //             }
-    //         }
-    //     }else{
-    //         this.ionViewWillEnter();
-    //         this.ionViewDidEnter();
-    //     }
-    // }
+    submitForm(tipo) {
+        this.isSubmitted = true;
+        if(parseFloat(this.paymentAmount.replace(',',''))>0){
+            console.log(this.ionicForm.value.direccion);
+            if (!this.ionicForm.valid) {
+                console.log('Valores cacios!')
+                return false;
+            } else {
+                console.log('Formulario completado' + this.ionicForm.value)
+                if (tipo == 1) {
+                    console.log("sin envio")
+                    //this.payWithPaypal(false); //Sin envio
+                    this.generarMp();
+                } else if (tipo == 2) {
+                    this.presentAlertConfirm();
+                // } else if (tipo == 3) {
+                //     console.log("con envio")
+                //     this.generarMp();
+                //     //this.payWithPaypal(true); //Con envio
+                // } else if (tipo == 4) {
+                //     console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+                //     console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+                //     console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+                //     console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+                //     if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+                //         this.payWithCard(true);
+                //     }else{
+                //         this.navCtrl.navigateRoot(['/pagonoexitoso'])
+                //     }
+                }
+            }
+        }else{
+            this.ionViewWillEnter();
+            this.ionViewDidEnter();
+        }
+    }
     // payWithCard(envio: boolean) {
     //     this.totalCompra=parseFloat(this.paymentAmount);
     //     (envio == true) ? "con envio" : " sin envio";
