@@ -132,38 +132,38 @@ export class CheckoutPage implements OnInit {
         await alert.present();
       }
 
-      async presentAlertPrompt() {
-    const alert = await this.alertController.create({
-        cssClass: 'nipContent',
-        header: '',
-        message: '<strong>Introduce tu NIP</strong>',
-      inputs: [
-        {
-          name: 'name6',
-          type: 'number',
-          placeholder: 'NIP',
-          min: 0,
-          max: 99999
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancelar',
-          cssClass: 'cancelar',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Aceptar',
-          handler: () => {
-            console.log('Confirm Aceptar');
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
+    async presentAlertPrompt() {
+        const alert = await this.alertController.create({
+            cssClass: 'nipContent',
+            header: '',
+            message: '<strong>Introduce tu NIP</strong>',
+        inputs: [
+            {
+            name: 'name6',
+            type: 'number',
+            placeholder: 'NIP',
+            min: 0,
+            max: 99999
+            },
+        ],
+        buttons: [
+            {
+            text: 'Cancelar',
+            role: 'cancelar',
+            cssClass: 'cancelar',
+            handler: () => {
+                console.log('Confirm Cancel');
+            }
+            }, {
+            text: 'Aceptar',
+            handler: () => {
+                console.log('Confirm Aceptar');
+            }
+            }
+        ]
+        });
+        await alert.present();
+    }
     cancelar(){
         if(this.className == 'quitar'){
           this.className = 'mostrar';
@@ -258,6 +258,8 @@ export class CheckoutPage implements OnInit {
             "sucursal":sucursal,
             "direccion":direccion
         };
+        console.log("POST DATA MP");
+        console.log(postData);
         const headers = new HttpHeaders({
             // "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
             "Authorization":"TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
@@ -277,6 +279,7 @@ export class CheckoutPage implements OnInit {
         });
     }
     verificarInventarioDomicilio(event){
+        this.accionBotonPagar(0);
         this.tax=.16;
         this.iva="16%";
         console.log('==INVENTARIO DOMICILIO==');
@@ -305,10 +308,12 @@ export class CheckoutPage implements OnInit {
     }
     accionBotonPagar(accion){
         if(accion==1){//show
+            alert($('input[name=radio]:checked').val());
             if($('input[name=radio]:checked').val()=="paypal"){
                 $('#btnPagar').show();
                 $('#btnSaldo').hide();
             }else{
+                this.getSaldoCliente()
                 $('#btnSaldo').show();
                 $('#btnPagar').hide();
             }
@@ -556,9 +561,12 @@ export class CheckoutPage implements OnInit {
         this.actualizarTotales();
     }
     pagoTarjeta(){
+        $('input[name=radio]:checked').val('paypal')
+        this.accionBotonPagar(1);
         this.mensajeInventario="";
     }
     getSaldoCliente(){
+        this.accionBotonPagar(0);
         console.log('====UUIDCLIENTE====');
         console.log(this.uuidcliente);
         this.taskService.getSaldoCliente(this.uuidcliente)
@@ -569,115 +577,117 @@ export class CheckoutPage implements OnInit {
                 this.accionBotonPagar(0);
                 this.mensajeInventario="";
                 this.mensajeInventario+="Lo sentimos NO cuentas con saldo suficiente.";
+            }else{
+                this.accionBotonPagar(1);
             }
         });
     }
-    payWithCard(envio: boolean) {
-        this.totalCompra=parseFloat(this.paymentAmount);
-        (envio == true) ? "con envio" : " sin envio";
-        let id_transaccion = Math.floor(Math.random() * 10000000) + 1000000;;
-        this.pagoAutorizado(2, id_transaccion)
-    }
-    pagoAutorizado(tipo: number, data: any) {
-        //1 paypal,2 tarjeta
-        console.log(data);
-        this.nativeStorage.getItem('carrito')
-            .then(
-                carrito => {
-                    console.log("==CARRITO DATA==");
-                    console.log(carrito);
-                    console.log("uuid_carrito: " + carrito.uuid_carrito);
-                    console.log("TOTAL: " +this.paymentAmount)
-                    let tipo_envio:any;
-                    let sucursal:any;
-                    let direccion:any;
-                    if(this.ionicForm.value.direccion.length<4){
-                        tipo_envio=1;//Sucursal
-                        sucursal = this.ionicForm.value.direccion
-                    }else{
-                        tipo_envio=2;//Direccion
-                        direccion = this.ionicForm.value.direccion
-                    }
-                    this.taskService.updCarritoInfo(carrito.uuid_carrito, {
-                        status: 2,
-                        id_tipo_pago:tipo,
-                        total:this.paymentAmount,
-                        tipo_envio:tipo_envio,
-                        uuid_direccion:direccion,
-                        sucursal:sucursal,
-                        info_pago:data
-                    }).subscribe(() => {
-                        this.nativeStorage.getItem('app')
-                        .then(
-                            app => {
-                                console.log("==APP DATA==");
-                                console.log(app);
-                                console.log("uuid_cliente: "+app.uuid_cliente);
-                                this.taskService.setCarritoActivo({uuid_cliente:app.uuid_cliente}).subscribe(() => {
-                                    this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carrito_activo_nuevo => {
-                                        console.log("Nuevo carrito activo.");
-                                        console.log(carrito_activo_nuevo);
-                                        this.nativeStorage.setItem('carrito', {
-                                            uuid_carrito: carrito_activo_nuevo[0].uuid_carrito,
-                                            cantidad: 0
-                                        }).then(
-                                            () => {
-                                                console.log('Actualizado APPDATA ==>');
-                                                console.log(carrito);
-                                                this.taskService.sendMailPagoExitoso(carrito.uuid_carrito).subscribe(()=>{
-                                                    this.navCtrl.navigateRoot(['/pagoexitoso'])
-                                                });
-                                            },
-                                            error => console.error('Error storing item', error)
-                                        );
-                                    });
-                                });
-                            },
-                            error => console.error("NO HAY UUID_CLIENTE")
-                        );
-                    });
-                },
-                error => {
-                    this.navCtrl.navigateRoot(['/pagonoexitoso'])
-                }
-            );
-    }
-    submitForm(tipo) {
-        this.isSubmitted = true;
-        if(parseFloat(this.paymentAmount.replace(',',''))>0){
-            console.log(this.ionicForm.value.direccion);
-            if (!this.ionicForm.valid) {
-                console.log('Valores cacios!')
-                return false;
-            } else {
-                console.log('Formulario completado' + this.ionicForm.value)
-                if (tipo == 1) {
-                    console.log("sin envio")
-                    //this.payWithPaypal(false); //Sin envio
-                    this.generarMp();
-                } else if (tipo == 2) {
-                    this.presentAlertConfirm();
-                } else if (tipo == 3) {
-                    console.log("con envio")
-                    this.generarMp();
-                    //this.payWithPaypal(true); //Con envio
-                } else if (tipo == 4) {
-                    console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
-                    console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
-                    console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
-                    console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
-                    if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
-                        this.payWithCard(true);
-                    }else{
-                        this.navCtrl.navigateRoot(['/pagonoexitoso'])
-                    }
-                }
-            }
-        }else{
-            this.ionViewWillEnter();
-            this.ionViewDidEnter();
-        }
-    }
+    // pagoAutorizado(tipo: number, data: any) {
+    //     //1 paypal,2 tarjeta
+    //     console.log(data);
+    //     this.nativeStorage.getItem('carrito')
+    //         .then(
+    //             carrito => {
+    //                 console.log("==CARRITO DATA==");
+    //                 console.log(carrito);
+    //                 console.log("uuid_carrito: " + carrito.uuid_carrito);
+    //                 console.log("TOTAL: " +this.paymentAmount)
+    //                 let tipo_envio:any;
+    //                 let sucursal:any;
+    //                 let direccion:any;
+    //                 if(this.ionicForm.value.direccion.length<4){
+    //                     tipo_envio=1;//Sucursal
+    //                     sucursal = this.ionicForm.value.direccion
+    //                 }else{
+    //                     tipo_envio=2;//Direccion
+    //                     direccion = this.ionicForm.value.direccion
+    //                 }
+    //                 this.taskService.updCarritoInfo(carrito.uuid_carrito, {
+    //                     status: 2,
+    //                     id_tipo_pago:tipo,
+    //                     total:this.paymentAmount,
+    //                     tipo_envio:tipo_envio,
+    //                     uuid_direccion:direccion,
+    //                     sucursal:sucursal,
+    //                     info_pago:data
+    //                 }).subscribe(() => {
+    //                     this.nativeStorage.getItem('app')
+    //                     .then(
+    //                         app => {
+    //                             console.log("==APP DATA==");
+    //                             console.log(app);
+    //                             console.log("uuid_cliente: "+app.uuid_cliente);
+    //                             this.taskService.setCarritoActivo({uuid_cliente:app.uuid_cliente}).subscribe(() => {
+    //                                 this.taskService.getCarritoActivo(app.uuid_cliente).subscribe(carrito_activo_nuevo => {
+    //                                     console.log("Nuevo carrito activo.");
+    //                                     console.log(carrito_activo_nuevo);
+    //                                     this.nativeStorage.setItem('carrito', {
+    //                                         uuid_carrito: carrito_activo_nuevo[0].uuid_carrito,
+    //                                         cantidad: 0
+    //                                     }).then(
+    //                                         () => {
+    //                                             console.log('Actualizado APPDATA ==>');
+    //                                             console.log(carrito);
+    //                                             this.taskService.sendMailPagoExitoso(carrito.uuid_carrito).subscribe(()=>{
+    //                                                 this.navCtrl.navigateRoot(['/pagoexitoso'])
+    //                                             });
+    //                                         },
+    //                                         error => console.error('Error storing item', error)
+    //                                     );
+    //                                 });
+    //                             });
+    //                         },
+    //                         error => console.error("NO HAY UUID_CLIENTE")
+    //                     );
+    //                 });
+    //             },
+    //             error => {
+    //                 this.navCtrl.navigateRoot(['/pagonoexitoso'])
+    //             }
+    //         );
+    // }
+    // submitForm(tipo) {
+    //     this.isSubmitted = true;
+    //     if(parseFloat(this.paymentAmount.replace(',',''))>0){
+    //         console.log(this.ionicForm.value.direccion);
+    //         if (!this.ionicForm.valid) {
+    //             console.log('Valores cacios!')
+    //             return false;
+    //         } else {
+    //             console.log('Formulario completado' + this.ionicForm.value)
+    //             if (tipo == 1) {
+    //                 console.log("sin envio")
+    //                 //this.payWithPaypal(false); //Sin envio
+    //                 this.generarMp();
+    //             } else if (tipo == 2) {
+    //                 this.presentAlertConfirm();
+    //             } else if (tipo == 3) {
+    //                 console.log("con envio")
+    //                 this.generarMp();
+    //                 //this.payWithPaypal(true); //Con envio
+    //             } else if (tipo == 4) {
+    //                 console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
+    //                 console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
+    //                 console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
+    //                 console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
+    //                 if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
+    //                     this.payWithCard(true);
+    //                 }else{
+    //                     this.navCtrl.navigateRoot(['/pagonoexitoso'])
+    //                 }
+    //             }
+    //         }
+    //     }else{
+    //         this.ionViewWillEnter();
+    //         this.ionViewDidEnter();
+    //     }
+    // }
+    // payWithCard(envio: boolean) {
+    //     this.totalCompra=parseFloat(this.paymentAmount);
+    //     (envio == true) ? "con envio" : " sin envio";
+    //     let id_transaccion = Math.floor(Math.random() * 10000000) + 1000000;;
+    //     this.pagoAutorizado(2, id_transaccion)
+    // }
     agregarDireccion() {
         this.router.navigate(['/agregardireccion']);
     }
