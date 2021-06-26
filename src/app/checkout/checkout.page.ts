@@ -138,43 +138,6 @@ export class CheckoutPage implements OnInit {
         header: '',
         message: '<strong>Introduce tu NIP</strong>',
       inputs: [
-        // {
-        //   name: 'name1',
-        //   type: 'text',
-        //   placeholder: 'Placeholder 1'
-        // },
-        // {
-        //   name: 'name2',
-        //   type: 'text',
-        //   id: 'name2-id',
-        //   value: 'hello',
-        //   placeholder: 'Placeholder 2'
-        // },
-        // // multiline input.
-        // {
-        //   name: 'paragraph',
-        //   id: 'paragraph',
-        //   type: 'textarea',
-        //   placeholder: 'Placeholder 3'
-        // },
-        // {
-        //   name: 'name3',
-        //   value: 'http://ionicframework.com',
-        //   type: 'url',
-        //   placeholder: 'Favorite site ever'
-        // },
-        // // input date with min & max
-        // {
-        //   name: 'name4',
-        //   type: 'date',
-        //   min: '2017-03-01',
-        //   max: '2018-01-12'
-        // },
-        // // input date without min nor max
-        // {
-        //   name: 'name5',
-        //   type: 'date'
-        // },
         {
           name: 'name6',
           type: 'number',
@@ -182,20 +145,6 @@ export class CheckoutPage implements OnInit {
           min: 0,
           max: 99999
         },
-        // {
-        //   name: 'name7',
-        //   type: 'number'
-        // },
-        // {
-        //   name: 'name8',
-        //   type: 'password',
-        //   placeholder: 'Advanced Attributes',
-        //   cssClass: 'specialClass',
-        //   attributes: {
-        //     maxlength: 4,
-        //     inputmode: 'decimal'
-        //   }
-        // }
       ],
       buttons: [
         {
@@ -213,7 +162,6 @@ export class CheckoutPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
     cancelar(){
@@ -346,7 +294,7 @@ export class CheckoutPage implements OnInit {
                         this.validacionInventario2(domicilio)
                     }else{
                         this.mensajeInventario="";
-                        this.mensajeInventario+="<div>Actualmente no es posible enviar al código postal "+d.cp+" de su dirección</div>";
+                        this.mensajeInventario+="Actualmente no es posible enviar al código postal "+d.cp+" de su dirección";
                         //$('#btnPagar').hide();
                         this.accionBotonPagar(0);
                     }
@@ -467,10 +415,8 @@ export class CheckoutPage implements OnInit {
                                 }
                             }
                         }
-                        
                         console.log("datosDefault:");
                         console.log(datosDefault);
-                        
                         this.muestraTienda(datosDefault);
                     });
                 },
@@ -494,22 +440,6 @@ export class CheckoutPage implements OnInit {
             this.mostrarTienda = false;
             this.tipoEnvio=1;
             this.envio=this.costoEnvio;
-            // console.log("Subtotal");
-            // console.log(this.subtotal);
-            // console.log("Envio");
-            // console.log(this.envio);
-            // console.log("Tax");
-            // console.log(this.tax);
-            // let subtotal=this.subtotal.toString().replace(',','');
-            // this.subtotal=subtotal;
-            // let envio=this.envio.toString().replace(',','');
-            // let total = (parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-            // this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            // this.totalMp = this.paymentAmount
-            // this.paymentAmountEnvio = this.paymentAmount;
-            // this.total = this.paymentAmount;
-            // subtotal=this.subtotal;
-            // this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.actualizarTotales();
             this.ionicForm = this.formBuilder.group({
                 direccion: ['',[Validators.required]]
@@ -522,22 +452,6 @@ export class CheckoutPage implements OnInit {
                 direccion: ['',[Validators.required]]
             })
             this.envio=0;
-            // console.log("Subtotal");
-            // console.log(this.subtotal);
-            // console.log("Envio");
-            // console.log(this.envio);
-            // console.log("Tax");
-            // console.log(this.tax);
-            // let subtotal=this.subtotal.toString().replace(',','');
-            // this.subtotal=subtotal;
-            // let envio=this.envio.toString().replace(',','');
-            // let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-            // this.totalMp = this.paymentAmount;
-            // this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            // this.paymentAmountEnvio = this.paymentAmount;
-            // this.total = this.paymentAmount;
-            // subtotal=this.subtotal;
-            // this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
             this.actualizarTotales();
         }
     }
@@ -605,9 +519,7 @@ export class CheckoutPage implements OnInit {
             totalCompra => {
                 console.log('====Total compra====');
                 console.log(totalCompra);
-                
                 this.subtotal = totalCompra.toString().replace(',','');
-                //this.totalEnvio = parseFloat(this.subtotal) + parseFloat(this.envio);
                 let envio=this.envio.toString().replace(',','');
                 let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
                 this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
@@ -615,8 +527,6 @@ export class CheckoutPage implements OnInit {
                 this.total = this.paymentAmount.replace(',','');
                 let subtotal=this.subtotal;
                 this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-                //$(".envio").text(0)
-                //this.inicializarVista();
             },
             error => {
                 this.router.navigate(['/principal']);
@@ -660,8 +570,6 @@ export class CheckoutPage implements OnInit {
         });
     }
     payWithCard(envio: boolean) {
-        //let total2 = parseFloat(this.tax) + parseFloat(this.subtotal) + ((envio == true) ? this.costoEnvio : 0);
-        //this.totalCompra=total2;
         this.totalCompra=parseFloat(this.paymentAmount);
         (envio == true) ? "con envio" : " sin envio";
         let id_transaccion = Math.floor(Math.random() * 10000000) + 1000000;;
@@ -746,16 +654,6 @@ export class CheckoutPage implements OnInit {
                     this.generarMp();
                 } else if (tipo == 2) {
                     this.presentAlertConfirm();
-                    // console.log("numeroTarjeta: "+this.ionicForm.value.numeroTarjeta)
-                    // console.log("fechaMesTarjeta: "+this.ionicForm.value.fechaMesTarjeta)
-                    // console.log("fechaAnoTarjeta: "+this.ionicForm.value.fechaAnoTarjeta)
-                    // console.log("cvvTarjeta: "+this.ionicForm.value.cvvTarjeta)                
-                    // if(this.ionicForm.value.numeroTarjeta == "5256780965458952" && this.ionicForm.value.fechaMesTarjeta == "02" && this.ionicForm.value.fechaAnoTarjeta == "21" && this.ionicForm.value.cvvTarjeta=="564"){
-                    //     this.payWithCard(false);
-                        
-                    // }else{
-                    //     this.navCtrl.navigateRoot(['/pagonoexitoso'])
-                    // }
                 } else if (tipo == 3) {
                     console.log("con envio")
                     this.generarMp();

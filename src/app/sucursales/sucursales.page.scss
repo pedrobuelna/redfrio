@@ -1,5 +1,6 @@
 .content_sucursales{padding:30px;}
 .content_select{padding: 15px;}
+.ios .categoria_select{margin-top: 35px;}
 #categoria_select{border: 2px solid #015BEE;width: 100%; text-transform: capitalize; padding: 0 30px 0 55px; -webkit-appearance: none; -moz-appearance: none; height: 60px;letter-spacing: 2px;color: black !important;/* background: url(../../assets/images/flecha_abajo.png),url(../../assets/images/ubiblanco.png);background-position: right 20px center,left 20px center;background-repeat: no-repeat;background-size: 10px, 25px; */}
 .map{border: 2px solid #015BEE;margin-top:20px;padding: 15px;height: 323px;}
 .direccion{margin-bottom: 30px;}
@@ -11,3 +12,5 @@
     color: black !important;
 }
 .none0,.none1,.quitSplash{display:none;}
+.telefono{margin-top: 20px;}
+.telefono a{color: black;text-decoration: none;}
