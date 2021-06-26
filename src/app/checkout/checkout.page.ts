@@ -306,21 +306,6 @@ export class CheckoutPage implements OnInit {
             }
         });
     }
-    accionBotonPagar(accion){
-        if(accion==1){//show
-            if($('input[name=radio]:checked').val()=="paypal"){
-                $('#btnPagar').show();
-                $('#btnSaldo').hide();
-            }else{
-                this.getSaldoCliente()
-                $('#btnSaldo').show();
-                $('#btnPagar').hide();
-            }
-        }else{//hide
-            $('#btnSaldo').hide();
-            $('#btnPagar').hide();
-        }
-    }
     validacionInventario2(sucursal){
         this.mensajeInventario="";
         this.nativeStorage.getItem('carrito')
@@ -559,14 +544,37 @@ export class CheckoutPage implements OnInit {
         );
         this.actualizarTotales();
     }
+    accionBotonPagar(accion,primera=true){
+        if(accion==1){//show
+            //alert($('input[name=radio]:checked').val());
+            if($('input[name=radio]:checked').val()=="paypal"){
+                $('#btnPagar').show();
+                $('#btnSaldo').hide();
+            }else{
+                $('#btnSaldo').show();
+                $('#btnPagar').hide();
+                if(primera==true){
+                    this.getSaldoCliente(false);
+                }
+                //this.getSaldoCliente();
+            }
+        }else{//hide
+            $('#btnSaldo').hide();
+            $('#btnPagar').hide();
+        }
+    }
     pagoTarjeta(){
         $('input[name=radio]:checked').val('paypal');
         this.accionBotonPagar(1);
         this.mensajeInventario="";
     }
-    getSaldoCliente(){
+    validarSaldo(){
         $('input[name=radio]:checked').val('credito');
-        this.accionBotonPagar(0);
+        this.accionBotonPagar(1);
+        //this.getSaldoCliente();
+    }
+    getSaldoCliente(primera=true){
+        this.accionBotonPagar(0,primera);
         console.log('====UUIDCLIENTE====');
         console.log(this.uuidcliente);
         this.taskService.getSaldoCliente(this.uuidcliente)
@@ -574,11 +582,11 @@ export class CheckoutPage implements OnInit {
             console.log('====CREDITO====');
             console.log(credito);
             if(credito[0].has_credit==0){
-                this.accionBotonPagar(0);
+                this.accionBotonPagar(0,primera);
                 this.mensajeInventario="";
                 this.mensajeInventario+="Lo sentimos NO cuentas con saldo suficiente.";
             }else{
-                this.accionBotonPagar(1);
+                this.accionBotonPagar(1,primera);
             }
         });
     }

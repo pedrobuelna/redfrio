@@ -74,6 +74,16 @@
                         </div>
                     </div>
                 </div>
+                <!-- <ion-radio-group (ionChange)="validarPago()">
+                    <ion-item>
+                        <ion-label>Pago con tarjeta Débito/Crédito/MercadoPago</ion-label>
+                        <ion-radio id="radio-2" name="radio" slot="start" value="paypal"></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Pago con Saldo</ion-label>
+                        <ion-radio id="radio-1" name="radio" slot="start" value="credito"></ion-radio>
+                    </ion-item>
+                </ion-radio-group> -->
                 <div class="forma_pago_subcontent radios">
                     <div class="titulo1_envio mt">Forma de pago</div>
                     <br><br>
@@ -81,7 +91,7 @@
                         <input id="radio-2" name="radio" type="radio" checked value="paypal">
                         <label for="radio-2" class="radio-label">Pago con tarjeta Débito/Crédito/MercadoPago</label>
                     </div>
-                    <div class="radio" style="display: inline-block;margin: 25px 0 0;text-align: center;" (click)="getSaldoCliente()">
+                    <div class="radio" style="display: inline-block;margin: 25px 0 0;text-align: center;" (click)="validarSaldo()">
                         <input id="radio-1" name="radio" type="radio" value="credito">
                         <label for="radio-1" class="radio-label">Pago con Saldo</label>
                     </div>
