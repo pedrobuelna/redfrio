@@ -224,16 +224,19 @@ export class CarritoPage implements OnInit {
         );
     }
     ngOnInit() {
+        console.log('ngOnInit');
         this.validarFlags();
-        setTimeout(() => { this.calcularTotales(); }, 400);
+        setTimeout(() => { this.calcularTotales(); }, 300);
     }
     ionViewWillEnter() {
+        console.log('ionViewWillEnter');
         this.validarFlags();
-        setTimeout(()=>{ this.calcularTotales(); }, 400);
+        setTimeout(()=>{ this.calcularTotales(); }, 300);
     }
     ionViewDidEnter() {
+        console.log('ionViewDidEnter');
         this.validarFlags();
-        setTimeout(()=>{ this.calcularTotales(); }, 400);
+        setTimeout(()=>{ this.calcularTotales(); }, 300);
         //this.calcularTotales()
 
     }

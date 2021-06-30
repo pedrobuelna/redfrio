@@ -103,7 +103,147 @@ export class CheckoutPage implements OnInit {
             cvvTarjeta: ['', ],
         })
     }
-   
+    ngOnInit() {
+        this.accionBotonPagar(0);
+        this.sucursales=[];
+        console.log("sucursales aaaa: "+this.sucursales)
+        //Radios de forma de envio
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: " + app.uuid_cliente);
+                this.taskService.getNotificaciones(app.uuid_cliente)
+                    .subscribe(notificaciones => {
+                        this.listas = notificaciones;
+                    });
+                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
+                .subscribe(notificaciones => {
+                    this.notificaciones = notificaciones;
+                    this.cantidadNot = this.notificaciones.length
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
+        this.taskService.getSucursales()
+        .subscribe(sucursales => {
+            this.sucursales = sucursales;
+        });
+    }
+    ionViewWillEnter() {
+        this.accionBotonPagar(0);
+        this.defaultSelectValue="";
+        this.route.queryParams.subscribe(params => {
+            this.flag_inventario = params.flag_inventario;
+            this.flag_viable_paqueteria = params.flag_viable_paqueteria;
+            if(params.status=="failure"){
+                alert("Su pago no fue aprobado.");
+            }
+            console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
+            if(params.flag_viable_paqueteria==1){
+                this.enviodireccion="sucursal";
+                this.mostrarTienda=true;
+                this.mostrarDireccion=false;
+                this.envio = 0.00;
+            }else{
+                this.enviodireccion="domicilio";
+            }
+            console.log("Mostrar tienda: "+this.mostrarTienda);
+            console.log("Mostrar direccion: "+this.mostrarDireccion)
+            this.validarTotales();
+        });
+    }
+    ionViewDidEnter() {
+        this.accionBotonPagar(0);
+        $("#radioDomicilio").prop("checked", true).trigger("click");
+        this.mensajeInventario="";
+        this.nativeStorage.getItem('app')
+        .then(
+            app => {
+                console.log("==APP DATA==");
+                console.log(app);
+                console.log("uuid_cliente: "+app.uuid_cliente);
+                this.uuidcliente=app.uuid_cliente;
+                this.taskService.getDireccionCliente(app.uuid_cliente)
+                .subscribe(direcciones => {
+                    this.direcciones = direcciones;
+                });
+            },
+            error => console.error("NO HAY UUID_CLIENTE")
+        );
+        this.validarTotales();
+    }
+    actualizarTotales(){
+        this.nativeStorage.getItem('totalCompra').then(
+            totalCompra => {
+                console.log('====Total compra====');
+                console.log(totalCompra);
+                this.subtotal = totalCompra.toString().replace(',','');
+                let envio=this.envio.toString().replace(',','');
+                let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
+                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+                this.paymentAmountEnvio = this.paymentAmount;
+                this.total = this.paymentAmount.replace(',','');
+                let subtotal=this.subtotal;
+                this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+            },
+            error => {
+                this.router.navigate(['/principal']);
+            }
+        );
+    }
+    validarTotales(){
+        this.nativeStorage.getItem('carrito')
+        .then(
+            carrito => {
+                console.log("==CARRITO DATA==");
+                console.log(carrito);
+                console.log("uuid_cliente: "+carrito.uuid_carrito);
+                this.uuidCarrito=carrito.uuid_carrito;
+                this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
+                    this.taskService.patchListaPrecios(carrito.uuid_carrito);
+                    console.log('===COSTO ENVIO===');
+                    console.log(envio);
+                    if(envio[0].peso_total>700){
+                        alert("La compra excede los 700 kilogramos máximos para un envío.");
+                        this.router.navigate(['/carrito']);
+                    }else{
+                        if(this.flag_viable_paqueteria==1){
+                            console.log("Tipo 1");
+                            this.costoEnvio=this.envio=0.00;
+                        }else{
+                            this.costoEnvio=envio[0].costo_envio.replace('$','').replace(',','');
+                            this.envio=envio[0].costo_envio.replace('$','').replace(',','');
+                            console.log("Tipo 2");
+                            console.log(this.envio);
+                        }
+                    }
+                    let datosDefault={
+                        'detail':{
+                            'value':'domicilio'
+                        }
+                    }
+                    if(this.flag_viable_paqueteria==1){
+                        datosDefault={
+                            'detail':{
+                                'value':'sucursal'
+                            }
+                        }
+                    }
+                    console.log("datosDefault:");
+                    console.log(datosDefault);
+                    this.actualizarTotales();
+                    this.muestraTienda(datosDefault);
+                });
+            },
+            error =>{
+                this.router.navigate(['/principal']);
+                alert("No hay datos carrito")
+                console.error("NO HAY DATOS DEL CARRITO");
+            }
+        );
+    }
     get errorControl() {
         return this.ionicForm.controls;
     }
@@ -196,34 +336,6 @@ export class CheckoutPage implements OnInit {
         //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
-    ngOnInit() {
-        this.accionBotonPagar(0);
-        this.sucursales=[];
-        console.log("sucursales aaaa: "+this.sucursales)
-        //Radios de forma de envio
-        this.nativeStorage.getItem('app')
-        .then(
-            app => {
-                console.log("==APP DATA==");
-                console.log(app);
-                console.log("uuid_cliente: " + app.uuid_cliente);
-                this.taskService.getNotificaciones(app.uuid_cliente)
-                    .subscribe(notificaciones => {
-                        this.listas = notificaciones;
-                    });
-                this.taskService.getNotificacionesNoLeidas(app.uuid_cliente)
-                .subscribe(notificaciones => {
-                    this.notificaciones = notificaciones;
-                    this.cantidadNot = this.notificaciones.length
-                });
-            },
-            error => console.error("NO HAY UUID_CLIENTE")
-        );
-        this.taskService.getSucursales()
-        .subscribe(sucursales => {
-            this.sucursales = sucursales;
-        });
-    }
     generarMp(){
         let tipo_envio:any;
         let sucursal:any;
@@ -262,7 +374,7 @@ export class CheckoutPage implements OnInit {
         console.log(postData);
         const headers = new HttpHeaders({
             // "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
-            "Authorization":"TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
+            "Authorization":"Bearer TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
             "cache-control": "no-cache",
             "Content-Type":"application/json"
         }); 
@@ -349,75 +461,7 @@ export class CheckoutPage implements OnInit {
             }
         );
     }
-    ionViewWillEnter() {
-        this.accionBotonPagar(0);
-        this.defaultSelectValue="";
-        this.route.queryParams.subscribe(params => {
-            this.flag_inventario = params.flag_inventario;
-            this.flag_viable_paqueteria = params.flag_viable_paqueteria;
-            if(params.status=="failure"){
-                alert("Su pago no fue aprobado.");
-            }
-            console.log("VARIABLE CHECKOUT: "+params.flag_viable_paqueteria)
-            if(params.flag_viable_paqueteria==1){
-                this.enviodireccion="sucursal";
-                this.mostrarTienda=true;
-                this.mostrarDireccion=false;
-                this.envio = 0.00;
-            }else{
-                this.enviodireccion="domicilio";
-            }
-            console.log("Mostrar tienda: "+this.mostrarTienda);
-            console.log("Mostrar direccion: "+this.mostrarDireccion)
-            this.nativeStorage.getItem('carrito')
-            .then(
-                carrito => {
-                    console.log("==CARRITO DATA==");
-                    console.log(carrito);
-                    console.log("uuid_cliente: "+carrito.uuid_carrito);
-                    this.uuidCarrito=carrito.uuid_carrito;
-                    this.taskService.getPrecioEnvio(carrito.uuid_carrito).subscribe(envio=>{
-                        this.taskService.patchListaPrecios(carrito.uuid_carrito);
-                        console.log('===COSTO ENVIO===');
-                        console.log(envio);
-                        if(envio[0].peso_total>700){
-                            alert("La compra excede los 700 kilogramos máximos para un envío.");
-                            this.router.navigate(['/carrito']);
-                        }else{
-                            if(this.flag_viable_paqueteria==1){
-                                console.log("Tipo 1");
-                                this.costoEnvio=this.envio=0.00;
-                            }else{
-                                this.costoEnvio=envio[0].costo_envio.replace('$','').replace(',','');
-                                this.envio=envio[0].costo_envio.replace('$','').replace(',','');
-                                console.log("Tipo 2");
-                                console.log(this.envio);
-                            }
-                        }
-                        let datosDefault={
-                            'detail':{
-                                'value':'domicilio'
-                            }
-                        }
-                        if(this.flag_viable_paqueteria==1){
-                            datosDefault={
-                                'detail':{
-                                    'value':'sucursal'
-                                }
-                            }
-                        }
-                        console.log("datosDefault:");
-                        console.log(datosDefault);
-                        this.muestraTienda(datosDefault);
-                    });
-                },
-                error =>{
-                    alert("No hay datos carrito")
-                    console.error("NO HAY DATOS DEL CARRITO");
-                }
-            );
-        });
-    }
+    
     muestraTienda(event) {
         //console.log(this.enviodireccion)
         console.log("muestraTienda",event.detail);
@@ -504,45 +548,6 @@ export class CheckoutPage implements OnInit {
                  console.error("NO HAY DATOS DEL CARRITO");
             }
         );
-    }
-    actualizarTotales(){
-        this.nativeStorage.getItem('totalCompra').then(
-            totalCompra => {
-                console.log('====Total compra====');
-                console.log(totalCompra);
-                this.subtotal = totalCompra.toString().replace(',','');
-                let envio=this.envio.toString().replace(',','');
-                let total = ( parseFloat(this.subtotal) + parseFloat(envio) ) * ( 1 + parseFloat(this.tax) );
-                this.paymentAmount = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-                this.paymentAmountEnvio = this.paymentAmount;
-                this.total = this.paymentAmount.replace(',','');
-                let subtotal=this.subtotal;
-                this.subtotal=subtotal.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-            },
-            error => {
-                this.router.navigate(['/principal']);
-            }
-        );
-    }
-    ionViewDidEnter() {
-        this.accionBotonPagar(0);
-        $("#radioDomicilio").prop("checked", true).trigger("click");
-        this.mensajeInventario="";
-        this.nativeStorage.getItem('app')
-        .then(
-            app => {
-                console.log("==APP DATA==");
-                console.log(app);
-                console.log("uuid_cliente: "+app.uuid_cliente);
-                this.uuidcliente=app.uuid_cliente;
-                this.taskService.getDireccionCliente(app.uuid_cliente)
-                .subscribe(direcciones => {
-                    this.direcciones = direcciones;
-                });
-            },
-            error => console.error("NO HAY UUID_CLIENTE")
-        );
-        this.actualizarTotales();
     }
     accionBotonPagar(accion,primera=true){
         if(accion==1){//show
