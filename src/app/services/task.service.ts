@@ -211,7 +211,7 @@ export class TaskService {
     }
     updateNotificacion(task: Notificacion,uuid_cliente:any,uuid:any) {
         // const path = `${this.api}/todos/${id}`;
-        const path = `${this.api}/notificaciones?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`
+        const path = `${this.api}/notificaciones_detalles?uuid_cliente=eq.${uuid_cliente}&uuid_notificacion=eq.${uuid}`
         return this.http.patch<Task>(path,task);
     }
     getAllBanners(){
