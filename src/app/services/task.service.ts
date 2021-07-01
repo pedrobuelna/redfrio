@@ -393,4 +393,9 @@ export class TaskService {
         const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
         return this.http.get < any > (path);
     }
+    setTokenId(data:any) {
+        const path = `${this.api}/rpc/setpushid`;
+        return this.http.post<any>(path, data);
+        
+    }
 }

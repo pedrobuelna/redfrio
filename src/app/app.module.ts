@@ -26,6 +26,7 @@ import { INotificationPayload } from 'cordova-plugin-fcm-with-dependecy-updated'
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { TaskService } from '../app/services/task.service';
 import { FCMPlugin } from '../../plugins/cordova-plugin-fcm-with-dependecy-updated/src/www/FCMPlugin';
+import { uuid_usuario } from './interfaces/task';
 
 registerLocaleData(localeMx,'ex-MX');
 @NgModule({
@@ -52,11 +53,28 @@ export class AppModule {
     public hasPermission: boolean;
     public token: string;
     public pushPayload: INotificationPayload;
+    public plataforma:string;
     constructor(private platform: Platform, private fcm: FCM,private taskService: TaskService,private nativeStorage: NativeStorage) {
         this.setupFCM();
     }
+    ngOnInit(){
+        console.log('Push id token');
+        console.log(this.token);
+    }
+    ionViewDidEnter(){
+        console.log('Push id token');
+        console.log(this.token);
+    }
     private async setupFCM() {
     await this.platform.ready();
+    if (this.platform.is('android')) {
+        this.plataforma="android";
+        console.log("running on Android device!");
+    }
+    if (this.platform.is('ios')) {
+        this.plataforma="ios";
+        console.log("running on iOS device!");
+    }
     console.log('FCM setup started');
 
     if (!this.platform.is('cordova')) {
@@ -73,13 +91,28 @@ export class AppModule {
         .then(
             app => {
                 console.log("ACTUALIZANDO PUSH_ID!!");
-                console.log("uuid_cliente: " + app.uuid_cliente);
-                console.log("push_id: " + this.token);
-                this.taskService.updInfoPerfil(app.uuid_cliente,{push_id:this.token}).subscribe(data=>{
-                    console.log("PATCH PERFIL");
+                let pushData={
+                    uuidcliente:app.uuid_cliente,
+                    tokendevice:this.token,
+                    deviceplatform:this.plataforma
+                }
+                console.log(pushData);
+                this.taskService.setTokenId(pushData).subscribe(data=>{
+                    console.log("SET TOKEN ID");
                 });
             },
-            error => console.error("NO HAY UUID_CLIENTE")
+            error =>{ 
+                console.error("NO HAY UUID_CLIENTE");
+                let pushData={
+                    uuidcliente:"",
+                    tokendevice:this.token,
+                    deviceplatform:this.plataforma
+                }
+                console.log(pushData);
+                this.taskService.setTokenId(pushData).subscribe(data=>{
+                    console.log("SET TOKEN ID");
+                });
+            }
         );
     });
 
@@ -97,17 +130,28 @@ export class AppModule {
     this.nativeStorage.getItem('app')
     .then(
         app => {
-            console.log("ACTUALIZANDO PUSH_ID GET TOKEN!!");
-            console.log("uuid_cliente: " + app.uuid_cliente);
-            console.log("push_id: " + this.token);
-            this.taskService.updInfoPerfil(app.uuid_cliente,{push_id:this.token}).subscribe(data=>{
-                console.log("Se envio push_id");
+            console.log("ACTUALIZANDO PUSH_ID GET TOKEN UUID CLIENTE!!");
+            let pushData={
+                uuidcliente:app.uuid_cliente,
+                tokendevice:this.token,
+                deviceplatform:this.plataforma
+            }
+            console.log(pushData);
+            
+            this.taskService.setTokenId(pushData).subscribe(data=>{
+                console.log("SET TOKEN ID");
             });
         },
         error =>{
             console.error("NO HAY UUID_CLIENTE");
-            this.taskService.updInfoPerfil("1",{push_id:this.token}).subscribe(data=>{
-                console.log("Se envio push_id");
+            let pushData={
+                uuidcliente:"",
+                tokendevice:this.token,
+                deviceplatform:this.plataforma
+            }
+            console.log(pushData);
+            this.taskService.setTokenId(pushData).subscribe(data=>{
+                console.log("SET TOKEN ID");
             });
         }
     );
