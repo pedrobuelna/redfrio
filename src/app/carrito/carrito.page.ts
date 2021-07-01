@@ -138,27 +138,27 @@ export class CarritoPage implements OnInit {
         );
 
     }
-    calcularTotales(){
-        console.log("Obteniendo totales");
-        let total = 0;
-        $(".precio").each(function (i) {
-            let uuid_producto=$(this).attr('id');
-            let precio=$(this).text().replace('$','');
-            precio=precio.replace(',','');
-            console.log(parseFloat(precio)+" * "+parseInt($("#cantidad_"+uuid_producto).val()));
-            total = total + (precio * parseInt($("#cantidad_"+uuid_producto).val()))
-            //total = total + (parseFloat($(this).text().replace('$','')) * parseInt($(".cantidad").val()))
-        })
-        console.log('==TOTAL==');
-        console.log(total);
-        this.nativeStorage.setItem('totalCompra',total).then(
-            ()=>console.log("Se guardo el total de la compra"),
-            error=>console.log("Error al guardar el total de la compra")
-        );
-        var t = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
-        $(".subtotal_numero").text("$ " + t);
-        $(".total_btnpago").text(t);
-    }
+    // calcularTotales(){
+    //     console.log("Obteniendo totales");
+    //     let total = 0;
+    //     $(".precio").each(function (i) {
+    //         let uuid_producto=$(this).attr('id');
+    //         let precio=$(this).text().replace('$','');
+    //         precio=precio.replace(',','');
+    //         console.log(parseFloat(precio)+" * "+parseInt($("#cantidad_"+uuid_producto).val()));
+    //         total = total + (precio * parseInt($("#cantidad_"+uuid_producto).val()))
+    //         //total = total + (parseFloat($(this).text().replace('$','')) * parseInt($(".cantidad").val()))
+    //     })
+    //     console.log('==TOTAL==');
+    //     console.log(total);
+    //     this.nativeStorage.setItem('totalCompra',total).then(
+    //         ()=>console.log("Se guardo el total de la compra"),
+    //         error=>console.log("Error al guardar el total de la compra")
+    //     );
+    //     var t = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+    //     $(".subtotal_numero").text("$ " + t);
+    //     $(".total_btnpago").text(t);
+    // }
     
     mas(uuid_producto,producto){
         let cantidad = producto.cantidad +=1;
@@ -195,7 +195,13 @@ export class CarritoPage implements OnInit {
                         this.carritoProductos=dataCarrito;
                         this.flag_viable_paqueteria = 0
                         this.flag_inventario = 0
+                        console.log("Productos carrito");
+                        let total=0;
                         for(let i=0;i<this.carritoProductos.length;i++){
+                            console.log(this.carritoProductos[i]);
+                            let precio=this.carritoProductos[i].precio.replace('$','').replace(',','');
+                            let cantidad = this.carritoProductos[i].cantidad;
+                            total+=precio*cantidad;
                             this.cantidadMaximaProducto[this.carritoProductos[i].uuid_producto]=this.carritoProductos[i].inventario;
                             this.taskService.validarImg(this.carritoProductos[i].url_img1).then(()=>{},e=>{this.carritoProductos[i].url_img1="../../assets/images/Icono_Reacsa.png"});
                             // if(this.carritoProductos[i].viable_paqueteria==1){//No es un gas
@@ -211,7 +217,11 @@ export class CarritoPage implements OnInit {
                         console.log("==CANTIDAD MAXIMA PRODUCTO==");
                         console.log(this.cantidadMaximaProducto);
                         console.log("flag_viable_paqueteria:"+this.flag_viable_paqueteria)
-                        console.log("flagInventario:"+this.flag_inventario)
+                        console.log("flagInventario:"+this.flag_inventario);
+
+                        var t = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
+                        $(".subtotal_numero").text("$ " + t);
+                        $(".total_btnpago").text(t);
                         //this.calcularTotales();
                     });
                     },
@@ -226,17 +236,17 @@ export class CarritoPage implements OnInit {
     ngOnInit() {
         console.log('ngOnInit');
         this.validarFlags();
-        setTimeout(() => { this.calcularTotales(); }, 300);
+        //setTimeout(() => { this.calcularTotales(); }, 300);
     }
     ionViewWillEnter() {
         console.log('ionViewWillEnter');
         this.validarFlags();
-        setTimeout(()=>{ this.calcularTotales(); }, 300);
+        //setTimeout(()=>{ this.calcularTotales(); }, 300);
     }
     ionViewDidEnter() {
         console.log('ionViewDidEnter');
         this.validarFlags();
-        setTimeout(()=>{ this.calcularTotales(); }, 300);
+        //setTimeout(()=>{ this.calcularTotales(); }, 300);
         //this.calcularTotales()
 
     }
