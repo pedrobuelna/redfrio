@@ -71,7 +71,7 @@ export class CarritoPage implements OnInit {
                                 if(dataCarrito.length<1){
                                     this.router.navigate(['/principal']);
                                 }
-                                this.calcularTotales();
+                                //this.calcularTotales();
                                 this.validarFlags();
                             },
                             error => console.error('Error storing item', error)
