@@ -96,6 +96,7 @@ export class AppModule {
                     tokendevice:this.token,
                     deviceplatform:this.plataforma
                 }
+                console.log("upd pedro")
                 console.log(pushData);
                 this.taskService.setTokenId(pushData).subscribe(data=>{
                     console.log("SET TOKEN ID");
