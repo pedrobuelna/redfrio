@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.reacsa_movil" version="9.16.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Reacsa Movil</name>
+    <name>Reacsa Móvil</name>
+    <!-- <widget id="io.reacsamovil" version="9.16.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Reacsa Movil</name> IOS -->
     <description>Aplicacion mobil de venta de productos</description>
     <author email="pedrobuelna@gmail.com" href="http://ionicframework.com/">Pedro Arturo Buelna Fausto</author>
     <content src="index.html" />
