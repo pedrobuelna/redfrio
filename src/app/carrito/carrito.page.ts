@@ -12,6 +12,7 @@ import {
     DbService
 } from '../services/db.service';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Platform } from '@ionic/angular';
 import { uuid_usuario } from '../interfaces/task';
 
 
@@ -26,7 +27,8 @@ export class CarritoPage implements OnInit {
         private router: Router,
         private db: DbService,
         private taskService: TaskService,
-        private nativeStorage: NativeStorage
+        private nativeStorage: NativeStorage,
+        private platform: Platform
     ) {}
     subtotal:any;
     notificaciones: any;
@@ -177,7 +179,8 @@ export class CarritoPage implements OnInit {
             this.updCantidad(uuid_producto,cantidad);
         }
     }
-    validarFlags(){
+    async validarFlags(){
+        await this.platform.ready();
         this.nativeStorage.getItem('carrito')
         .then(
             carrito => {
