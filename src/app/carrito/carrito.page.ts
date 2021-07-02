@@ -222,6 +222,11 @@ export class CarritoPage implements OnInit {
                         console.log("flag_viable_paqueteria:"+this.flag_viable_paqueteria)
                         console.log("flagInventario:"+this.flag_inventario);
 
+                        this.nativeStorage.setItem('totalCompra',total).then(
+                            ()=>console.log("Se guardo el total de la compra"),
+                            error=>console.log("Error al guardar el total de la compra")
+                        );
+
                         var t = total.toLocaleString(undefined,{ minimumFractionDigits: 2 });
                         $(".subtotal_numero").text("$ " + t);
                         $(".total_btnpago").text(t);
