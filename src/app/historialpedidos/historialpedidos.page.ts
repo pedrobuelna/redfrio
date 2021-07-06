@@ -29,13 +29,13 @@ export class HistorialpedidosPage implements OnInit {
         error => console.error("NO HAY UUID_CLIENTE")
     );
   }
-  detalle_pedido(id_carrito){
-    console.log("CARRITO: "+id_carrito)
-    this.router.navigate(['/historialdetallepedidos'], {
-        queryParams: {
-          id_carrito: id_carrito
-        }
-    });
-}
+    detalle_pedido(id_carrito){
+        console.log("CARRITO: "+id_carrito)
+        this.router.navigate(['/historialdetallepedidos'], {
+            queryParams: {
+            id_carrito: id_carrito
+            }
+        });
+    }
   
 }
