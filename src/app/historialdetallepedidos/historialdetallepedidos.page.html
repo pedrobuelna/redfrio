@@ -4,50 +4,49 @@
     <br>
     <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="12" class="productos_carrusel">
       <div *ngIf="i==0">
-        <b>Nombre:</b> <p>{{detalle_pedido.nombre_cliente}}</p>
+        <b>Nombre:</b> <p>{{detalle_pedido.nombre}}</p>
         <b>Numero de Pedido:</b><p>{{detalle_pedido.folio_pedido}}</p>
         <b>Fecha del pedido:</b><p>{{detalle_pedido.fecha_pago | date:'dd/MM/yyyy'}}</p>
         <b>Costo de envío: </b><p>{{detalle_pedido.costo_envio}}</p>
-        <b>Subtotal: </b> {{comprasubtotal | currency}} <br>
-        <b>IVA: </b> {{detalle_pedido.iva}}% <br>
+        <b>Subtotal: </b> {{subtotalprincipal | currency}} <br>
+        <b>IVA: </b> {{iva}}% <br>
         <b>Total: </b>{{total | currency}}
       </div>  
     </ion-col>
-    <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(detalle_pedido.uuid_producto)">
-      <div id="content_producto_carrusel" [class.last]="last">
-        <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
-        <img src="{{detalle_pedido.imagen}}" alt="imgblanca.png">
-        <div class="content_producto_textos">
-          <p><span class="titletxt1">{{detalle_pedido.producto}}</span><br></p>
-          <p>{{detalle_pedido.desc_corta}}</p>
-          <p>{{detalle_pedido.marca}}</p>
-          <b>No. de Parte: </b>{{detalle_pedido.sku}} <br>
-          <b>Cantidad: </b>{{detalle_pedido.cantidad}} <br>
-          <b>Precio: </b>{{detalle_pedido.precio}} <br>
-          
-          <b>Subtotal: </b>{{detalle_pedido.subtotal}}<br>
-          <b>Total: </b>{{total | currency}}
+      <ion-col *ngFor="let detalle_pedido of detalle_pedidos;let i = index;let last = last;" size="6" class="productos_carrusel" (click)="onclickProducto(detalle_pedido.uuid_producto)">
+        <div id="content_producto_carrusel" [class.last]="last">
+          <img src="../../assets/images/nuevo.png" alt="nuevo" class="marks">
+          <img src="{{detalle_pedido.imagen}}" alt="imgblanca.png">
+          <div class="content_producto_textos">
+            <p><span class="titletxt1">{{detalle_pedido.producto}}</span><br></p>
+            <p>{{detalle_pedido.desc_corta}}</p>
+            <p>{{detalle_pedido.marca}}</p>
+            <b>No. de Parte: </b>{{detalle_pedido.sku}} <br>
+            <b>Cantidad: </b>{{detalle_pedido.cantidad}} <br>
+            <b>Precio: </b>{{detalle_pedido.precio}} <br>
+            <b>Subtotal: </b>{{detalle_pedido.subtotal}}<br>
+            <b>Total: </b>{{totalx2[i] | currency}}
+          </div>
         </div>
-      </div>
       </ion-col>
   </ion-row>
   <div class="content_menu">
     <ul>
       <li>
-        <img src="../../assets/images/listado_menu.png" (click)="onclickCategorias()">
+        <img src="../../assets/images/Menu.svg" (click)="onclickCategorias()">
       </li>
       <li>
-        <img src="../../assets/images/ubicacion_menu.png" (click)="onclickUbicaciones()">
+        <img src="../../assets/images/Sucursales.svg" (click)="onclickUbicaciones()">
       </li>
       <li>
-        <img src="../../assets/images/reacsa_menu.png" (click)="onclickMenu()">
+        <img src="../../assets/images/Logo.svg" (click)="onclickMenu()">
       </li>
       <li>
-        <img src="../../assets/images/alertas_menu.png" (click)="onclickNotificaciones()">
+        <img src="../../assets/images/Notificacion.svg" (click)="onclickNotificaciones()">
           <span *ngIf="cantidadNot!=0" class="cantidad">{{cantidadNot}}</span>
       </li>
       <li>
-        <img src="../../assets/images/usuario_menu.png" (click)="onclickUsuario()">
+        <img src="../../assets/images/Perfil.svg" (click)="onclickUsuario()">
       </li>
     </ul>
   </div>

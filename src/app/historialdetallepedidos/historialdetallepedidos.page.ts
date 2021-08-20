@@ -22,7 +22,12 @@ export class HistorialdetallepedidosPage implements OnInit {
     total:any;
     envio:any;
     iva:any;
+    subtotalprincipal:any;
+    ivaprincipal:any;
+    totalx:any;
+    totalx2:any = [];
   ngOnInit() {
+
   }
   onclickProducto(id) {
     this.router.navigate(['/producto'], {
@@ -36,16 +41,28 @@ export class HistorialdetallepedidosPage implements OnInit {
     console.log("PARAM CARRITOID: "+ this.id_carrito)
     this.taskService.getDetallePedidos(this.id_carrito)
     .subscribe(detalle_pedidos => { 
-        this.detalle_pedidos = detalle_pedidos
-        console.log(this.detalle_pedidos[0]);
         let subtotal=0;
-        for(let i = 0; i < this.detalle_pedidos.length; i++){
-            console.log("index a : " + i);
-            console.log(this.detalle_pedidos[i]);
-            this.taskService.validarImg(this.detalle_pedidos[i].imagen).then(() => {
+        for(let i = 0; i < detalle_pedidos.length; i++){
+            // console.log("index a : " + i);
+            // console.log(detalle_pedidos[i]);
+            this.iva = detalle_pedidos[0].iva * 100;
+            this.totalx = parseFloat(detalle_pedidos[i].subtotal.replace('$','').replace(',',''));
+            // console.log("iva pe" + this.iva)
+            // console.log("subtotal cada 1 " + this.totalx)
+            if(this.iva==8){
+                this.totalx2[i] = this.totalx * 1.08
+            }else{
+                this.totalx2[i] = this.totalx * 1.16
+            }
+            //console.log("subtotal cada 1 sacado total" + this.totalx2[i])
+            if(detalle_pedidos.costo_envio == null){
+                detalle_pedidos[i].costo_envio = 0
+            }
+            this.taskService.validarImg(detalle_pedidos[i].imagen).then(() => {
             }, e => {
-                this.detalle_pedidos[i].imagen = "../../assets/images/Icono_Reacsa.png"
+                detalle_pedidos[i].imagen = "../../assets/images/Icono_Reacsa.png"
             });
+            
         }
         detalle_pedidos.forEach(detalle => {
             console.log(detalle.subtotal.replace('$','').replace(',',''))
@@ -54,9 +71,13 @@ export class HistorialdetallepedidosPage implements OnInit {
         let tp=String(detalle_pedidos[0].costo_envio).replace('$','').replace(',','');
         this.envio = parseFloat(tp);
         this.comprasubtotal = subtotal/1.16;
-        this.iva=parseFloat(this.comprasubtotal)*.16;
-        this.total = subtotal;//(subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
+        //this.iva=parseFloat(this.comprasubtotal)*.16;
+        this.iva = detalle_pedidos[0].iva * 100;
+        this.total = subtotal + ( subtotal* detalle_pedidos[0].iva) + parseFloat(detalle_pedidos[0].costo_envio);//(subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
+        this.subtotalprincipal = subtotal ;
         console.log("detalle_pedidos: ", detalle_pedidos)
+        this.detalle_pedidos = detalle_pedidos
+        console.log(this.detalle_pedidos[0]);
     });
     this.nativeStorage.getItem('app')
     .then(
