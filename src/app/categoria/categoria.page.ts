@@ -16,6 +16,7 @@ import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
 import { LoadingController } from '@ionic/angular';
+
 @Component({
     selector: 'app-categoria',
     templateUrl: './categoria.page.html',
@@ -59,21 +60,7 @@ export class CategoriaPage implements OnInit {
           
         }
     }
-    showLoader() {
-        this.loadingController.create({
-          message: 'Buscando productos...'
-        }).then((res) => {
-          res.present();
-        });
-    }
-    // Hide the loader if already created otherwise return error
-    hideLoader() {
-        this.loadingController.dismiss().then((res) => {
-            console.log('Busqueda de productos terminada!', res);
-        }).catch((error) => {
-            console.log('error', error);
-        });
-    }
+    
     submitForm() {
         this.isSubmitted = true;
         console.log(this.ionicForm.valid)
@@ -153,7 +140,8 @@ export class CategoriaPage implements OnInit {
         this.route.queryParams.subscribe(queryParams => this.x = queryParams.id);
         console.log("Valor queryParams");
         console.log(this.valorSelect);
-        this.valorOrdenar = "&order=destacado.desc"
+        this.valorOrdenar = "&order=destacado.desc";
+        //this.valorOrdenar = "&order=destacado.desc&limit=50&offset=100"
         this.taskService.getFamilias()
             .subscribe(familias => {
                 this.familias = familias;
@@ -166,9 +154,9 @@ export class CategoriaPage implements OnInit {
             .then(
                 app => {
                     let listaPrecio={idlistaprecio:app.lista_precio_id}
+                    console.log("ListaPrecio Pedro: " + listaPrecio.idlistaprecio)
                     this.taskService.getAllProductos(listaPrecio)
                     .subscribe(productos2 => {
-                        this.hideLoader();
                         this.productos2 = productos2;
                         this.totalproductos = productos2.length;
                         for (let i = 0; i < this.productos2.length; i++) {
@@ -178,8 +166,8 @@ export class CategoriaPage implements OnInit {
                                 this.productos2[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                             });
                         }
-                        
                     });
+                    this.hideLoader();
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
@@ -192,7 +180,6 @@ export class CategoriaPage implements OnInit {
                     let ordernarpor = $("#categoria_select2").val();
                     this.taskService.getProductos(this.x, ordernarpor,listaPrecio)
                         .subscribe(productos2 => {
-                            this.hideLoader();
                             this.productos2 = productos2;
                             this.totalproductos = productos2.length;
                             for (let i = 0; i < this.productos2.length; i++) {
@@ -202,13 +189,28 @@ export class CategoriaPage implements OnInit {
                                     this.productos2[i].url_img1 = "../../assets/images/Icono_Reacsa.png"
                                 });
                             }
-                            
                         });
+                    this.hideLoader();
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
             //alert("familia "+ x)
         }
+    }
+    showLoader() {
+            this.loadingController.create({
+            message: 'Cargando por favor espere...'
+        }).then((res) => {
+            res.present();
+        });
+    }
+    // Hide the loader if already created otherwise return error
+    hideLoader() {
+        this.loadingController.dismiss().then((res) => {
+            console.log('Loading dismissed!', res);
+        }).catch((error) => {
+            console.log('error', error);
+        });
     }
     ionViewDidLeave(){
         this.ionicForm.value.busqueda="";
@@ -252,6 +254,7 @@ export class CategoriaPage implements OnInit {
                     this.notificaciones = notificaciones;
                     this.cantidadNot = this.notificaciones.length
                 });
+                this.hideLoader();
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
@@ -288,13 +291,17 @@ export class CategoriaPage implements OnInit {
         this.router.navigate(['/editarperfil']);
     }
     onclickProducto(id) {
+        // this.showLoader();
+
         this.router.navigate(['/producto'], {
             queryParams: {
                 id: id
             }
         });
+        // this.hideLoader();
     }
     onClickCarrito() {
         this.router.navigate(['/carrito']);
     }
+    
 }

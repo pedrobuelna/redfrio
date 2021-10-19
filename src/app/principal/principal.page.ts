@@ -22,8 +22,7 @@ import {
 import {
     Network
 } from '@ionic-native/network/ngx';
-
-
+import { LoadingController } from '@ionic/angular';
 @Component({
     selector: 'app-principal',
     templateUrl: './principal.page.html',
@@ -71,9 +70,8 @@ export class PrincipalPage implements OnInit {
     cantidadActualCarrito: number;
     AppData: any[] = [];
     subscription:any;
-    
-    
     constructor(
+        public loadingController: LoadingController,
         private router: Router,
         private renderer: Renderer2,
         private taskService: TaskService,
@@ -83,6 +81,23 @@ export class PrincipalPage implements OnInit {
         private nativeStorage: NativeStorage
     ) {
     }
+    showLoader() {
+        this.loadingController.create({
+          message: 'Cargando por favor espere...'
+        }).then((res) => {
+          res.present();
+        });
+    
+      }
+      // Hide the loader if already created otherwise return error
+      hideLoader() {
+        this.loadingController.dismiss().then((res) => {
+          console.log('Loading dismissed!', res);
+        }).catch((error) => {
+          console.log('error', error);
+        });
+    
+      }
     addMyClass() {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
@@ -191,11 +206,13 @@ export class PrincipalPage implements OnInit {
         this.router.navigate(['/editarperfil']); 
     }
     onClickProducto(id) {
+        this.showLoader();
         this.router.navigate(['/producto'], {
             queryParams: {
                 id: id
             }
         });
+        this.hideLoader();
     }
     onClickCarrito() {
         this.router.navigate(['/carrito']);

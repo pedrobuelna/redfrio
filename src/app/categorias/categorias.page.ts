@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { Task, Sucursal } from '../interfaces/task';
+import { LoadingController } from '@ionic/angular';
 import {
     NativeStorage
 } from '@ionic-native/native-storage/ngx';
@@ -14,6 +15,7 @@ import {
 export class CategoriasPage implements OnInit {
   ionicForm: FormGroup;
   constructor(
+      public loadingController: LoadingController,
       private formBuilder: FormBuilder,
       private router: Router,
       private taskService: TaskService,
@@ -134,13 +136,32 @@ export class CategoriasPage implements OnInit {
     this.router.navigate(['/editarperfil']);
   }
   onclickCategoria(id){
-      console.log("Familia==>");
-      console.log(id);
+    console.log("Familia==>");
+    console.log(id);
+    // this.showLoader();
     this.router.navigate(['/categoria'], {
       queryParams: {
           id: id
       }
     });
+    
+  }
+  showLoader() {
+    this.loadingController.create({
+      message: 'Cargando por favor espere...'
+    }).then((res) => {
+      res.present();
+    });
+
+  }
+  // Hide the loader if already created otherwise return error
+  hideLoader() {
+    this.loadingController.dismiss().then((res) => {
+      console.log('Loading dismissed!', res);
+    }).catch((error) => {
+      console.log('error', error);
+    });
+
   }
   onClickCarrito(){
     this.router.navigate(['/carrito']);

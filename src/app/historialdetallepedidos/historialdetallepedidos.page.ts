@@ -50,12 +50,15 @@ export class HistorialdetallepedidosPage implements OnInit {
             // console.log("iva pe" + this.iva)
             // console.log("subtotal cada 1 " + this.totalx)
             if(this.iva==8){
-                this.totalx2[i] = this.totalx * 1.08
+                //this.totalx2[i] = this.totalx * 1.08
+                this.totalx2[i] = this.totalx 
             }else{
-                this.totalx2[i] = this.totalx * 1.16
+                //this.totalx2[i] = this.totalx * 1.16
+                this.totalx2[i] = this.totalx
             }
             //console.log("subtotal cada 1 sacado total" + this.totalx2[i])
-            if(detalle_pedidos.costo_envio == null){
+            console.log("valor del costo de envio "+detalle_pedidos[i].costo_envio)
+            if(detalle_pedidos[i].costo_envio == null){
                 detalle_pedidos[i].costo_envio = 0
             }
             this.taskService.validarImg(detalle_pedidos[i].imagen).then(() => {
@@ -73,11 +76,17 @@ export class HistorialdetallepedidosPage implements OnInit {
         this.comprasubtotal = subtotal/1.16;
         //this.iva=parseFloat(this.comprasubtotal)*.16;
         this.iva = detalle_pedidos[0].iva * 100;
-        this.total = subtotal + ( subtotal* detalle_pedidos[0].iva) + parseFloat(detalle_pedidos[0].costo_envio);//(subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
-        this.subtotalprincipal = subtotal ;
+        
+        //this.total = subtotal + ( subtotal* detalle_pedidos[0].iva) + parseFloat(detalle_pedidos[0].costo_envio);
+        
+        //(subtotal + parseFloat(this.envio)) + ((subtotal + parseFloat(this.envio)) * .16);
+        this.subtotalprincipal = subtotal + this.envio;
+        this.total = this.subtotalprincipal + (this.subtotalprincipal* detalle_pedidos[0].iva)
+        console.log("Total: "+this.subtotalprincipal)
         console.log("detalle_pedidos: ", detalle_pedidos)
         this.detalle_pedidos = detalle_pedidos
         console.log(this.detalle_pedidos[0]);
+
     });
     this.nativeStorage.getItem('app')
     .then(
