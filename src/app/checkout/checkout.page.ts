@@ -410,7 +410,7 @@ export class CheckoutPage implements OnInit {
                         this.validacionInventario2(domicilio)
                     }else{
                         this.mensajeInventario="";
-                        this.mensajeInventario+="Actualmente no es posible enviar al código postal "+d.cp+" de su dirección";
+                        this.mensajeInventario+="Actualmente no es posible enviar al código postal "+d.cp+" de su dirección<br>";
                         //$('#btnPagar').hide();
                         this.accionBotonPagar(0);
                     }
@@ -440,7 +440,7 @@ export class CheckoutPage implements OnInit {
                                     console.log(inventario);
                                     let todosDisponibles=true;
                                     if(parseInt(inventario.total_unidades)<1 || articulo.cantidad>inventario.total_unidades){
-                                        this.mensajeInventario+="El articulo "+articulo.nombre+" no tiene la disponibilidad de la cantidad deseada. Favor de disminuir la cantidad deseada o eliminar del carrito.<br> LA DISPONIBILIDAD ES DE "+inventario.total_unidades+"";
+                                        this.mensajeInventario+="El articulo "+articulo.nombre+" no tiene la disponibilidad de la cantidad deseada. Favor de disminuir la cantidad deseada o eliminar del carrito. LA DISPONIBILIDAD ES DE "+inventario.total_unidades+"";
                                         todosDisponibles=false;
                                         //$('#btnPagar').hide();
                                         this.accionBotonPagar(0);
@@ -528,7 +528,7 @@ export class CheckoutPage implements OnInit {
                                     console.log(inventario);
                                     let todosDisponibles=true;
                                     if(parseInt(inventario.cantidad)<1 || articulo.cantidad>inventario.cantidad){
-                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no se encuentra disponible en la sucursal o a superado la cantidad disponible en la sucursal seleccionada, elimine el producto o disminuya la cantidad para poder pagar o elige otra tienda. Cantidad máxima: "+inventario.cantidad+"</div><br>";
+                                        this.mensajeInventario+="<div> El articulo "+articulo.nombre+" no se encuentra disponible en la sucursal o ha superado la cantidad disponible en la sucursal seleccionada, elimine el producto o disminuya la cantidad para poder pagar o elige otra tienda. <br>Cantidad máxima: "+inventario.cantidad+"</div><br>";
                                         todosDisponibles=false;
                                         //$('#btnPagar').hide();
                                         this.accionBotonPagar(0);
@@ -589,7 +589,7 @@ export class CheckoutPage implements OnInit {
             if(credito[0].has_credit==0){
                 this.accionBotonPagar(0,primera);
                 this.mensajeInventario="";
-                this.mensajeInventario+="Lo sentimos NO cuentas con saldo suficiente.";
+                this.mensajeInventario+="Lo sentimos NO cuentas con saldo suficiente.<br>";
             }else{
                 this.accionBotonPagar(1,primera);
             }
