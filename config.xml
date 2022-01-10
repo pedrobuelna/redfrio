@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.reacsamovil" version="9.16.08" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.reacsamovil" version="9.16.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Reacsa Movil</name>
-    <description>Aplicacion mobil de venta de productos</description>
+    <description>Aplicacion movil de venta de productos</description>
     <author email="pedrobuelna@gmail.com" href="http://ionicframework.com/">Pedro Arturo Buelna Fausto</author>
     <content src="index.html" />
     <preference name="AndroidXEnabled" value="true" />
     <preference name="android-minSdkVersion" value="22" />
-    <preference name="android-targetSdkVersion" value="29" />
+    <preference name="android-targetSdkVersion" value="30" />
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="http://*/*" />

@@ -26,14 +26,14 @@ import { uuid_usuario } from '../interfaces/task';
 
 export class TaskService {
     //Operativo
-    // private api = 'https://app.reacsa.mx:3001';
-    // private apiMail = 'https://app.reacsa.mx';
-    // private apiSAP = 'https://app.reacsa.mx:3003';
+    private api = 'https://app.reacsa.mx:3001';
+    private apiMail = 'https://app.reacsa.mx';
+    private apiSAP = 'https://app.reacsa.mx:3003';
 
     //Pruebas
-    private api='https://qas.reacsa.mx:3001';
-    private apiMail = 'https://qas.reacsa.mx';
-    private apiSAP='https://qas.reacsa.mx:3003';
+    // private api='https://qas.reacsa.mx:3001';
+    // private apiMail = 'https://qas.reacsa.mx';
+    // private apiSAP='https://qas.reacsa.mx:3003';
     
     constructor(
         private http: HttpClient,

@@ -81,23 +81,23 @@ export class PrincipalPage implements OnInit {
         private nativeStorage: NativeStorage
     ) {
     }
-    showLoader() {
-        this.loadingController.create({
-          message: 'Cargando por favor espere...'
-        }).then((res) => {
-          res.present();
-        });
+    // showLoader() {
+    //     this.loadingController.create({
+    //       message: 'Cargando por favor espere...'
+    //     }).then((res) => {
+    //       res.present();
+    //     });
     
-      }
+    //   }
       // Hide the loader if already created otherwise return error
-      hideLoader() {
-        this.loadingController.dismiss().then((res) => {
-          console.log('Loading dismissed!', res);
-        }).catch((error) => {
-          console.log('error', error);
-        });
+    //   hideLoader() {
+    //     this.loadingController.dismiss().then((res) => {
+    //       console.log('Loading dismissed!', res);
+    //     }).catch((error) => {
+    //       console.log('error', error);
+    //     });
     
-      }
+    //   }
     addMyClass() {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
@@ -206,13 +206,13 @@ export class PrincipalPage implements OnInit {
         this.router.navigate(['/editarperfil']); 
     }
     onClickProducto(id) {
-        this.showLoader();
+        //this.showLoader();
         this.router.navigate(['/producto'], {
             queryParams: {
                 id: id
             }
         });
-        this.hideLoader();
+        //this.hideLoader();
     }
     onClickCarrito() {
         this.router.navigate(['/carrito']);

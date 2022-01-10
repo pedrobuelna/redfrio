@@ -349,7 +349,7 @@ export class CheckoutPage implements OnInit {
             direccion = this.ionicForm.value.direccion;
             sucursal=0;
         }
-        let rutaPlataforma= ((this.platform.is('android'))?"http://localhost":"https://qas.reacsa.mx:3004/mpios");
+        let rutaPlataforma= ((this.platform.is('android'))?"http://localhost":"https://app.reacsa.mx:3004/mpios");
         let postData = 
         {
             "items": [
@@ -363,7 +363,7 @@ export class CheckoutPage implements OnInit {
                 "success": rutaPlataforma+"/pagoexitoso?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
                 "failure": rutaPlataforma+"/carrito",
                 "pending": rutaPlataforma+"/pagopendiente?tipo_envio="+tipo_envio+"&sucursal="+sucursal+"&direccion="+direccion+"&total="+this.paymentAmount+"&uuidCliente="+this.uuidcliente+"&uuidCarrito="+this.uuidCarrito,
-                "notification_url":"https://qas.reacsa.mx:3004/notificacion_mp",
+                "notification_url":"https://app.reacsa.mx:3004/notificacion_mp",
             },
             "auto_return": "approved",
             "tipoEnvio":tipo_envio,
@@ -373,8 +373,8 @@ export class CheckoutPage implements OnInit {
         console.log("POST DATA MP");
         console.log(postData);
         const headers = new HttpHeaders({
-            // "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
-            "Authorization":"Bearer TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
+            "Authorization":"Bearer APP_USR-2911076993776931-012717-8fa842da5ecd106614b29615b7ac9edb-653952398",
+            //"Authorization":"Bearer TEST-2911076993776931-012717-e1076c951bf583a0ca2fddd6044de370-653952398",
             "cache-control": "no-cache",
             "Content-Type":"application/json"
         }); 

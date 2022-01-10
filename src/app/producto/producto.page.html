@@ -100,7 +100,7 @@
             </p>
             <div class="precios">
                 <span class="precio1"> {{producto.precio}}</span>
-                <span *ngIf="producto.precio_viejo" class="precio2">&nbsp;<s>{{producto.precio_viejo}}</s></span> <span *ngIf="producto.precio">+ IVA</span>
+                <span *ngIf="producto.precio_viejo" class="precio2">&nbsp;<s>{{producto.precio_viejo}}</s></span><span *ngIf="producto.precio"> + IVA</span>
             </div>
             <section class="full-width" *ngIf="producto.cantidad==null">
                 <ion-button expand="full" class="btn_agregar">No disponible</ion-button>

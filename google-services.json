@@ -7,6 +7,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:711045146840:android:2732551acc01d770adcfad",
+        "android_client_info": {
+          "package_name": "io.movil_reacsa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711045146840-9n3r1i966gc2k8lebjtpi20icqo98pi2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.movil_reacsa",
+            "certificate_hash": "49aaa2db9f39c10f425a028010d4beefbc32c127"
+          }
+        },
+        {
+          "client_id": "711045146840-ku30g2sbpjroil3dobqrdqnkdcn8c47f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmJ08PcjQVRe2GMpXBqOhfBk_8diWMiqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711045146840-ku30g2sbpjroil3dobqrdqnkdcn8c47f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "711045146840-fsflglg3hhf4jkp394bp5j2chonul44u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.reacsamovil"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:711045146840:android:e1140b9d760e10f7adcfad",
         "android_client_info": {
           "package_name": "io.reacsa_movil"
