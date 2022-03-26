@@ -53,16 +53,21 @@ export class HomePage {
             this.nativeStorage.getItem('app')
             .then(
                 app => {
-                    console.log("==APP DATA==");
-                    console.log(app);
-                    console.log("uuid_cliente: "+app.uuid_cliente);
-                    console.log("BD PEDRO 1: ",app);
-                    if(app.facturacion==true && (app.regimen_fiscal==null ||app.regimen_fiscal==0)){
-                        console.log("enviar a update")
-                        this.navCtrl.navigateRoot(['/editarperfil-update']);
-                    }else{
-                        this.getCarritoInfo(app.uuid_cliente);
-                    }
+                    this.taskService.getDatosCliente(app.uuid_cliente)
+                    .subscribe((data) => {
+                        if (data != null) {
+                            let cliente:any=data[0];
+                            if(cliente.facturacion==true && (cliente.regimen_fiscal==null ||cliente.regimen_fiscal==0)){
+                                this.navCtrl.navigateRoot(['/editarperfil-update']);
+                            }else{
+                                this.getCarritoInfo(cliente.uuid_cliente);
+                            }
+                        } else {
+                            this.presentAlert();
+                        }
+                    }, (err) => {
+                        alert(err)
+                    });
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
@@ -90,6 +95,17 @@ export class HomePage {
                 //this.navCtrl.pop();
             });
         });
+    }
+    
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            cssClass: 'class_alert',
+            //header: 'Alert',
+            //subHeader: 'Subtitle',
+            message: 'El usuario no fue encontrado',
+            buttons: ['OK']
+        });
+        await alert.present();
     }
     iraLogin() {
         this.router.navigate(['/login']);

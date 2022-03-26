@@ -406,4 +406,8 @@ export class TaskService {
         const path = `${this.api}/codigo_postal?cp=eq.${cp}`;
         return this.http.get < any[] > (path);
     }
+    getDatosCliente(uuid_cliente:string){
+        const path = `${this.api}/clientes?uuid_cliente=eq.${uuid_cliente}`;
+        return this.http.get<Task>(path);
+    }
 }

@@ -295,13 +295,11 @@ async presentAlert() {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
     header: 'Actualización de Datos Fiscales',
-    subHeader: 'Para poder continuar emitiéndole facturas a su RFC, le informamos que debe de actualizar sus datos fiscales antes de su siguiente pedido.',
-    message: 'Este mensaje dejara de aparecer automáticamente cuando actualice sus datos fiscales.',
+    subHeader: 'Para poder continuar emitiéndole facturas a su RFC, le informámos que debe de actualizar sus datos fiscales ántes de su siguiente pedído.',
+    message: 'Este mensaje dejará de aparecer automáticamente cuándo actualice sus datos fiscales.',
     buttons: ['ACTUALIZAR DATOS']
   });
   await alert.present();
-  const { role } = await alert.onDidDismiss();
-  console.log('onDidDismiss resolved with role', role);
 }
 submitForm() {
   this.isSubmitted = true;
@@ -359,8 +357,7 @@ submitForm() {
                       if(cliente[0].mail==this.usrMailViejo){
                           if(this.cpExistente==1){
                               this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                                  alert("Tus datos se han actualizado correctamente.");
-                                  this.navCtrl.navigateRoot(['/principal']);
+                                  this.datosActualizados();
                               });
                           }else{
                               alert("Codigo postal incorrecto");
@@ -372,8 +369,7 @@ submitForm() {
                   }else{
                       if(this.cpExistente==1){
                           this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                              alert("Tus datos se han actualizado correctamente.");
-                              this.navCtrl.navigateRoot(['/principal']);
+                              this.datosActualizados();
                           });
                       }else{
                           alert("Codigo postal incorrecto");
@@ -386,6 +382,22 @@ submitForm() {
           error => console.error("NO HAY UUID_CLIENTE")
       );
   }
+}
+async datosActualizados() {
+  const alert = await this.alertController.create({
+      cssClass: 'class_alert',
+      //header: 'Alert',
+      //subHeader: 'Subtitle',
+      message: 'Tus datos se han actualizado correctamente',
+      buttons: [{
+        text:"OK",
+        handler:()=>{
+          this.navCtrl.navigateRoot(['/principal']);
+          console.log("PERRO PERRO PEERRO");
+        }
+      }]
+  });
+  await alert.present();
 }
 onclickNotificaciones() {
   this.router.navigate(['/notificaciones']);

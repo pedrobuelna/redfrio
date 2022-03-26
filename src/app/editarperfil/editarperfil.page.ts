@@ -28,7 +28,7 @@ import {
 import { NavController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 import { Storage } from '@ionic/storage';
-
+import { AlertController } from '@ionic/angular';
 @Component({
     selector: 'app-editarperfil',
     templateUrl: './editarperfil.page.html',
@@ -76,6 +76,7 @@ export class EditarperfilPage implements OnInit {
         private taskService: TaskService,
         public navCtrl: NavController,
         public photoService: PhotoService,
+        public alertController: AlertController,
         private nativeStorage: NativeStorage) {
             this.ionicForm = this.formBuilder.group({
                 nombre: ['', ],
@@ -346,7 +347,7 @@ export class EditarperfilPage implements OnInit {
                             if(cliente[0].mail==this.usrMailViejo){
                                 if(this.cpExistente==1){
                                     this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                                        alert("Tus datos se han actualizado correctamente.");
+                                        this.datosActualizados();
                                     });
                                 }else{
                                     alert("Codigo postal incorrecto");
@@ -358,7 +359,7 @@ export class EditarperfilPage implements OnInit {
                         }else{
                             if(this.cpExistente==1){
                                 this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                                    alert("Tus datos se han actualizado correctamente.");
+                                    this.datosActualizados();
                                 });
                             }else{
                                 alert("Codigo postal incorrecto");
@@ -372,6 +373,21 @@ export class EditarperfilPage implements OnInit {
             );
         }
     }
+    async datosActualizados() {
+        const alert = await this.alertController.create({
+            cssClass: 'class_alert',
+            //header: 'Alert',
+            //subHeader: 'Subtitle',
+            message: 'Tus datos se han actualizado correctamente',
+            buttons: [{
+              text:"OK",
+              handler:()=>{
+                this.navCtrl.navigateRoot(['/principal']);
+              }
+            }]
+        });
+        await alert.present();
+      }
     onclickNotificaciones() {
         this.router.navigate(['/notificaciones']);
     }
