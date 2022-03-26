@@ -155,7 +155,6 @@
       }
     },
     "platforms": [
-      "ios",
       "android"
     ]
   }

@@ -65,6 +65,11 @@ export class EditarperfilPage implements OnInit {
     activa: boolean;
     usrMailViejo:any;
     data:any;
+    cps:any;
+    cpExistente:any;
+    razon_social:any;
+    regimenes:any;
+    regimenGua:any;
     constructor(
         private router: Router,
         public formBuilder: FormBuilder,
@@ -84,7 +89,10 @@ export class EditarperfilPage implements OnInit {
                 rfc: ['', ],
                 uso_cfdi: ['', ],
                 password: ['', ],
-                myBoolean: ['true', []]
+                myBoolean: ['true', ],
+                razon_social: ['', ],
+                regimen_fiscal:['', ],
+                cp: ['', ],
             })
     }
     
@@ -124,13 +132,32 @@ export class EditarperfilPage implements OnInit {
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
-              
+    }
+    prueba(){
+        this.taskService.getCp(this.ionicForm.value.cp)
+            .subscribe(cps => {
+              this.cps = cps;
+                if(cps.length){
+                  this.cpExistente=1;
+                }else{
+                  this.cpExistente=0;
+                }
+            });
     }
     capturarFoto(){
         this.photoService.guardarImagen();
         console.log("IMAGEN DE EDITAR PERFIL");
     }
     ionViewWillEnter(){
+        this.taskService.getCfdi()
+            .subscribe(cfdis => {
+                this.cfdis = cfdis;
+        });
+        this.taskService.getRegimenes()
+        .subscribe(regimenes => {
+            this.regimenes = regimenes;
+            console.log(regimenes)
+        });
         this.nativeStorage.getItem('photos')
         .then(
         data => {
@@ -156,7 +183,8 @@ export class EditarperfilPage implements OnInit {
                     this.taskService.getPerfiles(app.uuid_cliente)
                         .subscribe(perfiles => {
                             console.log(perfiles);
-                            console.log("JALADO: ", perfiles[0].nombre);
+                            console.log("regimen_fiscal PEDRO: ", perfiles[0].regimen_fiscal.toString());
+                            this.regimenGua = perfiles[0].regimen_fiscal
                             this.perfiles = perfiles;
                             this.usrMailViejo = perfiles[0].mail;
                             console.log("ARRE1"+this.usrMailViejo )
@@ -174,10 +202,23 @@ export class EditarperfilPage implements OnInit {
                                 uso_cfdi: [perfiles[0].uso_cfdi, [Validators.required]],
                                 password: ["", [Validators.minLength(8)]],
                                 myBoolean: ['true', ],
+                                regimen_fiscal:[perfiles[0].regimen_fiscal.toString(), [Validators.required]],
+                                cp:[perfiles[0].cp,[Validators.required,Validators.minLength(5),Validators.maxLength(5)]],
+                                razon_social:[perfiles[0].razon_social,[Validators.required]],
                             })
                             if(perfiles[0].rfc=="XAXX010101000"){   
                                 this.ionicForm.get('myBoolean').setValue("false");
                                 this.mostrarDireccion1=false;
+                                this.ionicForm.get('uso_cfdi').setValue("G03");
+                                this.ionicForm.get('regimen_fiscal').setValue("");
+                                this.ionicForm.get('razon_social').setValue("");
+                                this.ionicForm.get('cp').setValue("00000");
+                                console.log("Quitar datos con valores:",this.ionicForm.get('cp'))
+                            }
+                            console.log("VALIDA",perfiles[0].facturacion)
+                            if(perfiles[0].facturacion){
+                                console.log("Entra a validar")
+                                this.cpExistente=1;
                             }
                         });
                 }
@@ -220,28 +261,32 @@ export class EditarperfilPage implements OnInit {
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
-        this.taskService.getCfdi()
-            .subscribe(cfdis => {
-                this.cfdis = cfdis;
-                console.log("cfdis: ", cfdis);
-            });
         this.taskService.getEstados()
         .subscribe(estados => {
             this.estados = estados;
             console.log("estados: ", estados);
         });
     }
-    muestraDireccion2() {
+    muestraDireccion2(){
         if (this.ionicForm.value.myBoolean == true) {
             if(this.ionicForm.value.rfc=="XAXX010101000"){
                 this.ionicForm.get('rfc').setValue("");
                 this.ionicForm.get('uso_cfdi').setValue("");
+                this.ionicForm.get('cp').setValue("");
+                this.ionicForm.get('razon_social').setValue("");
+                this.ionicForm.get('regimen_fiscal').setValue("");
             }
             this.mostrarDireccion1 = true;
-        } else {
+        }else{
             this.ionicForm.get('rfc').setValue("XAXX010101000");
             this.ionicForm.get('uso_cfdi').setValue("G03");
+            this.ionicForm.get('regimen_fiscal').setValue("000");
+            this.ionicForm.get('razon_social').setValue("XXX");
             this.mostrarDireccion1 = false;
+            console.log("Desactivado: " )
+            this.ionicForm.get('cp').setValue("00000");
+            this.cpExistente=1;
+            console.log("valor cp: ", this.ionicForm.value.cp)
         }
     }
     
@@ -249,6 +294,11 @@ export class EditarperfilPage implements OnInit {
         this.isSubmitted = true;
         console.log(this.ionicForm.valid)
         console.log(this.ionicForm.value.myBoolean);
+        console.log(this.ionicForm.value.razon_social)
+        console.log(this.ionicForm.value.regimen_fiscal)
+        console.log(this.ionicForm.value.cp)
+        console.log(this.ionicForm.value.rfc)
+        console.log(this.ionicForm.value.uso_cfdi)
         if (!this.ionicForm.valid) {
             console.log('Please provide all the required values!')
             return false;
@@ -268,7 +318,10 @@ export class EditarperfilPage implements OnInit {
                 persona_fisica: 1,
                 status: "1",
                 uso_cfdi: this.ionicForm.value.uso_cfdi,
-                facturacion:true
+                facturacion:this.ionicForm.value.myBoolean,
+                cp:this.ionicForm.value.cp,
+                razon_social:this.ionicForm.value.razon_social,
+                regimen_fiscal:this.ionicForm.value.regimen_fiscal,
             };
             if(this.ionicForm.value.password!=""){
                 perfil['password']=Md5.hashStr(this.ionicForm.value.password)
@@ -291,18 +344,25 @@ export class EditarperfilPage implements OnInit {
                             console.log("USUARIO2 "+cliente[0].mail)
                             console.log("USUARIO VIEJO2 "+this.usrMailViejo)
                             if(cliente[0].mail==this.usrMailViejo){
-                                this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                                    alert("Tus datos se han actualizado correctamente.");
-                                    // this.router.navigate(['/principal']);
-                                });
+                                if(this.cpExistente==1){
+                                    this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
+                                        alert("Tus datos se han actualizado correctamente.");
+                                    });
+                                }else{
+                                    alert("Codigo postal incorrecto");
+                                }
+                                
                             }else{
                                 alert("El correo ya se encuentra registrado.")
                             }
                         }else{
-                            this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
-                                alert("Tus datos se han actualizado correctamente.");
-                                // this.router.navigate(['/principal']);
-                            });
+                            if(this.cpExistente==1){
+                                this.taskService.updInfoPerfil(app.uuid_cliente,perfil).subscribe(()=>{
+                                    alert("Tus datos se han actualizado correctamente.");
+                                });
+                            }else{
+                                alert("Codigo postal incorrecto");
+                            }
                         }
                       },er=>{});
 

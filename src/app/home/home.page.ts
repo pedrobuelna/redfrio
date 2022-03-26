@@ -56,20 +56,26 @@ export class HomePage {
                     console.log("==APP DATA==");
                     console.log(app);
                     console.log("uuid_cliente: "+app.uuid_cliente);
-                    this.getCarritoInfo(app.uuid_cliente);
+                    console.log("BD PEDRO 1: ",app);
+                    if(app.facturacion==true && (app.regimen_fiscal==null ||app.regimen_fiscal==0)){
+                        console.log("enviar a update")
+                        this.navCtrl.navigateRoot(['/editarperfil-update']);
+                    }else{
+                        this.getCarritoInfo(app.uuid_cliente);
+                    }
                 },
                 error => console.error("NO HAY UUID_CLIENTE")
             );
             let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
                 console.log('network was disconnected :-(');
-                this.ionLoader.showLoader();
+                //this.ionLoader.showLoader();
                 //alert("Desconectado a Inernet");
                 //this.router.navigate(['/sinconexion']);
             });
             //disconnectSubscription.unsubscribe();
             let connectSubscription = this.network.onConnect().subscribe(() => {
                 console.log('network was connected :-)');
-                this.ionLoader.hideLoader();
+                //this.ionLoader.hideLoader();
                 // alert("Conectado a Inernet");
                 //     this.nativeStorage.getItem('app')
                 //     .then(
@@ -130,9 +136,14 @@ export class HomePage {
         .then(
             app => {
                 console.log("==APP DATA==");
-                console.log(app);
+                console.log("BD PEDRO 2: ",app);
                 console.log("uuid_cliente: "+app.uuid_cliente);
-                this.getCarritoInfo(app.uuid_cliente);
+                if(app.facturacion==true  && (app.regimen_fiscal==null || app.regimen_fiscal==0)){
+                    console.log("enviar a update")
+                    this.navCtrl.navigateRoot(['/editarperfil-update']);
+                }else{
+                    this.getCarritoInfo(app.uuid_cliente);
+                }
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );

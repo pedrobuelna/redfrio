@@ -12,6 +12,9 @@ export interface Task {
   password: string;
   status: string;
   uso_cfdi: string;
+  cp:string;
+  razon_social:string;
+  regimen_fiscal:string;
 }
 export interface Sucursal {
   sucursal: string;
@@ -140,5 +143,8 @@ export interface Perfiles {
   persona_fisica: string,
   uso_cfdi: string,
   password: string,
-  status: string
+  status: string,
+  regimen_fiscal:string,
+  cp:string,
+  razon_social:string
 }

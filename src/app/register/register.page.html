@@ -103,10 +103,33 @@
         <label style="color:black;margin-left: 10px;">Requiere Factura</label>
       </ion-item>
       <div class="direccion2" *ngIf=mostrarDireccion1>
-        <div style="color:black;margin-top: 15px;margin:15px 0;">Datos de facturaciòn</div>
-        <ion-item >
+        <div style="color:black;margin-top: 15px;margin:15px 0;">Datos de facturación</div>
+        <ion-item>
+          <ion-label position="floating">Razón Social *</ion-label>
+          <ion-input formControlName="razon_social"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <div class="espacios">
+          <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.razon_social.errors?.required">
+            Campo Razón Social Obligatorio.
+          </span>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Régimen Fiscal</ion-label>
+          <ion-select formControlName="regimen_fiscal" value="">
+            <ion-select-option value="">Selecciona Régimen</ion-select-option>
+            <ion-select-option *ngFor="let regimen of regimenes;let i = index" value="{{regimen.regimen_fiscal}}">{{regimen.regimen_fiscal - regimen.descripcion}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <!-- Error messages -->
+        <div class="espacios">
+          <span class="error ion-padding" color="danger" *ngIf="isSubmitted && errorControl.uso_cfdi.errors?.required">
+            Campo Régimen Fiscal Obligatorio.
+          </span>
+        </div>
+        <ion-item>
           <ion-label position="floating">RFC *</ion-label>
-          <ion-input formControlName="rfc"></ion-input>
+          <ion-input formControlName="rfc" class="mayus"></ion-input>
         </ion-item>
         <!-- Error messages -->
         <div class="espacios">
@@ -127,8 +150,26 @@
             Campo CFDI Obligatorio.
           </span>
         </div>
+        <ion-item>
+          <ion-label position="floating">CP *</ion-label>
+          <ion-input formControlName="cp" (ionBlur)="prueba()"></ion-input>
+        </ion-item>
+        <!-- Error messages -->
+        <div class="espacios">
+          <span class="error ion-padding" color="danger" *ngIf="isSubmitted && (errorControl.cp.errors?.required || errorControl.cp.errors?.minlength || errorControl.cp.errors?.maxlength)">
+            Campo CP Obligatorio y debe contener 5 Digitos.
+          </span>
+        </div>
+        <!-- Error messages cp existente -->
+        <div class="espacios">
+          <span class="error ion-padding" color="danger" *ngIf="cpExistente==0">
+            El código postal es inválido para el SAT.
+          </span>
+        </div>
+        <br>
       </div>
       <br>
+      
       <div class="content_enlaces">
         <div class="link1 underline" (click)="cancelar()">Estoy de acuerdo con terminos y condiciones</div>
         <ion-toggle slot="end" color="success" mode="ios" checked={{myValue}} formControlName="terminos"></ion-toggle>

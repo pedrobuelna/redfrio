@@ -75,7 +75,9 @@ export class LoginPage implements OnInit {
                         nombre:cliente.nombre,
                         correo:cliente.mail,
                         uuid_cliente:cliente.uuid_cliente,
-                        lista_precio_id:cliente.lista_precio_id
+                        lista_precio_id:cliente.lista_precio_id,
+                        facturacion:cliente.facturacion,
+                        regimen_fiscal:cliente.regimen_fiscal
                     }).then(
                         () => {
                             console.log('Se actualizo la informacion APP')
@@ -94,7 +96,6 @@ export class LoginPage implements OnInit {
        
     }
     getCarritoInfo(uuid_cliente:string){
-        
         this.taskService.getCarritoActivo(uuid_cliente).subscribe(carrito_activo => {
             if(carrito_activo.length >0){
                 console.log("==Carrito activo==");
@@ -118,7 +119,23 @@ export class LoginPage implements OnInit {
             () => {
                 console.log('Actualizado APPDATA');
                 console.log(carrito);
-                this.router.navigate(['/principal']);
+                this.nativeStorage.getItem('app')
+                .then(
+                    app => {
+                        console.log("==APP DATA==");
+                        console.log("BD PEDRO 2: ",app);
+                        console.log("uuid_cliente: "+app.uuid_cliente);
+                        if(app.facturacion==true && (app.regimen_fiscal==null ||app.regimen_fiscal==0)){
+                            console.log("enviar a update")
+                            this.navCtrl.navigateRoot(['/editarperfil-update']);
+                        }else{
+                            console.log("Get carrito repetido")
+                            //this.getCarritoInfo(app.uuid_cliente);
+                            this.router.navigate(['/principal']);
+                        }
+                    },
+                    error => console.error("NO HAY UUID_CLIENTE")
+                );
             },
             error => console.error('Error storing item', error)
         );

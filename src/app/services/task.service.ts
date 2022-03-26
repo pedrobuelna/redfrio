@@ -26,14 +26,14 @@ import { uuid_usuario } from '../interfaces/task';
 
 export class TaskService {
     //Operativo
-    private api = 'https://app.reacsa.mx:3001';
-    private apiMail = 'https://app.reacsa.mx';
-    private apiSAP = 'https://app.reacsa.mx:3003';
+    // private api = 'https://app.reacsa.mx:3001';
+    // private apiMail = 'https://app.reacsa.mx';
+    // private apiSAP = 'https://app.reacsa.mx:3003';
 
     //Pruebas
-    // private api='https://qas.reacsa.mx:3001';
-    // private apiMail = 'https://qas.reacsa.mx';
-    // private apiSAP='https://qas.reacsa.mx:3003';
+    private api='https://qas.reacsa.mx:3001';
+    private apiMail = 'https://qas.reacsa.mx';
+    private apiSAP='https://qas.reacsa.mx:3003';
     
     constructor(
         private http: HttpClient,
@@ -226,6 +226,10 @@ export class TaskService {
         //alert(path)
         return this.http.get<Task>(path);
     }
+    getRegimenes() {
+        const path = `${this.api}/regimen_fiscal`;
+        return this.http.get<Task>(path);
+    }
     getEstados() {
         //const path = `${this.api}/todos/${id}`;
         const path = `${this.api}/estados`;
@@ -397,5 +401,9 @@ export class TaskService {
         const path = `${this.api}/rpc/setpushid`;
         return this.http.post<any>(path, data);
         
+    }
+    getCp(cp:any) {
+        const path = `${this.api}/codigo_postal?cp=eq.${cp}`;
+        return this.http.get < any[] > (path);
     }
 }

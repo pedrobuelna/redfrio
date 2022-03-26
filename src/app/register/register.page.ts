@@ -3,12 +3,8 @@ import { Router } from  "@angular/router";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { TaskService } from '../services/task.service';
 import { Task, Sucursal } from '../interfaces/task';
-//import { AuthService } from '../auth.service';
 import {Md5} from 'ts-md5/dist/md5';
 import { ConfirmedValidator } from '../confirmed.validator';
-import {
-    DbService
-} from '../services/db.service';
 import { NavController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 import { Storage } from '@ionic/storage';
@@ -34,6 +30,7 @@ export class RegisterPage implements OnInit {
   sucursal: string;
   tipo_empresa: string;
   rfc: string;
+  cp:string;
   persona_fisica: string;
   password: string;
   status: string;
@@ -45,7 +42,11 @@ export class RegisterPage implements OnInit {
   currentImage: any;
   photos:any;
   imagenPerfil:any;
-  data:any=""
+  data:any="";
+  cps:any;
+  cpExistente:any;
+  razon_social:any;
+  regimenes:any;
   constructor(
     public photoService: PhotoService,
     private storage: Storage,
@@ -68,6 +69,9 @@ export class RegisterPage implements OnInit {
       confirmarcontrasena: ['', [Validators.required]],
       myBoolean: ['false',[]],
       terminos: [false, [Validators.requiredTrue]],
+      regimen_fiscal:['', [Validators.required]],
+      cp:['',[Validators.required,Validators.minLength(5),Validators.maxLength(5)]],
+      razon_social:['',[Validators.required]],
     }, { 
       validator: ConfirmedValidator('password', 'confirmarcontrasena')
     })
@@ -91,9 +95,23 @@ export class RegisterPage implements OnInit {
     this.getTask()
     this.taskService.getCfdi()
     .subscribe(cfdis => {
-       console.log("cfdis: ",cfdis);
        this.cfdis = cfdis;
     });
+    this.taskService.getRegimenes()
+    .subscribe(regimenes => {
+       this.regimenes = regimenes;
+    });
+  }
+  prueba(){
+    this.taskService.getCp(this.ionicForm.value.cp)
+        .subscribe(cps => {
+          this.cps = cps;
+            if(cps.length){
+              this.cpExistente=1;
+            }else{
+              this.cpExistente=0;
+            }
+        });
   }
   getTask() {
     this.taskService.getAllTasks()
@@ -101,17 +119,25 @@ export class RegisterPage implements OnInit {
        console.log("nombre: ",task);
     });
   }
+  
   muestraDireccion2(){
     if(this.ionicForm.value.myBoolean == true){
       this.mostrarDireccion1 = true;
       this.calle2Required = true;
       this.ionicForm["controls"]["rfc"].reset();
       this.ionicForm["controls"]["uso_cfdi"].reset();
+      this.ionicForm["controls"]["cp"].reset();
+      this.ionicForm["controls"]["razon_social"].reset();
+      this.ionicForm["controls"]["regimen_fiscal"].reset();
     }else{
       this.ionicForm.get('rfc').setValue("XAXX010101000");
-      this.ionicForm.get('uso_cfdi').setValue("G03");
+      this.ionicForm.get('uso_cfdi').setValue("NULL");
+      this.ionicForm.get('regimen_fiscal').setValue("NULL");
       this.mostrarDireccion1 = false;
       this.calle2Required = false;
+      this.ionicForm["controls"]["uso_cfdi"].reset();
+      this.ionicForm["controls"]["razon_social"].reset();
+      
     }
   }
   nombreCompleto:any;
@@ -119,26 +145,6 @@ export class RegisterPage implements OnInit {
   ionViewWillEnter(){
     this.photoService.photos=[];
     this.photoService.flag=false;
-    // this.nativeStorage.setItem('photos', {
-    //   data:'',
-    // }).then(
-    //     () => {
-    //         this.data = ''
-    //         console.log('Se borra la foto: '+this.data)
-    //     },
-    //   error => console.error('Error al actualizar la informacion APP', error)
-    // );
-    // this.nativeStorage.getItem('photos')
-    // .then(
-    //   data => {
-    //         console.log("URL de la imagen guardada 2"+data.data);
-    //         this.data = data.data;
-    //     },
-    //     error => {
-    //       this.data = false;
-    //       console.log("No hay FOTO")
-    //     }
-    // );
   }
   submitForm() {
     this.isSubmitted = true;
@@ -166,6 +172,9 @@ export class RegisterPage implements OnInit {
         password: this.ionicForm.value.password,
         status: "0",
         uso_cfdi: this.ionicForm.value.uso_cfdi,
+        cp:this.ionicForm.value.cp,
+        razon_social:this.ionicForm.value.razon_social,
+        regimen_fiscal:this.ionicForm.value.regimen_fiscal
       };
       this.taskService.validarCorreo(usrMail).subscribe((cliente)=>{
         console.log("Found");
@@ -173,10 +182,9 @@ export class RegisterPage implements OnInit {
         if(cliente.length>0){
             alert("El correo ya se encuentra registrado.")
         }else{
-          this.taskService.createTask(task)
+          if(this.cpExistente==1){
+            this.taskService.createTask(task)
             .subscribe((reply: any) => {
-                //alert("Tus datos han sido guardados correctamente")
-                //this.taskService.sendMailUsr(usrMail)
                 console.log(usrMail)
                 console.log(this.nombreCompleto)
                 this.taskService.sendMailActivacionUsuario(usrMail)
@@ -199,8 +207,6 @@ export class RegisterPage implements OnInit {
                         this.cfdis = cfdis;
                       });
                           console.log("FOTO 1"+this.photoService.data);
-                          //this.storage.create();
-                          //console.log("FOTO 2"+this.storage.get('photos'));
                           this.nativeStorage.setItem('photos', {
                             data: this.photoService.data,
                           }).then(
@@ -221,6 +227,9 @@ export class RegisterPage implements OnInit {
             }, (err) => {
                 console.log(err)
             });
+          }else{
+            alert("Captura codigo postal correcto")
+          } 
         }
       },er=>{});
     

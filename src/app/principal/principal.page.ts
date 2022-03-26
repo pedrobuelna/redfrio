@@ -23,6 +23,7 @@ import {
     Network
 } from '@ionic-native/network/ngx';
 import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 @Component({
     selector: 'app-principal',
     templateUrl: './principal.page.html',
@@ -78,7 +79,8 @@ export class PrincipalPage implements OnInit {
         private network: Network,
         private platform: Platform,
         public navCtrl: NavController,
-        private nativeStorage: NativeStorage
+        private nativeStorage: NativeStorage,
+        public alertController: AlertController
     ) {
     }
     // showLoader() {
@@ -98,10 +100,12 @@ export class PrincipalPage implements OnInit {
     //     });
     
     //   }
+    
     addMyClass() {
         this.renderer.addClass(this.splash.nativeElement, "quitSplash");
     }
     ngOnInit() {
+        
         this.nativeStorage.getItem('app')
         .then(
             app => {
@@ -133,7 +137,9 @@ export class PrincipalPage implements OnInit {
                             console.log(this.productos2[i]);
                             this.taskService.validarImg(this.productos2[i].url_img1).then(()=>{},e=>{this.productos2[i].url_img1="../../assets/images/Icono_Reacsa.png"});
                         }
+                        //this.presentAlert();
                     });
+
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );

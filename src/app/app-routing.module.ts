@@ -130,6 +130,10 @@ const routes: Routes = [
     path: 'resultadobusquedavacia',
     loadChildren: () => import('./resultadobusquedavacia/resultadobusquedavacia.module').then( m => m.ResultadobusquedavaciaPageModule)
   },
+  {
+    path: 'editarperfil-update',
+    loadChildren: () => import('./editarperfil-update/editarperfil-update.module').then( m => m.EditarperfilUpdatePageModule)
+  },
 
 ];
 
