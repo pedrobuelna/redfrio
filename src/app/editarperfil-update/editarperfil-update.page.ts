@@ -204,7 +204,7 @@ ionViewWillEnter(){
                           uso_cfdi: [perfiles[0].uso_cfdi, [Validators.required]],
                           password: ["", [Validators.minLength(8)]],
                           myBoolean: ['true', ],
-                          regimen_fiscal:[perfiles[0].regimen_fiscal, [Validators.required]],
+                          regimen_fiscal:[perfiles[0].regimen_fiscal, [Validators.required,Validators.minLength(3),Validators.maxLength(3)]],
                           cp:[perfiles[0].cp,[Validators.required,Validators.minLength(5),Validators.maxLength(5)]],
                           razon_social:[perfiles[0].razon_social,[Validators.required]],
                       })

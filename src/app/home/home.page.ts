@@ -151,15 +151,30 @@ export class HomePage {
         this.nativeStorage.getItem('app')
         .then(
             app => {
-                console.log("==APP DATA==");
-                console.log("BD PEDRO 2: ",app);
-                console.log("uuid_cliente: "+app.uuid_cliente);
-                if(app.facturacion==true  && (app.regimen_fiscal==null || app.regimen_fiscal==0)){
-                    console.log("enviar a update")
-                    this.navCtrl.navigateRoot(['/editarperfil-update']);
-                }else{
-                    this.getCarritoInfo(app.uuid_cliente);
-                }
+                this.taskService.getDatosCliente(app.uuid_cliente)
+                .subscribe((data) => {
+                    if (data != null) {
+                        let cliente:any=data[0];
+                        if(cliente.facturacion==true && (cliente.regimen_fiscal==null ||cliente.regimen_fiscal==0)){
+                            this.navCtrl.navigateRoot(['/editarperfil-update']);
+                        }else{
+                            this.getCarritoInfo(cliente.uuid_cliente);
+                        }
+                    } else {
+                        this.presentAlert();
+                    }
+                }, (err) => {
+                    alert(err)
+                });
+                // console.log("==APP DATA==");
+                // console.log("BD PEDRO 2: ",app);
+                // console.log("uuid_cliente: "+app.uuid_cliente);
+                // if(app.facturacion==true  && (app.regimen_fiscal==null || app.regimen_fiscal==0)){
+                //     console.log("enviar a update")
+                //     this.navCtrl.navigateRoot(['/editarperfil-update']);
+                // }else{
+                //     this.getCarritoInfo(app.uuid_cliente);
+                // }
             },
             error => console.error("NO HAY UUID_CLIENTE")
         );
